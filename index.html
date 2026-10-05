@@ -544,19 +544,27 @@ function initAuth(){
   try{
     let users=JSON.parse(localStorage.getItem('sdrAuth_v1')||'null');
     if(!users||!Array.isArray(users)||users.length===0){
-      users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':,approved:u.id==='emilia'}));
+      users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':'',approved:u.id==='emilia'}));
       localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
     }
     let pwds=JSON.parse(localStorage.getItem('sdrPwd_v1')||'null');
-    if(!pwds||typeof pwds!=='object'){pwds={'decorafit':'2218'};}
-    // Garantir que Emília sempre tem senha
-    if(!pwds['emilia.moreira@decorafit.com.br'])pwds['emilia.moreira@decorafit.com.br']='2218';
+    if(!pwds||typeof pwds!=='object'){pwds={};}
+    const ADM_EMAIL='emilia.moreira@decorafit.com.br';
+    // Garantir que a gestora sempre tem acesso, mesmo com dados antigos salvos
+    if(!pwds[ADM_EMAIL])pwds[ADM_EMAIL]='2218';
     localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
-    // Garantir que Emília está aprovada
-    const em=users.find(u=>u.userId==='emilia');
-    if(em&&!em.approved){em.approved=true;localStorage.setItem('sdrAuth_v1',JSON.stringify(users));}
+    let em=users.find(u=>u.userId==='emilia');
+    if(!em){em={userId:'emilia',name:'Emília',role:'admin',email:ADM_EMAIL,approved:true};users.push(em);}
+    em.email=ADM_EMAIL;em.approved=true;em.role='admin';
+    // Garantir que todos os perfis do sistema existem na lista de acessos
+    USERS.forEach(u=>{
+      if(!users.find(a=>a.userId===u.id)){
+        users.push({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?ADM_EMAIL:'',approved:u.id==='emilia'});
+      }
+    });
+    localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
   } catch(e){
-    const users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':,approved:u.id==='emilia'}));
+    const users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':'',approved:u.id==='emilia'}));
     localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
     localStorage.setItem('sdrPwd_v1',JSON.stringify({'emilia.moreira@decorafit.com.br':'2218'}));
   }
@@ -577,11 +585,14 @@ function doLogin(){
   err.textContent='';
   if(!email||!pw){err.textContent='Preencha e-mail e senha.';return;}
   const users=getAuthUsers();
-  const au=users.find(u=>u.email.toLowerCase()===email&&u.approved);
+  let au=users.find(u=>u.email&&u.email.toLowerCase()===email&&u.approved);
+  // atalho de compatibilidade para a gestora
+  if(!au&&(email==='decorafit'||email==='emilia')){au=users.find(u=>u.userId==='emilia');}
   if(!au){err.textContent='E-mail não autorizado. Aguarde o convite da gestora.';return;}
   const pwds=getPwds();
-  if(!pwds[email]){pendingEmail=email;showCreatePw(email);return;}
-  if(pwds[email]!==pw){err.textContent='Senha incorreta.';return;}
+  const key=(au.email||email).toLowerCase();
+  if(!pwds[key]){pendingEmail=key;showCreatePw(key);return;}
+  if(pwds[key]!==pw){err.textContent='Senha incorreta.';return;}
   const full=USERS.find(u=>u.id===au.userId);
   if(!full){err.textContent='Erro ao carregar usuário.';return;}
   currentUser=full;loginSuccess();
