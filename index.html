@@ -317,6 +317,21 @@
   .lesson-sec{margin-top:18px;}
   .lesson-sec-title{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid var(--line);}
   .lesson-sec-title .n{width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;}
+
+  .mod-cat{font-size:.63rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--bg);color:var(--muted);}
+  .mod-mode{font-size:.63rem;font-weight:700;padding:2px 8px;border-radius:20px;}
+  .mode-on{background:#dbeafe;color:#1d4ed8;}
+  .mode-pres{background:#fff7ed;color:#c2410c;}
+  .topic-item{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;transition:all .15s;}
+  .topic-item:hover{border-color:var(--orange);}
+  .topic-item.done{background:#f0fdf4;border-color:var(--green);}
+  .topic-cb{width:19px;height:19px;border-radius:5px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;margin-top:1px;}
+  .topic-item.done .topic-cb{background:var(--green);border-color:var(--green);color:#fff;}
+  .topic-txt{font-size:.79rem;font-weight:500;color:var(--txt);flex:1;}
+  .topic-item.done .topic-txt{text-decoration:line-through;color:var(--muted);}
+  .cert-banner{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border-radius:14px;padding:22px;text-align:center;margin-bottom:22px;}
+  .cert-banner h3{font-size:1.1rem;font-weight:800;}
+  .cert-banner p{font-size:.82rem;opacity:.9;margin-top:5px;}
 </style>
 </head>
 <body>
@@ -334,7 +349,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.7</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v2.0</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -585,6 +600,109 @@ const DAYS=[
   },
 ];
 
+
+/* ═══════ MÓDULOS DO CURSO ═══════ */
+const MODULOS=[
+ /* ─────── PIPEDRIVE (online) ─────── */
+ {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'💼',
+  video:'PIPEDRIVE',
+  topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Preenchimento obrigatório','Motivos de perda','Ganho: passo a passo dos dois cards'],
+  prova:{pts:20,perguntas:[
+    {id:'m1q1',txt:'Descreva as etapas do funil no Pipedrive e o que caracteriza cada uma.'},
+    {id:'m1q2',txt:'Quais são os campos de preenchimento obrigatório ao abrir um card? Por que cada um importa?'},
+    {id:'m1q3',txt:'Como você pesquisa duplicidade antes de criar um card? O que faz se encontrar uma?'},
+    {id:'m1q4',txt:'Liste os motivos de perda e dê um exemplo de situação para pelo menos três deles.'},
+    {id:'m1q5',txt:'VÍDEO OPCIONAL: grave a tela abrindo um card do zero até marcá-lo como ganho.'}]}},
+
+ {id:'m2',num:2,cat:'Pipedrive',titulo:'Pipedrive II — Atividades',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'📋',
+  topicos:['Atividades do dia','Atividades atrasadas','Como organizar a fila de trabalho'],
+  prova:{pts:15,perguntas:[
+    {id:'m2q1',txt:'Como você consulta suas atividades do dia? Qual a primeira coisa que faz ao abrir o Pipedrive pela manhã?'},
+    {id:'m2q2',txt:'O que fazer ao encontrar atividades atrasadas? Descreva sua ordem de prioridade.'},
+    {id:'m2q3',txt:'VÍDEO OPCIONAL: mostre sua tela de atividades e explique como organizaria o dia.'}]}},
+
+ {id:'m3',num:3,cat:'Pipedrive',titulo:'Pipedrive III — Indicadores',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'📊',
+  topicos:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
+  prova:{pts:20,perguntas:[
+    {id:'m3q1',txt:'Explique o que é MQL e como ele se diferencia de um lead comum.'},
+    {id:'m3q2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
+    {id:'m3q3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
+    {id:'m3q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'}]}},
+
+ /* ─────── SLACK (online) ─────── */
+ {id:'m4',num:4,cat:'Slack',titulo:'Slack I — Comunicação do time',modo:'online',prazo:'até 09/10',cor:'#14b8a6',icon:'💬',
+  topicos:['Estar incluído em todos os canais','Responder com check verdinho ✅ aos avisos','Como responder em qualquer canal','Círculo'],
+  prova:{pts:15,perguntas:[
+    {id:'m4q1',txt:'Por que responder com o check verdinho nos avisos é importante para o time? O que acontece se você não responde?'},
+    {id:'m4q2',txt:'Liste os canais em que você já foi incluído e para que serve cada um.'},
+    {id:'m4q3',txt:'O que é o Círculo e qual seu papel nele?'}]}},
+
+ {id:'m5',num:5,cat:'Slack',titulo:'Slack II — Status e rotinas',modo:'online',prazo:'até 09/10',cor:'#14b8a6',icon:'🟢',
+  topicos:['Ligar a agenda no Slack','Status de almoço (pratinho 🍽️)','Sempre ativo (bolinha verde 🟢)','Roleta','Medição','Vistoria'],
+  prova:{pts:15,perguntas:[
+    {id:'m5q1',txt:'Como você conecta sua agenda ao Slack e por que isso importa para o time?'},
+    {id:'m5q2',txt:'Explique como e quando usar o status de almoço e o status ativo.'},
+    {id:'m5q3',txt:'O que são Roleta, Medição e Vistoria? Explique cada uma com suas palavras.'},
+    {id:'m5q4',txt:'VÍDEO OPCIONAL: mostre seu Slack configurado com agenda e status.'}]}},
+
+ /* ─────── AGENDA I (online) ─────── */
+ {id:'m6',num:6,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',prazo:'até 09/10',cor:'#3b82f6',icon:'📅',
+  topicos:['Como agendar um meet com colegas','Como agendar um meet com o cliente','R01','Como colocar a R1 para gravar','Aceitar invite'],
+  prova:{pts:20,perguntas:[
+    {id:'m6q1',txt:'Descreva o passo a passo para agendar uma reunião com o cliente, do convite até a confirmação.'},
+    {id:'m6q2',txt:'O que é a R01 e qual seu objetivo dentro do processo?'},
+    {id:'m6q3',txt:'Como você deixa uma R1 configurada para gravar? Por que a gravação importa?'},
+    {id:'m6q4',txt:'Por que aceitar o invite é obrigatório? O que acontece com a agenda do time se você não aceita?'}]}},
+
+ /* ─────── VOIP (online) ─────── */
+ {id:'m7',num:7,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',prazo:'até 09/10',cor:'#f59e0b',icon:'☎️',
+  topicos:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
+  prova:{pts:20,perguntas:[
+    {id:'m7q1',txt:'Descreva o passo a passo de uma ligação, do discar até registrar o resultado no Pipedrive.'},
+    {id:'m7q2',txt:'Como a integração com o Pipedrive funciona e o que ela registra automaticamente?'},
+    {id:'m7q3',txt:'Como você localiza a gravação de uma ligação específica? Para que isso serve no dia a dia?'},
+    {id:'m7q4',txt:'VÍDEO OPCIONAL: mostre a tela fazendo uma ligação de teste e buscando uma gravação.'}]}},
+
+ /* ─────── AGENDA II (presencial) ─────── */
+ {id:'m8',num:8,cat:'Agenda',titulo:'Agenda II — Arquitetos e regras',modo:'presencial',prazo:'13 a 16/10',cor:'#3b82f6',icon:'🗓️',
+  topicos:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Regra: agendar com no mínimo 6h de antecedência','Participar de todas as reuniões diárias','Câmera aberta','Levantar a mão para falar','Atenção total durante as reuniões'],
+  prova:{pts:25,perguntas:[
+    {id:'m8q1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
+    {id:'m8q2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
+    {id:'m8q3',txt:'Explique a regra das 6 horas de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
+    {id:'m8q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'},
+    {id:'m8q5',txt:'PRÁTICA: agende uma R1 de teste respeitando todas as regras e descreva o que fez.'}]}},
+
+ /* ─────── WHATSAPP (presencial) ─────── */
+ {id:'m9',num:9,cat:'WhatsApp',titulo:'WhatsApp — Grupos e cliente',modo:'presencial',prazo:'13 a 16/10',cor:'#22c55e',icon:'📱',
+  topicos:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
+  prova:{pts:20,perguntas:[
+    {id:'m9q1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente corretamente.'},
+    {id:'m9q2',txt:'Escreva a mensagem que você enviaria ao cliente junto com o link da reunião.'},
+    {id:'m9q3',txt:'Como você envia o evento e confirma que o cliente recebeu?'},
+    {id:'m9q4',txt:'PRÁTICA: monte um grupo de teste e descreva (ou grave) o processo completo.'}]}},
+
+ /* ─────── ROTINAS (presencial) ─────── */
+ {id:'m10',num:10,cat:'Rotinas',titulo:'Rotinas do time',modo:'presencial',prazo:'13 a 16/10',cor:'#ec4899',icon:'⏰',
+  topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir para outra pessoa cuidar dos leads quando não puder trabalhar'],
+  prova:{pts:15,perguntas:[
+    {id:'m10q1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
+    {id:'m10q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
+    {id:'m10q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
+
+ /* ─────── METAS (presencial) ─────── */
+ {id:'m11',num:11,cat:'Metas',titulo:'Metas e indicadores',modo:'presencial',prazo:'13 a 16/10',cor:'#ef4444',icon:'🎯',
+  topicos:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
+  prova:{pts:25,perguntas:[
+    {id:'m11q1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
+    {id:'m11q2',txt:'O que é o SLA de 1 hora na prática? O que você faz para garantir que ele seja cumprido?'},
+    {id:'m11q3',txt:'Com 500 ligações por mês, quantas você precisa fazer por dia útil? E quantos agendamentos por semana para bater os 29?'},
+    {id:'m11q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'},
+    {id:'m11q5',txt:'VÍDEO FINAL: explique em até 3 minutos como pretende organizar sua rotina para bater todas as metas.'}]}},
+];
+const MOD_PTS_TOPICO=5;
+const MAX_MOD_PTS=MODULOS.reduce((a,m)=>a+m.topicos.length*MOD_PTS_TOPICO+m.prova.pts,0);
+
 const TYPE_LABELS={live:'🔴 Ao vivo',async:'🟣 Assíncrono',listen:'🟢 Escuta',read:'🟡 Leitura',practice:'🔴 Prática',meet:'🔵 Meet'};
 const TYPE_CLASSES={live:'pill-live',async:'pill-async',listen:'pill-listen',read:'pill-read',practice:'pill-practice',meet:'pill-meet'};
 const MAX_PTS=DAYS.reduce((a,d)=>a+d.pts,0)+Object.values(PROVAS).reduce((a,p)=>a+p.pts,0);
@@ -775,7 +893,7 @@ function addTab(tabs,main,id,label,builder){
 /* ══════ ADM ══════ */
 function buildAdminPanels(tabs,main){
   addTab(tabs,main,'adm-dashboard','📊 Dashboard',   buildAdmDashboard);
-  addTab(tabs,main,'adm-provas',   '📋 Provas',      buildAdmProvas);
+  addTab(tabs,main,'adm-provas',   '📋 Avaliações',  buildAdmProvas);
   addTab(tabs,main,'adm-diarios',  '📓 Diários',     buildAdmDiarios);
   addTab(tabs,main,'adm-duvidas',  '💬 Dúvidas',     buildAdmDuvidas);
   addTab(tabs,main,'adm-acessos',  '🔐 Acessos',     buildAdmAcessos);
@@ -789,51 +907,62 @@ function avatarHtml(u,size){
   return '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+(u?u.color:'#ccc')+';display:flex;align-items:center;justify-content:center;font-weight:800;font-size:'+fs+'px;color:#fff;flex-shrink:0">'+(u?u.name[0]:'?')+'</div>';
 }
 function buildAdmDashboard(){
-  const totalPts=NOVOS.reduce((a,u)=>a+(getU(u.id).pts||0),0);
-  const totalTasks=NOVOS.reduce((a,u)=>a+(getU(u.id).tasks||[]).length,0);
-  const totalProvas=NOVOS.reduce((a,u)=>a+Object.keys(getU(u.id).provas||{}).filter(k=>(getU(u.id).provas||{})[k].submitted).length,0);
-  const allStars=NOVOS.flatMap(u=>Object.values(getU(u.id).evals||{}).map(e=>e.stars||0).filter(Boolean));
-  const avgConf=allStars.length?+(allStars.reduce((a,b)=>a+b,0)/allStars.length).toFixed(1):'-';
-  const maxTasks=NOVOS.length*DAYS.reduce((a,d)=>a+d.tasks.length,0);
-  let html=`<div class="section-title">Dashboard — Integração SDR Inbound</div>
-  <p class="section-sub">Tempo real · ${new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}</p>
+  const stat=u=>{
+    const d=getU(u.id), mp=d.modProvas||{}, tops=(d.modTopics||[]);
+    const env=Object.values(mp).filter(v=>v.submitted).length;
+    const pts=tops.length*MOD_PTS_TOPICO+Object.entries(mp).filter(([,v])=>v.submitted)
+      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
+    const done=MODULOS.filter(m=>m.topicos.every((_,i)=>tops.includes(m.id+'_t'+i))&&(mp[m.id]||{}).submitted).length;
+    const st=Object.values(d.evals||{}).map(e=>e.stars||0).filter(Boolean);
+    return {env,pts,done,tops:tops.length,
+      conf:st.length?(st.reduce((a,b)=>a+b,0)/st.length).toFixed(1):'-',
+      vid:Object.values(mp).some(v=>v.hasVideo),
+      duv:Object.values(d.evals||{}).map(e=>e.duvida).filter(Boolean).pop()};
+  };
+  const S=NOVOS.map(stat);
+  const tPts=S.reduce((a,s)=>a+s.pts,0), tMod=S.reduce((a,s)=>a+s.done,0), tEnv=S.reduce((a,s)=>a+s.env,0);
+  const cs=S.map(s=>parseFloat(s.conf)).filter(n=>!isNaN(n));
+  const conf=cs.length?(cs.reduce((a,b)=>a+b,0)/cs.length).toFixed(1):'-';
+
+  let html=`<div class="section-title">Dashboard — Formação Pré-Vendas</div>
+  <p class="section-sub">${new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}</p>
   <div class="adm-kpi-grid">
-    <div class="adm-kpi" style="border-left-color:var(--orange)"><div class="kpi-val">${totalPts}</div><div class="kpi-label">Pontos acumulados</div><div class="kpi-sub">pelos 3 novos SDRs</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--green)"><div class="kpi-val">${totalTasks}</div><div class="kpi-label">Tarefas concluídas</div><div class="kpi-sub">de ${maxTasks} disponíveis</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--blue)"><div class="kpi-val">${totalProvas}</div><div class="kpi-label">Provas enviadas</div><div class="kpi-sub">de ${NOVOS.length*8} no total</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--gold)"><div class="kpi-val">${avgConf}</div><div class="kpi-label">Confiança média</div><div class="kpi-sub">escala 1–5</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--orange)"><div class="kpi-val">${tMod}</div><div class="kpi-label">Módulos concluídos</div><div class="kpi-sub">de ${NOVOS.length*MODULOS.length} possíveis</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--blue)"><div class="kpi-val">${tEnv}</div><div class="kpi-label">Avaliações enviadas</div><div class="kpi-sub">de ${NOVOS.length*MODULOS.length}</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--green)"><div class="kpi-val">${tPts}</div><div class="kpi-label">Pontos acumulados</div><div class="kpi-sub">pelos ${NOVOS.length} novos SDRs</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--gold)"><div class="kpi-val">${conf}</div><div class="kpi-label">Confiança média</div><div class="kpi-sub">escala 1–5</div></div>
   </div><div class="adm-sdr-grid">`;
-  NOVOS.forEach(u=>{
-    const ud=getU(u.id);const pts=ud.pts||0;
-    const tasks=(ud.tasks||[]).length;const mxT=DAYS.reduce((a,d)=>a+d.tasks.length,0);
-    const provas=Object.keys(ud.provas||{}).filter(k=>(ud.provas||{})[k].submitted).length;
-    const hasVid=Object.values(ud.provas||{}).some(p=>p.hasVideo);
-    const stars=Object.values(ud.evals||{}).map(e=>e.stars||0).filter(Boolean);
-    const avgStar=stars.length?(stars.reduce((a,b)=>a+b,0)/stars.length).toFixed(1):'-';
-    const pct=Math.round((pts/MAX_PTS)*100);const pctT=Math.round((tasks/mxT)*100);
-    const lastD=Object.values(ud.evals||{}).map(e=>e.duvida).filter(Boolean).pop()||null;
-    html+=`<div class="adm-sdr-card"><div class="adm-sdr-header">${avatarHtml(u,38)}<div class="info"><strong>${u.name}</strong><span>${u.turno} · ${u.mentor}</span></div></div>
+  NOVOS.forEach((u,i)=>{
+    const s=S[i], pct=Math.round((s.pts/MAX_MOD_PTS)*100);
+    html+=`<div class="adm-sdr-card"><div class="adm-sdr-header">${avatarHtml(u,38)}
+      <div class="info"><strong>${u.name}</strong><span>${u.turno} · ${u.mentor}</span></div></div>
       <div class="adm-sdr-body">
-        <div class="adm-sdr-row"><span>Pontos</span><div style="display:flex;align-items:center;gap:7px"><strong>${pts}/${MAX_PTS}</strong><div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div></div></div>
-        <div class="adm-sdr-row"><span>Tarefas</span><div style="display:flex;align-items:center;gap:7px"><strong>${tasks}/${mxT}</strong><div class="mini-bar-wrap"><div class="mini-bar" style="width:${pctT}%"></div></div></div></div>
-        <div class="adm-sdr-row"><span>Provas enviadas</span><strong>${provas}/8${hasVid?' 🎥':''}</strong></div>
-        <div class="adm-sdr-row"><span>Confiança média</span><strong>${avgStar==='-'?'-':avgStar+' /5'}</strong></div>
-        ${lastD?`<div style="margin-top:9px;background:#fef9c3;border-radius:8px;padding:7px 9px;font-size:.72rem;color:#92400e"><strong>💬 Última dúvida:</strong><br>${lastD}</div>`:''}
+        <div class="adm-sdr-row"><span>Progresso</span><div style="display:flex;align-items:center;gap:7px"><strong>${pct}%</strong><div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div></div></div>
+        <div class="adm-sdr-row"><span>Módulos concluídos</span><strong>${s.done}/${MODULOS.length}</strong></div>
+        <div class="adm-sdr-row"><span>Avaliações</span><strong>${s.env}/${MODULOS.length}${s.vid?' 🎥':''}</strong></div>
+        <div class="adm-sdr-row"><span>Conteúdos vistos</span><strong>${s.tops}</strong></div>
+        <div class="adm-sdr-row"><span>Pontos</span><strong>${s.pts}</strong></div>
+        ${s.duv?`<div style="margin-top:9px;background:#fef9c3;border-radius:8px;padding:7px 9px;font-size:.72rem;color:#92400e"><strong>💬 Última dúvida:</strong><br>${s.duv}</div>`:''}
       </div></div>`;
   });
   html+=`</div>`;
-  const rows=NOVOS.map(u=>({name:u.name,color:u.color,pts:(getU(u.id).pts||0),provas:Object.keys(getU(u.id).provas||{}).filter(k=>(getU(u.id).provas||{})[k].submitted).length})).sort((a,b)=>b.pts-a.pts);
-  const maxP=Math.max(...rows.map(r=>r.pts),1);
-  html+=`<div class="leaderboard" style="margin-top:8px"><div class="lb-header">🏆 Placar da Integração</div>`;
-  rows.forEach((r,i)=>{html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div><div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.provas} provas enviadas</div></div><div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/maxP)*100)}%"></div></div><div class="lb-pts">${r.pts} pts</div></div>`;});
+  const rows=NOVOS.map((u,i)=>({name:u.name,photo:u.photo,color:u.color,pts:S[i].pts,done:S[i].done})).sort((a,b)=>b.pts-a.pts);
+  const mx=Math.max(...rows.map(r=>r.pts),1);
+  html+=`<div class="leaderboard"><div class="lb-header">🏆 Ranking da Formação</div>`;
+  rows.forEach((r,i)=>{
+    const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
+      :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem">${r.name[0]}</div>`;
+    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div>${av}
+      <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.done}/${MODULOS.length} módulos</div></div>
+      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/mx)*100)}%"></div></div>
+      <div class="lb-pts">${r.pts} pts</div></div>`;
+  });
   return html+`</div>`;
 }
 function buildAdmProvas(){
-  let html=`<div class="section-title">Provas dos Novos SDRs</div>
-  <p class="section-sub">Clique no card de cada SDR para ver as provas por dia.</p>`;
-  NOVOS.forEach(u=>{
-    html+=buildSdrProvaCard(u, getU(u.id).provas||{});
-  });
+  let html=`<div class="section-title">Avaliações dos Módulos</div>
+  <p class="section-sub">Clique no card de cada novo SDR para ver as respostas por módulo.</p>`;
+  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u);});
   return html;
 }
 function applyProvaFilter(btn,main){
@@ -887,19 +1016,21 @@ function buildAdmDuvidas(){
 
 /* ══════ NOVO SDR ══════ */
 function buildNovoPanels(tabs,main){
-  addTab(tabs,main,'cronograma','📚 Minha Trilha',()=>buildProgressBanner()+buildDaysHTML());
+  addTab(tabs,main,'modulos','📚 Módulos',()=>buildModHero()+buildModulosHTML());
+  addTab(tabs,main,'cronograma','📅 Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
   addTab(tabs,main,'progresso','🏆 Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
-  main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
-  main.querySelectorAll('.task-item').forEach(item=>{item.onclick=()=>toggleTask(item);});
-  main.querySelectorAll('.star-btn').forEach(s=>{s.onclick=()=>setStars(s.dataset.day,parseInt(s.dataset.star));});
-  main.querySelectorAll('.btn-save-eval').forEach(btn=>{btn.onclick=()=>saveEval(btn.dataset.day);});
-  main.querySelectorAll('.btn-submit-prova').forEach(btn=>{btn.onclick=()=>submitProva(btn.dataset.day);});
-  main.querySelectorAll('.video-upload-area').forEach(area=>{
-    area.onclick=()=>area.querySelector('input[type=file]').click();
-    area.querySelector('input[type=file]').onchange=(e)=>handleVideoUpload(e,area.dataset.day);
-  });
-  refreshTaskStates();refreshEvalStates();refreshProvaStates();
+
+  const mp=document.getElementById('panel-modulos');
+  if(mp){bindModEvents(mp);}
+  const cp=document.getElementById('panel-cronograma');
+  if(cp){
+    cp.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
+    cp.querySelectorAll('.star-btn').forEach(s=>{s.onclick=()=>setStars(s.dataset.day,parseInt(s.dataset.star));});
+    cp.querySelectorAll('.btn-save-eval').forEach(b=>{b.onclick=()=>saveEval(b.dataset.day);});
+  }
+  restoreModStates();
+  refreshEvalStates();
 }
 function countProvas(){return Object.keys(getU(currentUser.id).provas||{}).filter(k=>(getU(currentUser.id).provas||{})[k].submitted).length;}
 function hasVideo(){return Object.values(getU(currentUser.id).provas||{}).some(p=>p.hasVideo);}
@@ -1012,36 +1143,246 @@ function buildVideoSection(day){
   });
   return h+'</div>';
 }
-function buildDaysHTML(){
+
+function modProgress(m){
+  const u=getU(currentUser.id);
+  const tops=(u.modTopics||[]);
+  const done=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
+  const prova=((u.modProvas||{})[m.id]||{}).submitted?1:0;
+  const total=m.topicos.length;
+  const pct=Math.round(((done+prova)/(total+1))*100);
+  return {done,total,prova,pct,status:(done===total&&prova)?'done':(done>0||prova)?'doing':'todo'};
+}
+function modPoints(){
+  const u=getU(currentUser.id);
+  const tops=(u.modTopics||[]).length*MOD_PTS_TOPICO;
+  const pr=Object.entries(u.modProvas||{}).filter(([,v])=>v.submitted)
+      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
+  return tops+pr;
+}
+function modProvasEnviadas(){
+  const u=getU(currentUser.id);
+  return Object.values(u.modProvas||{}).filter(v=>v.submitted).length;
+}
+function modHasVideo(){
+  const u=getU(currentUser.id);
+  return Object.values(u.modProvas||{}).some(v=>v.hasVideo);
+}
+
+function buildModulosHTML(){
   let html='';
-  const weeks=[{label:'🌐 Semana 1 — Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
-               {label:'🏢 Semana 2 — Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
-  let n=0;
-  weeks.forEach(w=>{
-    html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:10px">`;
-    w.ids.forEach(did=>{
-      const day=DAYS.find(d=>d.id===did);if(!day)return;
-      n++;
-      const p=dayProgress(day);
+  const grupos=[
+    {label:'🌐 Módulos Online — concluir até sexta 09/10', modo:'online'},
+    {label:'🏢 Módulos Presenciais — 13 a 16/10',          modo:'presencial'}
+  ];
+  grupos.forEach(g=>{
+    const lista=MODULOS.filter(m=>m.modo===g.modo);
+    const ok=lista.filter(m=>modProgress(m).status==='done').length;
+    html+=`<div class="week-divider">${g.label} <span style="color:var(--orange);font-weight:800;margin-left:6px">${ok}/${lista.length}</span></div><div class="days-grid" style="margin-bottom:10px">`;
+    lista.forEach(m=>{
+      const p=modProgress(m);
       const chip={done:'<span class="mod-chip chip-done">✅ Concluído</span>',
                   doing:'<span class="mod-chip chip-doing">▶️ Em andamento</span>',
                   todo:'<span class="mod-chip chip-todo">A iniciar</span>'}[p.status];
-      html+=`<div class="day-card" id="card-${day.id}">
+      html+=`<div class="day-card" id="mod-${m.id}">
         <div class="day-header"><div class="dh-left">
-          <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':n}</div>
+          <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
-            <strong>Módulo ${n} · ${day.label}</strong>${chip}
-            <div class="day-sub">${day.sub}</div>
-            <div class="day-sub" style="margin-top:3px">${p.done}/${p.total} atividades · ${p.prova?'prova enviada ✅':'prova pendente 📝'}</div>
+            <strong>${m.icon} ${m.titulo}</strong>${chip}
+            <div class="day-sub" style="margin-top:3px">
+              <span class="mod-cat">${m.cat}</span>
+              <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'🌐 Online':'🏢 Presencial'}</span>
+              <span style="margin-left:5px">${m.prazo}</span>
+            </div>
+            <div class="day-sub" style="margin-top:3px">${p.done}/${p.total} conteúdos · ${p.prova?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div>
         </div><span class="day-arrow">▼</span></div>
         <div class="day-body">
-          ${buildVideoSection(day)}
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Cronograma do dia</div>${buildScheduleTable(day)}</div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Atividades para concluir</div>${buildTaskChecklist(day)}</div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">3</span> Avaliação de aprendizagem</div>${buildProvaSection(day)}</div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">4</span> Reflexão do dia</div>${buildEvalForm(day)}</div>
+          ${m.video?buildModVideo(m):''}
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo do módulo</div>
+            <div class="task-list">${m.topicos.map((t,i)=>`
+              <div class="topic-item" id="top-${m.id}_t${i}" data-tid="${m.id}_t${i}">
+                <div class="topic-cb">✓</div><span class="topic-txt">${t}</span>
+                <span class="task-pts">+${MOD_PTS_TOPICO}</span>
+              </div>`).join('')}
+            </div>
+          </div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Avaliação do módulo</div>
+            ${buildModProva(m)}
+          </div>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  return html;
+}
+
+function buildModVideo(m){
+  const src=VIDEO_SOURCES[m.video]||'';
+  return `<div class="day-video-card" id="mv-${m.id}">
+    <div class="day-video-header" onclick="document.getElementById('mv-${m.id}').classList.toggle('open')">
+      <span class="vhour">AULA</span><span class="vtitle">📹 Vídeo do módulo</span><span class="vplay">▼</span>
+    </div>
+    <div class="day-video-body">
+      <video controls playsinline preload="metadata" style="width:100%;border-radius:8px;background:#000">
+        <source src="${src}" type="video/mp4">
+      </video>
+    </div></div>`;
+}
+
+function buildModProva(m){
+  let h=`<div class="prova-section" id="mprova-${m.id}">
+    <div class="prova-header"><span class="prova-icon">📋</span><h4>Avaliação — ${m.titulo}</h4><span class="prova-pts-badge">+${m.prova.pts} pts</span></div>
+    <p class="prova-desc">Responda com suas palavras. Conclua o conteúdo acima antes de enviar.</p>`;
+  m.prova.perguntas.forEach((q,i)=>{
+    h+=`<div class="prova-q"><label>Questão ${i+1}</label><div class="q-enunciado">${q.txt}</div>
+      <textarea id="${q.id}" placeholder="Sua resposta..."></textarea></div>`;
+  });
+  h+=`<div class="video-or">— ou envie um vídeo —</div>
+    <div class="video-upload-area" data-mod="${m.id}"><input type="file" accept="video/*"><div class="vu-icon">🎥</div>
+      <p><strong>Grave um vídeo e envie aqui</strong><br>Mostre sua tela ou explique oralmente.</p></div>
+    <div class="video-preview" id="mvp-${m.id}"><video controls></video><div class="vp-name" id="mvn-${m.id}"></div></div>
+    <div class="prova-status">
+      <button class="btn-submit-prova" data-mod="${m.id}">Enviar avaliação do módulo</button>
+      <div class="prova-done-banner" id="mdone-${m.id}">✅ Avaliação enviada! +${m.prova.pts} pts</div>
+    </div></div>`;
+  return h;
+}
+
+function toggleTopic(el){
+  const uid=currentUser.id, tid=el.dataset.tid;
+  const u=getU(uid); const tops=u.modTopics||[];
+  const i=tops.indexOf(tid);
+  if(i===-1){tops.push(tid);el.classList.add('done');}
+  else{tops.splice(i,1);el.classList.remove('done');}
+  setU(uid,{modTopics:tops,pts:modPoints()});
+  refreshTrilha();
+}
+
+function submitModProva(mid){
+  const m=MODULOS.find(x=>x.id===mid); if(!m)return;
+  const uid=currentUser.id, u=getU(uid), mp=u.modProvas||{};
+  if(!mp[mid])mp[mid]={};
+  const r={}; m.prova.perguntas.forEach(q=>{r[q.id]=document.getElementById(q.id)?.value||'';});
+  mp[mid].respostas=r; mp[mid].submitted=true;
+  setU(uid,{modProvas:mp});
+  setU(uid,{pts:modPoints()});
+  const b=document.getElementById('mdone-'+mid); if(b)b.style.display='flex';
+  const btn=document.querySelector(`.btn-submit-prova[data-mod="${mid}"]`); if(btn)btn.disabled=true;
+  refreshTrilha();
+}
+
+function handleModVideo(e,mid){
+  const f=e.target.files[0]; if(!f)return;
+  const p=document.getElementById('mvp-'+mid);
+  p.querySelector('video').src=URL.createObjectURL(f);
+  document.getElementById('mvn-'+mid).textContent='📎 '+f.name;
+  p.style.display='block';
+  const uid=currentUser.id,u=getU(uid),mp=u.modProvas||{};
+  if(!mp[mid])mp[mid]={};
+  mp[mid].hasVideo=true;mp[mid].videoName=f.name;
+  setU(uid,{modProvas:mp});
+}
+
+function restoreModStates(){
+  const u=getU(currentUser.id);
+  (u.modTopics||[]).forEach(t=>document.getElementById('top-'+t)?.classList.add('done'));
+  Object.entries(u.modProvas||{}).forEach(([mid,pv])=>{
+    const m=MODULOS.find(x=>x.id===mid); if(!m)return;
+    if(pv.respostas)m.prova.perguntas.forEach(q=>{const el=document.getElementById(q.id);if(el&&pv.respostas[q.id])el.value=pv.respostas[q.id];});
+    if(pv.submitted){
+      const b=document.getElementById('mdone-'+mid); if(b)b.style.display='flex';
+      const btn=document.querySelector(`.btn-submit-prova[data-mod="${mid}"]`); if(btn)btn.disabled=true;
+    }
+    if(pv.hasVideo&&pv.videoName){
+      const n=document.getElementById('mvn-'+mid);
+      if(n){n.textContent='📎 '+pv.videoName;const pr=document.getElementById('mvp-'+mid);if(pr)pr.style.display='block';}
+    }
+  });
+}
+
+function refreshTrilha(){
+  const p=document.getElementById('panel-modulos');
+  if(!p)return;
+  const abertos=[...p.querySelectorAll('.day-card.open')].map(c=>c.id);
+  p.innerHTML=buildModHero()+buildModulosHTML();
+  abertos.forEach(id=>document.getElementById(id)?.classList.add('open'));
+  bindModEvents(p);
+  restoreModStates();
+  refreshLeaderboard();
+}
+
+function bindModEvents(root){
+  root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
+  root.querySelectorAll('.topic-item').forEach(t=>{t.onclick=()=>toggleTopic(t);});
+  root.querySelectorAll('.btn-submit-prova[data-mod]').forEach(b=>{b.onclick=()=>submitModProva(b.dataset.mod);});
+  root.querySelectorAll('.video-upload-area[data-mod]').forEach(a=>{
+    a.onclick=(e)=>{if(e.target.tagName!=='INPUT')a.querySelector('input').click();};
+    a.querySelector('input').onchange=(e)=>handleModVideo(e,a.dataset.mod);
+  });
+}
+
+function buildModHero(){
+  const pts=modPoints();
+  const pct=Math.min(100,Math.round((pts/MAX_MOD_PTS)*100));
+  const done=MODULOS.filter(m=>modProgress(m).status==='done').length;
+  const R=32,C=2*Math.PI*R,off=C-(pct/100)*C;
+  const av=currentUser.photo?`<div class="ch-avatar"><img src="${currentUser.photo}"></div>`
+    :`<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
+  const h=new Date().getHours(), saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
+  let out=`<div class="course-hero"><div class="ch-top">${av}
+      <div class="ch-greet"><div class="eyebrow">Trilha de Formação Pré-Vendas</div>
+      <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
+      <p>${done} de ${MODULOS.length} módulos concluídos</p></div>
+      <div class="ch-ring"><svg width="74" height="74">
+        <circle cx="37" cy="37" r="${R}" stroke="rgba(255,255,255,.18)" stroke-width="7" fill="none"/>
+        <circle cx="37" cy="37" r="${R}" stroke="#f97316" stroke-width="7" fill="none" stroke-linecap="round"
+          stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/></svg>
+        <div class="rtxt"><b>${pct}%</b><small>concluído</small></div></div>
+    </div>
+    <div class="ch-stats">
+      <div class="ch-stat"><b>${done}/${MODULOS.length}</b><span>módulos</span></div>
+      <div class="ch-stat"><b>${modProvasEnviadas()}/${MODULOS.length}</b><span>avaliações</span></div>
+      <div class="ch-stat"><b>${(getU(currentUser.id).modTopics||[]).length}</b><span>conteúdos vistos</span></div>
+      <div class="ch-stat"><b>${pts}</b><span>pontos</span></div>
+    </div></div>`;
+  const prox=MODULOS.find(m=>modProgress(m).status!=='done');
+  if(prox){
+    const p=modProgress(prox);
+    out+=`<div class="resume-card"><span class="ric">${p.status==='doing'?'▶️':'🎯'}</span>
+      <div class="rtx"><b>${p.status==='doing'?'Continue de onde parou':'Próximo módulo'}</b>
+      <span>Módulo ${prox.num} — ${prox.titulo} · ${p.done}/${p.total} conteúdos</span></div>
+      <button class="btn-resume" onclick="abrirMod('${prox.id}')">Abrir módulo</button></div>`;
+  } else {
+    out+=`<div class="cert-banner"><h3>🏅 Formação concluída!</h3><p>Você completou todos os ${MODULOS.length} módulos da trilha Pré-Vendas. Parabéns!</p></div>`;
+  }
+  return out;
+}
+function abrirMod(id){
+  const c=document.getElementById('mod-'+id);
+  if(c){c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+function buildDaysHTML(){
+  let html=`<div style="background:#eef2f8;border-left:4px solid var(--navy);border-radius:10px;padding:13px 16px;margin-bottom:18px;font-size:.78rem;color:var(--navy)">
+    <strong>Esta é a sua agenda diária.</strong> O conteúdo do curso e as avaliações ficam na aba <b>📚 Módulos</b>.
+  </div>`;
+  const weeks=[{label:'🌐 Semana 1 — Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
+               {label:'🏢 Semana 2 — Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
+  weeks.forEach(w=>{
+    html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:10px">`;
+    w.ids.forEach(did=>{
+      const day=DAYS.find(d=>d.id===did);if(!day)return;
+      html+=`<div class="day-card" id="card-${day.id}">
+        <div class="day-header"><div class="dh-left">
+          <div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}<br><span style="font-size:.58rem">${day.sub.includes('Online')?'🌐':'🏢'}</span></div>
+          <div><strong>${day.label}</strong><div class="day-sub">${day.sub}</div></div>
+        </div><span class="day-arrow">▼</span></div>
+        <div class="day-body">
+          ${buildScheduleTable(day)}
+          ${buildEvalForm(day)}
         </div>
       </div>`;
     });
@@ -1165,10 +1506,30 @@ function refreshProgressBanner(){
   [pts>=5,pts>=50,countProvas()>=3,pts>=150,hasVideo(),pts>=MAX_PTS*.9].forEach((v,i)=>badges[i]?.classList.toggle('earned',v));
 }
 function buildLeaderboardHTML(){
-  const rows=NOVOS.map(u=>({name:u.name,color:u.color,pts:(getU(u.id).pts||0),provas:Object.keys(getU(u.id).provas||{}).filter(k=>(getU(u.id).provas||{})[k].submitted).length})).sort((a,b)=>b.pts-a.pts);
+  const rows=NOVOS.map(u=>{
+    const d=getU(u.id);
+    const tops=(d.modTopics||[]).length*MOD_PTS_TOPICO;
+    const pr=Object.entries(d.modProvas||{}).filter(([,v])=>v.submitted)
+      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
+    const nMods=MODULOS.filter(m=>{
+      const t=(d.modTopics||[]);
+      const okT=m.topicos.every((_,i)=>t.includes(m.id+'_t'+i));
+      const okP=((d.modProvas||{})[m.id]||{}).submitted;
+      return okT&&okP;}).length;
+    return {name:u.name,color:u.color,photo:u.photo,pts:tops+pr,mods:nMods,
+            provas:Object.values(d.modProvas||{}).filter(v=>v.submitted).length};
+  }).sort((a,b)=>b.pts-a.pts);
   const maxP=Math.max(...rows.map(r=>r.pts),1);
-  let html=`<div class="leaderboard"><div class="lb-header">🏆 Placar da Integração</div>`;
-  rows.forEach((r,i)=>{html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div><div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.provas}/8 provas enviadas</div></div><div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/maxP)*100)}%"></div></div><div class="lb-pts">${r.pts} pts</div></div>`;});
+  let html=`<div class="leaderboard"><div class="lb-header">🏆 Ranking da Formação</div>`;
+  rows.forEach((r,i)=>{
+    const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
+      :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem;flex-shrink:0">${r.name[0]}</div>`;
+    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div>
+      ${av}
+      <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.mods}/${MODULOS.length} módulos · ${r.provas} avaliações</div></div>
+      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/maxP)*100)}%"></div></div>
+      <div class="lb-pts">${r.pts} pts</div></div>`;
+  });
   return html+`</div>`;
 }
 function refreshLeaderboard(){
@@ -1179,7 +1540,7 @@ function refreshLeaderboard(){
 /* ══════ MENTOR ══════ */
 function buildMadrinhaPanels(tabs,main){
   addTab(tabs,main,'acompanhamento','👁 Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
-  addTab(tabs,main,'provas-mentor','📋 Provas',()=>`<div class="section-title">Provas dos Novos SDRs</div>`+buildMentorProvas());
+  addTab(tabs,main,'provas-mentor','📋 Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
   addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
@@ -1187,76 +1548,71 @@ function buildMadrinhaPanels(tabs,main){
   refreshMentorDiary();
 }
 function buildMentorOverview(){
-  const mentees=currentUser.mentees||[];let html=`<div class="overview-grid">`;
-  mentees.forEach(mName=>{
-    const mu=USERS.find(u=>u.name===mName);if(!mu)return;
-    const u=getU(mu.id);const pts=u.pts||0;
-    const tasks=(u.tasks||[]).length;const provas=Object.keys(u.provas||{}).filter(k=>(u.provas||{})[k].submitted).length;
-    const stars=Object.values(u.evals||{}).map(e=>e.stars||0).filter(Boolean);
-    const avgStar=stars.length?Math.round(stars.reduce((a,b)=>a+b,0)/stars.length):'-';
-    html+=`<div class="ov-card" style="border-top-color:${mu.color}"><h3>${mu.emoji} ${mName} <span style="font-size:.73rem;color:var(--muted);font-weight:500">${mu.turno}</span></h3>
-      <div class="ov-row"><span>Pontos</span><strong>${pts} / ${MAX_PTS}</strong></div>
-      <div class="ov-row"><span>Tarefas</span><strong>${tasks}</strong></div>
-      <div class="ov-row"><span>Provas enviadas</span><strong>${provas} / 8</strong></div>
-      <div class="ov-row"><span>Confiança média</span><strong>${avgStar==='-'?'-':avgStar+'/5 ★'}</strong></div></div>`;
-    const duvidas=Object.entries(u.evals||{}).filter(([,e])=>e.duvida).map(([dayId,e])=>{const day=DAYS.find(d=>d.id===dayId);return `<div style="margin-bottom:7px"><strong style="font-size:.73rem;color:var(--navy)">${day?.date}</strong><div style="font-size:.75rem;color:var(--muted);margin-top:2px">${e.duvida}</div></div>`;}).join('');
-    if(duvidas)html+=`<div class="mentor-obs-box" style="grid-column:1/-1"><strong>💬 Dúvidas de ${mName}</strong>${duvidas}</div>`;
+  const mentees=currentUser.mentees||[];
+  let html=`<div class="overview-grid">`;
+  mentees.forEach(n=>{
+    const u=USERS.find(x=>x.name===n); if(!u)return;
+    const d=getU(u.id), mp=d.modProvas||{}, tops=(d.modTopics||[]);
+    const env=Object.values(mp).filter(v=>v.submitted).length;
+    const done=MODULOS.filter(m=>m.topicos.every((_,i)=>tops.includes(m.id+'_t'+i))&&(mp[m.id]||{}).submitted).length;
+    const st=Object.values(d.evals||{}).map(e=>e.stars||0).filter(Boolean);
+    const conf=st.length?(st.reduce((a,b)=>a+b,0)/st.length).toFixed(1):'-';
+    html+=`<div class="ov-card" style="border-top-color:${u.color}"><h3>${u.name} <span style="font-size:.73rem;color:var(--muted);font-weight:500">${u.turno}</span></h3>
+      <div class="ov-row"><span>Módulos concluídos</span><strong>${done}/${MODULOS.length}</strong></div>
+      <div class="ov-row"><span>Avaliações enviadas</span><strong>${env}/${MODULOS.length}</strong></div>
+      <div class="ov-row"><span>Conteúdos vistos</span><strong>${tops.length}</strong></div>
+      <div class="ov-row"><span>Confiança média</span><strong>${conf==='-'?'-':conf+'/5 ★'}</strong></div></div>`;
+    const dv=Object.entries(d.evals||{}).filter(([,e])=>e.duvida).map(([did,e])=>{
+      const day=DAYS.find(x=>x.id===did);
+      return `<div style="margin-bottom:7px"><strong style="font-size:.73rem;color:var(--navy)">${day?day.date:did}</strong><div style="font-size:.75rem;color:var(--muted);margin-top:2px">${e.duvida}</div></div>`;}).join('');
+    if(dv)html+=`<div class="mentor-obs-box" style="grid-column:1/-1"><strong>💬 Dúvidas de ${u.name}</strong>${dv}</div>`;
   });
   return html+`</div>`;
 }
-function buildSdrProvaCard(u,provas){
-  const totalEnv=Object.keys(provas).filter(k=>provas[k].submitted).length;
-  const hasVid=Object.values(provas).some(p=>p.hasVideo);
-  const stars=Object.values(getU(u.id).evals||{}).map(e=>e.stars||0).filter(Boolean);
-  const avgStar=stars.length?(stars.reduce((a,b)=>a+b,0)/stars.length).toFixed(1):'-';
+function buildSdrProvaCard(u){
+  const d=getU(u.id);
+  const mp=d.modProvas||{}, tops=(d.modTopics||[]);
+  const env=Object.values(mp).filter(v=>v.submitted).length;
+  const vid=Object.values(mp).some(v=>v.hasVideo);
+  const pts=tops.length*MOD_PTS_TOPICO+Object.entries(mp).filter(([,v])=>v.submitted)
+      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
   let html=`<div class="sdr-prova-wrapper">
     <div class="sdr-prova-summary" onclick="this.closest('.sdr-prova-wrapper').classList.toggle('open')">
       ${avatarHtml(u,52)}
-      <div class="sdr-prova-info">
-        <strong>${u.name}</strong>
-        <span>${u.turno}${u.mentor?' · mentora: '+u.mentor:''}</span>
+      <div class="sdr-prova-info"><strong>${u.name}</strong><span>${u.turno}</span>
         <div class="sdr-prova-stats">
-          <span class="${totalEnv===8?'stat-ok':'stat-pend'}">${totalEnv}/8 provas enviadas</span>
-          ${hasVid?'<span class="stat-vid">🎥 enviou vídeo</span>':''}
-          ${avgStar!=='-'?`<span class="stat-star">★ ${avgStar}/5 confiança</span>`:''}
-        </div>
-      </div>
-      <span class="sdr-prova-arrow">▼</span>
-    </div>
+          <span class="${env===MODULOS.length?'stat-ok':'stat-pend'}">${env}/${MODULOS.length} avaliações</span>
+          <span class="stat-star">${pts} pts</span>
+          ${vid?'<span class="stat-vid">🎥 enviou vídeo</span>':''}
+        </div></div>
+      <span class="sdr-prova-arrow">▼</span></div>
     <div class="sdr-prova-days">`;
-  DAYS.forEach(day=>{
-    const pv=provas[day.id];const p=PROVAS[day.id];if(!p)return;
-    const submitted=pv?.submitted;
+  MODULOS.forEach(m=>{
+    const pv=mp[m.id]; const ok=pv&&pv.submitted;
+    const tOk=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
     html+=`<div class="day-card">
       <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
-        <div class="dh-left">
-          <div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}<br><span style="font-size:.58rem">${day.sub.includes('Online')?'🌐':'🏢'}</span></div>
-          <div><strong>${day.label} · ${day.date}</strong>
-          <div class="day-sub">${submitted?'✅ Prova enviada':'⏳ Não enviada ainda'}${pv?.hasVideo?' · 🎥':''}</div></div>
-        </div><span class="day-arrow">▼</span>
-      </div>
+        <div class="dh-left"><div class="module-num ${ok?'done':''}">${ok?'✓':m.num}</div>
+        <div><strong>${m.icon} ${m.titulo}</strong>
+        <div class="day-sub">${tOk}/${m.topicos.length} conteúdos · ${ok?'✅ avaliação enviada':'⏳ pendente'}${pv&&pv.hasVideo?' · 🎥':''}</div></div>
+        </div><span class="day-arrow">▼</span></div>
       <div class="day-body">`;
-    if(submitted&&pv.respostas){
+    if(ok&&pv.respostas){
       html+=`<div class="mentor-prova-view"><h5>📋 Respostas de ${u.name}</h5>`;
-      p.perguntas.forEach((q,i)=>{html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.enunciado.substring(0,65)}...</div><div class="mpv-text">${pv.respostas[q.id]||'(sem resposta)'}</div></div>`;});
+      m.prova.perguntas.forEach((q,i)=>{
+        html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.txt.substring(0,65)}...</div><div class="mpv-text">${pv.respostas[q.id]||'(sem resposta)'}</div></div>`;});
       if(pv.hasVideo)html+=`<div style="margin-top:7px;font-size:.75rem;color:var(--green);font-weight:600">🎥 Vídeo: ${pv.videoName||'enviado'}</div>`;
       html+=`</div>`;
-    } else {
-      html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Nenhuma resposta enviada ainda.</div>`;
-    }
+    } else html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Avaliação ainda não enviada.</div>`;
     html+=`</div></div>`;
   });
-  html+=`</div></div>`;
-  return html;
+  return html+`</div></div>`;
 }
 function buildMentorProvas(){
   const mentees=currentUser.mentees||[];
-  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum mentorado encontrado.</div>';
+  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR vinculado.</div>';
   let html='';
-  mentees.forEach(mName=>{
-    const mu=USERS.find(u=>u.name===mName);if(!mu)return;
-    html+=buildSdrProvaCard(mu, getU(mu.id).provas||{});
-  });
+  mentees.forEach(n=>{const u=USERS.find(x=>x.name===n); if(u)html+=buildSdrProvaCard(u);});
   return html;
 }
 function buildMentorDiary(){
