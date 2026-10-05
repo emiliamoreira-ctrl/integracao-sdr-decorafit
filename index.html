@@ -332,6 +332,38 @@
   .cert-banner{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border-radius:14px;padding:22px;text-align:center;margin-bottom:22px;}
   .cert-banner h3{font-size:1.1rem;font-weight:800;}
   .cert-banner p{font-size:.82rem;opacity:.9;margin-top:5px;}
+
+  /* AVALIAÇÃO DE PROCESSOS */
+  .proc-hero{background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:14px;padding:22px 24px;color:#fff;margin-bottom:20px;}
+  .proc-hero h2{font-size:1.15rem;font-weight:800;}
+  .proc-hero .ph-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .proc-hero .ph-tag{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 11px;font-size:.72rem;font-weight:600;}
+  .proc-hero p{font-size:.8rem;color:rgba(255,255,255,.82);margin-top:10px;line-height:1.5;}
+  .proc-bloco{background:var(--card);border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+  .proc-bloco-h{padding:12px 16px;background:#faf5ff;border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+  .proc-bloco-h strong{font-size:.84rem;font-weight:800;color:var(--navy);}
+  .proc-bloco-h .cnt{font-size:.7rem;color:var(--muted);}
+  .proc-bloco-b{display:none;padding:16px;}
+  .proc-bloco.open .proc-bloco-b{display:block;}
+  .proc-q{margin-bottom:16px;}
+  .proc-q .qn{display:inline-block;background:var(--purple);color:#fff;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:6px;}
+  .proc-q .qt{font-size:.8rem;color:var(--txt);line-height:1.55;margin-bottom:8px;font-weight:500;}
+  .proc-q textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:.78rem;resize:vertical;min-height:80px;}
+  .proc-q textarea:focus{outline:none;border-color:var(--purple);}
+  .proc-q.answered textarea{border-color:var(--green);background:#f0fdf4;}
+  .proc-submit{background:var(--purple);color:#fff;border:none;border-radius:9px;padding:12px 26px;font-family:'Montserrat',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;}
+  .proc-submit:hover{background:#6d28d9;}
+  .proc-submit:disabled{background:var(--line);color:var(--muted);cursor:not-allowed;}
+  /* vídeo por tópico */
+  .topic-row{background:#fff;border:1.5px solid var(--line);border-radius:9px;margin-bottom:8px;overflow:hidden;}
+  .topic-row.done{background:#f0fdf4;border-color:var(--green);}
+  .topic-head{display:flex;align-items:center;gap:11px;padding:10px 13px;cursor:pointer;}
+  .topic-vbtn{background:var(--navy);color:#fff;border:none;border-radius:6px;padding:4px 9px;font-size:.65rem;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;white-space:nowrap;}
+  .topic-vbtn:hover{background:#2d4a7a;}
+  .topic-vbody{display:none;padding:0 13px 13px;}
+  .topic-row.vopen .topic-vbody{display:block;}
+  .topic-vbody video{width:100%;border-radius:8px;background:#000;max-height:280px;}
+  .vsoon{background:var(--bg);border:1.5px dashed var(--line);border-radius:8px;padding:16px;text-align:center;font-size:.75rem;color:var(--muted);}
 </style>
 </head>
 <body>
@@ -349,7 +381,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v2.0</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v2.1</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -701,7 +733,53 @@ const MODULOS=[
     {id:'m11q5',txt:'VÍDEO FINAL: explique em até 3 minutos como pretende organizar sua rotina para bater todas as metas.'}]}},
 ];
 const MOD_PTS_TOPICO=5;
+/* Vídeo por tópico: chave = <idModulo>_t<indice>, valor = arquivo .mp4 */
+const TOPIC_VIDEOS={
+  'm1_t0':'pipedrive-intro.mp4'
+};
 const MAX_MOD_PTS=MODULOS.reduce((a,m)=>a+m.topicos.length*MOD_PTS_TOPICO+m.prova.pts,0);
+
+
+/* ═══════ AVALIAÇÃO DE PROCESSOS — todos os SDRs ═══════ */
+const AVAL_PROCESSOS={
+  id:'proc',
+  titulo:'Avaliação de Processos',
+  responsavel:'Gaby',
+  data:'Quarta-feira · 14/10 · após o treinamento',
+  pts:90,
+  desc:'Avaliação aplicada a todo o time de Pré-Vendas após o treinamento de processos com a Gaby. Responda com suas palavras, como você responderia ao cliente no dia a dia.',
+  blocos:[
+    {nome:'🔧 Operacional e sistemas',perguntas:[
+      {id:'pr1',txt:'Como abrir uma solicitação de medição? Descreva o passo a passo.'},
+      {id:'pr2',txt:'O Chatwoot parou de funcionar. O que você faz? Para quem avisa e como segue atendendo?'},
+      {id:'pr3',txt:'A mensagem ficou vermelha, você clicou em reenviar e não foi. O que faz agora?'},
+      {id:'pr4',txt:'Qual é o nosso SLA de resposta ao cliente? O que você faz para garantir que ele seja cumprido?'},
+    ]},
+    {nome:'📐 Projeto, planta e escopo',perguntas:[
+      {id:'pr5',txt:'O apartamento é antigo. Posso fazer escopo parcial? Justifique a sua resposta.'},
+      {id:'pr6',txt:'O que é uma planta com escala?'},
+      {id:'pr7',txt:'Como fazer a leitura de planta e o cálculo parcial? Descreva o processo.'},
+      {id:'pr8',txt:'Na estimativa estão inclusos quais materiais de acabamento?'},
+    ]},
+    {nome:'💰 Valores e qualificação',perguntas:[
+      {id:'pr9',txt:'Qual é o valor mínimo para um projeto de só móveis?'},
+      {id:'pr10',txt:'O cliente quer comprar apenas o projeto e a entrega não é acima de 15 meses. Como você conduz?'},
+      {id:'pr11',txt:'Cliente investidor: falamos de orçamento exato? Explique o porquê.'},
+      {id:'pr12',txt:'Onde você verifica se o cliente é investidor ou não?'},
+    ]},
+    {nome:'🗣️ Objeções e condução do cliente',perguntas:[
+      {id:'pr13',txt:'O cliente diz que pode ficar 30 dias fora, mas depois vai precisar morar no apartamento enquanto a obra termina. Como você responde?'},
+      {id:'pr14',txt:'Você já ofereceu a agenda da semana e o cliente disse que não consegue nenhum horário. O que você faz?'},
+      {id:'pr15',txt:'Depois de passar o valor, o cliente responde "é bem perto do que eu imaginava". Isso é um sim ou não? Como você conduz a partir daí?'},
+    ]},
+    {nome:'🏁 Fechamento, perda e ganho',perguntas:[
+      {id:'pr16',txt:'Cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
+      {id:'pr17',txt:'O cliente ainda não assinou o contrato de compra e venda e não tem previsão. Como seguir com esse lead?'},
+      {id:'pr18',txt:'Quais são as informações principais necessárias para dar um GANHO?'},
+    ]},
+  ]
+};
+function totalPerguntasProc(){return AVAL_PROCESSOS.blocos.reduce((a,b)=>a+b.perguntas.length,0);}
 
 const TYPE_LABELS={live:'🔴 Ao vivo',async:'🟣 Assíncrono',listen:'🟢 Escuta',read:'🟡 Leitura',practice:'🔴 Prática',meet:'🔵 Meet'};
 const TYPE_CLASSES={live:'pill-live',async:'pill-async',listen:'pill-listen',read:'pill-read',practice:'pill-practice',meet:'pill-meet'};
@@ -896,6 +974,7 @@ function buildAdminPanels(tabs,main){
   addTab(tabs,main,'adm-provas',   '📋 Avaliações',  buildAdmProvas);
   addTab(tabs,main,'adm-diarios',  '📓 Diários',     buildAdmDiarios);
   addTab(tabs,main,'adm-duvidas',  '💬 Dúvidas',     buildAdmDuvidas);
+  addTab(tabs,main,'adm-proc',    '📝 Aval. Processos', buildAdmProc);
   addTab(tabs,main,'adm-acessos',  '🔐 Acessos',     buildAdmAcessos);
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.adm-diary-entry-header').forEach(h=>{h.onclick=()=>h.closest('.adm-diary-entry').classList.toggle('open');});
@@ -1018,6 +1097,7 @@ function buildAdmDuvidas(){
 function buildNovoPanels(tabs,main){
   addTab(tabs,main,'modulos','📚 Módulos',()=>buildModHero()+buildModulosHTML());
   addTab(tabs,main,'cronograma','📅 Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
+  addTab(tabs,main,'proc','📝 Aval. Processos',buildProcPanel);
   addTab(tabs,main,'progresso','🏆 Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
 
@@ -1169,6 +1249,95 @@ function modHasVideo(){
   return Object.values(u.modProvas||{}).some(v=>v.hasVideo);
 }
 
+
+/* ─── Avaliação de Processos ─── */
+function buildProcPanel(){
+  const u=getU(currentUser.id);
+  const pv=u.procAval||{};
+  const total=totalPerguntasProc();
+  const resp=Object.values(pv.respostas||{}).filter(v=>v&&v.trim()).length;
+  const enviada=pv.submitted;
+
+  let html=`<div class="proc-hero">
+    <h2>📝 ${AVAL_PROCESSOS.titulo}</h2>
+    <div class="ph-meta">
+      <span class="ph-tag">👤 Responsável: ${AVAL_PROCESSOS.responsavel}</span>
+      <span class="ph-tag">📅 ${AVAL_PROCESSOS.data}</span>
+      <span class="ph-tag">❓ ${total} questões</span>
+      <span class="ph-tag">⭐ ${AVAL_PROCESSOS.pts} pontos</span>
+      <span class="ph-tag">${enviada?'✅ Enviada':'⏳ '+resp+'/'+total+' respondidas'}</span>
+    </div>
+    <p>${AVAL_PROCESSOS.desc}</p>
+  </div>`;
+
+  if(enviada){
+    html+=`<div style="background:#f0fdf4;border:1.5px solid var(--green);border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:.82rem;color:#15803d;font-weight:600">
+      ✅ Avaliação enviada. Suas respostas foram registradas e estão disponíveis para a gestora.</div>`;
+  }
+
+  let n=0;
+  AVAL_PROCESSOS.blocos.forEach((b,bi)=>{
+    const feitas=b.perguntas.filter(q=>(pv.respostas||{})[q.id]&&(pv.respostas||{})[q.id].trim()).length;
+    html+=`<div class="proc-bloco${bi===0?' open':''}" id="pb-${bi}">
+      <div class="proc-bloco-h" onclick="document.getElementById('pb-${bi}').classList.toggle('open')">
+        <strong>${b.nome}</strong><span class="cnt">${feitas}/${b.perguntas.length} respondidas ▼</span></div>
+      <div class="proc-bloco-b">`;
+    b.perguntas.forEach(q=>{
+      n++;
+      const val=(pv.respostas||{})[q.id]||'';
+      html+=`<div class="proc-q${val.trim()?' answered':''}" id="pq-${q.id}">
+        <span class="qn">Questão ${n}</span>
+        <div class="qt">${q.txt}</div>
+        <textarea id="${q.id}" ${enviada?'disabled':''} placeholder="Responda como você responderia no dia a dia...">${val}</textarea>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+
+  if(!enviada){
+    html+=`<div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button class="btn-save-eval" onclick="salvarProcRascunho()">💾 Salvar rascunho</button>
+      <button class="proc-submit" onclick="enviarProcAval()">Enviar avaliação →</button>
+      <span class="eval-saved" id="proc-saved">✓ Rascunho salvo!</span>
+    </div>
+    <p style="font-size:.73rem;color:var(--muted);margin-top:9px">Depois de enviar não é possível editar. Salve o rascunho quantas vezes quiser antes disso.</p>`;
+  }
+  return html;
+}
+
+function coletarProcRespostas(){
+  const r={};
+  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
+    const el=document.getElementById(q.id); if(el)r[q.id]=el.value;
+  }));
+  return r;
+}
+function salvarProcRascunho(){
+  const uid=currentUser.id,u=getU(uid);
+  const pa=u.procAval||{};
+  pa.respostas=coletarProcRespostas();
+  setU(uid,{procAval:pa});
+  const s=document.getElementById('proc-saved');
+  if(s){s.style.display='inline';setTimeout(()=>s.style.display='none',2500);}
+  // atualiza contadores
+  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
+    const box=document.getElementById('pq-'+q.id);
+    if(box)box.classList.toggle('answered',!!(pa.respostas[q.id]||'').trim());
+  }));
+}
+function enviarProcAval(){
+  const r=coletarProcRespostas();
+  const total=totalPerguntasProc();
+  const feitas=Object.values(r).filter(v=>v&&v.trim()).length;
+  if(feitas<total){
+    if(!confirm(`Você respondeu ${feitas} de ${total} questões. Enviar mesmo assim? Não será possível editar depois.`))return;
+  } else if(!confirm('Enviar a avaliação? Não será possível editar depois.')) return;
+  const uid=currentUser.id,u=getU(uid);
+  setU(uid,{procAval:{respostas:r,submitted:true,enviadoEm:new Date().toISOString()}});
+  const p=document.getElementById('panel-proc');
+  if(p)p.innerHTML=buildProcPanel();
+}
+
 function buildModulosHTML(){
   let html='';
   const grupos=[
@@ -1201,11 +1370,21 @@ function buildModulosHTML(){
         <div class="day-body">
           ${m.video?buildModVideo(m):''}
           <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo do módulo</div>
-            <div class="task-list">${m.topicos.map((t,i)=>`
-              <div class="topic-item" id="top-${m.id}_t${i}" data-tid="${m.id}_t${i}">
-                <div class="topic-cb">✓</div><span class="topic-txt">${t}</span>
-                <span class="task-pts">+${MOD_PTS_TOPICO}</span>
-              </div>`).join('')}
+            <div class="task-list">${m.topicos.map((t,i)=>{
+              const tid=m.id+'_t'+i;
+              const vsrc=(TOPIC_VIDEOS[tid]||'');
+              return `<div class="topic-row" id="trow-${tid}">
+                <div class="topic-head">
+                  <div class="topic-cb" id="top-${tid}" data-tid="${tid}" onclick="toggleTopic(this)">✓</div>
+                  <span class="topic-txt" onclick="document.getElementById('top-${tid}').click()">${t}</span>
+                  <button class="topic-vbtn" onclick="document.getElementById('trow-${tid}').classList.toggle('vopen')">${vsrc?'▶ Vídeo':'📹 Vídeo'}</button>
+                  <span class="task-pts">+${MOD_PTS_TOPICO}</span>
+                </div>
+                <div class="topic-vbody">${vsrc
+                  ? `<video controls playsinline preload="metadata"><source src="${vsrc}" type="video/mp4"></video>`
+                  : `<div class="vsoon">📹 Vídeo explicativo deste tópico será disponibilizado em breve.</div>`}
+                </div>
+              </div>`;}).join('')}
             </div>
           </div>
           <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Avaliação do módulo</div>
@@ -1253,10 +1432,11 @@ function buildModProva(m){
 
 function toggleTopic(el){
   const uid=currentUser.id, tid=el.dataset.tid;
+  const row=document.getElementById('trow-'+tid);
   const u=getU(uid); const tops=u.modTopics||[];
   const i=tops.indexOf(tid);
-  if(i===-1){tops.push(tid);el.classList.add('done');}
-  else{tops.splice(i,1);el.classList.remove('done');}
+  if(i===-1){tops.push(tid);if(row)row.classList.add('done');}
+  else{tops.splice(i,1);if(row)row.classList.remove('done');}
   setU(uid,{modTopics:tops,pts:modPoints()});
   refreshTrilha();
 }
@@ -1288,7 +1468,7 @@ function handleModVideo(e,mid){
 
 function restoreModStates(){
   const u=getU(currentUser.id);
-  (u.modTopics||[]).forEach(t=>document.getElementById('top-'+t)?.classList.add('done'));
+  (u.modTopics||[]).forEach(t=>document.getElementById('trow-'+t)?.classList.add('done'));
   Object.entries(u.modProvas||{}).forEach(([mid,pv])=>{
     const m=MODULOS.find(x=>x.id===mid); if(!m)return;
     if(pv.respostas)m.prova.perguntas.forEach(q=>{const el=document.getElementById(q.id);if(el&&pv.respostas[q.id])el.value=pv.respostas[q.id];});
@@ -1316,7 +1496,6 @@ function refreshTrilha(){
 
 function bindModEvents(root){
   root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
-  root.querySelectorAll('.topic-item').forEach(t=>{t.onclick=()=>toggleTopic(t);});
   root.querySelectorAll('.btn-submit-prova[data-mod]').forEach(b=>{b.onclick=()=>submitModProva(b.dataset.mod);});
   root.querySelectorAll('.video-upload-area[data-mod]').forEach(a=>{
     a.onclick=(e)=>{if(e.target.tagName!=='INPUT')a.querySelector('input').click();};
@@ -1542,6 +1721,7 @@ function buildMadrinhaPanels(tabs,main){
   addTab(tabs,main,'acompanhamento','👁 Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
   addTab(tabs,main,'provas-mentor','📋 Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
   addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
+  addTab(tabs,main,'proc','📝 Aval. Processos',buildProcPanel);
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
   main.querySelectorAll('.btn-mentor-save').forEach(btn=>{btn.onclick=()=>saveMentorEntry(btn.dataset.day);});
@@ -1688,6 +1868,52 @@ function saveMentorEntry(dayId){
   switchDiaryTarget();
 }
 function refreshMentorDiary(){ switchDiaryTarget(); }
+
+
+function buildAdmProc(){
+  const todos=[...NOVOS,...MENTORS];
+  const total=totalPerguntasProc();
+  const env=todos.filter(u=>(getU(u.id).procAval||{}).submitted).length;
+  let html=`<div class="section-title">${AVAL_PROCESSOS.titulo}</div>
+  <p class="section-sub">${AVAL_PROCESSOS.data} · responsável: ${AVAL_PROCESSOS.responsavel} · aplicada a todo o time</p>
+  <div class="adm-kpi-grid">
+    <div class="adm-kpi" style="border-left-color:var(--purple)"><div class="kpi-val">${env}</div><div class="kpi-label">Avaliações enviadas</div><div class="kpi-sub">de ${todos.length} do time</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--orange)"><div class="kpi-val">${total}</div><div class="kpi-label">Questões</div><div class="kpi-sub">em ${AVAL_PROCESSOS.blocos.length} blocos</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--blue)"><div class="kpi-val">${todos.length-env}</div><div class="kpi-label">Pendentes</div><div class="kpi-sub">ainda não enviaram</div></div>
+  </div>`;
+  todos.forEach(u=>{
+    const pa=getU(u.id).procAval||{};
+    const r=pa.respostas||{};
+    const feitas=Object.values(r).filter(v=>v&&v.trim()).length;
+    html+=`<div class="sdr-prova-wrapper">
+      <div class="sdr-prova-summary" onclick="this.closest('.sdr-prova-wrapper').classList.toggle('open')">
+        ${avatarHtml(u,48)}
+        <div class="sdr-prova-info"><strong>${u.name}</strong>
+          <span>${u.role==='mentor'?'Madrinha':'Novo SDR'} · ${u.turno}</span>
+          <div class="sdr-prova-stats">
+            <span class="${pa.submitted?'stat-ok':'stat-pend'}">${pa.submitted?'✅ Enviada':'⏳ Pendente'}</span>
+            <span class="stat-star">${feitas}/${total} respondidas</span>
+          </div></div>
+        <span class="sdr-prova-arrow">▼</span></div>
+      <div class="sdr-prova-days">`;
+    if(feitas===0){
+      html+=`<div style="font-size:.78rem;color:var(--muted);font-style:italic;padding:8px">Nenhuma resposta registrada ainda.</div>`;
+    } else {
+      let n=0;
+      AVAL_PROCESSOS.blocos.forEach(b=>{
+        html+=`<div style="font-size:.78rem;font-weight:800;color:var(--purple);margin:12px 0 7px">${b.nome}</div>`;
+        b.perguntas.forEach(q=>{
+          n++;
+          const a=(r[q.id]||'').trim();
+          html+=`<div class="adm-resp-item"><div class="adm-resp-label">Q${n} — ${q.txt.substring(0,70)}...</div>
+            <div class="adm-resp-text">${a||'<i style="color:var(--muted)">sem resposta</i>'}</div></div>`;
+        });
+      });
+    }
+    html+=`</div></div>`;
+  });
+  return html;
+}
 
 function buildAdmAcessos(){
   const users=getAuthUsers();const pwds=getPwds();
