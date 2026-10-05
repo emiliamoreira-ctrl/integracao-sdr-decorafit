@@ -323,6 +323,7 @@ const USERS=[
   {id:'leandro',name:'Leandro', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#3b82f6', emoji:'👨‍💼', mentor:'Dani / Gaby', photo:LEANDRO_IMG},
   {id:'larissa',name:'Larissa', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#8b5cf6', emoji:'👩‍💼', mentor:'Dani / Gaby', photo:LARISSA_IMG},
   {id:'allice', name:'Allice',  role:'novo',   turno:'tarde',                    color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
+  {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'🧪', mentor:'—'},
 ];
 
 /* ══ PROVAS ══ */
@@ -556,6 +557,13 @@ function initAuth(){
     let em=users.find(u=>u.userId==='emilia');
     if(!em){em={userId:'emilia',name:'Emília',role:'admin',email:ADM_EMAIL,approved:true};users.push(em);}
     em.email=ADM_EMAIL;em.approved=true;em.role='admin';
+    // Conta de teste pré-autorizada (visualização como Novo SDR)
+    const TEST_EMAIL='emiliabertoldo2008@gmail.com';
+    let tu=users.find(u=>u.userId==='teste');
+    if(!tu){tu={userId:'teste',name:'Teste (Candidato)',role:'novo',email:TEST_EMAIL,approved:true};users.push(tu);}
+    tu.email=TEST_EMAIL;tu.approved=true;tu.role='novo';
+    if(!pwds[TEST_EMAIL])pwds[TEST_EMAIL]='2218';
+    localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
     // Garantir que todos os perfis do sistema existem na lista de acessos
     USERS.forEach(u=>{
       if(!users.find(a=>a.userId===u.id)){
