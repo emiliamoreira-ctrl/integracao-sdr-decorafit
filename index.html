@@ -1159,7 +1159,7 @@ function gmailInvite(userId){
   const allUsers=[...USERS,...extras];
   const u=allUsers.find(u=>u.id===userId)||{name:au.name,role:au.role};
   const isNovo=au.role==='novo';
-  const invUrl=`https://pre-vendas.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
+  const invUrl=`https://emiliamoreira-ctrl.github.io/integracao-sdr-decorafit/?invite=${encodeURIComponent(au.email)}`;
 
   let subject, body;
   if(isNovo){
@@ -1200,7 +1200,7 @@ function copyInvite(userId){
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
   if(!au||!au.email){alert('Salve um e-mail primeiro.');return;}
-  const url=`https://pre-vendas.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
+  const url=`https://emiliamoreira-ctrl.github.io/integracao-sdr-decorafit/?invite=${encodeURIComponent(au.email)}`;
   navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('cbtn-'+userId);
     if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
