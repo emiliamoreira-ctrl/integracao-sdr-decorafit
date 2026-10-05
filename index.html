@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Integração SDR Inbound — Decorafit</title>
+<title>Treinamento Pré-Vendas — Decorafit</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{--navy:#1a2b4a;--orange:#f97316;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--bg:#f0f2f5;--card:#ffffff;--line:#e2e8f0;--txt:#1e293b;--muted:#64748b;--gold:#f59e0b;--purple:#8b5cf6;--teal:#14b8a6;--mentor:#ec4899;}
@@ -269,7 +269,7 @@
   <div class="login-box">
     <div class="logo">
       <h1>Decorafit <span style="color:var(--orange)">SDR</span></h1>
-      <p>Integração Inbound — Outubro 2026</p>
+      <p>Treinamento Pré-Vendas — Outubro 2026</p>
     </div>
     <div id="login-form-area">
       <div class="login-section-label">Acesso ao Sistema</div>
@@ -1159,7 +1159,7 @@ function gmailInvite(userId){
   const allUsers=[...USERS,...extras];
   const u=allUsers.find(u=>u.id===userId)||{name:au.name,role:au.role};
   const isNovo=au.role==='novo';
-  const invUrl=`https://treinamento.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
+  const invUrl=`https://pre-vendas.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
 
   let subject, body;
   if(isNovo){
@@ -1200,7 +1200,7 @@ function copyInvite(userId){
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
   if(!au||!au.email){alert('Salve um e-mail primeiro.');return;}
-  const url=`https://treinamento.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
+  const url=`https://pre-vendas.decorafit.com.br/?invite=${encodeURIComponent(au.email)}`;
   navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('cbtn-'+userId);
     if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
