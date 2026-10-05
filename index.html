@@ -532,10 +532,24 @@ loadState();
 /* ══ LOGIN ══ */
 /* ══ AUTH SYSTEM ══ */
 function initAuth(){
-  if(!localStorage.getItem('sdrAuth_v1')){
-    const defaults=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'decorafit':'',approved:u.id==='emilia'}));
-    localStorage.setItem('sdrAuth_v1',JSON.stringify(defaults));
-    localStorage.setItem('sdrPwd_v1',JSON.stringify({decorafit:'2218'}));
+  try{
+    let users=JSON.parse(localStorage.getItem('sdrAuth_v1')||'null');
+    if(!users||!Array.isArray(users)||users.length===0){
+      users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'decorafit':'',approved:u.id==='emilia'}));
+      localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
+    }
+    let pwds=JSON.parse(localStorage.getItem('sdrPwd_v1')||'null');
+    if(!pwds||typeof pwds!=='object'){pwds={'decorafit':'2218'};}
+    // Garantir que Emília sempre tem senha
+    if(!pwds['decorafit'])pwds['decorafit']='2218';
+    localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
+    // Garantir que Emília está aprovada
+    const em=users.find(u=>u.userId==='emilia');
+    if(em&&!em.approved){em.approved=true;localStorage.setItem('sdrAuth_v1',JSON.stringify(users));}
+  } catch(e){
+    const users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'decorafit':'',approved:u.id==='emilia'}));
+    localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
+    localStorage.setItem('sdrPwd_v1',JSON.stringify({'decorafit':'2218'}));
   }
   // Verificar link de convite na URL
   const inv=new URLSearchParams(window.location.search).get('invite');
@@ -615,11 +629,10 @@ function logout(){
 }
 
 // Enter key no login
-document.addEventListener('DOMContentLoaded',function(){
-  initAuth();
-  document.getElementById('login-password')?.addEventListener('keypress',function(e){if(e.key==='Enter')doLogin();});
-  document.getElementById('login-email')?.addEventListener('keypress',function(e){if(e.key==='Enter')document.getElementById('login-password')?.focus();});
-});
+// Inicializar auth e eventos imediatamente (script está no final do body)
+initAuth();
+document.getElementById('login-password')?.addEventListener('keypress',function(e){if(e.key==='Enter')doLogin();});
+document.getElementById('login-email')?.addEventListener('keypress',function(e){if(e.key==='Enter')document.getElementById('login-password')?.focus();});
 
 function buildApp(){
   const tabs=document.getElementById('nav-tabs'),main=document.getElementById('main-content');
@@ -1060,38 +1073,67 @@ function refreshMentorDiary(){
 
 function buildAdmAcessos(){
   const users=getAuthUsers();const pwds=getPwds();
+  // Combinar USERS fixos + extra users
+  const extraUsers=JSON.parse(localStorage.getItem('sdrExtraUsers')||'[]');
+  const allManaged=[...USERS,...extraUsers];
+
   let html=`<div class="section-title">Gerenciar Acessos</div>
-  <p class="section-sub">Configure e-mails e gere links de convite para cada colaborador.</p>
-  <div style="background:#fff8f0;border:1.5px solid var(--orange);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:.78rem;color:#92400e">
-    <strong>Como funciona:</strong> Insira o e-mail de cada colaborador → clique Salvar → copie o link de convite → envie para eles via WhatsApp. Eles clicam no link e criam a própria senha.
-  </div>
-  <div>`;
-  USERS.filter(u=>u.id!=='emilia').forEach(u=>{
+  <p class="section-sub">Configure e-mails, gere convites e adicione novos colaboradores.</p>
+  <div style="background:#fff8f0;border:1.5px solid var(--orange);border-radius:10px;padding:11px 15px;margin-bottom:18px;font-size:.76rem;color:#92400e">
+    <strong>Como funciona:</strong> Insira o e-mail → Salvar → Copiar link de convite → Enviar via WhatsApp. O colaborador cria a própria senha.
+  </div>`;
+
+  // ── Usuários cadastrados ──
+  html+=`<div style="font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:10px">👥 Colaboradores cadastrados</div>`;
+  allManaged.forEach(u=>{
     const au=users.find(a=>a.userId===u.id)||{};
     const hasEmail=au.email&&au.email.length>0;
     const hasPwd=hasEmail&&pwds[au.email.toLowerCase()];
+    const isMe=u.id==='emilia';
     const invUrl=hasEmail?`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(au.email)}`:'';
-    html+=`<div class="acesso-card">
+    html+=`<div class="acesso-card" style="${isMe?'border-color:var(--navy);background:#f0f4ff':''}">
       <div class="acesso-card-header">
-        ${avatarHtml(u,40)}
+        ${avatarHtml(u,38)}
         <div style="flex:1">
-          <strong style="font-size:.88rem;color:var(--navy)">${u.name}</strong>
-          <span style="font-size:.73rem;color:var(--muted);display:block">${u.role==='mentor'?'Mentora':'Novo SDR'} · ${u.turno}</span>
+          <strong style="font-size:.85rem;color:var(--navy)">${u.name}${isMe?' 👑':''}</strong>
+          <span style="font-size:.72rem;color:var(--muted);display:block">${isMe?'Gestora ADM':(u.role==='mentor'?'Mentora':'Novo SDR')} · ${u.turno||''}</span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end">
           <span class="status-tag ${hasEmail?'tag-ok':'tag-pend'}">${hasEmail?'✅ E-mail ok':'⏳ Sem e-mail'}</span>
-          <span class="status-tag ${hasPwd?'tag-ok':'tag-warn'}">${hasPwd?'🔒 Senha criada':'🔑 Aguardando senha'}</span>
+          <span class="status-tag ${hasPwd?'tag-ok':'tag-warn'}">${hasPwd?'🔒 Senha criada':'🔑 Aguardando'}</span>
         </div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
         <input type="text" id="email-${u.id}" class="invite-input" placeholder="E-mail de acesso" value="${hasEmail?au.email:''}">
         <button class="btn-acesso btn-salvar" onclick="saveUserEmail('${u.id}')">Salvar</button>
-        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="copyInvite('${u.id}','${invUrl}')">🔗 Copiar link convite</button>`:''}
-        ${hasPwd?`<button class="btn-acesso btn-reset" onclick="resetPwd('${u.id}')">↺ Redefinir senha</button>`:''}
+        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="copyInvite('${u.id}')">🔗 Copiar convite</button>`:''}
+        ${hasPwd&&!isMe?`<button class="btn-acesso btn-reset" onclick="resetPwd('${u.id}')">↺ Redefinir senha</button>`:''}
+        ${!isMe&&extraUsers.find(e=>e.id===u.id)?`<button class="btn-acesso" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5" onclick="removeExtraUser('${u.id}')">🗑 Remover</button>`:''}
       </div>
     </div>`;
   });
-  html+=`</div>`;
+
+  // ── Adicionar Novo Colaborador ──
+  html+=`<div style="background:var(--card);border:2px dashed var(--line);border-radius:12px;padding:18px;margin-top:20px">
+    <div style="font-size:.85rem;font-weight:800;color:var(--navy);margin-bottom:14px">➕ Adicionar Novo Colaborador</div>
+    <div style="display:grid;gap:10px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="text" id="new-user-name" class="invite-input" placeholder="Nome completo" style="flex:2;min-width:140px">
+        <select id="new-user-role" class="invite-input" style="flex:1;min-width:120px">
+          <option value="novo">Novo SDR</option>
+          <option value="mentor">Mentora/Mentor</option>
+          <option value="admin">Gestão ADM</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="text" id="new-user-turno" class="invite-input" placeholder="Turno (ex: manhã/tarde)" style="flex:2;min-width:140px">
+        <input type="text" id="new-user-email" class="invite-input" placeholder="E-mail de acesso" style="flex:2;min-width:140px">
+      </div>
+      <div id="new-user-error" style="color:var(--red);font-size:.74rem;font-weight:600;display:none"></div>
+      <button class="btn-acesso btn-salvar" style="width:fit-content;padding:9px 20px" onclick="addNewUser()">➕ Adicionar e gerar convite</button>
+    </div>
+  </div>`;
+
   return html;
 }
 
@@ -1102,33 +1144,70 @@ function saveUserEmail(userId){
   const users=getAuthUsers();
   const idx=users.findIndex(u=>u.userId===userId);
   if(idx>=0){users[idx].email=email;users[idx].approved=true;}
+  else{users.push({userId,name:userId,role:'novo',email,approved:true});}
   saveAuthUsers(users);
-  const panel=document.getElementById('panel-adm-acessos');
-  if(panel){panel.innerHTML=buildAdmAcessos();}
+  refreshAcessos();
 }
 
-function copyInvite(userId,url){
-  // Recalcular URL com email atualizado
+function copyInvite(userId){
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
-  const freshUrl=au?`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(au.email)}`:'';
-  const finalUrl=freshUrl||url;
-  navigator.clipboard.writeText(finalUrl).then(()=>{
+  if(!au||!au.email){alert('Salve um e-mail primeiro.');return;}
+  const url=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(au.email)}`;
+  navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('ibtn-'+userId);
-    if(btn){btn.textContent='✅ Copiado!';setTimeout(()=>btn.textContent='🔗 Copiar link convite',2500);}
-  }).catch(()=>{prompt('Copie o link abaixo e envie via WhatsApp:',finalUrl);});
+    if(btn){const orig=btn.textContent;btn.textContent='✅ Copiado!';setTimeout(()=>btn.textContent=orig,2500);}
+  }).catch(()=>{prompt('Copie o link abaixo e envie via WhatsApp:',url);});
 }
 
 function resetPwd(userId){
-  if(!confirm('Redefinir senha? O colaborador precisará criar uma nova senha no próximo acesso.'))return;
+  if(!confirm('Redefinir senha? O colaborador precisará criar uma nova no próximo acesso.'))return;
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
   if(!au||!au.email)return;
-  const pwds=getPwds();
-  delete pwds[au.email.toLowerCase()];
-  savePwds(pwds);
+  const pwds=getPwds();delete pwds[au.email.toLowerCase()];savePwds(pwds);
+  refreshAcessos();
+}
+
+function addNewUser(){
+  const name=document.getElementById('new-user-name')?.value.trim();
+  const role=document.getElementById('new-user-role')?.value;
+  const turno=document.getElementById('new-user-turno')?.value.trim();
+  const email=document.getElementById('new-user-email')?.value.trim().toLowerCase();
+  const errEl=document.getElementById('new-user-error');
+  if(!name||!email){errEl.style.display='block';errEl.textContent='Nome e e-mail são obrigatórios.';return;}
+  errEl.style.display='none';
+  // Gerar ID único
+  const uid='user_'+Date.now();
+  const colors={'novo':'#6366f1','mentor':'#ec4899','admin':'#1a2b4a'};
+  const newUser={id:uid,name,role,turno:turno||'—',color:colors[role]||'#64748b',emoji:role==='admin'?'👑':role==='mentor'?'⭐':'👤',mentor:''};
+  // Salvar no extra users
+  const extras=JSON.parse(localStorage.getItem('sdrExtraUsers')||'[]');
+  extras.push(newUser);
+  localStorage.setItem('sdrExtraUsers',JSON.stringify(extras));
+  // Adicionar ao auth
+  const users=getAuthUsers();
+  users.push({userId:uid,name,role,email,approved:true});
+  saveAuthUsers(users);
+  // Gerar link convite
+  const invUrl=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(email)}`;
+  navigator.clipboard.writeText(invUrl).then(()=>{alert(`✅ ${name} adicionado! Link de convite copiado — cole no WhatsApp.`);}).catch(()=>{prompt(`✅ ${name} adicionado! Copie o link de convite:`,invUrl);});
+  refreshAcessos();
+}
+
+function removeExtraUser(userId){
+  if(!confirm('Remover este colaborador? O acesso será revogado.'))return;
+  let extras=JSON.parse(localStorage.getItem('sdrExtraUsers')||'[]');
+  extras=extras.filter(e=>e.id!==userId);
+  localStorage.setItem('sdrExtraUsers',JSON.stringify(extras));
+  const users=getAuthUsers().filter(u=>u.userId!==userId);
+  saveAuthUsers(users);
+  refreshAcessos();
+}
+
+function refreshAcessos(){
   const panel=document.getElementById('panel-adm-acessos');
-  if(panel){panel.innerHTML=buildAdmAcessos();}
+  if(panel)panel.innerHTML=buildAdmAcessos();
 }
 
 </script>
