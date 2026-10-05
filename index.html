@@ -535,21 +535,21 @@ function initAuth(){
   try{
     let users=JSON.parse(localStorage.getItem('sdrAuth_v1')||'null');
     if(!users||!Array.isArray(users)||users.length===0){
-      users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'decorafit':'',approved:u.id==='emilia'}));
+      users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':,approved:u.id==='emilia'}));
       localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
     }
     let pwds=JSON.parse(localStorage.getItem('sdrPwd_v1')||'null');
     if(!pwds||typeof pwds!=='object'){pwds={'decorafit':'2218'};}
     // Garantir que Emília sempre tem senha
-    if(!pwds['decorafit'])pwds['decorafit']='2218';
+    if(!pwds['emilia.moreira@decorafit.com.br'])pwds['emilia.moreira@decorafit.com.br']='2218';
     localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
     // Garantir que Emília está aprovada
     const em=users.find(u=>u.userId==='emilia');
     if(em&&!em.approved){em.approved=true;localStorage.setItem('sdrAuth_v1',JSON.stringify(users));}
   } catch(e){
-    const users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'decorafit':'',approved:u.id==='emilia'}));
+    const users=USERS.map(u=>({userId:u.id,name:u.name,role:u.role,email:u.id==='emilia'?'emilia.moreira@decorafit.com.br':,approved:u.id==='emilia'}));
     localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
-    localStorage.setItem('sdrPwd_v1',JSON.stringify({'decorafit':'2218'}));
+    localStorage.setItem('sdrPwd_v1',JSON.stringify({'emilia.moreira@decorafit.com.br':'2218'}));
   }
   // Verificar link de convite na URL
   const inv=new URLSearchParams(window.location.search).get('invite');
