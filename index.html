@@ -327,9 +327,12 @@ const USERS=[
 
 /* ══ PROVAS ══ */
 const PROVAS={
-  d1:{pts:15,titulo:'Prova Dia 1 — Ferramentas & Primeiras Impressões',desc:'Responda com suas palavras. Vídeo opcional mostrando os sistemas (até 2 min).',perguntas:[
-    {id:'p1q1',enunciado:'Qual é a função do Chatwoot, do Pipedrive e do Api4com no trabalho do SDR? Descreva brevemente cada um.'},
-    {id:'p1q2',enunciado:'O que é o Daily PV? O que você observou na daily que assistiu hoje?'},
+  d1:{pts:25,titulo:'Prova Dia 1 — Pipedrive, Chatwoot & Rotina',desc:'Responda por etapa. Grave um vídeo com a tela mostrando o que fez nos sistemas (opcional, até 3 min).',perguntas:[
+    {id:'p1q1',enunciado:'ETAPA 1 — PIPEDRIVE: Depois de assistir ao vídeo, explique para que serve o Pipedrive no dia a dia do SDR e descreva a tarefa que você cumpriu nele.'},
+    {id:'p1q2',enunciado:'ETAPA 1 — PIPEDRIVE: Quais informações do lead precisam estar preenchidas no card? Liste os campos que você considera obrigatórios.'},
+    {id:'p1q3',enunciado:'ETAPA 2 — CHATWOOT: Para que serve o Chatwoot e como ele se conecta ao trabalho do SDR? Descreva a tarefa que você cumpriu.'},
+    {id:'p1q4',enunciado:'ETAPA 2 — CHATWOOT: Como você identifica de qual canal o lead chegou e o que faz em seguida?'},
+    {id:'p1q5',enunciado:'ETAPA 3 — ROTINA: O que é o Daily PV? O que mais chamou sua atenção na daily e na rotina da equipe tarde que você acompanhou?'},
   ]},
   d2:{pts:20,titulo:'Prova Dia 2 — Rotinas do Time & R01',desc:'Responda ou grave um vídeo descrevendo sua resposta (até 3 min).',perguntas:[
     {id:'p2q1',enunciado:'O que acontece na "Rotina part1" do time? Quais são os principais pontos discutidos?'},
@@ -370,22 +373,28 @@ const PROVAS={
 const DAYS=[
   /* ─── SEMANA ONLINE ─── */
   {
-    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online · Tarde — início com Emília',color:'#3b82f6',pts:40,
+    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online · 12h–21h — início com Emília',color:'#3b82f6',pts:75,
     videos:[{name:'Introdução ao Pipedrive',time:'14h',src:'PIPEDRIVE'}],
     blocks:[
+      {time:'12h–13h15',   title:'🍽️ Almoço',type:'async',conduct:'—',joint:true,note:'Esta semana todos os novos SDRs trabalham das 12h às 21h'},
       {time:'13h15–14h',   title:'Daily PV — equipe tarde (observação)',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham a daily como ouvintes'},
       {time:'14h–15h20',   title:'📹 Introdução ao Pipedrive + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
       {time:'15h20–15h40', title:'☕ Pausa café',type:'async',conduct:'—',joint:true},
       {time:'15h40–17h',   title:'📹 Vídeos Chatwoot + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
-      {time:'17h',         title:'💬 Momento Dúvidas — Emília',type:'live',conduct:'Emília',joint:true},
-      {time:'Fim do dia',  title:'Avaliação do dia + Prova Diária 1',type:'practice',conduct:'Auto'},
+      {time:'17h–17h40',   title:'💬 Momento Dúvidas — Emília',type:'live',conduct:'Emília',joint:true},
+      {time:'17h40–19h',   title:'Prática livre nos sistemas + revisão das tarefas',type:'practice',conduct:'Madrinha',joint:true},
+      {time:'19h–20h30',   title:'Acompanhar rotina da equipe tarde',type:'live',conduct:'Madrinha',joint:true},
+      {time:'20h30–21h',   title:'Avaliação do dia + Prova Diária 1',type:'practice',conduct:'Auto',joint:true},
     ],
     tasks:[
       {id:'d1t1',label:'Participei do Daily PV como ouvinte',pts:5},
-      {id:'d1t2',label:'Assisti à Introdução ao Pipedrive e cumpri as tarefas',pts:15},
-      {id:'d1t3',label:'Assisti aos vídeos do Chatwoot e cumpri as tarefas',pts:15},
-      {id:'d1t4',label:'Participei do Momento Dúvidas com a Emília',pts:5},
-      {id:'d1t5',label:'Enviei a Prova do Dia 1',pts:15},
+      {id:'d1t2',label:'📹 Assisti ao vídeo Introdução ao Pipedrive',pts:10},
+      {id:'d1t3',label:'✅ Cumpri as tarefas propostas do Pipedrive',pts:15},
+      {id:'d1t4',label:'📹 Assisti aos vídeos do Chatwoot',pts:10},
+      {id:'d1t5',label:'✅ Cumpri as tarefas propostas do Chatwoot',pts:15},
+      {id:'d1t6',label:'Participei do Momento Dúvidas com a Emília',pts:5},
+      {id:'d1t7',label:'Acompanhei a rotina da equipe tarde',pts:10},
+      {id:'d1t8',label:'Enviei a Prova do Dia 1',pts:15},
     ]
   },
   {
