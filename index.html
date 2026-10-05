@@ -281,7 +281,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.5</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.6</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -330,7 +330,7 @@ const USERS=[
   {id:'allice', name:'Allice',  role:'novo',   turno:'tarde (12h–21h)',          color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
   {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'🧪', mentor:'—'},
   {id:'teste_sdr',      name:'Teste — Novo SDR',  role:'novo',   turno:'visualização de teste', color:'#0ea5e9', emoji:'🧪', mentor:'Teste — Madrinha'},
-  {id:'teste_madrinha', name:'Teste — Madrinha',  role:'mentor', turno:'visualização de teste', color:'#a855f7', emoji:'🧪', mentees:['Teste — Novo SDR','Leandro','Larissa']},
+  {id:'teste_madrinha', name:'Teste — Madrinha',  role:'mentor', turno:'visualização de teste', color:'#a855f7', emoji:'🧪', mentees:['Leandro','Larissa']},
 ];
 
 /* ══ PROVAS ══ */
@@ -613,8 +613,27 @@ function doLogin(){
   if(!email||!pw){err.textContent='Preencha e-mail e senha.';return;}
   const users=getAuthUsers();
   let au=users.find(u=>u.email&&u.email.toLowerCase()===email&&u.approved);
-  // atalho de compatibilidade para a gestora
-  if(!au&&(email==='decorafit'||email==='emilia'||email==='emilia.moreira@decorafit.com.br')){au=users.find(u=>u.userId==='emilia');}
+  // Allowlist fixa — garante acesso mesmo com dados antigos no navegador
+  if(!au){
+    const FIXOS={
+      'decorafit':'emilia','emilia':'emilia','emilia.moreira@decorafit.com.br':'emilia',
+      'emiliabertoldo2008@gmail.com':'teste',
+      'teste.sdr@decorafit.com.br':'teste_sdr',
+      'teste.madrinha@decorafit.com.br':'teste_madrinha'
+    };
+    const uid=FIXOS[email];
+    if(uid){
+      au=users.find(u=>u.userId===uid);
+      if(!au){
+        const base=USERS.find(u=>u.id===uid);
+        au={userId:uid,name:base?base.name:uid,role:base?base.role:'novo',email:email,approved:true};
+        users.push(au);saveAuthUsers(users);
+      }
+      au.email=email;au.approved=true;
+      const pw0=getPwds();
+      if(!pw0[email]){pw0[email]='2218';savePwds(pw0);}
+    }
+  }
   if(!au){err.textContent='E-mail não autorizado. Confira o endereço ou use o link "Limpar dados" abaixo.';return;}
   const pwds=getPwds();
   const key=(au.email||email).toLowerCase();
@@ -767,23 +786,28 @@ function applyProvaFilter(btn,main){
   main.querySelectorAll('.adm-prova-block').forEach(b=>{b.style.display=(f==='all'||b.dataset.day===f)?'block':'none';});
 }
 function buildAdmDiarios(){
-  let html=`<div class="section-title">Diários das Mentoras</div><p class="section-sub">Registros das Madrinhas sobre o acompanhamento dos novos SDRs.</p>`;
+  let html=`<div class="section-title">Diários das Madrinhas</div><p class="section-sub">Registros das madrinhas sobre os momentos que acompanharam.</p>`;
   MENTORS.forEach(m=>{
-    const diary=getU(m.id).diary||{};const hasAny=Object.keys(diary).length>0;
-    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · novos SDRs: ${(m.mentees||[]).join(', ')}</strong></div>`;
-    if(!hasAny){html+=`<div style="font-size:.76rem;color:var(--muted);font-style:italic;padding:7px 0">Nenhum registro ainda.</div>`;}
+    const diary=getU(m.id).diary||{};
+    const alvos=Object.keys(diary);
+    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · acompanha: ${(m.mentees||[]).join(', ')}</strong></div>`;
+    if(!alvos.length){html+=`<div style="font-size:.76rem;color:var(--muted);font-style:italic;padding:7px 0">Nenhum registro ainda.</div>`;}
     else{
-      DAYS.forEach(day=>{
-        const e=diary[day.id];if(!e)return;
-        const filled=[e.exp,e.atencao,e.bem,e.prova,e.sug].filter(Boolean).length;
-        html+=`<div class="adm-diary-entry"><div class="adm-diary-entry-header" onclick="this.closest('.adm-diary-entry').classList.toggle('open')">${day.label} · ${day.date}<span style="color:var(--muted);font-size:.68rem">${filled} campos ▼</span></div>
-          <div class="adm-diary-entry-body">
-            ${e.exp?`<div class="adm-diary-field"><label>📌 Experiência do dia</label><p>${e.exp}</p></div>`:''}
-            ${e.atencao?`<div class="adm-diary-field"><label>🔎 Pontos de atenção</label><p>${e.atencao}</p></div>`:''}
-            ${e.bem?`<div class="adm-diary-field"><label>✅ O que funcionou</label><p>${e.bem}</p></div>`:''}
-            ${e.prova?`<div class="adm-diary-field"><label>📋 Avaliação das provas</label><p>${e.prova}</p></div>`:''}
-            ${e.sug?`<div class="adm-diary-field"><label>💡 Sugestão para Emília</label><p>${e.sug}</p></div>`:''}
-          </div></div>`;
+      alvos.forEach(alvo=>{
+        html+=`<div style="font-size:.78rem;font-weight:700;color:var(--orange);margin:12px 0 7px">↳ sobre ${alvo}</div>`;
+        DAYS.forEach(day=>{
+          const e=(diary[alvo]||{})[day.id];if(!e)return;
+          const filled=[e.mom,e.exp,e.atencao,e.bem,e.prova].filter(Boolean).length;
+          if(!filled)return;
+          html+=`<div class="adm-diary-entry"><div class="adm-diary-entry-header" onclick="this.closest('.adm-diary-entry').classList.toggle('open')">${day.label} · ${day.date}<span style="color:var(--muted);font-size:.68rem">${filled} campos ▼</span></div>
+            <div class="adm-diary-entry-body">
+              ${e.mom?`<div class="adm-diary-field"><label>🕐 Momentos acompanhados</label><p>${e.mom}</p></div>`:''}
+              ${e.exp?`<div class="adm-diary-field"><label>📌 O que aconteceu</label><p>${e.exp}</p></div>`:''}
+              ${e.atencao?`<div class="adm-diary-field"><label>🔎 Pontos de atenção</label><p>${e.atencao}</p></div>`:''}
+              ${e.bem?`<div class="adm-diary-field"><label>✅ O que funcionou</label><p>${e.bem}</p></div>`:''}
+              ${e.prova?`<div class="adm-diary-field"><label>📋 Desempenho nas atividades</label><p>${e.prova}</p></div>`:''}
+            </div></div>`;
+        });
       });
     }
     html+=`</div>`;
@@ -1082,20 +1106,32 @@ function buildMentorProvas(){
   return html;
 }
 function buildMentorDiary(){
+  const mentees=(currentUser.mentees||[]);
+  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR vinculado.</div>';
+
+  let html=`<div style="background:#fdf2f8;border:1.5px solid var(--mentor);border-radius:10px;padding:12px 15px;margin-bottom:16px;font-size:.76rem;color:#9d174d">
+    <strong>Registre apenas os momentos em que você acompanhou.</strong> Escolha o novo SDR e o dia, e descreva só o que você conduziu ou observou diretamente.
+  </div>`;
+
+  // Seletor de novo SDR
+  html+=`<div style="margin-bottom:16px"><label style="display:block;font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:6px">Sobre qual novo SDR você vai registrar?</label>
+    <select id="diary-target" class="invite-input" style="max-width:320px" onchange="switchDiaryTarget()">`;
+  mentees.forEach((m,i)=>{html+=`<option value="${m}"${i===0?' selected':''}>${m}</option>`;});
+  html+=`</select></div>`;
+
   const weeks=[{label:'🌐 Semana Online',ids:['d1','d2','d3','d4']},{label:'🏢 Semana Presencial',ids:['d5','d6','d7','d8']}];
-  let html='';
   weeks.forEach(w=>{
     html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:8px">`;
     w.ids.forEach(did=>{
       const day=DAYS.find(d=>d.id===did);if(!day)return;
-      html+=`<div class="day-card"><div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')"><div class="dh-left"><div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}</div><div><strong>${day.label} · ${day.sub}</strong></div></div><span class="day-arrow">▼</span></div>
+      html+=`<div class="day-card"><div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')"><div class="dh-left"><div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}</div><div><strong>${day.label} · ${day.sub}</strong><div class="day-sub" id="dstat-${day.id}"></div></div></div><span class="day-arrow">▼</span></div>
         <div class="day-body"><div class="mentor-section">
-          <div class="mentor-q"><label>📌 Como foi sua experiência como Madrinha hoje?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que observou..."></textarea></div>
-          <div class="mentor-q"><label>🔎 Pontos de atenção no(s) novo(s) SDR(s)</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, comportamentos, pontos a reforçar..."></textarea></div>
-          <div class="mentor-q"><label>✅ O que funcionou bem no dia?</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
-          <div class="mentor-q"><label>📋 Como avalia o desempenho nas provas?</label><textarea id="m-prova-${day.id}" placeholder="Qualidade das respostas, pontos a reforçar..."></textarea></div>
-          <div class="mentor-q"><label>💡 Sugestão para a Emília (gestora)</label><textarea id="m-sug-${day.id}" placeholder="Algo que poderia melhorar no plano?"></textarea></div>
-          <button class="btn-mentor-save" data-day="${day.id}">Salvar diário do dia</button>
+          <div class="mentor-q"><label>🕐 Em quais momentos deste dia você acompanhou?</label><textarea id="m-mom-${day.id}" placeholder="Ex.: escuta de ligações 11h–12h, role-play da tarde..."></textarea></div>
+          <div class="mentor-q"><label>📌 O que aconteceu nesses momentos?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que você observou diretamente..."></textarea></div>
+          <div class="mentor-q"><label>🔎 Pontos de atenção que você notou</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, dúvidas recorrentes, o que reforçar..."></textarea></div>
+          <div class="mentor-q"><label>✅ O que funcionou bem</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
+          <div class="mentor-q"><label>📋 Desempenho nas tarefas/provas que você acompanhou</label><textarea id="m-prova-${day.id}" placeholder="Só sobre as atividades que passaram por você..."></textarea></div>
+          <button class="btn-mentor-save" data-day="${day.id}">Salvar registro do dia</button>
           <span class="eval-saved" id="m-saved-${day.id}">✓ Salvo!</span>
         </div></div></div>`;
     });
@@ -1103,20 +1139,45 @@ function buildMentorDiary(){
   });
   return html;
 }
-function saveMentorEntry(dayId){
-  const uid=currentUser.id;const u=getU(uid);const diary=u.diary||{};
-  diary[dayId]={exp:document.getElementById('m-exp-'+dayId)?.value||'',atencao:document.getElementById('m-atencao-'+dayId)?.value||'',bem:document.getElementById('m-bem-'+dayId)?.value||'',prova:document.getElementById('m-prova-'+dayId)?.value||'',sug:document.getElementById('m-sug-'+dayId)?.value||''};
-  setU(uid,{diary});
-  const saved=document.getElementById('m-saved-'+dayId);
-  if(saved){saved.style.display='inline';setTimeout(()=>saved.style.display='none',2500);}
+function currentDiaryTarget(){
+  const el=document.getElementById('diary-target');
+  return el?el.value:((currentUser.mentees||['geral'])[0]);
 }
-function refreshMentorDiary(){
+
+function switchDiaryTarget(){
   const diary=(getU(currentUser.id).diary||{});
-  Object.keys(diary).forEach(dayId=>{
-    const e=diary[dayId];
-    ['exp','atencao','bem','prova','sug'].forEach(k=>{if(e[k]){const el=document.getElementById(`m-${k}-${dayId}`);if(el)el.value=e[k];}});
+  const alvo=currentDiaryTarget();
+  DAYS.forEach(day=>{
+    const e=(diary[alvo]||{})[day.id]||{};
+    ['mom','exp','atencao','bem','prova'].forEach(k=>{
+      const el=document.getElementById(`m-${k}-${day.id}`);
+      if(el)el.value=e[k]||'';
+    });
+    const st=document.getElementById('dstat-'+day.id);
+    if(st){
+      const n=['mom','exp','atencao','bem','prova'].filter(k=>e[k]).length;
+      st.textContent=n?`✅ ${n} campo(s) registrados sobre ${alvo}`:`Sem registro sobre ${alvo}`;
+    }
   });
 }
+
+function saveMentorEntry(dayId){
+  const uid=currentUser.id;const u=getU(uid);const diary=u.diary||{};
+  const alvo=currentDiaryTarget();
+  if(!diary[alvo])diary[alvo]={};
+  diary[alvo][dayId]={
+    mom:document.getElementById('m-mom-'+dayId)?.value||'',
+    exp:document.getElementById('m-exp-'+dayId)?.value||'',
+    atencao:document.getElementById('m-atencao-'+dayId)?.value||'',
+    bem:document.getElementById('m-bem-'+dayId)?.value||'',
+    prova:document.getElementById('m-prova-'+dayId)?.value||''
+  };
+  setU(uid,{diary});
+  const s=document.getElementById('m-saved-'+dayId);
+  if(s){s.style.display='inline';setTimeout(()=>s.style.display='none',2500);}
+  switchDiaryTarget();
+}
+function refreshMentorDiary(){ switchDiaryTarget(); }
 
 function buildAdmAcessos(){
   const users=getAuthUsers();const pwds=getPwds();
