@@ -264,6 +264,59 @@
   .tag-warn{background:#fef9c3;color:#a16207;}
   .invite-input{flex:1;min-width:160px;padding:7px 10px;border:1.5px solid var(--line);border-radius:7px;font-family:'Montserrat',sans-serif;font-size:.75rem;transition:border-color .15s;}
   .invite-input:focus{outline:none;border-color:var(--orange);}
+
+  /* ═══ LMS / PLATAFORMA DE CURSO ═══ */
+  .hprofile{display:flex;align-items:center;gap:10px;cursor:default;}
+  .hprofile .pav{width:38px;height:38px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff;}
+  .hprofile .pav img{width:100%;height:100%;object-fit:cover;}
+  .hprofile .pinfo{line-height:1.25;}
+  .hprofile .pinfo strong{display:block;color:#fff;font-size:.82rem;font-weight:700;}
+  .hprofile .pinfo span{display:block;color:rgba(255,255,255,.65);font-size:.68rem;}
+
+  /* HERO do curso */
+  .course-hero{background:linear-gradient(135deg,var(--navy) 0%,#2d4a7a 100%);border-radius:16px;padding:26px 28px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden;}
+  .course-hero::after{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(249,115,22,.18);}
+  .ch-top{display:flex;align-items:center;gap:16px;margin-bottom:20px;position:relative;z-index:1;}
+  .ch-avatar{width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;}
+  .ch-avatar img{width:100%;height:100%;object-fit:cover;}
+  .ch-greet{flex:1;}
+  .ch-greet .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);font-weight:700;}
+  .ch-greet h2{font-size:1.25rem;font-weight:800;margin-top:2px;}
+  .ch-greet p{font-size:.8rem;color:rgba(255,255,255,.72);margin-top:3px;}
+  .ch-ring{width:74px;height:74px;flex-shrink:0;position:relative;}
+  .ch-ring svg{transform:rotate(-90deg);}
+  .ch-ring .rtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .ch-ring .rtxt b{font-size:1.05rem;font-weight:800;line-height:1;}
+  .ch-ring .rtxt small{font-size:.58rem;color:rgba(255,255,255,.65);}
+  .ch-stats{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;}
+  .ch-stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:10px 14px;min-width:94px;}
+  .ch-stat b{display:block;font-size:1.1rem;font-weight:800;line-height:1;}
+  .ch-stat span{font-size:.67rem;color:rgba(255,255,255,.68);}
+
+  /* Continue de onde parou */
+  .resume-card{background:#fff8f0;border:1.5px solid var(--orange);border-radius:12px;padding:14px 18px;margin-bottom:22px;display:flex;align-items:center;gap:14px;}
+  .resume-card .ric{font-size:1.5rem;}
+  .resume-card .rtx{flex:1;}
+  .resume-card .rtx b{display:block;font-size:.84rem;color:var(--navy);font-weight:800;}
+  .resume-card .rtx span{font-size:.75rem;color:var(--muted);}
+  .btn-resume{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .btn-resume:hover{background:#ea6c0a;}
+
+  /* MÓDULOS */
+  .module-num{width:34px;height:34px;border-radius:9px;background:var(--bg);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;border:1.5px solid var(--line);}
+  .module-num.done{background:#dcfce7;border-color:var(--green);color:#15803d;}
+  .module-num.doing{background:#fff7ed;border-color:var(--orange);color:#c2410c;}
+  .mod-chip{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px;}
+  .chip-done{background:#dcfce7;color:#15803d;}
+  .chip-doing{background:#fff7ed;color:#c2410c;}
+  .chip-todo{background:var(--bg);color:var(--muted);}
+  .mod-progress{height:4px;background:var(--line);border-radius:99px;margin-top:7px;overflow:hidden;}
+  .mod-progress i{display:block;height:4px;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--gold));}
+
+  /* Blocos de conteúdo da aula */
+  .lesson-sec{margin-top:18px;}
+  .lesson-sec-title{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid var(--line);}
+  .lesson-sec-title .n{width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;}
 </style>
 </head>
 <body>
@@ -281,7 +334,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.6</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.7</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -300,9 +353,10 @@
   <header>
     <div class="hlogo">Decorafit <span>Pré-Vendas</span> · Treinamento</div>
     <div class="huser">
-      <div class="avatar" id="hdr-avatar"></div>
-      <span class="uname" id="hdr-name"></span>
-      <span class="role-chip" id="hdr-chip"></span>
+      <div class="hprofile">
+        <div class="pav" id="hdr-avatar"></div>
+        <div class="pinfo"><strong id="hdr-name"></strong><span id="hdr-role"></span></div>
+      </div>
       <button class="logout-btn" onclick="logout()">Sair</button>
     </div>
   </header>
@@ -534,8 +588,11 @@ const DAYS=[
 const TYPE_LABELS={live:'🔴 Ao vivo',async:'🟣 Assíncrono',listen:'🟢 Escuta',read:'🟡 Leitura',practice:'🔴 Prática',meet:'🔵 Meet'};
 const TYPE_CLASSES={live:'pill-live',async:'pill-async',listen:'pill-listen',read:'pill-read',practice:'pill-practice',meet:'pill-meet'};
 const MAX_PTS=DAYS.reduce((a,d)=>a+d.pts,0)+Object.values(PROVAS).reduce((a,p)=>a+p.pts,0);
-const NOVOS=USERS.filter(u=>u.role==='novo');
-const MENTORS=USERS.filter(u=>u.role==='mentor');
+const TESTE_IDS=['teste','teste_sdr','teste_madrinha'];
+const isTeste=u=>TESTE_IDS.includes(u.id||u.userId);
+// Listagens visíveis não incluem contas de teste
+const NOVOS=USERS.filter(u=>u.role==='novo'&&!isTeste(u));
+const MENTORS=USERS.filter(u=>u.role==='mentor'&&!isTeste(u));
 
 /* ══ STATE ══ */
 let currentUser=null,state={};
@@ -677,9 +734,8 @@ function loginSuccess(){
   if(currentUser.photo){hdrAv.style.background='transparent';hdrAv.style.padding='0';hdrAv.style.overflow='hidden';hdrAv.innerHTML='<img src="'+currentUser.photo+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
   else{hdrAv.style.background=currentUser.color;hdrAv.textContent=currentUser.name[0];}
   document.getElementById('hdr-name').textContent=currentUser.name;
-  const chip=document.getElementById('hdr-chip');
-  chip.className='role-chip '+({admin:'chip-admin',mentor:'chip-mentor',novo:'chip-novo'}[currentUser.role]||'');
-  chip.textContent={admin:'ADM',mentor:'Madrinha',novo:'Novo SDR'}[currentUser.role]||'';
+  const rl=document.getElementById('hdr-role');
+  if(rl)rl.textContent={admin:'Gestora · Pré-Vendas',mentor:'Madrinha · Pré-Vendas',novo:'Novo SDR · Pré-Vendas'}[currentUser.role]||'';
   buildApp();
 }
 
@@ -831,8 +887,8 @@ function buildAdmDuvidas(){
 
 /* ══════ NOVO SDR ══════ */
 function buildNovoPanels(tabs,main){
-  addTab(tabs,main,'cronograma','📅 Cronograma',()=>`<div class="section-title">Cronograma — ${currentUser.name}</div>`+buildProgressBanner()+buildDaysHTML());
-  addTab(tabs,main,'progresso','🏆 Progresso',()=>`<div class="section-title">Meu Progresso</div>`+buildLeaderboardHTML());
+  addTab(tabs,main,'cronograma','📚 Minha Trilha',()=>buildProgressBanner()+buildDaysHTML());
+  addTab(tabs,main,'progresso','🏆 Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
   main.querySelectorAll('.task-item').forEach(item=>{item.onclick=()=>toggleTask(item);});
@@ -847,10 +903,93 @@ function buildNovoPanels(tabs,main){
 }
 function countProvas(){return Object.keys(getU(currentUser.id).provas||{}).filter(k=>(getU(currentUser.id).provas||{})[k].submitted).length;}
 function hasVideo(){return Object.values(getU(currentUser.id).provas||{}).some(p=>p.hasVideo);}
+function dayProgress(day){
+  const u=getU(currentUser.id);
+  const done=(u.tasks||[]).filter(t=>day.tasks.find(dt=>dt.id===t)).length;
+  const prova=((u.provas||{})[day.id]||{}).submitted?1:0;
+  const total=day.tasks.length;
+  return {done,total,prova,pct:total?Math.round((done/total)*100):0,
+          status: done===0&&!prova ? 'todo' : (done===total ? 'done':'doing')};
+}
+
 function buildProgressBanner(){
-  const u=getU(currentUser.id);const pts=u.pts||0;const pct=Math.round((pts/MAX_PTS)*100);
-  const badges=[{label:'🌱 Primeira atividade',earned:pts>=5},{label:'🔥 50 pontos',earned:pts>=50},{label:'📝 3 provas enviadas',earned:countProvas()>=3},{label:'⭐ 150 pontos',earned:pts>=150},{label:'🎥 Gravou um vídeo',earned:hasVideo()},{label:'🏅 SDR Ativado',earned:pts>=MAX_PTS*.9}];
-  return `<div class="progress-banner"><div class="pb-top"><strong>Pontos acumulados</strong><span class="pb-pts">${pts} / ${MAX_PTS} pts</span></div><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div><div class="pb-badges">${badges.map(b=>`<span class="badge${b.earned?' earned':''}">${b.label}</span>`).join('')}</div></div>`;
+  const u=getU(currentUser.id);
+  const pts=u.pts||0;
+  const pct=Math.min(100,Math.round((pts/MAX_PTS)*100));
+  const mods=DAYS.map(dayProgress);
+  const modsDone=mods.filter(m=>m.status==='done').length;
+  const provasEnv=countProvas();
+  const tarefas=(u.tasks||[]).length;
+  const maxT=DAYS.reduce((a,d)=>a+d.tasks.length,0);
+
+  // anel de progresso
+  const R=32,C=2*Math.PI*R, off=C-(pct/100)*C;
+  const ring=`<div class="ch-ring"><svg width="74" height="74">
+      <circle cx="37" cy="37" r="${R}" stroke="rgba(255,255,255,.18)" stroke-width="7" fill="none"/>
+      <circle cx="37" cy="37" r="${R}" stroke="#f97316" stroke-width="7" fill="none"
+        stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
+    </svg><div class="rtxt"><b>${pct}%</b><small>do curso</small></div></div>`;
+
+  const av=currentUser.photo
+    ? `<div class="ch-avatar"><img src="${currentUser.photo}"></div>`
+    : `<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
+
+  const hora=new Date().getHours();
+  const saud=hora<12?'Bom dia':hora<18?'Boa tarde':'Boa noite';
+
+  let html=`<div class="course-hero">
+    <div class="ch-top">
+      ${av}
+      <div class="ch-greet">
+        <div class="eyebrow">Trilha de Integração</div>
+        <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
+        <p>Plataforma de Treinamento Pré-Vendas · Decorafit</p>
+      </div>
+      ${ring}
+    </div>
+    <div class="ch-stats">
+      <div class="ch-stat"><b>${modsDone}/${DAYS.length}</b><span>módulos concluídos</span></div>
+      <div class="ch-stat"><b>${tarefas}/${maxT}</b><span>atividades feitas</span></div>
+      <div class="ch-stat"><b>${provasEnv}/${DAYS.length}</b><span>provas enviadas</span></div>
+      <div class="ch-stat"><b>${pts}</b><span>pontos</span></div>
+    </div>
+  </div>`;
+
+  // Continue de onde parou
+  const idx=mods.findIndex(m=>m.status!=='done');
+  if(idx>=0){
+    const d=DAYS[idx];
+    html+=`<div class="resume-card">
+      <span class="ric">${mods[idx].status==='doing'?'▶️':'🎯'}</span>
+      <div class="rtx"><b>${mods[idx].status==='doing'?'Continue de onde parou':'Próximo módulo'}</b>
+      <span>Módulo ${idx+1} — ${d.label} · ${d.date} · ${mods[idx].done}/${mods[idx].total} atividades</span></div>
+      <button class="btn-resume" onclick="abrirModulo('${d.id}')">Abrir módulo</button>
+    </div>`;
+  } else {
+    html+=`<div class="resume-card" style="background:#f0fdf4;border-color:var(--green)">
+      <span class="ric">🏅</span>
+      <div class="rtx"><b>Trilha concluída!</b><span>Você completou todos os módulos da integração. Parabéns!</span></div>
+    </div>`;
+  }
+
+  // Conquistas
+  const badges=[
+    {label:'🌱 Primeiros passos',earned:pts>=5},
+    {label:'🔥 50 pontos',earned:pts>=50},
+    {label:'📝 3 provas',earned:provasEnv>=3},
+    {label:'⭐ 150 pontos',earned:pts>=150},
+    {label:'🎥 Enviou vídeo',earned:hasVideo()},
+    {label:'🏅 SDR Ativado',earned:pts>=MAX_PTS*.9},
+  ];
+  html+=`<div class="progress-banner"><div class="pb-top"><strong>🏆 Suas conquistas</strong><span class="pb-pts">${pts} / ${MAX_PTS} pts</span></div>
+    <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+    <div class="pb-badges">${badges.map(b=>`<span class="badge${b.earned?' earned':''}">${b.label}</span>`).join('')}</div></div>`;
+  return html;
+}
+
+function abrirModulo(did){
+  const c=document.getElementById('card-'+did);
+  if(c){c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
 }
 function buildVideoSection(day){
   if(!day.videos||!day.videos.length)return'';
@@ -874,21 +1013,36 @@ function buildVideoSection(day){
   return h+'</div>';
 }
 function buildDaysHTML(){
-  const uid=currentUser.id;let html='';
-  const weeks=[{label:'🌐 SEMANA ONLINE — 06 a 09/10',ids:['d1','d2','d3','d4']},{label:'🏢 SEMANA PRESENCIAL — 13 a 16/10',ids:['d5','d6','d7','d8']}];
+  let html='';
+  const weeks=[{label:'🌐 Semana 1 — Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
+               {label:'🏢 Semana 2 — Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
+  let n=0;
   weeks.forEach(w=>{
-    html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:8px">`;
+    html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:10px">`;
     w.ids.forEach(did=>{
       const day=DAYS.find(d=>d.id===did);if(!day)return;
-      const u=getU(uid);
-      const doneTasks=(u.tasks||[]).filter(t=>day.tasks.find(dt=>dt.id===t)).length;
-      const provaFeita=(u.provas||{})[day.id]?.submitted;
+      n++;
+      const p=dayProgress(day);
+      const chip={done:'<span class="mod-chip chip-done">✅ Concluído</span>',
+                  doing:'<span class="mod-chip chip-doing">▶️ Em andamento</span>',
+                  todo:'<span class="mod-chip chip-todo">A iniciar</span>'}[p.status];
       html+=`<div class="day-card" id="card-${day.id}">
         <div class="day-header"><div class="dh-left">
-          <div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}<br><span style="font-size:.58rem">${day.sub.includes('Online')?'🌐':'🏢'}</span></div>
-          <div><strong>${day.label} · ${day.sub}</strong><div class="day-sub">${doneTasks}/${day.tasks.length} tarefas · ${provaFeita?'✅ Prova enviada':'📝 Prova pendente'}</div></div>
+          <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':n}</div>
+          <div style="flex:1">
+            <strong>Módulo ${n} · ${day.label}</strong>${chip}
+            <div class="day-sub">${day.sub}</div>
+            <div class="day-sub" style="margin-top:3px">${p.done}/${p.total} atividades · ${p.prova?'prova enviada ✅':'prova pendente 📝'}</div>
+            <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
+          </div>
         </div><span class="day-arrow">▼</span></div>
-        <div class="day-body">${buildVideoSection(day)}${buildScheduleTable(day)}${buildTaskChecklist(day)}${buildProvaSection(day)}${buildEvalForm(day)}</div>
+        <div class="day-body">
+          ${buildVideoSection(day)}
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Cronograma do dia</div>${buildScheduleTable(day)}</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Atividades para concluir</div>${buildTaskChecklist(day)}</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">3</span> Avaliação de aprendizagem</div>${buildProvaSection(day)}</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">4</span> Reflexão do dia</div>${buildEvalForm(day)}</div>
+        </div>
       </div>`;
     });
     html+=`</div>`;
@@ -911,7 +1065,7 @@ function buildScheduleTable(day){
   return html+`</tbody></table>`;
 }
 function buildTaskChecklist(day){
-  let html=`<div style="margin-top:14px"><div style="font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:7px">✅ Tarefas do dia</div><div class="task-list">`;
+  let html=`<div><div class="task-list">`;
   day.tasks.forEach(t=>{html+=`<div class="task-item" id="task-${t.id}" data-id="${t.id}" data-day="${day.id}" data-pts="${t.pts}"><div class="task-cb">✓</div><span class="task-label">${t.label}</span><span class="task-pts">+${t.pts} pts</span></div>`;});
   return html+`</div></div>`;
 }
@@ -1183,7 +1337,7 @@ function buildAdmAcessos(){
   const users=getAuthUsers();const pwds=getPwds();
   // Combinar USERS fixos + extra users
   const extraUsers=JSON.parse(localStorage.getItem('sdrExtraUsers')||'[]');
-  const allManaged=[...USERS,...extraUsers];
+  const allManaged=[...USERS.filter(u=>!isTeste(u)),...extraUsers];
 
   let html=`<div class="section-title">Gerenciar Acessos</div>
   <p class="section-sub">Configure e-mails, gere convites e adicione novos colaboradores.</p>
