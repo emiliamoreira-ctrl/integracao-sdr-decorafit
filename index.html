@@ -391,9 +391,9 @@ const DAYS=[
   {
     id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:55,
     blocks:[
-      {time:'09h–11h30 (M)', title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'SDR Mentora',turno:'manha',note:'Leandro e Larissa acompanham a rotina da equipe manhã'},
+      {time:'09h–11h30 (M)', title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'Madrinha',turno:'manha',note:'Leandro e Larissa acompanham a rotina da equipe manhã'},
       {time:'14h–15h30 (M)', title:'Resultados PV + Rotina part2 equipe manhã',type:'live',conduct:'Emília',turno:'manha'},
-      {time:'15h30–16h30 (M)',title:'Prática: Enviar 1 R01 supervisionado',type:'practice',conduct:'SDR Mentora',turno:'manha'},
+      {time:'15h30–16h30 (M)',title:'Prática: Enviar 1 R01 supervisionado',type:'practice',conduct:'Madrinha',turno:'manha'},
       {time:'13h–15h30 (T)', title:'[ALLICE] Rotinas part1 + Resultados PV — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'17h30–19h (T)', title:'[ALLICE] Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'19h–21h (T)',   title:'[ALLICE] Encaminhar 2 R01 (prática supervisionada)',type:'practice',conduct:'Grazi',turno:'allice'},
@@ -410,7 +410,7 @@ const DAYS=[
   {
     id:'d3',date:'08/10 (Qui)',label:'Quinta-feira',sub:'08/10 · Online',color:'#14b8a6',pts:60,
     blocks:[
-      {time:'09h30–11h30 (M)',title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'SDR Mentora',turno:'manha'},
+      {time:'09h30–11h30 (M)',title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'Madrinha',turno:'manha'},
       {time:'13h–15h30',      title:'Treinamento Integração — Novos (todos juntos)',type:'live',conduct:'Emília',joint:true,note:'Leandro, Larissa e Allice juntos'},
       {time:'15h30–16h30',    title:'Ler conversas reais do time com clientes',type:'read',conduct:'Auto',joint:true},
       {time:'17h',            title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true},
@@ -429,7 +429,7 @@ const DAYS=[
     blocks:[
       {time:'09h30–11h30 (M)',title:'Rotina part2 equipe manhã (Gaby) + Daily PV Manhã',type:'live',conduct:'Gaby',turno:'manha'},
       {time:'13h–14h30 (M)', title:'Rotina part2 (Dani) — reflexão e consolidação',type:'live',conduct:'Dani',turno:'manha'},
-      {time:'14h30–16h30 (M)',title:'Escuta e envio de ligações supervisionado',type:'listen',conduct:'SDR Mentora',turno:'manha'},
+      {time:'14h30–16h30 (M)',title:'Escuta e envio de ligações supervisionado',type:'listen',conduct:'Madrinha',turno:'manha'},
       {time:'13h–14h30 (T)', title:'[ALLICE] Rotina part2 (Dani)',type:'live',conduct:'Dani',turno:'allice'},
       {time:'14h30–16h30 (T)',title:'[ALLICE] Escuta e envio de ligações',type:'listen',conduct:'Grazi',turno:'allice'},
       {time:'18h–19h30 (T)', title:'[ALLICE] Rotina part2 equipe tarde (Grazi)',type:'live',conduct:'Grazi',turno:'allice'},
@@ -448,12 +448,12 @@ const DAYS=[
   {
     id:'d5',date:'13/10 (Ter)',label:'Terça-feira',sub:'13/10 · PRESENCIAL',color:'#f97316',pts:80,
     blocks:[
-      {time:'09h–09h30 (M)', title:'Check-in presencial: posto de trabalho e rotina física',type:'live',conduct:'Emília + Mentoras',turno:'manha'},
-      {time:'09h30–11h (M)', title:'Prática guiada no sistema: simular atendimento do zero',type:'practice',conduct:'SDR Mentora',turno:'manha'},
+      {time:'09h–09h30 (M)', title:'Check-in presencial: posto de trabalho e rotina física',type:'live',conduct:'Emília + Madrinhas',turno:'manha'},
+      {time:'09h30–11h (M)', title:'Prática guiada no sistema: simular atendimento do zero',type:'practice',conduct:'Madrinha',turno:'manha'},
       {time:'11h–12h (M)',   title:'Assistir meet ao vivo do time de vendas (ouvinte)',type:'meet',conduct:'Time de Vendas',turno:'manha'},
       {time:'13h–14h (T)',   title:'[ALLICE] Check-in presencial + prática no sistema',type:'practice',conduct:'Grazi',turno:'allice'},
       {time:'14h–15h (T)',   title:'[ALLICE] Assistir meet time de vendas',type:'meet',conduct:'Time de Vendas',turno:'allice'},
-      {time:'15h–16h',       title:'Role-play: todos atendem mentora',type:'practice',conduct:'SDR Mentoras',joint:true,note:'Mentoras simulam clientes difíceis — presença obrigatória'},
+      {time:'15h–16h',       title:'Role-play: todos atendem mentora',type:'practice',conduct:'Madrinhas',joint:true,note:'Mentoras simulam clientes difíceis — presença obrigatória'},
       {time:'Fim do dia',    title:'Avaliação do dia + Prova Diária 5',type:'practice',conduct:'Auto'},
     ],
     tasks:[
@@ -467,7 +467,7 @@ const DAYS=[
     id:'d6',date:'14/10 (Qua)',label:'Quarta-feira',sub:'14/10 · PRESENCIAL',color:'#ef4444',pts:85,
     blocks:[
       {time:'09h–10h30 (M)', title:'Card de Alocação do Arquiteto: passo a passo completo',type:'live',conduct:'Emília',turno:'manha'},
-      {time:'10h30–12h (M)', title:'Prática: preencher card de alocação com caso real anonimizado',type:'practice',conduct:'SDR Mentora',turno:'manha'},
+      {time:'10h30–12h (M)', title:'Prática: preencher card de alocação com caso real anonimizado',type:'practice',conduct:'Madrinha',turno:'manha'},
       {time:'13h–14h30 (T)', title:'[ALLICE] Card de Alocação: passo a passo',type:'live',conduct:'Emília',turno:'allice'},
       {time:'14h30–16h (T)', title:'[ALLICE] Prática: card de alocação com caso real',type:'practice',conduct:'Grazi',turno:'allice'},
       {time:'16h–17h',       title:'KPIs do time: como ler, acompanhar e bater metas',type:'live',conduct:'Emília',joint:true,note:'Todos juntos'},
@@ -483,8 +483,8 @@ const DAYS=[
   {
     id:'d7',date:'15/10 (Qui)',label:'Quinta-feira',sub:'15/10 · PRESENCIAL',color:'#8b5cf6',pts:100,
     blocks:[
-      {time:'09h–10h (M)',   title:'Primeiro atendimento real supervisionado — mentora ao lado',type:'practice',conduct:'SDR Mentora',turno:'manha',note:'Leandro e Larissa: primeiro atendimento real com cliente'},
-      {time:'10h–11h30 (M)', title:'Debriefing: o que foi bem, o que melhorar',type:'live',conduct:'Emília + Mentora',turno:'manha'},
+      {time:'09h–10h (M)',   title:'Primeiro atendimento real supervisionado — Madrinha ao lado',type:'practice',conduct:'Madrinha',turno:'manha',note:'Leandro e Larissa: primeiro atendimento real com cliente'},
+      {time:'10h–11h30 (M)', title:'Debriefing: o que foi bem, o que melhorar',type:'live',conduct:'Emília + Madrinha',turno:'manha'},
       {time:'13h–14h (T)',   title:'[ALLICE] Primeiro atendimento real supervisionado',type:'practice',conduct:'Grazi',turno:'allice',note:'Allice: primeiro atendimento real com cliente'},
       {time:'14h–15h (T)',   title:'[ALLICE] Debriefing com Grazi + Emília',type:'live',conduct:'Emília + Grazi',turno:'allice'},
       {time:'15h30–16h30',   title:'Leitura: FAQ e situações especiais do manual SDR',type:'read',conduct:'Auto',joint:true},
@@ -500,7 +500,7 @@ const DAYS=[
   {
     id:'d8',date:'16/10 (Sex)',label:'Sexta-feira',sub:'16/10 · PRESENCIAL · Encerramento 🏅',color:'#f59e0b',pts:80,
     blocks:[
-      {time:'09h–10h (M)',   title:'Segundo atendimento supervisionado — mais autonomia',type:'practice',conduct:'SDR Mentora',turno:'manha'},
+      {time:'09h–10h (M)',   title:'Segundo atendimento supervisionado — mais autonomia',type:'practice',conduct:'Madrinha',turno:'manha'},
       {time:'10h–11h (M)',   title:'Avaliação final individual',type:'practice',conduct:'Emília',turno:'manha'},
       {time:'13h–14h (T)',   title:'[ALLICE] Segundo atendimento + avaliação final',type:'practice',conduct:'Grazi + Emília',turno:'allice'},
       {time:'14h30–16h',     title:'Prova Final (vídeo ou descrição)',type:'practice',conduct:'Auto',joint:true},
@@ -613,7 +613,7 @@ function loginSuccess(){
   document.getElementById('hdr-name').textContent=currentUser.name;
   const chip=document.getElementById('hdr-chip');
   chip.className='role-chip '+({admin:'chip-admin',mentor:'chip-mentor',novo:'chip-novo'}[currentUser.role]||'');
-  chip.textContent={admin:'ADM',mentor:'Mentora',novo:'Novo SDR'}[currentUser.role]||'';
+  chip.textContent={admin:'ADM',mentor:'Madrinha',novo:'Novo SDR'}[currentUser.role]||'';
   buildApp();
 }
 
@@ -638,7 +638,7 @@ function buildApp(){
   const tabs=document.getElementById('nav-tabs'),main=document.getElementById('main-content');
   tabs.innerHTML='';main.innerHTML='';
   if(currentUser.role==='admin')   buildAdminPanels(tabs,main);
-  else if(currentUser.role==='mentor') buildMentorPanels(tabs,main);
+  else if(currentUser.role==='mentor') buildMadrinhaPanels(tabs,main);
   else buildNovoPanels(tabs,main);
 }
 function addTab(tabs,main,id,label,builder){
@@ -720,10 +720,10 @@ function applyProvaFilter(btn,main){
   main.querySelectorAll('.adm-prova-block').forEach(b=>{b.style.display=(f==='all'||b.dataset.day===f)?'block':'none';});
 }
 function buildAdmDiarios(){
-  let html=`<div class="section-title">Diários das Mentoras</div><p class="section-sub">Registros de Dani, Gaby e Grazi sobre o acompanhamento dos novos.</p>`;
+  let html=`<div class="section-title">Diários das Mentoras</div><p class="section-sub">Registros das Madrinhas sobre o acompanhamento dos afilhados.</p>`;
   MENTORS.forEach(m=>{
     const diary=getU(m.id).diary||{};const hasAny=Object.keys(diary).length>0;
-    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · mentorados: ${(m.mentees||[]).join(', ')}</strong></div>`;
+    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · afilhados: ${(m.mentees||[]).join(', ')}</strong></div>`;
     if(!hasAny){html+=`<div style="font-size:.76rem;color:var(--muted);font-style:italic;padding:7px 0">Nenhum registro ainda.</div>`;}
     else{
       DAYS.forEach(day=>{
@@ -952,10 +952,10 @@ function refreshLeaderboard(){
 }
 
 /* ══════ MENTOR ══════ */
-function buildMentorPanels(tabs,main){
-  addTab(tabs,main,'acompanhamento','👁 Acompanhamento',()=>`<div class="section-title">Acompanhamento dos mentorados</div>`+buildMentorOverview());
-  addTab(tabs,main,'provas-mentor','📋 Provas',()=>`<div class="section-title">Provas dos Mentorados</div>`+buildMentorProvas());
-  addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário do Mentor — ${currentUser.name}</div>`+buildMentorDiary());
+function buildMadrinhaPanels(tabs,main){
+  addTab(tabs,main,'acompanhamento','👁 Afilhados',()=>`<div class="section-title">Acompanhamento dos afilhados</div>`+buildMentorOverview());
+  addTab(tabs,main,'provas-mentor','📋 Provas',()=>`<div class="section-title">Provas dos Afilhados</div>`+buildMentorProvas());
+  addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
   main.querySelectorAll('.btn-mentor-save').forEach(btn=>{btn.onclick=()=>saveMentorEntry(btn.dataset.day);});
@@ -1043,11 +1043,11 @@ function buildMentorDiary(){
       const day=DAYS.find(d=>d.id===did);if(!day)return;
       html+=`<div class="day-card"><div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')"><div class="dh-left"><div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}</div><div><strong>${day.label} · ${day.sub}</strong></div></div><span class="day-arrow">▼</span></div>
         <div class="day-body"><div class="mentor-section">
-          <div class="mentor-q"><label>📌 Como foi a experiência acompanhando hoje?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que observou..."></textarea></div>
-          <div class="mentor-q"><label>🔎 Pontos de atenção nos mentorados</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, comportamentos, pontos a reforçar..."></textarea></div>
+          <div class="mentor-q"><label>📌 Como foi sua experiência como Madrinha hoje?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que observou..."></textarea></div>
+          <div class="mentor-q"><label>🔎 Pontos de atenção no(s) seu(s) afilhado(s)</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, comportamentos, pontos a reforçar..."></textarea></div>
           <div class="mentor-q"><label>✅ O que funcionou bem no dia?</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
           <div class="mentor-q"><label>📋 Como avalia o desempenho nas provas?</label><textarea id="m-prova-${day.id}" placeholder="Qualidade das respostas, pontos a reforçar..."></textarea></div>
-          <div class="mentor-q"><label>💡 Sugestão para a Emília</label><textarea id="m-sug-${day.id}" placeholder="Algo que poderia melhorar no plano?"></textarea></div>
+          <div class="mentor-q"><label>💡 Sugestão para a Emília (gestora)</label><textarea id="m-sug-${day.id}" placeholder="Algo que poderia melhorar no plano?"></textarea></div>
           <button class="btn-mentor-save" data-day="${day.id}">Salvar diário do dia</button>
           <span class="eval-saved" id="m-saved-${day.id}">✓ Salvo!</span>
         </div></div></div>`;
@@ -1096,7 +1096,7 @@ function buildAdmAcessos(){
         ${avatarHtml(u,38)}
         <div style="flex:1">
           <strong style="font-size:.85rem;color:var(--navy)">${u.name}${isMe?' 👑':''}</strong>
-          <span style="font-size:.72rem;color:var(--muted);display:block">${isMe?'Gestora ADM':(u.role==='mentor'?'Mentora':'Novo SDR')} · ${u.turno||''}</span>
+          <span style="font-size:.72rem;color:var(--muted);display:block">${isMe?'Gestora ADM':(u.role==='mentor'?'Madrinha':'Novo SDR')} · ${u.turno||''}</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end">
           <span class="status-tag ${hasEmail?'tag-ok':'tag-pend'}">${hasEmail?'✅ E-mail ok':'⏳ Sem e-mail'}</span>
@@ -1106,7 +1106,7 @@ function buildAdmAcessos(){
       <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
         <input type="text" id="email-${u.id}" class="invite-input" placeholder="E-mail de acesso" value="${hasEmail?au.email:''}">
         <button class="btn-acesso btn-salvar" onclick="saveUserEmail('${u.id}')">Salvar</button>
-        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="copyInvite('${u.id}')">🔗 Copiar convite</button>`:''}
+        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="gmailInvite('${u.id}')">📧 Enviar convite Gmail</button><button class="btn-acesso" id="cbtn-${u.id}" onclick="copyInvite('${u.id}')" style="background:#e0e7ff;color:#3730a3">🔗 Copiar link</button>`:''}
         ${hasPwd&&!isMe?`<button class="btn-acesso btn-reset" onclick="resetPwd('${u.id}')">↺ Redefinir senha</button>`:''}
         ${!isMe&&extraUsers.find(e=>e.id===u.id)?`<button class="btn-acesso" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5" onclick="removeExtraUser('${u.id}')">🗑 Remover</button>`:''}
       </div>
@@ -1121,7 +1121,7 @@ function buildAdmAcessos(){
         <input type="text" id="new-user-name" class="invite-input" placeholder="Nome completo" style="flex:2;min-width:140px">
         <select id="new-user-role" class="invite-input" style="flex:1;min-width:120px">
           <option value="novo">Novo SDR</option>
-          <option value="mentor">Mentora/Mentor</option>
+          <option value="mentor">Madrinha</option>
           <option value="admin">Gestão ADM</option>
         </select>
       </div>
@@ -1149,16 +1149,64 @@ function saveUserEmail(userId){
   refreshAcessos();
 }
 
+
+function gmailInvite(userId){
+  const users=getAuthUsers();
+  const au=users.find(u=>u.userId===userId);
+  if(!au||!au.email){alert('Salve o e-mail primeiro.');return;}
+
+  const extras=JSON.parse(localStorage.getItem('sdrExtraUsers')||'[]');
+  const allUsers=[...USERS,...extras];
+  const u=allUsers.find(u=>u.id===userId)||{name:au.name,role:au.role};
+  const isNovo=au.role==='novo';
+  const invUrl=`https://emiliamoreira-ctrl.github.io/integracao-sdr-decorafit/?invite=${encodeURIComponent(au.email)}`;
+
+  let subject, body;
+  if(isNovo){
+    subject=encodeURIComponent('Seu acesso à Plataforma de Treinamento Decorafit 🏠');
+    body=encodeURIComponent(
+      `Olá, ${u.name||au.name}! 👋\n\n`+
+      `Seja muito bem-vindo(a) ao time SDR da Decorafit!\n\n`+
+      `Criamos uma plataforma exclusiva com todo o seu cronograma de integração, vídeos, atividades e avaliações para te acompanhar nessa jornada.\n\n`+
+      `Você também terá uma Madrinha do time que vai te apoiar nos primeiros passos. 🤝\n\n`+
+      `Clique no link abaixo para criar sua senha e acessar a plataforma:\n`+
+      `${invUrl}\n\n`+
+      `Qualquer dúvida, fala com a Emília. Bora? 🚀\n\n`+
+      `Equipe Decorafit 🏠`
+    );
+  } else {
+    subject=encodeURIComponent('Você é Madrinha na Decorafit! 🌟');
+    body=encodeURIComponent(
+      `Olá, ${u.name||au.name}! 👋\n\n`+
+      `Temos um novo membro chegando ao time SDR e você foi escolhida como Madrinha dessa integração! 💛\n\n`+
+      `Na plataforma você acompanha em tempo real o progresso do seu afilhado(a), visualiza as provas enviadas, registra seu diário e envia feedbacks para a gestora.\n\n`+
+      `Clique no link abaixo para criar seu acesso:\n`+
+      `${invUrl}\n\n`+
+      `Obrigada por fazer parte dessa jornada! 🌟\n\n`+
+      `Emília — Decorafit 🏠`
+    );
+  }
+
+  const gmail=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(au.email)}&su=${subject}&body=${body}`;
+  window.open(gmail,'_blank');
+
+  // Também copiar o link
+  navigator.clipboard.writeText(invUrl).catch(()=>{});
+  const btn=document.getElementById('ibtn-'+userId);
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Gmail aberto!';setTimeout(()=>btn.innerHTML=orig,3000);}
+}
+
 function copyInvite(userId){
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
   if(!au||!au.email){alert('Salve um e-mail primeiro.');return;}
-  const url=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(au.email)}`;
+  const url=`https://emiliamoreira-ctrl.github.io/integracao-sdr-decorafit/?invite=${encodeURIComponent(au.email)}`;
   navigator.clipboard.writeText(url).then(()=>{
-    const btn=document.getElementById('ibtn-'+userId);
-    if(btn){const orig=btn.textContent;btn.textContent='✅ Copiado!';setTimeout(()=>btn.textContent=orig,2500);}
-  }).catch(()=>{prompt('Copie o link abaixo e envie via WhatsApp:',url);});
+    const btn=document.getElementById('cbtn-'+userId);
+    if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
+  }).catch(()=>{prompt('Copie o link:',url);});
 }
+
 
 function resetPwd(userId){
   if(!confirm('Redefinir senha? O colaborador precisará criar uma nova no próximo acesso.'))return;
@@ -1191,7 +1239,16 @@ function addNewUser(){
   saveAuthUsers(users);
   // Gerar link convite
   const invUrl=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(email)}`;
-  navigator.clipboard.writeText(invUrl).then(()=>{alert(`✅ ${name} adicionado! Link de convite copiado — cole no WhatsApp.`);}).catch(()=>{prompt(`✅ ${name} adicionado! Copie o link de convite:`,invUrl);});
+  // Abrir Gmail com mensagem de convite
+  const isNovo=role==='novo';
+  const subject=encodeURIComponent(isNovo?'Seu acesso à Plataforma de Treinamento Decorafit 🏠':'Você é Madrinha na Decorafit! 🌟');
+  const body=encodeURIComponent(isNovo?
+    `Olá, ${name}! 👋\n\nSeja muito bem-vindo(a) ao time SDR da Decorafit!\n\nCriamos uma plataforma exclusiva com seu cronograma de integração, vídeos e avaliações.\n\nVocê também terá uma Madrinha do time que vai te apoiar nos primeiros passos. 🤝\n\nAcesse pelo link:\n${invUrl}\n\nBora? 🚀\n\nEquipe Decorafit 🏠`:
+    `Olá, ${name}! 👋\n\nTemos um novo membro chegando ao time e você foi escolhida como Madrinha dessa integração! 💛\n\nNa plataforma você acompanha o progresso do seu afilhado(a), visualiza provas e registra feedbacks.\n\nAcesse pelo link:\n${invUrl}\n\nObrigada por fazer parte dessa jornada! 🌟\n\nEmília — Decorafit 🏠`
+  );
+  const gmail=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
+  window.open(gmail,'_blank');
+  alert(`✅ ${name} adicionado! Gmail aberto com o convite.`);
   refreshAcessos();
 }
 
