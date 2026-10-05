@@ -720,10 +720,10 @@ function applyProvaFilter(btn,main){
   main.querySelectorAll('.adm-prova-block').forEach(b=>{b.style.display=(f==='all'||b.dataset.day===f)?'block':'none';});
 }
 function buildAdmDiarios(){
-  let html=`<div class="section-title">Diários das Mentoras</div><p class="section-sub">Registros das Madrinhas sobre o acompanhamento dos afilhados.</p>`;
+  let html=`<div class="section-title">Diários das Mentoras</div><p class="section-sub">Registros das Madrinhas sobre o acompanhamento dos novos SDRs.</p>`;
   MENTORS.forEach(m=>{
     const diary=getU(m.id).diary||{};const hasAny=Object.keys(diary).length>0;
-    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · afilhados: ${(m.mentees||[]).join(', ')}</strong></div>`;
+    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · novos SDRs: ${(m.mentees||[]).join(', ')}</strong></div>`;
     if(!hasAny){html+=`<div style="font-size:.76rem;color:var(--muted);font-style:italic;padding:7px 0">Nenhum registro ainda.</div>`;}
     else{
       DAYS.forEach(day=>{
@@ -953,8 +953,8 @@ function refreshLeaderboard(){
 
 /* ══════ MENTOR ══════ */
 function buildMadrinhaPanels(tabs,main){
-  addTab(tabs,main,'acompanhamento','👁 Afilhados',()=>`<div class="section-title">Acompanhamento dos afilhados</div>`+buildMentorOverview());
-  addTab(tabs,main,'provas-mentor','📋 Provas',()=>`<div class="section-title">Provas dos Afilhados</div>`+buildMentorProvas());
+  addTab(tabs,main,'acompanhamento','👁 Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
+  addTab(tabs,main,'provas-mentor','📋 Provas',()=>`<div class="section-title">Provas dos Novos SDRs</div>`+buildMentorProvas());
   addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
@@ -1044,7 +1044,7 @@ function buildMentorDiary(){
       html+=`<div class="day-card"><div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')"><div class="dh-left"><div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}</div><div><strong>${day.label} · ${day.sub}</strong></div></div><span class="day-arrow">▼</span></div>
         <div class="day-body"><div class="mentor-section">
           <div class="mentor-q"><label>📌 Como foi sua experiência como Madrinha hoje?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que observou..."></textarea></div>
-          <div class="mentor-q"><label>🔎 Pontos de atenção no(s) seu(s) afilhado(s)</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, comportamentos, pontos a reforçar..."></textarea></div>
+          <div class="mentor-q"><label>🔎 Pontos de atenção no(s) novo(s) SDR(s)</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, comportamentos, pontos a reforçar..."></textarea></div>
           <div class="mentor-q"><label>✅ O que funcionou bem no dia?</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
           <div class="mentor-q"><label>📋 Como avalia o desempenho nas provas?</label><textarea id="m-prova-${day.id}" placeholder="Qualidade das respostas, pontos a reforçar..."></textarea></div>
           <div class="mentor-q"><label>💡 Sugestão para a Emília (gestora)</label><textarea id="m-sug-${day.id}" placeholder="Algo que poderia melhorar no plano?"></textarea></div>
@@ -1163,7 +1163,7 @@ function gmailInvite(userId){
 
   let subject, body;
   if(isNovo){
-    subject=encodeURIComponent('Seu acesso à Plataforma de Treinamento Decorafit 🏠');
+    subject=encodeURIComponent('Plataforma de Treinamento Decorafit 🏠');
     body=encodeURIComponent(
       `Olá, ${u.name||au.name}! 👋\n\n`+
       `Seja muito bem-vindo(a) ao time SDR da Decorafit!\n\n`+
@@ -1175,11 +1175,11 @@ function gmailInvite(userId){
       `Equipe Decorafit 🏠`
     );
   } else {
-    subject=encodeURIComponent('Você é Madrinha na Decorafit! 🌟');
+    subject=encodeURIComponent('Plataforma de Treinamento Decorafit 🏠');
     body=encodeURIComponent(
       `Olá, ${u.name||au.name}! 👋\n\n`+
       `Temos um novo membro chegando ao time SDR e você foi escolhida como Madrinha dessa integração! 💛\n\n`+
-      `Na plataforma você acompanha em tempo real o progresso do seu afilhado(a), visualiza as provas enviadas, registra seu diário e envia feedbacks para a gestora.\n\n`+
+      `Na plataforma você acompanha em tempo real o progresso do novo SDR, visualiza as provas enviadas, registra seu diário e envia feedbacks para a gestora.\n\n`+
       `Clique no link abaixo para criar seu acesso:\n`+
       `${invUrl}\n\n`+
       `Obrigada por fazer parte dessa jornada! 🌟\n\n`+
@@ -1241,10 +1241,10 @@ function addNewUser(){
   const invUrl=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(email)}`;
   // Abrir Gmail com mensagem de convite
   const isNovo=role==='novo';
-  const subject=encodeURIComponent(isNovo?'Seu acesso à Plataforma de Treinamento Decorafit 🏠':'Você é Madrinha na Decorafit! 🌟');
+  const subject=encodeURIComponent('Plataforma de Treinamento Decorafit 🏠');
   const body=encodeURIComponent(isNovo?
     `Olá, ${name}! 👋\n\nSeja muito bem-vindo(a) ao time SDR da Decorafit!\n\nCriamos uma plataforma exclusiva com seu cronograma de integração, vídeos e avaliações.\n\nVocê também terá uma Madrinha do time que vai te apoiar nos primeiros passos. 🤝\n\nAcesse pelo link:\n${invUrl}\n\nBora? 🚀\n\nEquipe Decorafit 🏠`:
-    `Olá, ${name}! 👋\n\nTemos um novo membro chegando ao time e você foi escolhida como Madrinha dessa integração! 💛\n\nNa plataforma você acompanha o progresso do seu afilhado(a), visualiza provas e registra feedbacks.\n\nAcesse pelo link:\n${invUrl}\n\nObrigada por fazer parte dessa jornada! 🌟\n\nEmília — Decorafit 🏠`
+    `Olá, ${name}! 👋\n\nTemos um novo membro chegando ao time e você foi escolhida como Madrinha dessa integração! 💛\n\nNa plataforma você acompanha o progresso do novo SDR, visualiza provas e registra feedbacks.\n\nAcesse pelo link:\n${invUrl}\n\nObrigada por fazer parte dessa jornada! 🌟\n\nEmília — Decorafit 🏠`
   );
   const gmail=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
   window.open(gmail,'_blank');
