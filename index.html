@@ -281,7 +281,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.4</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.5</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -329,6 +329,8 @@ const USERS=[
   {id:'larissa',name:'Larissa', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#8b5cf6', emoji:'👩‍💼', mentor:'Dani / Gaby', photo:LARISSA_IMG},
   {id:'allice', name:'Allice',  role:'novo',   turno:'tarde (12h–21h)',          color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
   {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'🧪', mentor:'—'},
+  {id:'teste_sdr',      name:'Teste — Novo SDR',  role:'novo',   turno:'visualização de teste', color:'#0ea5e9', emoji:'🧪', mentor:'Teste — Madrinha'},
+  {id:'teste_madrinha', name:'Teste — Madrinha',  role:'mentor', turno:'visualização de teste', color:'#a855f7', emoji:'🧪', mentees:['Teste — Novo SDR','Leandro','Larissa']},
 ];
 
 /* ══ PROVAS ══ */
@@ -567,6 +569,17 @@ function initAuth(){
     if(!tu){tu={userId:'teste',name:'Teste (Candidato)',role:'novo',email:TEST_EMAIL,approved:true};users.push(tu);}
     tu.email=TEST_EMAIL;tu.approved=true;tu.role='novo';
     if(!pwds[TEST_EMAIL])pwds[TEST_EMAIL]='2218';
+    // Contas de teste adicionais (Novo SDR e Madrinha)
+    const TESTES=[
+      {id:'teste_sdr',      nome:'Teste — Novo SDR', papel:'novo',   mail:'teste.sdr@decorafit.com.br'},
+      {id:'teste_madrinha', nome:'Teste — Madrinha', papel:'mentor', mail:'teste.madrinha@decorafit.com.br'}
+    ];
+    TESTES.forEach(t=>{
+      let x=users.find(u=>u.userId===t.id);
+      if(!x){x={userId:t.id,name:t.nome,role:t.papel,email:t.mail,approved:true};users.push(x);}
+      x.email=t.mail;x.approved=true;x.role=t.papel;
+      if(!pwds[t.mail])pwds[t.mail]='2218';
+    });
     localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
     // Garantir que todos os perfis do sistema existem na lista de acessos
     USERS.forEach(u=>{
