@@ -322,7 +322,7 @@ const USERS=[
   {id:'grazi',  name:'Grazi',   role:'mentor', turno:'tarde',                    color:'#f59e0b', emoji:'⭐', mentees:['Allice'], photo:GRAZI_IMG},
   {id:'leandro',name:'Leandro', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#3b82f6', emoji:'👨‍💼', mentor:'Dani / Gaby', photo:LEANDRO_IMG},
   {id:'larissa',name:'Larissa', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#8b5cf6', emoji:'👩‍💼', mentor:'Dani / Gaby', photo:LARISSA_IMG},
-  {id:'allice', name:'Allice',  role:'novo',   turno:'tarde',                    color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
+  {id:'allice', name:'Allice',  role:'novo',   turno:'tarde (12h–21h)',          color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
   {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'🧪', mentor:'—'},
 ];
 
@@ -374,18 +374,17 @@ const PROVAS={
 const DAYS=[
   /* ─── SEMANA ONLINE ─── */
   {
-    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online · 12h–21h — início com Emília',color:'#3b82f6',pts:75,
+    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online — início com Emília',color:'#3b82f6',pts:75,
     videos:[{name:'Introdução ao Pipedrive',time:'14h',src:'PIPEDRIVE'}],
     blocks:[
-      {time:'12h–13h15',   title:'🍽️ Almoço',type:'async',conduct:'—',joint:true,note:'Esta semana todos os novos SDRs trabalham das 12h às 21h'},
       {time:'13h15–14h',   title:'Daily PV — equipe tarde (observação)',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham a daily como ouvintes'},
       {time:'14h–15h20',   title:'📹 Introdução ao Pipedrive + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
       {time:'15h20–15h40', title:'☕ Pausa café',type:'async',conduct:'—',joint:true},
       {time:'15h40–17h',   title:'📹 Vídeos Chatwoot + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
       {time:'17h–17h40',   title:'💬 Momento Dúvidas — Emília',type:'live',conduct:'Emília',joint:true},
-      {time:'17h40–19h',   title:'Prática livre nos sistemas + revisão das tarefas',type:'practice',conduct:'Madrinha',joint:true},
-      {time:'19h–20h30',   title:'Acompanhar rotina da equipe tarde',type:'live',conduct:'Madrinha',joint:true},
-      {time:'20h30–21h',   title:'Avaliação do dia + Prova Diária 1',type:'practice',conduct:'Auto',joint:true},
+      {time:'17h40–18h',   title:'Avaliação do dia + Prova Diária 1',type:'practice',conduct:'Auto',joint:true},
+      {time:'18h–19h30 (T)', title:'[ALLICE] Prática nos sistemas + revisão das tarefas',type:'practice',conduct:'Grazi',turno:'allice'},
+      {time:'19h30–21h (T)', title:'[ALLICE] Acompanhar rotina da equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
     ],
     tasks:[
       {id:'d1t1',label:'Participei do Daily PV como ouvinte',pts:5},
@@ -394,7 +393,7 @@ const DAYS=[
       {id:'d1t4',label:'📹 Assisti aos vídeos do Chatwoot',pts:10},
       {id:'d1t5',label:'✅ Cumpri as tarefas propostas do Chatwoot',pts:15},
       {id:'d1t6',label:'Participei do Momento Dúvidas com a Emília',pts:5},
-      {id:'d1t7',label:'Acompanhei a rotina da equipe tarde',pts:10},
+      {id:'d1t7',label:'Pratiquei nos sistemas após os vídeos',pts:10},
       {id:'d1t8',label:'Enviei a Prova do Dia 1',pts:15},
     ]
   },
@@ -821,7 +820,7 @@ function buildVideoSection(day){
         <span class="vplay">▼</span>
       </div>
       <div class="day-video-body">
-        <video controls preload="none" style="width:100%;border-radius:8px;background:#000">
+        <video controls playsinline preload="metadata" style="width:100%;border-radius:8px;background:#000">
           <source src="${src}" type="video/mp4">
           Seu navegador não suporta vídeo.
         </video>
