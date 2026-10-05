@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Treinamento Pré-Vendas Decorafit</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -277,6 +280,8 @@
       <input type="password" id="login-password" class="login-input" placeholder="Senha" autocomplete="current-password">
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
+      <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v1.4</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -585,6 +590,8 @@ function getPwds(){return JSON.parse(localStorage.getItem('sdrPwd_v1')||'{}');}
 function saveAuthUsers(u){localStorage.setItem('sdrAuth_v1',JSON.stringify(u));}
 function savePwds(p){localStorage.setItem('sdrPwd_v1',JSON.stringify(p));}
 
+function resetLocalData(){try{localStorage.removeItem('sdrAuth_v1');localStorage.removeItem('sdrPwd_v1');localStorage.removeItem('sdrExtraUsers');}catch(e){}location.replace(location.pathname+'?v='+Date.now());}
+
 function doLogin(){
   const email=document.getElementById('login-email').value.trim().toLowerCase();
   const pw=document.getElementById('login-password').value;
@@ -595,7 +602,7 @@ function doLogin(){
   let au=users.find(u=>u.email&&u.email.toLowerCase()===email&&u.approved);
   // atalho de compatibilidade para a gestora
   if(!au&&(email==='decorafit'||email==='emilia'||email==='emilia.moreira@decorafit.com.br')){au=users.find(u=>u.userId==='emilia');}
-  if(!au){err.textContent='E-mail não autorizado. Aguarde o convite da gestora.';return;}
+  if(!au){err.textContent='E-mail não autorizado. Confira o endereço ou use o link "Limpar dados" abaixo.';return;}
   const pwds=getPwds();
   const key=(au.email||email).toLowerCase();
   if(!pwds[key]){pendingEmail=key;showCreatePw(key);return;}
