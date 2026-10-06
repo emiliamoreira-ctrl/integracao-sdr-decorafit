@@ -392,6 +392,54 @@
   .corr-box textarea{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:7px;font-family:'Montserrat',sans-serif;font-size:.77rem;min-height:70px;margin-top:8px;resize:vertical;}
   .btn-corrigir{background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;margin-top:9px;}
   .hist-item{font-size:.7rem;color:var(--muted);border-left:2px solid var(--line);padding-left:9px;margin-top:5px;}
+
+  /* MATERIAIS DO MÓDULO */
+  .mat-box{background:#f8fafc;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:15px 17px;margin-bottom:14px;}
+  .mat-box h5{font-size:.83rem;font-weight:800;color:var(--navy);margin-bottom:4px;}
+  .mat-box .md{font-size:.76rem;color:var(--muted);margin-bottom:11px;line-height:1.5;}
+  .mat-links{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;}
+  .mat-link{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;text-decoration:none;border-radius:8px;padding:7px 13px;font-size:.74rem;font-weight:700;transition:background .15s;}
+  .mat-link:hover{background:#2d4a7a;}
+  .mat-link.off{background:var(--bg);color:var(--muted);border:1.5px dashed var(--line);cursor:not-allowed;}
+  .mat-obs{background:#fff;border-radius:8px;padding:11px 13px;}
+  .mat-obs .ot{font-size:.72rem;font-weight:800;color:var(--orange);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;}
+  .mat-obs ul{margin:0;padding-left:17px;}
+  .mat-obs li{font-size:.76rem;color:var(--txt);margin-bottom:4px;line-height:1.45;}
+  .meet-btn{display:inline-flex;align-items:center;gap:5px;background:#1a73e8;color:#fff;text-decoration:none;border-radius:7px;padding:4px 10px;font-size:.68rem;font-weight:700;margin-top:5px;}
+  .meet-btn:hover{background:#1557b0;}
+  .meet-btn.off{background:var(--bg);color:var(--muted);border:1.5px dashed var(--line);}
+
+  /* ═══ IDENTIDADE DECORAFIT ═══ */
+  body{background:#f7f8fa;}
+  header{box-shadow:0 2px 12px rgba(26,43,74,.12);}
+  .hlogo{display:flex;align-items:center;gap:9px;letter-spacing:-.2px;}
+  .hlogo .lmark{width:28px;height:28px;border-radius:7px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;}
+  .hlogo .ltxt{line-height:1.1;}
+  .hlogo .ltxt b{display:block;font-size:.92rem;font-weight:800;color:#fff;}
+  .hlogo .ltxt small{display:block;font-size:.62rem;color:rgba(255,255,255,.6);letter-spacing:.6px;text-transform:uppercase;font-weight:600;}
+  .nav-tabs{box-shadow:0 1px 4px rgba(26,43,74,.05);border-bottom:1px solid var(--line);}
+  .ntab{border-radius:0;position:relative;}
+  .ntab.active{background:#fff7ed;}
+  .week-divider{font-size:.72rem;letter-spacing:.8px;color:var(--navy);font-weight:800;padding:20px 0 10px;}
+  .week-divider::after{background:linear-gradient(90deg,var(--line),transparent);}
+  .day-card{box-shadow:0 1px 3px rgba(26,43,74,.05);transition:box-shadow .2s,border-color .2s;}
+  .day-card:hover{box-shadow:0 4px 14px rgba(26,43,74,.09);}
+  .day-card.open{border-color:var(--orange);box-shadow:0 4px 18px rgba(249,115,22,.1);}
+  .course-hero{box-shadow:0 8px 28px rgba(26,43,74,.18);}
+  .course-hero .eyebrow{color:var(--orange);opacity:.95;}
+  .module-num{font-family:'Montserrat',sans-serif;}
+  .lesson-sec-title{border-bottom-color:var(--line);}
+  .lesson-sec-title .n{background:var(--orange);}
+  .adm-kpi{box-shadow:0 1px 3px rgba(26,43,74,.05);}
+  .leaderboard{box-shadow:0 1px 3px rgba(26,43,74,.05);}
+  .lb-header{background:linear-gradient(90deg,var(--navy),#2d4a7a);}
+  .progress-banner{box-shadow:0 1px 3px rgba(26,43,74,.05);}
+  .section-title{display:flex;align-items:center;gap:9px;}
+  .section-title::before{content:'';width:4px;height:17px;background:var(--orange);border-radius:3px;}
+  .login-box{box-shadow:0 28px 70px rgba(0,0,0,.3);}
+  .login-box .logo h1{letter-spacing:-.3px;}
+  footer.plat-foot{text-align:center;padding:26px 20px 34px;color:var(--muted);font-size:.7rem;border-top:1px solid var(--line);margin-top:34px;}
+  footer.plat-foot b{color:var(--navy);}
 </style>
 </head>
 <body>
@@ -409,7 +457,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.0</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.1</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -426,7 +474,7 @@
 
 <div id="app">
   <header>
-    <div class="hlogo">Decorafit <span>Pré-Vendas</span> · Treinamento</div>
+    <div class="hlogo"><span class="lmark">D</span><span class="ltxt"><b>Decorafit</b><small>Treinamento Pré-Vendas</small></span></div>
     <div class="huser">
       <div class="hprofile">
         <div class="pav" id="hdr-avatar"></div>
@@ -437,6 +485,7 @@
   </header>
   <div class="nav-tabs" id="nav-tabs"></div>
   <main id="main-content"></main>
+  <footer class="plat-foot"><b>Decorafit</b> · Plataforma de Treinamento Pré-Vendas · uso interno</footer>
 </div>
 
 <script>
@@ -536,10 +585,12 @@ const DAYS=[
   {
     id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:55,
     blocks:[
-      {time:'09h–11h30 (M)', title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'Madrinha',turno:'manha',note:'Leandro e Larissa acompanham a rotina da equipe manhã'},
+      {time:'09h–10h (M)',   title:'Acompanhar Rotina da manhã',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro com a Gaby',meet:''},
+      {time:'10h–11h30 (M)', title:'Módulos do dia + 🎥 Assistir uma R1',type:'practice',conduct:'Auto',turno:'manha'},
       {time:'14h–15h30 (M)', title:'Resultados PV + Rotina part2 equipe manhã',type:'live',conduct:'Emília',turno:'manha'},
       {time:'15h30–16h30 (M)',title:'Prática: Enviar 1 R01 supervisionado',type:'practice',conduct:'Madrinha',turno:'manha'},
-      {time:'13h–15h30 (T)', title:'[ALLICE] Rotinas part1 + Resultados PV — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'13h–14h (T)',   title:'[ALLICE] Acompanhar Rotina da tarde',type:'live',conduct:'Grazi',turno:'allice',note:'Allice com a Grazi',meet:''},
+      {time:'14h–15h30 (T)', title:'[ALLICE] Módulos do dia + 🎥 Assistir uma R1',type:'practice',conduct:'Auto',turno:'allice'},
       {time:'17h30–19h (T)', title:'[ALLICE] Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'19h–21h (T)',   title:'[ALLICE] Encaminhar 2 R01 (prática supervisionada)',type:'practice',conduct:'Grazi',turno:'allice'},
       {time:'17h',           title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true},
@@ -557,7 +608,7 @@ const DAYS=[
     blocks:[
       {time:'09h30–11h30 (M)',title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'Madrinha',turno:'manha'},
       {time:'13h–15h30',      title:'Treinamento Integração — Novos (todos juntos)',type:'live',conduct:'Emília',joint:true,note:'Leandro, Larissa e Allice juntos'},
-      {time:'15h30–16h30',    title:'Ler conversas reais do time com clientes',type:'read',conduct:'Auto',joint:true},
+      {time:'15h30–16h30',    title:'💬 Ler conversas do Chatwoot (ver aba Atividades)',type:'read',conduct:'Auto',joint:true},
       {time:'17h',            title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true},
       {time:'17h30–21h (T)',  title:'[ALLICE] Rotina equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'Fim do dia',     title:'Avaliação do dia + Prova Diária 3',type:'practice',conduct:'Auto'},
@@ -574,9 +625,9 @@ const DAYS=[
     blocks:[
       {time:'09h30–11h30 (M)',title:'Rotina part2 equipe manhã (Gaby) + Daily PV Manhã',type:'live',conduct:'Gaby',turno:'manha'},
       {time:'13h–14h30 (M)', title:'Rotina part2 (Dani) — reflexão e consolidação',type:'live',conduct:'Dani',turno:'manha'},
-      {time:'14h30–16h30 (M)',title:'Escuta e envio de ligações supervisionado',type:'listen',conduct:'Madrinha',turno:'manha'},
+      {time:'14h30–16h30 (M)',title:'🎧 Ouvir ligações (ver aba Atividades)',type:'listen',conduct:'Auto',turno:'manha'},
       {time:'13h–14h30 (T)', title:'[ALLICE] Rotina part2 (Dani)',type:'live',conduct:'Dani',turno:'allice'},
-      {time:'14h30–16h30 (T)',title:'[ALLICE] Escuta e envio de ligações',type:'listen',conduct:'Grazi',turno:'allice'},
+      {time:'14h30–16h30 (T)',title:'[ALLICE] 🎧 Ouvir ligações (ver aba Atividades)',type:'listen',conduct:'Auto',turno:'allice'},
       {time:'18h–19h30 (T)', title:'[ALLICE] Rotina part2 equipe tarde (Grazi)',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'19h30–21h (T)', title:'[ALLICE] Ler conversas do time',type:'read',conduct:'Grazi',turno:'allice'},
       {time:'16h30',         title:'Call conjunta — reflexão da 1ª semana online',type:'live',conduct:'Emília',joint:true,note:'Leandro, Larissa e Allice · encerramento da semana'},
@@ -661,21 +712,25 @@ const DAYS=[
 ];
 
 
+
 /* ═══════ MÓDULOS DO CURSO — organizados por data ═══════ */
 const MODULOS=[
 /* ───── 06/10 ───── */
  {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#8b5cf6',icon:'💼',
-  topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Preenchimento obrigatório'],
-  praticas:['Abra um card de teste do zero preenchendo todos os campos obrigatórios','Pesquise duplicidade antes de criar um segundo card de teste','Movimente o card de teste entre duas etapas do funil','Faça uma anotação no card registrando o contato','Crie a próxima atividade no card com data e tipo'],
+  topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Fazendo anotações no card','Mudando de etapa'],
+  praticas:['Abra um card de teste do zero','Pesquise duplicidade antes de criar um segundo card','Faça uma anotação no card registrando o contato','Movimente o card de teste entre duas etapas do funil','Crie a próxima atividade no card com data e tipo'],
   prova:{pts:20,perguntas:[
    {id:'m1q1',txt:'Descreva as etapas do funil no Pipedrive e o que caracteriza cada uma.'},
-   {id:'m1q2',txt:'Quais são os campos de preenchimento obrigatório ao abrir um card? Por que cada um importa?'},
-   {id:'m1q3',txt:'Como você pesquisa duplicidade antes de criar um card? O que faz se encontrar uma?'},
-   {id:'m1q4',txt:'Para que serve o Pipedrive na rotina do SDR? Explique com suas palavras.'}]}},
+   {id:'m1q2',txt:'Como você pesquisa duplicidade antes de criar um card? O que faz se encontrar uma?'},
+   {id:'m1q3',txt:'Por que registrar anotações no card é importante? O que não pode faltar numa anotação?'},
+   {id:'m1q4',txt:'O que precisa estar pronto antes de mudar um card de etapa?'}]}},
 
  {id:'m2',num:2,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#3b82f6',icon:'📅',
   topicos:['Como agendar um meet com colegas','Como agendar um meet com o cliente','R01','Como colocar a R1 para gravar','Aceitar invite'],
   praticas:['Agende um meet de teste com um colega do time','Configure uma reunião de teste para gravar automaticamente','Aceite um invite enviado pela sua madrinha','Localize a gravação de uma R1 já realizada'],
+  materiais:{titulo:'🎥 Assistir uma R1',desc:'Assista à gravação abaixo e observe a condução do consultor.',
+    links:[{nome:'Gravação da R1',url:''}],
+    obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
   prova:{pts:20,perguntas:[
    {id:'m2q1',txt:'Descreva o passo a passo para agendar uma reunião com o cliente, do convite até a confirmação.'},
    {id:'m2q2',txt:'O que é a R01 e qual seu objetivo dentro do processo?'},
@@ -716,112 +771,138 @@ const MODULOS=[
    {id:'m6q2',txt:'Explique como e quando usar o status de almoço e o status ativo.'},
    {id:'m6q3',txt:'Por que o time precisa saber se você está disponível em tempo real?'}]}},
 
- {id:'m7',num:7,cat:'Chatwoot',titulo:'Chatwoot II — Contatos e Status',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#f97316',icon:'👤',
-  topicos:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa'],
-  praticas:['Identifique o proprietário de três conversas diferentes','Localize uma conversa vinda do bot e outra do WhatsApp','Altere o status de uma conversa de teste e observe o que muda','Reatribua uma conversa para outro proprietário'],
-  prova:{pts:20,perguntas:[
+ {id:'m7',num:7,cat:'Chatwoot',titulo:'Chatwoot II — Contatos, Status e Mensagens',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#f97316',icon:'👤',
+  topicos:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa','Mensagens prontas','Envio de template após a janela de 24 horas'],
+  praticas:['Identifique o proprietário de três conversas diferentes','Localize uma conversa vinda do bot e outra do WhatsApp','Altere o status de uma conversa de teste e observe o que muda','Use uma mensagem pronta numa conversa de teste','Localize onde ficam os templates e simule o envio após 24h'],
+  materiais:{titulo:'💬 Ler conversas do Chatwoot',desc:'Abra as conversas abaixo e analise cada uma com atenção.',
+    links:[{nome:'Conversa 1',url:''},{nome:'Conversa 2',url:''},{nome:'Conversa 3',url:''},{nome:'Conversa 4',url:''},{nome:'Conversa 5',url:''}],
+    obs:['Qual cliente foi atendido pela Cora','Quais perguntas de qualificação foram feitas aos clientes de WhatsApp','Em quais momentos o cliente parou de responder']},
+  prova:{pts:25,perguntas:[
    {id:'m7q1',txt:'O que significa o proprietário de uma conversa? O que acontece quando ela não tem um?'},
    {id:'m7q2',txt:'Qual a diferença entre cliente bot e cliente WhatsApp? Como você identifica cada um?'},
    {id:'m7q3',txt:'Quais são os status possíveis de uma conversa e quando usar cada um?'},
-   {id:'m7q4',txt:'Por que manter o status atualizado afeta o SLA do time?'}]}},
+   {id:'m7q4',txt:'O que é a janela de 24 horas do WhatsApp? O que muda no envio depois que ela fecha?'},
+   {id:'m7q5',txt:'Quando usar uma mensagem pronta e quando escrever do zero?'}]}},
 
 /* ───── 09/10 ───── */
  {id:'m8',num:8,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f59e0b',icon:'☎️',
   topicos:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
   praticas:['Faça uma ligação de teste para um colega do time','Confirme que a ligação foi registrada automaticamente no card do Pipedrive','Abra o relatório de ligações e identifique o total do dia','Localize a gravação de uma ligação pelo número ou pela data'],
+  materiais:{titulo:'🎧 Ouvir ligações',desc:'Ouça os áudios abaixo e registre suas observações.',
+    links:[{nome:'Ligação 1',url:''},{nome:'Ligação 2',url:''},{nome:'Ligação 3',url:''}],
+    obs:['Principais perguntas feitas pelos clientes','Se houve um OK claro sobre o valor ou ficou subentendido','Qual foi a resposta do cliente sobre valor e prazo']},
   prova:{pts:20,perguntas:[
    {id:'m8q1',txt:'Descreva o passo a passo de uma ligação, do discar até registrar o resultado no Pipedrive.'},
    {id:'m8q2',txt:'Como a integração com o Pipedrive funciona e o que ela registra automaticamente?'},
    {id:'m8q3',txt:'Como você localiza a gravação de uma ligação específica? Para que isso serve no dia a dia?'},
    {id:'m8q4',txt:'Para que serve o relatório de ligações e com que frequência você deve consultá-lo?'}]}},
 
-/* ───── 13/10 ───── */
- {id:'m9',num:9,cat:'Rotinas',titulo:'Rotinas do Time',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#ec4899',icon:'⏰',
-  topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
-  praticas:['Confirme seu horário de entrada e saída com a madrinha','Simule um aviso de impedimento no canal correto do Slack','Identifique quem seria seu backup de leads em caso de ausência'],
-  prova:{pts:15,perguntas:[
-   {id:'m9q1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
-   {id:'m9q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
-   {id:'m9q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
+ {id:'m9',num:9,cat:'Chatwoot',titulo:'Chatwoot III — Etiquetas e Registro no Pipedrive',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f97316',icon:'🏷️',
+  topicos:['Etiquetas: para que servem','Como aplicar etiquetas corretamente','Preenchimento lateral','Salvar dados','Salvar mensagem no Pipedrive'],
+  praticas:['Aplique pelo menos três etiquetas diferentes em conversas de teste','Preencha todos os campos da barra lateral de uma conversa','Salve os dados e confirme que ficaram registrados','Salve uma mensagem da conversa direto no card do Pipedrive','Filtre a caixa por uma etiqueta e veja o resultado'],
+  prova:{pts:25,perguntas:[
+   {id:'m9q1',txt:'Para que servem as etiquetas? O que acontece se você não etiquetar uma conversa?'},
+   {id:'m9q2',txt:'Liste as etiquetas que você usou e explique quando aplicar cada uma.'},
+   {id:'m9q3',txt:'Quais campos existem no preenchimento lateral e por que cada um importa?'},
+   {id:'m9q4',txt:'Descreva o passo a passo para salvar uma mensagem do Chatwoot no Pipedrive.'},
+   {id:'m9q5',txt:'Por que o registro no Pipedrive não pode depender só da memória da conversa no Chatwoot?'}]}},
 
- {id:'m10',num:10,cat:'Chatwoot',titulo:'Chatwoot III — Atendimento Cora e Etiquetas',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#f97316',icon:'🏷️',
-  topicos:['Atendimento Cora','Etiquetas: para que servem','Como aplicar etiquetas corretamente'],
-  praticas:['Abra um atendimento Cora e acompanhe o fluxo completo','Aplique pelo menos três etiquetas diferentes em conversas de teste','Remova uma etiqueta aplicada por engano','Filtre a caixa por uma etiqueta e veja o resultado'],
+/* ───── 13/10 ───── */
+ {id:'m10',num:10,cat:'Rotinas',titulo:'Rotinas do Time',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#ec4899',icon:'⏰',
+  topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
+  praticas:[],
+  prova:{pts:15,perguntas:[
+   {id:'m10q1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
+   {id:'m10q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
+   {id:'m10q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
+
+ {id:'m11',num:11,cat:'Chatwoot',titulo:'Chatwoot IV — Atendimento Cora',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#f97316',icon:'🤖',
+  topicos:['O que é o Atendimento Cora','Quando a Cora entra na conversa','Como assumir um atendimento da Cora','O que revisar no histórico da Cora'],
+  praticas:['Abra um atendimento Cora e acompanhe o fluxo completo','Identifique em qual ponto a Cora passou a conversa para o humano','Assuma um atendimento da Cora e registre a continuidade','Revise o histórico da Cora e anote o que já foi qualificado'],
   prova:{pts:20,perguntas:[
-   {id:'m10q1',txt:'O que é o atendimento Cora e em que situações ele aparece?'},
-   {id:'m10q2',txt:'Para que servem as etiquetas? O que acontece se você não etiquetar uma conversa?'},
-   {id:'m10q3',txt:'Liste as etiquetas que você usou e explique quando aplicar cada uma.'},
-   {id:'m10q4',txt:'Como as etiquetas ajudam na organização da sua fila de atendimento?'}]}},
+   {id:'m11q1',txt:'O que é o atendimento Cora e em que situações ele aparece?'},
+   {id:'m11q2',txt:'Como você identifica que uma conversa foi atendida pela Cora?'},
+   {id:'m11q3',txt:'Ao assumir um atendimento da Cora, o que você revisa antes de responder ao cliente?'},
+   {id:'m11q4',txt:'O que a Cora já pergunta e o que ainda cabe a você perguntar?'}]}},
+
+ {id:'m12',num:12,cat:'Estimativa',titulo:'Simulador de Estimativa',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#0ea5e9',icon:'🧮',
+  topicos:['O que é o simulador de estimativa','Refazendo uma estimativa','Quando a estimativa precisa ser refeita'],
+  praticas:['Monte uma estimativa de teste no simulador','Refaça uma estimativa alterando o escopo e compare os valores','Registre a nova estimativa no card do cliente'],
+  prova:{pts:20,perguntas:[
+   {id:'m12q1',txt:'Para que serve o simulador de estimativa e em que momento do processo você usa?'},
+   {id:'m12q2',txt:'Descreva o passo a passo para refazer uma estimativa.'},
+   {id:'m12q3',txt:'Em quais situações a estimativa precisa ser refeita?'},
+   {id:'m12q4',txt:'O que você comunica ao cliente quando o valor muda depois de refazer a estimativa?'}]}},
 
 /* ───── 14/10 ───── */
- {id:'m11',num:11,cat:'Metas',titulo:'Metas e Indicadores de Performance',modo:'presencial',data:'14/10',dia:'Quarta-feira',sem:2,cor:'#ef4444',icon:'🎯',
+ {id:'m13',num:13,cat:'Metas',titulo:'Metas e Performance',modo:'presencial',data:'14/10',dia:'Quarta-feira',sem:2,cor:'#ef4444',icon:'🎯',
   topicos:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
   praticas:['Calcule quantas ligações precisa por dia útil para bater as 500','Calcule quantos agendamentos precisa por semana para bater os 29','Monte sua rotina diária alinhada às metas e valide com a madrinha'],
   prova:{pts:25,perguntas:[
-   {id:'m11q1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
-   {id:'m11q2',txt:'O que é o SLA de 1 hora na prática? O que você faz para garantir que ele seja cumprido?'},
-   {id:'m11q3',txt:'Com 500 ligações por mês, quantas você precisa fazer por dia útil? E quantos agendamentos por semana para bater os 29?'},
-   {id:'m11q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'}]}},
+   {id:'m13q1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
+   {id:'m13q2',txt:'O que é o SLA de 1 hora na prática? O que você faz para garantir que ele seja cumprido?'},
+   {id:'m13q3',txt:'Com 500 ligações por mês, quantas você precisa fazer por dia útil? E quantos agendamentos por semana para bater os 29?'},
+   {id:'m13q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'}]}},
 
 /* ───── 15/10 ───── */
- {id:'m12',num:12,cat:'Agenda',titulo:'Agenda II — Arquitetos e Regras',modo:'presencial',data:'15/10',dia:'Quinta-feira',sem:2,cor:'#3b82f6',icon:'🗓️',
+ {id:'m14',num:14,cat:'Agenda',titulo:'Agenda II — Arquitetos e Regras',modo:'presencial',data:'15/10',dia:'Quinta-feira',sem:2,cor:'#3b82f6',icon:'🗓️',
   topicos:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Regra: agendar com no mínimo 6h de antecedência','Participar de todas as reuniões diárias','Câmera aberta','Levantar a mão para falar','Atenção total durante as reuniões'],
   praticas:['Salve as agendas de todos os arquitetos no seu calendário','Consulte a disponibilidade de um arquiteto para os próximos 3 dias','Agende uma R1 de teste respeitando a regra das 6 horas','Simule um agendamento que fura a regra e descreva como contornaria'],
   prova:{pts:25,perguntas:[
-   {id:'m12q1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
-   {id:'m12q2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
-   {id:'m12q3',txt:'Explique a regra das 6 horas de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
-   {id:'m12q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'}]}},
+   {id:'m14q1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
+   {id:'m14q2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
+   {id:'m14q3',txt:'Explique a regra das 6 horas de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
+   {id:'m14q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'}]}},
 
 /* ───── 16/10 ───── */
- {id:'m13',num:13,cat:'Pipedrive',titulo:'Pipedrive III — Perdas e Ganhos',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#8b5cf6',icon:'🏁',
-  topicos:['Motivos de perda: quais existem','Quando usar cada motivo de perda','Ganho: passo a passo do card','Informações obrigatórias para dar um ganho'],
-  praticas:['Marque um card de teste como perdido escolhendo o motivo correto','Registre a anotação justificando o motivo de perda','Faça o passo a passo completo de ganho em um card de teste','Confira se todas as informações obrigatórias estão no card antes do ganho'],
+ {id:'m15',num:15,cat:'Pipedrive',titulo:'Pipedrive III — Perdas e Ganhos',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#8b5cf6',icon:'🏁',
+  topicos:['Preenchimento obrigatório','Motivos de perda: quais existem','Quando usar cada motivo de perda','Ganho: passo a passo do card','Informações obrigatórias para dar um ganho'],
+  praticas:['Confira todos os campos obrigatórios de um card antes de fechá-lo','Marque um card de teste como perdido escolhendo o motivo correto','Registre a anotação justificando o motivo de perda','Faça o passo a passo completo de ganho em um card de teste'],
   prova:{pts:25,perguntas:[
-   {id:'m13q1',txt:'Liste os motivos de perda e dê um exemplo de situação para pelo menos três deles.'},
-   {id:'m13q2',txt:'CENÁRIO: cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
-   {id:'m13q3',txt:'Descreva o passo a passo completo para dar um ganho no card.'},
-   {id:'m13q4',txt:'Quais são as informações obrigatórias para dar um GANHO? O que acontece se faltar alguma?'},
-   {id:'m13q5',txt:'Por que registrar o motivo de perda correto importa para o time e para os indicadores?'}]}},
+   {id:'m15q1',txt:'Quais são os campos de preenchimento obrigatório? Por que cada um importa no fechamento?'},
+   {id:'m15q2',txt:'Liste os motivos de perda e dê um exemplo de situação para pelo menos três deles.'},
+   {id:'m15q3',txt:'CENÁRIO: cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
+   {id:'m15q4',txt:'Descreva o passo a passo completo para dar um ganho no card.'},
+   {id:'m15q5',txt:'Quais são as informações obrigatórias para dar um GANHO? O que acontece se faltar alguma?'}]}},
 
- {id:'m14',num:14,cat:'WhatsApp',titulo:'WhatsApp — Grupos e Cliente',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#22c55e',icon:'📱',
+ {id:'m16',num:16,cat:'WhatsApp',titulo:'WhatsApp — Grupos e Cliente',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#22c55e',icon:'📱',
   topicos:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
   praticas:['Crie um grupo de teste com o padrão de nome do time','Inclua um colega simulando o cliente','Envie a mensagem com o link da reunião no formato padrão','Envie o evento e confirme o recebimento'],
   prova:{pts:20,perguntas:[
-   {id:'m14q1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente corretamente.'},
-   {id:'m14q2',txt:'Escreva a mensagem que você enviaria ao cliente junto com o link da reunião.'},
-   {id:'m14q3',txt:'Como você envia o evento e confirma que o cliente recebeu?'},
-   {id:'m14q4',txt:'Qual o padrão de nome dos grupos e por que seguir esse padrão importa?'}]}},
+   {id:'m16q1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente corretamente.'},
+   {id:'m16q2',txt:'Escreva a mensagem que você enviaria ao cliente junto com o link da reunião.'},
+   {id:'m16q3',txt:'Como você envia o evento e confirma que o cliente recebeu?'},
+   {id:'m16q4',txt:'Qual o padrão de nome dos grupos e por que seguir esse padrão importa?'}]}},
 
 /* ───── 21/10 ───── */
- {id:'m15',num:15,cat:'Pipedrive',titulo:'Pipedrive IV — Indicadores',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#8b5cf6',icon:'📊',
+ {id:'m17',num:17,cat:'Pipedrive',titulo:'Pipedrive IV — Indicadores',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#8b5cf6',icon:'📊',
   topicos:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
   praticas:['Abra o painel de indicadores e anote seus números da semana','Calcule sua taxa de conversão do período','Identifique quantos MQL você gerou e quantos viraram agendamento','Compare seus indicadores com as metas do time'],
   prova:{pts:25,perguntas:[
-   {id:'m15q1',txt:'Explique o que é MQL e como ele se diferencia de um lead comum.'},
-   {id:'m15q2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
-   {id:'m15q3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
-   {id:'m15q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'},
-   {id:'m15q5',txt:'Olhando seus próprios números desta semana, onde você está melhor e onde precisa evoluir?'}]}},
+   {id:'m17q1',txt:'Explique o que é MQL e como ele se diferencia de um lead comum.'},
+   {id:'m17q2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
+   {id:'m17q3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
+   {id:'m17q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'},
+   {id:'m17q5',txt:'Olhando seus próprios números desta semana, onde você está melhor e onde precisa evoluir?'}]}},
 
- {id:'m16',num:16,cat:'Slack',titulo:'Slack III — Fluxos Operacionais',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#14b8a6',icon:'🔄',
+ {id:'m18',num:18,cat:'Slack',titulo:'Slack III — Fluxos Operacionais',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#14b8a6',icon:'🔄',
   topicos:['Roleta','Medição','Vistoria'],
   praticas:['Acompanhe uma rodada de roleta do início ao fim','Abra uma solicitação de medição de teste','Localize onde as vistorias são registradas e acompanhe uma'],
   prova:{pts:20,perguntas:[
-   {id:'m16q1',txt:'O que é a Roleta? Como ela funciona e qual seu papel nela?'},
-   {id:'m16q2',txt:'Descreva o fluxo de Medição: quem solicita, quem executa e o que você precisa informar.'},
-   {id:'m16q3',txt:'O que é a Vistoria e em que momento do processo ela acontece?'},
-   {id:'m16q4',txt:'O que acontece se um desses fluxos não for registrado no canal correto?'}]}},
+   {id:'m18q1',txt:'O que é a Roleta? Como ela funciona e qual seu papel nela?'},
+   {id:'m18q2',txt:'Descreva o fluxo de Medição: quem solicita, quem executa e o que você precisa informar.'},
+   {id:'m18q3',txt:'O que é a Vistoria e em que momento do processo ela acontece?'},
+   {id:'m18q4',txt:'O que acontece se um desses fluxos não for registrado no canal correto?'}]}},
 
 /* ───── 22/10 ───── */
- {id:'m17',num:17,cat:'Chatwoot',titulo:'Chatwoot IV — Filtros Personalizados',modo:'online',data:'22/10',dia:'Quinta-feira',sem:3,cor:'#f97316',icon:'🔍',
+ {id:'m19',num:19,cat:'Chatwoot',titulo:'Chatwoot V — Filtros Personalizados',modo:'online',data:'22/10',dia:'Quinta-feira',sem:3,cor:'#f97316',icon:'🔍',
   topicos:['O que são filtros personalizados','Como criar um filtro','Combinando critérios','Salvando e reutilizando filtros'],
   praticas:['Crie um filtro de conversas não respondidas há mais de 1 hora','Crie um filtro combinando etiqueta e status','Salve o filtro e use-o na sua rotina','Compartilhe com a madrinha o filtro que mais te ajudou'],
   prova:{pts:20,perguntas:[
-   {id:'m17q1',txt:'O que são filtros personalizados e como eles ajudam no cumprimento do SLA?'},
-   {id:'m17q2',txt:'Descreva o passo a passo para criar um filtro combinando dois critérios.'},
-   {id:'m17q3',txt:'Qual filtro você criou que mais ajuda na sua rotina? Explique por quê.'},
-   {id:'m17q4',txt:'Como os filtros se conectam com as etiquetas que você aprendeu no Chatwoot III?'}]}},
+   {id:'m19q1',txt:'O que são filtros personalizados e como eles ajudam no cumprimento do SLA?'},
+   {id:'m19q2',txt:'Descreva o passo a passo para criar um filtro combinando dois critérios.'},
+   {id:'m19q3',txt:'Qual filtro você criou que mais ajuda na sua rotina? Explique por quê.'},
+   {id:'m19q4',txt:'Como os filtros se conectam com as etiquetas que você aprendeu no Chatwoot III?'}]}},
 ];
 const MOD_PTS_TOPICO=5;
 const MOD_PTS_PRATICA=10;
@@ -1344,6 +1425,21 @@ function modProvasEnviadas(){return Object.values(getU(currentUser.id).modProvas
 function hasVideo(){return false;}
 
 /* ─── Render dos módulos ─── */
+
+function buildMateriais(m){
+  if(!m.materiais)return'';
+  const M=m.materiais;
+  let h=`<div class="mat-box"><h5>${M.titulo}</h5><div class="md">${M.desc}</div><div class="mat-links">`;
+  M.links.forEach(l=>{
+    h+= l.url
+      ? `<a class="mat-link" href="${l.url}" target="_blank" rel="noopener">🔗 ${l.nome}</a>`
+      : `<span class="mat-link off">⏳ ${l.nome} — em breve</span>`;
+  });
+  h+=`</div><div class="mat-obs"><div class="ot">O que observar e anotar</div><ul>`;
+  M.obs.forEach(o=>h+=`<li>${o}</li>`);
+  return h+`</ul></div></div>`;
+}
+
 function buildModulosHTML(){
   let html='';
   SEMANAS.forEach(S=>{
@@ -1370,10 +1466,11 @@ function buildModulosHTML(){
               <span class="mod-cat">${m.cat}</span>
               <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'🌐 Online':'🏢 Presencial'}</span>
               <span style="margin-left:5px">${m.data}</span></div>
-            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos · ${p.dP}/${p.tP} práticas · ${p.env?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
+            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos${p.tP?` · ${p.dP}/${p.tP} práticas`:''} · ${p.env?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
+          ${buildMateriais(m)}
           <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo do módulo</div>
             <div class="task-list">${m.topicos.map((t,i)=>`
               <div class="topic-row" id="trow-${m.id}_t${i}">
@@ -1383,11 +1480,11 @@ function buildModulosHTML(){
                   <span class="task-pts">+${MOD_PTS_TOPICO}</span>
                 </div></div>`).join('')}</div>
           </div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Tarefas práticas no sistema</div>
+          ${m.praticas.length?`<div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Tarefas práticas no sistema</div>
             <p style="font-size:.74rem;color:var(--muted);margin-bottom:9px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
             ${m.praticas.map((t,i)=>buildPratica(m,t,i)).join('')}
-          </div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">3</span> Avaliação do módulo</div>
+          </div>`:''}
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">${m.praticas.length?3:2}</span> Avaliação do módulo</div>
             ${buildModProva(m)}
           </div>
         </div></div>`;
@@ -1587,7 +1684,8 @@ function buildScheduleTable(day){
   let html=`<table class="sched-table"><thead><tr><th>Horário</th><th>Atividade</th><th>Tipo</th><th>Condutor</th></tr></thead><tbody>`;
   visible.forEach(b=>{
     const jt=b.joint?`<span class="joint-badge">👥 Conjunta</span>`:'';
-    html+=`<tr><td style="white-space:nowrap;font-weight:600;font-size:.75rem">${b.time}</td><td>${b.title}${jt}${b.note?`<div style="font-size:.68rem;color:var(--muted);margin-top:3px">💡 ${b.note}</div>`:''}</td><td><span class="type-pill ${TYPE_CLASSES[b.type]}">${TYPE_LABELS[b.type]}</span></td><td style="font-size:.75rem;color:var(--muted)">${b.conduct}</td></tr>`;
+    const meetHtml=(b.meet!==undefined)?(b.meet?`<a class="meet-btn" href="${b.meet}" target="_blank" rel="noopener">📹 Entrar no meet</a>`:`<span class="meet-btn off">📹 Link do meet em breve</span>`):'';
+    html+=`<tr><td style="white-space:nowrap;font-weight:600;font-size:.75rem">${b.time}</td><td>${b.title}${jt}${b.note?`<div style="font-size:.68rem;color:var(--muted);margin-top:3px">💡 ${b.note}</div>`:''}${meetHtml?`<div>${meetHtml}</div>`:''}</td><td><span class="type-pill ${TYPE_CLASSES[b.type]}">${TYPE_LABELS[b.type]}</span></td><td style="font-size:.75rem;color:var(--muted)">${b.conduct}</td></tr>`;
   });
   return html+`</tbody></table>`;
 }
