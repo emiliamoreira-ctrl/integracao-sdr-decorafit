@@ -643,9 +643,7 @@ const DAYS=[
     id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online',color:'#3b82f6',pts:75,
     blocks:[
       {time:'13h15–14h',   title:'Daily PV — observação',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham como ouvintes',meet:''},
-      {time:'14h–15h20',   title:'Módulos Pipedrive I, Agenda I, Slack I e Chatwoot I',type:'async',conduct:'Auto',joint:true},
-      {time:'15h20–15h40', title:'Pausa',type:'async',conduct:'—',joint:true},
-      {time:'15h40–17h',   title:'Continuação dos módulos do dia',type:'async',conduct:'Auto',joint:true},
+      {auto:'m1',from:'14h',to:'17h',joint:true},
       {time:'17h–17h40',   title:'Momento Dúvidas',type:'live',conduct:'Emília',joint:true,meet:''},
       {time:'17h40–18h',   title:'Reflexão do dia',type:'practice',conduct:'Auto',joint:true},
       {time:'18h–19h30',   title:'Prática nos sistemas + revisão das tarefas',type:'practice',conduct:'Grazi',turno:'allice'},
@@ -656,13 +654,13 @@ const DAYS=[
     id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:60,
     blocks:[
       {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
-      {time:'10h–11h30',   title:'Módulos do dia: Pipedrive II, Slack II e Chatwoot II',type:'async',conduct:'Auto',turno:'manha'},
+      {auto:'m2',from:'10h',to:'11h30',turno:'manha'},
       {time:'11h30–12h',   title:'Assistir uma R1 (gravação no módulo Agenda I)',type:'read',conduct:'Auto',turno:'manha'},
       {time:'14h–15h30',   title:'Resultados PV + Rotina part2 — equipe manhã',type:'live',conduct:'Dani',turno:'manha',meet:''},
       {time:'15h30–16h30', title:'Prática: enviar 1 R01 supervisionado',type:'practice',conduct:'Gaby',turno:'manha'},
       {time:'16h30–17h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Gaby',turno:'manha'},
       {time:'13h–14h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
-      {time:'14h–15h30',   title:'Módulos do dia + assistir uma R1',type:'async',conduct:'Auto',turno:'allice'},
+      {auto:'m2',from:'14h',to:'15h30',turno:'allice'},
       {time:'17h30–19h',   title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'19h–20h30',   title:'Prática: encaminhar 2 R01',type:'practice',conduct:'Grazi',turno:'allice'},
       {time:'20h30–21h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
@@ -687,12 +685,13 @@ const DAYS=[
     id:'d4',date:'09/10 (Sex)',label:'Sexta-feira',sub:'09/10 · Online',color:'#22c55e',pts:60,
     blocks:[
       {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
-      {time:'10h–11h30',   title:'Módulos do dia: VoIP e Chatwoot III',type:'async',conduct:'Auto',turno:'manha'},
+      {auto:'m3',from:'10h',to:'11h30',turno:'manha'},
       {time:'13h–14h30',   title:'Rotina part2 — consolidação da semana',type:'live',conduct:'Dani',turno:'manha',meet:''},
       {time:'14h30–16h',   title:'Ouvir ligações (áudios no módulo VoIP)',type:'listen',conduct:'Auto',turno:'manha'},
       {time:'16h–16h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Dani',turno:'manha'},
       {time:'13h–14h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
-      {time:'14h30–16h30', title:'Ouvir ligações (áudios no módulo VoIP)',type:'listen',conduct:'Auto',turno:'allice'},
+      {auto:'m3',from:'14h',to:'15h30',turno:'allice'},
+      {time:'15h30–16h30', title:'Ouvir ligações (áudios no módulo VoIP)',type:'listen',conduct:'Auto',turno:'allice'},
       {time:'18h–19h30',   title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
       {time:'19h30–20h30', title:'Leitura de conversas do time',type:'read',conduct:'Grazi',turno:'allice'},
       {time:'20h30–21h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
@@ -700,73 +699,31 @@ const DAYS=[
     ],
     tasks:[]},
   {
-    id:'d5',date:'13/10 (Ter)',label:'Terça-feira',sub:'13/10 · PRESENCIAL',color:'#f97316',pts:80,
+    id:'d5',date:'13/10 (Ter)',label:'Terça-feira',sub:'13/10 · PRESENCIAL',color:'#f97316',pts:60,
     blocks:[
-      {time:'09h–09h30 (M)', title:'Check-in presencial: posto de trabalho e rotina física',type:'live',conduct:'Emília + Madrinhas',turno:'manha'},
-      {time:'09h30–11h (M)', title:'Prática guiada no sistema: simular atendimento do zero',type:'practice',conduct:'Madrinha',turno:'manha'},
-      {time:'11h–12h (M)',   title:'Assistir meet ao vivo do time de vendas (ouvinte)',type:'meet',conduct:'Time de Vendas',turno:'manha'},
-      {time:'13h–14h (T)',   title:'[ALLICE] Check-in presencial + prática no sistema',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'14h–15h (T)',   title:'[ALLICE] Assistir meet time de vendas',type:'meet',conduct:'Time de Vendas',turno:'allice'},
-      {time:'15h–16h',       title:'Role-play: todos atendem mentora',type:'practice',conduct:'Madrinhas',joint:true,note:'Mentoras simulam clientes difíceis — presença obrigatória'},
-      {time:'Fim do dia',    title:'Avaliação do dia + Prova Diária 5',type:'practice',conduct:'Auto'},
+      {time:'09h–09h30', title:'Check-in presencial com a madrinha',type:'live',conduct:'Madrinha',joint:true},
+      {auto:'m4',from:'09h30',to:'17h30',joint:true},
     ],
-    tasks:[
-      {id:'d5t1',label:'Fiz simulação completa no sistema presencialmente',pts:20},
-      {id:'d5t2',label:'Assisti ao meet do time de vendas',pts:15},
-      {id:'d5t3',label:'Participei do role-play com mentora',pts:20},
-      {id:'d5t4',label:'Enviei a Prova do Dia 5',pts:25},
-    ]
-  },
+    tasks:[]},
   {
-    id:'d6',date:'14/10 (Qua)',label:'Quarta-feira',sub:'14/10 · PRESENCIAL',color:'#ef4444',pts:85,
+    id:'d6',date:'14/10 (Qua)',label:'Quarta-feira',sub:'14/10 · PRESENCIAL',color:'#ef4444',pts:60,
     blocks:[
-      {time:'09h–10h30 (M)', title:'Card de Alocação do Arquiteto: passo a passo completo',type:'live',conduct:'Emília',turno:'manha'},
-      {time:'10h30–12h (M)', title:'Prática: preencher card de alocação com caso real anonimizado',type:'practice',conduct:'Madrinha',turno:'manha'},
-      {time:'13h–14h30 (T)', title:'[ALLICE] Card de Alocação: passo a passo',type:'live',conduct:'Emília',turno:'allice'},
-      {time:'14h30–16h (T)', title:'[ALLICE] Prática: card de alocação com caso real',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'16h–17h',       title:'KPIs do time: como ler, acompanhar e bater metas',type:'live',conduct:'Emília',joint:true,note:'Todos juntos'},
-      {time:'Fim do dia',    title:'Avaliação do dia + Prova Diária 6',type:'practice',conduct:'Auto'},
+      {auto:'m5',from:'09h',to:'17h30',joint:true},
     ],
-    tasks:[
-      {id:'d6t1',label:'Preenchi o card de alocação completo',pts:20},
-      {id:'d6t2',label:'Consigo explicar os KPIs do time',pts:15},
-      {id:'d6t3',label:'Enviei a Prova do Dia 6',pts:25},
-      {id:'d6t4',label:'Preenchi a avaliação do dia',pts:5},
-    ]
-  },
+    tasks:[]},
   {
-    id:'d7',date:'15/10 (Qui)',label:'Quinta-feira',sub:'15/10 · PRESENCIAL',color:'#8b5cf6',pts:100,
+    id:'d7',date:'15/10 (Qui)',label:'Quinta-feira',sub:'15/10 · PRESENCIAL',color:'#8b5cf6',pts:60,
     blocks:[
-      {time:'09h–10h (M)',   title:'Primeiro atendimento real supervisionado — Madrinha ao lado',type:'practice',conduct:'Madrinha',turno:'manha',note:'Leandro e Larissa: primeiro atendimento real com cliente'},
-      {time:'10h–11h30 (M)', title:'Debriefing: o que foi bem, o que melhorar',type:'live',conduct:'Emília + Madrinha',turno:'manha'},
-      {time:'13h–14h (T)',   title:'[ALLICE] Primeiro atendimento real supervisionado',type:'practice',conduct:'Grazi',turno:'allice',note:'Allice: primeiro atendimento real com cliente'},
-      {time:'14h–15h (T)',   title:'[ALLICE] Debriefing com Grazi + Emília',type:'live',conduct:'Emília + Grazi',turno:'allice'},
-      {time:'15h30–16h30',   title:'Leitura: FAQ e situações especiais do manual SDR',type:'read',conduct:'Auto',joint:true},
-      {time:'Fim do dia',    title:'Avaliação do dia + Prova Diária 7',type:'practice',conduct:'Auto'},
+      {auto:'m6',from:'09h',to:'17h30',joint:true},
     ],
-    tasks:[
-      {id:'d7t1',label:'Realizei meu primeiro atendimento real',pts:30},
-      {id:'d7t2',label:'Anotei feedbacks do debriefing',pts:15},
-      {id:'d7t3',label:'Li o FAQ e tirei dúvidas pendentes',pts:10},
-      {id:'d7t4',label:'Enviei a Prova do Dia 7',pts:30},
-    ]
-  },
+    tasks:[]},
   {
-    id:'d8',date:'16/10 (Sex)',label:'Sexta-feira',sub:'16/10 · PRESENCIAL · Encerramento 🏅',color:'#f59e0b',pts:80,
+    id:'d8',date:'16/10 (Sex)',label:'Sexta-feira',sub:'16/10 · PRESENCIAL · Encerramento',color:'#f59e0b',pts:60,
     blocks:[
-      {time:'09h–10h (M)',   title:'Segundo atendimento supervisionado — mais autonomia',type:'practice',conduct:'Madrinha',turno:'manha'},
-      {time:'10h–11h (M)',   title:'Avaliação final individual',type:'practice',conduct:'Emília',turno:'manha'},
-      {time:'13h–14h (T)',   title:'[ALLICE] Segundo atendimento + avaliação final',type:'practice',conduct:'Grazi + Emília',turno:'allice'},
-      {time:'14h30–16h',     title:'Prova Final (vídeo ou descrição)',type:'practice',conduct:'Auto',joint:true},
-      {time:'16h–17h',       title:'Cerimônia de encerramento — Badge SDR Ativado 🏅',type:'live',conduct:'Emília',joint:true,note:'Todos juntos — presença obrigatória!'},
+      {auto:'m7',from:'09h',to:'16h',joint:true},
+      {time:'16h–17h', title:'Cerimônia de encerramento',type:'live',conduct:'Emília',joint:true,note:'Todos juntos — presença obrigatória'},
     ],
-    tasks:[
-      {id:'d8t1',label:'Fiz o segundo atendimento com mais autonomia',pts:20},
-      {id:'d8t2',label:'Enviei a Prova Final',pts:25},
-      {id:'d8t3',label:'Participei da cerimônia de encerramento 🏅',pts:20},
-      {id:'d8t4',label:'Preenchi a avaliação final da integração',pts:5},
-    ]
-  },
+    tasks:[]}
 ];
 
 
@@ -1349,8 +1306,8 @@ function buildAdmDuvidas(){
 
 /* ══════ NOVO SDR ══════ */
 function buildNovoPanels(tabs,main){
-  addTab(tabs,main,'modulos','Módulos',()=>buildModHero()+buildModulosHTML());
   addTab(tabs,main,'cronograma','Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
+  addTab(tabs,main,'modulos','Módulos',()=>buildModHero()+buildModulosHTML());
   addTab(tabs,main,'proc','Aval. Processos',buildProcPanel);
   addTab(tabs,main,'progresso','Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
@@ -1653,7 +1610,7 @@ function buildModulosHTML(){
           <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
             <strong>Módulo ${m.num}</strong>${chip}
-            <div class="day-sub" style="margin-top:3px">${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} avaliações</div>
+            <div class="day-sub" style="margin-top:3px">Dia ${m.num} · ${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} avaliações</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
@@ -1897,9 +1854,37 @@ function buildDaysHTML(){
   });
   return html;
 }
+function gerarBlocosAulas(m,inicioStr,fimStr){
+  const [ih,im]=inicioStr.split('h').map(Number);
+  const [fh,fm]=fimStr.split('h').map(Number);
+  const inicio=ih*60+(im||0), fim=fh*60+(fm||0);
+  const totalMin=fim-inicio;
+  const aulas=[];
+  m.blocos.forEach(b=>b.aulas.forEach((t,j)=>aulas.push({fer:b.fer,nome:t,num:b.ini+j+1})));
+  const n=aulas.length;
+  const fmt=mn=>{const h=Math.floor(mn/60),mi=mn%60;return h+'h'+(mi?String(mi).padStart(2,'0'):'');};
+  const passo=totalMin/n;
+  const blocks=[];
+  aulas.forEach((a,i)=>{
+    const ini=inicio+Math.round(i*passo), fimA=inicio+Math.round((i+1)*passo);
+    blocks.push({time:fmt(ini)+'–'+fmt(fimA),title:'Aula '+a.num+' · '+a.fer+' — '+a.nome,type:'async',conduct:'Auto',joint:true});
+  });
+  return blocks;
+}
 function buildScheduleTable(day){
   const uid=currentUser.id;
-  const visible=day.blocks.filter(b=>{
+  let expanded=[];
+  day.blocks.forEach(b=>{
+    if(b.auto){
+      const m=MODULOS.find(x=>x.id===b.auto);
+      if(m){ gerarBlocosAulas(m,b.from,b.to).forEach(g=>{
+        const item={...g};
+        if(b.turno){ item.turno=b.turno; delete item.joint; }
+        expanded.push(item);
+      }); }
+    } else expanded.push(b);
+  });
+  const visible=expanded.filter(b=>{
     if(b.joint)return true;if(!b.turno)return true;
     if(b.turno==='manha'&&uid==='allice')return false;
     if(b.turno==='allice'&&uid!=='allice')return false;
