@@ -526,6 +526,44 @@
   .teste-section .section-title{color:var(--muted);}
   .teste-section .section-title::before{background:#94a3b8;}
   .teste-badge{display:inline-block;background:#f1f5f9;color:#64748b;font-size:.65rem;font-weight:800;letter-spacing:.4px;padding:2px 9px;border-radius:20px;margin-left:8px;text-transform:uppercase;}
+
+  /* TEMA ESCURO */
+  [data-theme="dark"]{--bg:#0f1420;--card:#161d2e;--line:#2a3348;--txt:#e2e8f0;--muted:#94a3b8;--navy:#1a2b4a;}
+  [data-theme="dark"] body{background:var(--bg);color:var(--txt);}
+  [data-theme="dark"] .day-card,[data-theme="dark"] .bloco,[data-theme="dark"] .cx,[data-theme="dark"] .aula{background:var(--card);border-color:var(--line);}
+  [data-theme="dark"] .aula.done{background:#0d2016;}
+  [data-theme="dark"] .bloco-h:hover,[data-theme="dark"] .cx-h:hover{background:#1c2438;}
+  [data-theme="dark"] textarea,[data-theme="dark"] input{background:#1c2438;color:var(--txt);border-color:var(--line);}
+  [data-theme="dark"] .mat-box,[data-theme="dark"] .eval-section,[data-theme="dark"] .mod-cat{background:#1c2438;}
+  [data-theme="dark"] .q-enunciado,[data-theme="dark"] .mpv-text{background:#1c2438;}
+  [data-theme="dark"] .week-divider{color:#cbd5e1;}
+  [data-theme="dark"] .login-box{background:#161d2e;}
+  .theme-btn{background:rgba(255,255,255,.12);border:none;color:#fff;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:.9rem;margin-left:6px;display:flex;align-items:center;justify-content:center;}
+  .theme-btn:hover{background:rgba(255,255,255,.22);}
+  /* VIEW SWITCH */
+  .view-switch{display:flex;gap:4px;background:rgba(255,255,255,.1);border-radius:8px;padding:3px;margin-left:10px;}
+  .view-btn{background:none;border:none;color:rgba(255,255,255,.7);font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;}
+  .view-btn.active{background:var(--orange);color:#fff;}
+  /* LOCK */
+  .mod-locked{opacity:.65;}
+  .mod-locked .day-header{cursor:not-allowed;}
+  .lock-msg{background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:9px 13px;font-size:.73rem;color:var(--muted);font-weight:600;margin-left:8px;}
+  /* QUIZ */
+  .quiz-warn{background:#fff7ed;border:1.5px solid var(--orange);border-radius:12px;padding:20px;text-align:center;}
+  .quiz-warn h4{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:8px;}
+  .quiz-warn p{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+  .quiz-box{background:#fff;border:2px solid var(--navy);border-radius:12px;padding:20px;}
+  .quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .quiz-prog{font-size:.75rem;font-weight:700;color:var(--muted);}
+  .quiz-timer{font-size:1.1rem;font-weight:800;color:var(--navy);background:var(--bg);padding:5px 14px;border-radius:20px;}
+  .quiz-timer.warn{color:#b91c1c;background:#fee2e2;}
+  .quiz-q{font-size:.88rem;color:var(--txt);line-height:1.5;margin-bottom:16px;font-weight:600;}
+  .quiz-opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 15px;margin-bottom:9px;font-family:'Montserrat',sans-serif;font-size:.8rem;cursor:pointer;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--orange);background:#fff7ed;}
+  .quiz-opt.certa{background:#dcfce7;border-color:var(--green);}
+  .quiz-opt.errada{background:#fee2e2;border-color:var(--red);}
+  .quiz-result{text-align:center;padding:10px;}
+  .quiz-result .nv{font-size:2.2rem;font-weight:800;color:var(--green);}
 </style>
 </head>
 <body>
@@ -543,7 +581,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v4.9</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v5.0</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -562,10 +600,12 @@
   <header>
     <div class="hlogo"><span class="lmark">D</span><span class="ltxt"><b>Decorafit</b><small>Treinamento Pré-Vendas</small></span></div>
     <div class="huser">
+      <div class="view-switch" id="view-switch" style="display:none"></div>
       <div class="hprofile">
         <div class="pav" id="hdr-avatar"></div>
         <div class="pinfo"><strong id="hdr-name"></strong><span id="hdr-role"></span></div>
       </div>
+      <button class="theme-btn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
       <button class="logout-btn" onclick="logout()">Sair</button>
     </div>
   </header>
@@ -758,69 +798,97 @@ const DAYS=[
 
 /* ═══════ MÓDULOS — um por dia, blocos por ferramenta ═══════ */
 const MODULOS=[
-{num:1,data:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
+{num:1,data:'06/10',libera:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
  {fer:'Introdução à Plataforma',
   aulas:['Introdução à Plataforma','Site Decorafit'],
   praticas:['Navegue pela plataforma e identifique as principais áreas','Acesse o site da Decorafit e localize as informações institucionais'],
-  prova:{pts:15,perguntas:[
-   {id:'p1a1',txt:'Quais são as principais áreas da plataforma e para que serve cada uma?'},
-   {id:'p1a2',txt:'O que você encontra no site da Decorafit que ajuda no seu trabalho como SDR?'},
-   {id:'p1a3',txt:'Por que conhecer bem a plataforma e o site institucional importa para o atendimento ao cliente?'}]}},
+  prova:{pts:27,perguntas:[
+   {id:'p1a1',txt:'Qual é a principal finalidade da plataforma de treinamento para o novo SDR?',
+    opcoes:['Servir de rede social interna da equipe','Organizar o aprendizado em módulos, aulas e avaliações','Substituir o Pipedrive no dia a dia','Ser usada apenas pela gestão para relatórios'],correta:1},
+   {id:'p1a2',txt:'O que o site institucional da Decorafit normalmente ajuda o SDR a fazer?',
+    opcoes:['Processar pagamentos de clientes','Mostrar ao cliente o portfólio e a proposta de valor da empresa','Substituir o CRM da empresa','Agendar férias da equipe'],correta:1},
+   {id:'p1a3',txt:'Por que conhecer bem a plataforma e o site institucional é importante no atendimento?',
+    opcoes:['Porque é exigido apenas no primeiro dia de trabalho','Porque ajuda a passar segurança e informação correta ao cliente','Porque evita o uso do Chatwoot','Porque substitui a necessidade de treinamento de produto'],correta:1}]}},
  {fer:'Pipedrive',
   aulas:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card'],
   praticas:['Navegue pelo funil e identifique quantos cards há em cada etapa','Abra um card de teste do zero','Confira os campos preenchidos no card que você criou'],
-  prova:{pts:20,perguntas:[
-   {id:'p1d1',txt:'Para que serve o Pipedrive na rotina do SDR?'},
-   {id:'p1d2',txt:'Descreva as etapas do funil e o que caracteriza cada uma.'},
-   {id:'p1d3',txt:'Descreva o passo a passo para abrir um card.'},
-   {id:'p1d4',txt:'O que não pode faltar em um card recém-criado?'}]}},
+  prova:{pts:36,perguntas:[
+   {id:'p1d1',txt:'Qual é a função principal do Pipedrive na rotina do SDR?',
+    opcoes:['Enviar e-mails em massa','Organizar e acompanhar os leads pelas etapas do funil','Gravar as ligações do time','Substituir o WhatsApp Business'],correta:1},
+   {id:'p1d2',txt:'O que caracteriza as etapas do funil no Pipedrive?',
+    opcoes:['São etapas fixas que nunca mudam de nome','Representam o estágio de avanço do lead até o fechamento','Servem apenas para organizar por data de criação','Indicam o departamento responsável pelo card'],correta:1},
+   {id:'p1d3',txt:'Ao abrir um card novo no Pipedrive, qual é o primeiro cuidado a ter?',
+    opcoes:['Pesquisar duplicidade antes de criar o card','Marcar o card como ganho imediatamente','Excluir cards antigos da mesma pessoa','Ignorar o preenchimento até o final do dia'],correta:0},
+   {id:'p1d4',txt:'O que não pode faltar em um card recém-criado?',
+    opcoes:['Uma foto do cliente','Os dados de contato e a origem do lead','O valor final do contrato','A assinatura do contrato'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
   praticas:['Navegue pelas três caixas e conte as conversas de cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e veja de qual canal veio','Atribua uma conversa de teste para você'],
-  prova:{pts:20,perguntas:[
-   {id:'p1e1',txt:'O que é o Chatwoot e qual seu papel no trabalho do SDR?'},
-   {id:'p1e2',txt:'Explique a diferença entre as caixas Minhas, Não atribuídas e Geral.'},
-   {id:'p1e3',txt:'Como pesquisar um cliente? Quais dados você pode usar na busca?'},
-   {id:'p1e4',txt:'Ao abrir o Chatwoot pela manhã, qual caixa você olha primeiro e por quê?'}]}},
+  prova:{pts:37,perguntas:[
+   {id:'p1e1',txt:'Qual é o papel do Chatwoot no trabalho do SDR?',
+    opcoes:['É usado só pelo time financeiro','Centraliza o atendimento das conversas com os clientes','Serve para agendar reuniões no Google Agenda','É um sistema de folha de pagamento'],correta:1},
+   {id:'p1e2',txt:'O que diferencia a caixa "Não atribuídas" das demais?',
+    opcoes:['São conversas finalizadas e arquivadas','São conversas que ainda não têm um responsável definido','São conversas só do setor financeiro','São conversas que já foram respondidas'],correta:1},
+   {id:'p1e3',txt:'Quais dados costumam ser usados para pesquisar um cliente no Chatwoot?',
+    opcoes:['Apenas o CPF do cliente','Nome, telefone ou e-mail do cliente','Somente o número do pedido','O nome do arquiteto responsável'],correta:1},
+   {id:'p1e4',txt:'Por que é importante checar a caixa de conversas logo no início do turno?',
+    opcoes:['Para não perder o SLA de resposta ao cliente','Para fechar o sistema mais cedo','Porque é uma exigência só às sextas-feiras','Porque a caixa é apagada automaticamente à noite'],correta:0}]}},
 ]},
 
-{num:2,data:'07/10',dia:'Quarta-feira',modo:'online',sem:1, blocos:[
+{num:2,data:'07/10',libera:'07/10',dia:'Quarta-feira',modo:'online',sem:1, blocos:[
  {fer:'Pipedrive',
   aulas:['Pesquisar duplicidade','Fazendo anotações no card','Mudando de etapa','Atividades do dia','Atividades atrasadas','Organizando a fila de trabalho'],
   praticas:['Pesquise duplicidade antes de criar um card de teste','Faça uma anotação registrando o contato','Movimente o card entre duas etapas do funil','Abra as atividades do dia e liste as pendentes','Conclua uma atividade e crie a próxima na sequência'],
-  prova:{pts:25,perguntas:[
-   {id:'p2a1',txt:'Como você pesquisa duplicidade? O que faz se encontrar uma?'},
-   {id:'p2a2',txt:'O que não pode faltar numa anotação de card?'},
-   {id:'p2a3',txt:'O que precisa estar pronto antes de mudar um card de etapa?'},
-   {id:'p2a4',txt:'Qual a primeira coisa que você faz ao abrir o Pipedrive pela manhã?'},
-   {id:'p2a5',txt:'O que fazer com atividades atrasadas? Descreva sua ordem de prioridade.'}]}},
+  prova:{pts:29,perguntas:[
+   {id:'p2a1',txt:'Ao encontrar um lead duplicado, qual é a conduta correta?',
+    opcoes:['Criar um novo card mesmo assim','Unificar as informações no card já existente','Apagar os dois cards','Ignorar e seguir com os dois cards separados'],correta:1},
+   {id:'p2a2',txt:'O que não pode faltar em uma anotação registrada no card?',
+    opcoes:['A cor do imóvel do cliente','Data, o que foi tratado e o próximo passo combinado','O horário de almoço do SDR','O nome do concorrente'],correta:1},
+   {id:'p2a3',txt:'Antes de mudar um card de etapa, o que deve estar garantido?',
+    opcoes:['Que o card tenha pelo menos uma foto','Que os critérios daquela etapa já foram cumpridos','Que o valor final já esteja fechado','Que o card tenha mais de 30 dias'],correta:1},
+   {id:'p2a4',txt:'Qual costuma ser a primeira ação ao abrir o Pipedrive pela manhã?',
+    opcoes:['Consultar as atividades do dia','Excluir cards antigos','Alterar a senha de acesso','Desligar as notificações'],correta:0},
+   {id:'p2a5',txt:'Como priorizar quando há atividades atrasadas?',
+    opcoes:['Ignorar e seguir só com as do dia','Resolver primeiro as mais antigas ou mais urgentes para o cliente','Deixar para o fim do mês','Apagar as atividades atrasadas'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa','Mensagens prontas','Envio de template após a janela de 24 horas'],
   praticas:['Identifique o proprietário de três conversas','Localize uma conversa do bot e outra do WhatsApp','Altere o status de uma conversa de teste','Use uma mensagem pronta numa conversa de teste','Localize os templates e simule o envio após 24h'],
-  prova:{pts:25,perguntas:[
-   {id:'p2b1',txt:'O que significa o proprietário de uma conversa? O que acontece quando ela não tem um?'},
-   {id:'p2b2',txt:'Qual a diferença entre cliente bot e cliente WhatsApp?'},
-   {id:'p2b3',txt:'Quais são os status possíveis e quando usar cada um?'},
-   {id:'p2b4',txt:'O que é a janela de 24 horas? O que muda no envio depois que ela fecha?'},
-   {id:'p2b5',txt:'Quando usar uma mensagem pronta e quando escrever do zero?'}]}},
+  prova:{pts:29,perguntas:[
+   {id:'p2b1',txt:'O que acontece quando uma conversa não tem um proprietário definido?',
+    opcoes:['Ela é fechada automaticamente','Ela fica sem responsável claro, podendo atrasar a resposta','O sistema atribui a todos os SDRs ao mesmo tempo','Ela é apagada em 24h'],correta:1},
+   {id:'p2b2',txt:'Qual a principal diferença entre cliente bot e cliente WhatsApp?',
+    opcoes:['Não existe diferença real','O bot é um atendimento automático inicial; o WhatsApp é o canal de conversa com a pessoa','Cliente bot é sempre um erro do sistema','Cliente WhatsApp não aparece no Chatwoot'],correta:1},
+   {id:'p2b3',txt:'Para que servem os status de uma conversa no Chatwoot?',
+    opcoes:['Apenas para fins estéticos','Indicam se a conversa está aberta, pendente ou resolvida','Mostram o valor do contrato','Indicam o plano de internet do cliente'],correta:1},
+   {id:'p2b4',txt:'O que muda no WhatsApp depois que a janela de 24 horas se fecha?',
+    opcoes:['Nada muda','Só é possível reiniciar a conversa usando um template aprovado','A conversa é apagada','O cliente é bloqueado automaticamente'],correta:1},
+   {id:'p2b5',txt:'Quando faz mais sentido usar uma mensagem pronta?',
+    opcoes:['Em qualquer situação, mesmo complexa','Em respostas padrão e recorrentes, adaptando ao contexto quando necessário','Nunca, deve-se sempre escrever do zero','Somente quando o cliente pede'],correta:1}]}},
  {fer:'Google Agenda',
   aulas:['Criar invite','Disponibilidade de agenda','Adicionar tarefas e pausas','Boas práticas meet'],
   praticas:['Crie um invite de teste para um colega','Consulte sua disponibilidade para os próximos 3 dias','Adicione uma pausa e uma tarefa na sua agenda','Revise se sua agenda está com as boas práticas configuradas'],
-  prova:{pts:20,perguntas:[
-   {id:'p1b1',txt:'Descreva o passo a passo para criar um invite.'},
-   {id:'p1b2',txt:'Como você verifica sua disponibilidade antes de marcar algo?'},
-   {id:'p1b3',txt:'Por que bloquear tarefas e pausas na agenda importa para o time?'},
-   {id:'p1b4',txt:'Quais são as boas práticas em um meet?'}]}},
+  prova:{pts:24,perguntas:[
+   {id:'p1b1',txt:'O que é essencial preencher corretamente ao criar um invite de reunião?',
+    opcoes:['Apenas o título da reunião','Data, horário, participantes e link da chamada','Somente o nome do cliente','O valor do orçamento'],correta:1},
+   {id:'p1b2',txt:'Como se verifica a disponibilidade antes de agendar algo?',
+    opcoes:['Perguntando para outro SDR aleatório','Consultando a própria agenda e a do convidado','Marcando direto sem checar nada','Esperando o cliente confirmar primeiro'],correta:1},
+   {id:'p1b3',txt:'Por que bloquear tarefas e pausas na agenda ajuda o time?',
+    opcoes:['Porque é uma exigência sem motivo prático','Porque evita que marquem reuniões em cima de compromissos já definidos','Porque aumenta o número de reuniões do dia','Porque esconde a agenda dos colegas'],correta:1},
+   {id:'p1b4',txt:'Qual destas é uma boa prática em uma reunião (meet)?',
+    opcoes:['Câmera desligada o tempo todo','Câmera aberta e atenção total durante a chamada','Responder e-mails durante a reunião','Entrar atrasado sem avisar'],correta:1}]}},
  {fer:'Slack',
   aulas:['Boas práticas no Slack','Canais do Slack','Círculo'],
   praticas:['Responda com o check verdinho a um aviso do canal','Confira se está em todos os canais e peça inclusão nos que faltam','Envie uma mensagem de apresentação no canal do time'],
-  prova:{pts:15,perguntas:[
-   {id:'p1c1',txt:'Quais são as boas práticas no Slack? Por que responder aos avisos importa?'},
-   {id:'p1c2',txt:'Liste os canais em que você foi incluído e para que serve cada um.'},
-   {id:'p1c3',txt:'O que é o Círculo e qual seu papel nele?'}]}},
+  prova:{pts:18,perguntas:[
+   {id:'p1c1',txt:'Por que é importante responder com o check verdinho aos avisos no Slack?',
+    opcoes:['É só uma formalidade sem função real','Confirma para o time que a mensagem foi vista e está sendo tratada','Serve para desativar notificações','É exigido apenas às sextas-feiras'],correta:1},
+   {id:'p1c2',txt:'Qual é o propósito de estar incluído nos canais certos do time no Slack?',
+    opcoes:['Acumular mensagens não lidas','Acompanhar informações e rotinas relevantes para o seu trabalho','Aparecer online para o gestor','Substituir o e-mail corporativo'],correta:1},
+   {id:'p1c3',txt:'O que caracteriza o Círculo no contexto do time?',
+    opcoes:['Um grupo de WhatsApp externo','Um espaço/rotina de alinhamento e acompanhamento do time','Um aplicativo de agenda','Um relatório financeiro mensal'],correta:1}]}},
 ]},
 
-{num:3,data:'08/10',dia:'Quinta-feira',modo:'online',sem:1,
+{num:3,data:'08/10',libera:'08/10',dia:'Quinta-feira',modo:'online',sem:1,
  materiais:{titulo:'Assistir R1',desc:'Assista às gravações e observe a condução do consultor.',
   links:[{nome:'R1 Franciele',url:''},{nome:'R1 (2)',url:''},{nome:'R1 (3)',url:''}],
   obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
@@ -831,64 +899,84 @@ const MODULOS=[
    links:[{nome:'Ligação 1',url:''},{nome:'Ligação 2',url:''},{nome:'Ligação 3',url:''}],
    obs:['Principais perguntas feitas pelos clientes','Se houve um OK claro sobre o valor ou ficou subentendido','Qual foi a resposta do cliente sobre valor e prazo']},
   praticas:['Faça uma ligação de teste para um colega','Confirme o registro automático no card do Pipedrive','Abra o relatório e identifique o total do dia','Localize a gravação de uma ligação pela data'],
-  prova:{pts:20,perguntas:[
-   {id:'p3a1',txt:'Descreva o passo a passo de uma ligação, do discar até registrar no Pipedrive.'},
-   {id:'p3a2',txt:'O que a integração registra automaticamente?'},
-   {id:'p3a3',txt:'Como localizar a gravação de uma ligação específica?'},
-   {id:'p3a4',txt:'Nos áudios que você ouviu, o valor ficou claro para o cliente? Justifique.'}]}},
+  prova:{pts:44,perguntas:[
+   {id:'p3a1',txt:'O que deve acontecer logo após o fim de uma ligação com o cliente?',
+    opcoes:['Nada, o sistema cuida de tudo sozinho','Registrar o resultado da ligação no card do Pipedrive','Apagar o contato do cliente','Agendar férias'],correta:1},
+   {id:'p3a2',txt:'O que a integração do VoIP com o Pipedrive costuma registrar automaticamente?',
+    opcoes:['O cardápio do almoço','Duração e vínculo da ligação ao card do cliente','O salário do SDR','O clima da cidade do cliente'],correta:1},
+   {id:'p3a3',txt:'Como normalmente se localiza a gravação de uma ligação específica?',
+    opcoes:['Pelo relatório de ligações, buscando por data ou número','Perguntando diretamente ao cliente','Não é possível localizar gravações','Apenas o gestor pode acessar, sem filtro'],correta:0},
+   {id:'p3a4',txt:'Por que é importante avaliar se o valor passado ficou claro para o cliente nas ligações?',
+    opcoes:['Não é relevante para o processo','Evita mal-entendidos que atrapalham o fechamento','Serve só para estatística interna','É exigido apenas em ligações longas'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['Etiquetas: para que servem','Como aplicar etiquetas corretamente','Preenchimento lateral','Salvar dados','Salvar mensagem no Pipedrive'],
   praticas:['Aplique três etiquetas diferentes em conversas de teste','Preencha todos os campos da barra lateral','Salve os dados e confirme o registro','Salve uma mensagem direto no card do Pipedrive','Filtre a caixa por uma etiqueta'],
-  prova:{pts:25,perguntas:[
-   {id:'p3b1',txt:'Para que servem as etiquetas? O que acontece se você não etiquetar?'},
-   {id:'p3b2',txt:'Liste as etiquetas que você usou e quando aplicar cada uma.'},
-   {id:'p3b3',txt:'Quais campos existem no preenchimento lateral e por que cada um importa?'},
-   {id:'p3b4',txt:'Descreva o passo a passo para salvar uma mensagem no Pipedrive.'},
-   {id:'p3b5',txt:'Por que o registro no Pipedrive não pode depender só da conversa no Chatwoot?'}]}},
+  prova:{pts:56,perguntas:[
+   {id:'p3b1',txt:'O que acontece se uma conversa não for etiquetada corretamente?',
+    opcoes:['Nada muda no processo','Fica mais difícil organizar e localizar aquela conversa depois','A conversa é apagada','O cliente recebe uma mensagem automática de erro'],correta:1},
+   {id:'p3b2',txt:'Para que servem as etiquetas nas conversas do Chatwoot?',
+    opcoes:['Decoração visual apenas','Classificar e organizar as conversas por contexto/status','Bloquear o cliente','Mudar a cor do sistema'],correta:1},
+   {id:'p3b3',txt:'Qual é a função do preenchimento lateral em uma conversa?',
+    opcoes:['Mostrar propagandas','Registrar dados e contexto importantes sobre o lead/cliente','Trocar o idioma da tela','Ativar notificações sonoras'],correta:1},
+   {id:'p3b4',txt:'Ao identificar uma informação importante na conversa, o que se deve fazer?',
+    opcoes:['Ignorar e seguir conversando','Salvar essa informação/mensagem no card correspondente do Pipedrive','Encerrar a conversa imediatamente','Encaminhar para o RH'],correta:1},
+   {id:'p3b5',txt:'Por que o registro no Pipedrive não pode depender só do histórico do Chatwoot?',
+    opcoes:['Porque o Chatwoot é mais confiável que o Pipedrive','Porque o Pipedrive centraliza o funil e o acompanhamento comercial do lead','Porque o Chatwoot apaga mensagens automaticamente','Não há diferença real entre os dois'],correta:1}]}},
 ]},
 
-{num:4,data:'13/10',dia:'Terça-feira',modo:'presencial',sem:2,blocos:[
+{num:4,data:'09/10',libera:'09/10',dia:'Quinta-feira',modo:'online',sem:1,blocos:[
  {fer:'Rotinas',
   aulas:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
   praticas:[],
-  prova:{pts:15,perguntas:[
-   {id:'p4a1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
-   {id:'p4a2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva o que faz, para quem avisa e em que ordem.'},
-   {id:'p4a3',txt:'Por que os leads não podem ficar sem responsável?'}]}},
+  prova:{pts:27,perguntas:[
+   {id:'p4a1',txt:'Por que a pontualidade no início do turno é importante para o resultado do time?',
+    opcoes:['Não tem impacto real','Atrasos podem comprometer o SLA de resposta ao cliente','É só uma questão estética','Afeta somente o próprio SDR'],correta:1},
+   {id:'p4a2',txt:'Se você não puder trabalhar por estar passando mal, qual é a conduta correta?',
+    opcoes:['Simplesmente não aparecer e avisar depois','Avisar imediatamente a madrinha/gestão para que os leads tenham cobertura','Esperar o fim do turno para avisar','Pedir para um cliente remarcar sozinho'],correta:1},
+   {id:'p4a3',txt:'Por que um lead não pode ficar sem responsável definido?',
+    opcoes:['Não há problema nisso','Corre o risco de atraso no atendimento e queda no SLA','O sistema reatribui sozinho sem impacto','É uma regra sem efeito prático'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['O que é o Atendimento Cora','Quando a Cora entra na conversa','Como assumir um atendimento da Cora','O que revisar no histórico da Cora'],
   praticas:['Abra um atendimento Cora e acompanhe o fluxo','Identifique onde a Cora passou a conversa para o humano','Assuma um atendimento e registre a continuidade','Revise o histórico e anote o que já foi qualificado'],
-  prova:{pts:20,perguntas:[
-   {id:'p4b1',txt:'O que é o atendimento Cora e em que situações ele aparece?'},
-   {id:'p4b2',txt:'Como você identifica que uma conversa foi atendida pela Cora?'},
-   {id:'p4b3',txt:'Ao assumir um atendimento da Cora, o que você revisa antes de responder?'},
-   {id:'p4b4',txt:'O que a Cora já pergunta e o que ainda cabe a você perguntar?'}]}},
+  prova:{pts:37,perguntas:[
+   {id:'p4b1',txt:'O que é o atendimento Cora?',
+    opcoes:['Um colaborador humano do time','Um atendimento automatizado que inicia a conversa com o lead','Um relatório financeiro','Um tipo de contrato'],correta:1},
+   {id:'p4b2',txt:'Como se identifica que uma conversa passou pela Cora?',
+    opcoes:['Pela etiqueta/indicação de atendimento automático no histórico','Não é possível identificar','Pelo valor do orçamento','Pela cor da tela'],correta:0},
+   {id:'p4b3',txt:'Antes de responder, o que deve ser revisado ao assumir uma conversa da Cora?',
+    opcoes:['Nada, pode responder direto','O histórico e as informações já coletadas pela Cora','Apenas o nome do cliente','O horário da ligação'],correta:1},
+   {id:'p4b4',txt:'Qual é o papel do SDR depois da Cora já ter feito perguntas iniciais?',
+    opcoes:['Repetir as mesmas perguntas','Aprofundar a qualificação com base no que já foi coletado','Encerrar a conversa','Pedir para o cliente recomeçar do zero'],correta:1}]}},
  {fer:'Simulador de Estimativa',
   aulas:['O que é o simulador de estimativa','Refazendo uma estimativa','Quando a estimativa precisa ser refeita'],
   praticas:['Monte uma estimativa de teste no simulador','Refaça alterando o escopo e compare os valores','Registre a nova estimativa no card do cliente'],
-  prova:{pts:20,perguntas:[
-   {id:'p4c1',txt:'Para que serve o simulador e em que momento do processo você usa?'},
-   {id:'p4c2',txt:'Descreva o passo a passo para refazer uma estimativa.'},
-   {id:'p4c3',txt:'Em quais situações a estimativa precisa ser refeita?'},
-   {id:'p4c4',txt:'O que você comunica ao cliente quando o valor muda?'}]}},
+  prova:{pts:36,perguntas:[
+   {id:'p4c1',txt:'Para que serve o simulador de estimativa?',
+    opcoes:['Para calcular o salário do SDR','Para gerar uma projeção de valor do projeto com base no escopo informado','Para marcar reuniões','Para enviar e-mails em massa'],correta:1},
+   {id:'p4c2',txt:'O que normalmente muda ao refazer uma estimativa?',
+    opcoes:['Nada, o valor é sempre fixo','O escopo informado, gerando um novo valor projetado','Apenas a cor do relatório','O nome do cliente'],correta:1},
+   {id:'p4c3',txt:'Em qual situação faz sentido refazer a estimativa?',
+    opcoes:['Nunca, a primeira estimativa é definitiva','Quando o escopo do projeto muda em relação ao informado antes','Apenas se o cliente pedir desconto','Todo início de mês, sem motivo'],correta:1},
+   {id:'p4c4',txt:'Ao comunicar uma mudança de valor ao cliente, o que é essencial fazer?',
+    opcoes:['Enviar o novo valor sem explicação','Explicar o motivo da mudança de forma clara e transparente','Não comunicar nada','Esperar o cliente perceber sozinho'],correta:1}]}},
 ]},
 
-{num:5,data:'14/10',dia:'Quarta-feira',modo:'presencial',sem:2,blocos:[
+{num:5,data:'14/10',dia:'Quarta-feira',modo:'presencial',sem:2,libera:null,blocos:[
  {fer:'Metas',
   aulas:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
   praticas:['Calcule quantas ligações precisa por dia útil','Calcule quantos agendamentos precisa por semana','Monte sua rotina diária alinhada às metas e valide com a madrinha'],
-  prova:{pts:25,perguntas:[
+  prova:{pts:100,perguntas:[
    {id:'p5a1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
    {id:'p5a2',txt:'O que é o SLA de 1 hora na prática? Como garantir que ele seja cumprido?'},
    {id:'p5a3',txt:'Com 500 ligações por mês, quantas por dia útil? E quantos agendamentos por semana para bater os 29?'},
    {id:'p5a4',txt:'Como evitar ultrapassar os 5% de desalinhados e os 10% de queda em R0?'}]}},
 ]},
 
-{num:6,data:'15/10',dia:'Quinta-feira',modo:'presencial',sem:2,blocos:[
+{num:6,data:'15/10',dia:'Quinta-feira',modo:'presencial',sem:2,libera:null,blocos:[
  {fer:'Google Agenda',
   aulas:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Agendar com no mínimo 6h úteis de antecedência','Padrão de invite para R01','Programar gravação de R1'],
   praticas:['Salve as agendas de todos os arquitetos no seu calendário','Consulte a disponibilidade de um arquiteto para os próximos 3 dias','Monte um invite de R01 seguindo o padrão','Programe a gravação de uma reunião de teste'],
-  prova:{pts:25,perguntas:[
+  prova:{pts:100,perguntas:[
    {id:'p6a1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
    {id:'p6a2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
    {id:'p6a3',txt:'Explique a regra das 6h úteis de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
@@ -896,11 +984,11 @@ const MODULOS=[
    {id:'p6a5',txt:'Como programar a gravação de uma R1 e por que ela importa?'}]}},
 ]},
 
-{num:7,data:'16/10',dia:'Sexta-feira',modo:'presencial',sem:2,blocos:[
+{num:7,data:'16/10',dia:'Sexta-feira',modo:'presencial',sem:2,libera:null,blocos:[
  {fer:'Pipedrive',
   aulas:['Preenchimento obrigatório','Motivos de perda: quais existem','Quando usar cada motivo de perda','Ganho: passo a passo do card','Informações obrigatórias para dar um ganho'],
   praticas:['Confira todos os campos obrigatórios de um card','Marque um card de teste como perdido com o motivo correto','Registre a anotação justificando o motivo','Faça o passo a passo completo de ganho em um card de teste'],
-  prova:{pts:25,perguntas:[
+  prova:{pts:56,perguntas:[
    {id:'p7a1',txt:'Quais são os campos de preenchimento obrigatório e por que cada um importa?'},
    {id:'p7a2',txt:'Liste os motivos de perda e dê um exemplo para pelo menos três deles.'},
    {id:'p7a3',txt:'CENÁRIO: cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
@@ -909,18 +997,18 @@ const MODULOS=[
  {fer:'WhatsApp',
   aulas:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
   praticas:['Crie um grupo de teste com o padrão de nome do time','Inclua um colega simulando o cliente','Envie a mensagem com o link no formato padrão','Envie o evento e confirme o recebimento'],
-  prova:{pts:20,perguntas:[
+  prova:{pts:44,perguntas:[
    {id:'p7b1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente.'},
    {id:'p7b2',txt:'Escreva a mensagem que você enviaria junto com o link da reunião.'},
    {id:'p7b3',txt:'Como enviar o evento e confirmar que o cliente recebeu?'},
    {id:'p7b4',txt:'Qual o padrão de nome dos grupos e por que seguir esse padrão importa?'}]}},
 ]},
 
-{num:8,data:'21/10',dia:'Quarta-feira',modo:'online',sem:3,blocos:[
+{num:8,data:'21/10',dia:'Quarta-feira',modo:'online',sem:3,libera:null,blocos:[
  {fer:'Pipedrive',
   aulas:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
   praticas:['Abra o painel de indicadores e anote seus números da semana','Calcule sua taxa de conversão do período','Identifique quantos MQL viraram agendamento','Compare seus indicadores com as metas do time'],
-  prova:{pts:25,perguntas:[
+  prova:{pts:56,perguntas:[
    {id:'p8a1',txt:'O que é MQL e como se diferencia de um lead comum?'},
    {id:'p8a2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
    {id:'p8a3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
@@ -929,18 +1017,18 @@ const MODULOS=[
  {fer:'Slack',
   aulas:['Roleta','Medição','Vistoria'],
   praticas:['Acompanhe uma rodada de roleta do início ao fim','Abra uma solicitação de medição de teste','Localize onde as vistorias são registradas'],
-  prova:{pts:20,perguntas:[
+  prova:{pts:44,perguntas:[
    {id:'p8b1',txt:'O que é a Roleta? Como funciona e qual seu papel nela?'},
    {id:'p8b2',txt:'Descreva o fluxo de Medição: quem solicita, quem executa e o que informar.'},
    {id:'p8b3',txt:'O que é a Vistoria e em que momento do processo acontece?'},
    {id:'p8b4',txt:'O que acontece se um desses fluxos não for registrado no canal correto?'}]}},
 ]},
 
-{num:9,data:'22/10',dia:'Quinta-feira',modo:'online',sem:3,blocos:[
+{num:9,data:'22/10',dia:'Quinta-feira',modo:'online',sem:3,libera:null,blocos:[
  {fer:'Chatwoot',
   aulas:['O que são filtros personalizados','Como criar um filtro','Combinando critérios','Salvando e reutilizando filtros'],
   praticas:['Crie um filtro de conversas não respondidas há mais de 1 hora','Crie um filtro combinando etiqueta e status','Salve o filtro e use na sua rotina','Compartilhe com a madrinha o filtro que mais ajudou'],
-  prova:{pts:20,perguntas:[
+  prova:{pts:100,perguntas:[
    {id:'p9a1',txt:'O que são filtros personalizados e como ajudam no cumprimento do SLA?'},
    {id:'p9a2',txt:'Descreva o passo a passo para criar um filtro combinando dois critérios.'},
    {id:'p9a3',txt:'Qual filtro você criou que mais ajuda na sua rotina? Por quê?'},
@@ -1020,6 +1108,8 @@ const MENTORS=USERS.filter(u=>u.role==='mentor'&&!isTeste(u));
 
 /* ══ STATE ══ */
 let currentUser=null,state={};
+let activeQuiz=null;
+let realAdmin=null;
 function loadState(){try{state=JSON.parse(localStorage.getItem('sdrInt26')||'{}');}catch{state={};}}
 function saveState(){try{localStorage.setItem('sdrInt26',JSON.stringify(state));}catch{}}
 function getU(uid){return(state[uid]||{});}
@@ -1166,19 +1256,43 @@ function showLoginForm(){
 }
 
 function loginSuccess(){
+  if(currentUser.role==='admin') realAdmin=currentUser;
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.cssText='display:flex;flex-direction:column;min-height:100vh;';
+  atualizarHeaderPerfil();
+  buildViewSwitch();
+  buildApp();
+}
+
+function atualizarHeaderPerfil(){
   const hdrAv=document.getElementById('hdr-avatar');
   if(currentUser.photo){hdrAv.style.background='transparent';hdrAv.style.padding='0';hdrAv.style.overflow='hidden';hdrAv.innerHTML='<img src="'+currentUser.photo+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
-  else{hdrAv.style.background=currentUser.color;hdrAv.textContent=currentUser.name[0];}
+  else{hdrAv.style.background=currentUser.color;hdrAv.textContent=currentUser.name[0];hdrAv.innerHTML=currentUser.name[0];hdrAv.style.padding='';hdrAv.style.overflow='';}
   document.getElementById('hdr-name').textContent=currentUser.name;
   const rl=document.getElementById('hdr-role');
   if(rl)rl.textContent={admin:'Gestora · Pré-Vendas',mentor:'Madrinha · Pré-Vendas',novo:'Novo SDR · Pré-Vendas'}[currentUser.role]||'';
+}
+
+function buildViewSwitch(){
+  const vs=document.getElementById('view-switch');
+  if(!realAdmin){vs.style.display='none';return;}
+  vs.style.display='flex';
+  const views=[{k:'gestao',l:'Gestão',id:'emilia'},{k:'sdr',l:'Visão SDR',id:'teste_sdr'},{k:'madrinha',l:'Visão Madrinha',id:'teste_madrinha'}];
+  vs.innerHTML=views.map(v=>`<button class="view-btn${currentUser.id===v.id?' active':''}" onclick="switchView('${v.k}')">${v.l}</button>`).join('');
+}
+
+function switchView(mode){
+  if(mode==='gestao') currentUser=realAdmin;
+  else if(mode==='sdr') currentUser=USERS.find(u=>u.id==='teste_sdr');
+  else if(mode==='madrinha') currentUser=USERS.find(u=>u.id==='teste_madrinha');
+  atualizarHeaderPerfil();
+  buildViewSwitch();
   buildApp();
 }
 
 function logout(){
-  currentUser=null;
+  currentUser=null; realAdmin=null;
+  document.getElementById('view-switch').style.display='none';
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('app').style.display='none';
   document.getElementById('login-form-area').style.display='block';
@@ -1217,7 +1331,8 @@ function addTab(tabs,main,id,label,builder){
 function buildAdminPanels(tabs,main){
   addTab(tabs,main,'adm-dashboard','Dashboard',   buildAdmDashboard);
   addTab(tabs,main,'adm-provas',   'Avaliações',  buildAdmProvas);
-  addTab(tabs,main,'adm-diarios',  '📓 Diários',     buildAdmDiarios);
+  addTab(tabs,main,'adm-horarios', 'Relatório de Horários', buildAdmHorarios);
+  addTab(tabs,main,'adm-diarios',  'Diários',     buildAdmDiarios);
   addTab(tabs,main,'adm-duvidas',  'Dúvidas',     buildAdmDuvidas);
   addTab(tabs,main,'adm-proc',    'Aval. Processos', buildAdmProc);
   addTab(tabs,main,'adm-acessos',  'Acessos',     buildAdmAcessos);
@@ -1322,12 +1437,10 @@ function buildAdmDashboard(){
 }
 
 function buildAdmProvas(){
-  const pend=NOVOS.reduce((a,u)=>a+sdrStats(u).pend,0);
   let html=`<div class="section-title">Avaliações</div>
-  <p class="section-sub">Clique no card de cada novo SDR para ver as respostas e lançar a nota.</p>
-  ${pend>0?`<div style="background:#fffbeb;border:1.5px solid var(--gold);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.8rem;color:#92400e;font-weight:600">${pend} avaliação(ões) aguardando sua correção</div>`:''}`;
-  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,true);});
-  html += buildTesteSection(true);
+  <p class="section-sub">Múltipla escolha com correção automática. Clique no card de cada SDR para ver as respostas.</p>`;
+  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,false);});
+  html += buildTesteSection(false);
   return html;
 }
 function applyProvaFilter(btn,main){
@@ -1521,6 +1634,19 @@ function blocoProg(b){
   return {dA,tA:b.aulas.length,dP,tP:b.praticas.length,env,
           done:(dA===b.aulas.length&&dP===b.praticas.length&&env===1)};
 }
+
+const TEMPO_POR_PERGUNTA=300; // 5 minutos
+function moduloLiberado(m){
+  if(!m.libera) return false;
+  const [d,mo]=m.libera.split('/').map(Number);
+  const dataLib=new Date(2026,mo-1,d,0,0,0);
+  return new Date()>=dataLib;
+}
+function procLiberado(){
+  const dataLib=new Date(2026,9,16,0,0,0); // 16/10/2026
+  return new Date()>=dataLib;
+}
+
 function modProgress(m){
   let dA=0,tA=0,dP=0,tP=0,env=0,tE=0;
   m.blocos.forEach(b=>{const p=blocoProg(b);dA+=p.dA;tA+=p.tA;dP+=p.dP;tP+=p.tP;env+=p.env;tE++;});
@@ -1547,6 +1673,20 @@ function findBloco(bid){for(const m of MODULOS)for(const b of m.blocos)if(b.id==
 /* ─── Render ─── */
 
 /* ─── Interações de aula, tarefa e caixas ─── */
+
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme');
+  const novo=cur==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',novo);
+  try{localStorage.setItem('sdrTheme',novo);}catch(e){}
+}
+(function initTheme(){
+  try{
+    const saved=localStorage.getItem('sdrTheme');
+    if(saved==='dark') document.documentElement.setAttribute('data-theme','dark');
+  }catch(e){}
+})();
+
 function toggleAulaOpen(aid){
   const el=document.getElementById('aula-'+aid); if(!el)return;
   const abrindo=!el.classList.contains('open');
@@ -1586,12 +1726,16 @@ function toggleBloco(bid,mid){
 
 function toggleCx(id){document.getElementById(id)?.classList.toggle('open');}
 function bindModEvents(root){
-  root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
+  root.querySelectorAll('.day-header').forEach(h=>{const c=h.closest('.day-card');if(!c.classList.contains('mod-locked'))h.onclick=()=>c.classList.toggle('open');});
 }
 function restoreModStates(){}
 
 /* ─── Avaliação de Processos ─── */
 function buildProcPanel(){
+  if(currentUser.role==='novo' && !procLiberado()){
+    return `<div class="quiz-warn"><h4>Avaliação de Processos</h4>
+      <p>Esta avaliação com a Gaby fica disponível a partir de <b>16/10</b>, após o treinamento de processos presencial.</p></div>`;
+  }
   const u=getU(currentUser.id);
   const pv=u.procAval||{};
   const total=totalPerguntasProc();
@@ -1673,9 +1817,25 @@ function buildModulosHTML(){
   SEMANAS.forEach(S=>{
     const lista=MODULOS.filter(m=>m.sem===S.n);
     if(!lista.length)return;
-    const ok=lista.filter(m=>modProgress(m).status==='done').length;
+    const ok=lista.filter(m=>moduloLiberado(m)&&modProgress(m).status==='done').length;
     html+=`<div class="week-divider">${S.label} <span style="color:var(--orange);font-weight:800;margin-left:6px">${ok}/${lista.length}</span></div><div class="days-grid" style="margin-bottom:10px">`;
+    let dataAtual='';
     lista.forEach(m=>{
+      if(m.data!==dataAtual){
+        dataAtual=m.data;
+        html+=`<div style="font-size:.73rem;font-weight:800;color:var(--muted);letter-spacing:.4px;margin:8px 0 2px">${m.dia} · ${m.data}</div>`;
+      }
+      const liberado=moduloLiberado(m);
+      if(!liberado){
+        html+=`<div class="day-card mod-locked" id="mod-${m.id}">
+          <div class="day-header"><div class="dh-left">
+            <div class="module-num">🔒</div>
+            <div style="flex:1"><strong>Módulo ${m.num}</strong>
+              <div class="day-sub" style="margin-top:3px">${m.libera?`Disponível a partir de ${m.libera}`:'Em breve — data a definir'}</div>
+            </div></div></div>
+        </div>`;
+        return;
+      }
       const p=modProgress(m);
       const chip={done:'<span class="mod-chip chip-done">Concluído</span>',
                   doing:'<span class="mod-chip chip-doing">Em andamento</span>',
@@ -1685,7 +1845,7 @@ function buildModulosHTML(){
           <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
             <strong>Módulo ${m.num}</strong>${chip}
-            <div class="day-sub" style="margin-top:3px">Dia ${m.num} · ${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} avaliações</div>
+            <div class="day-sub" style="margin-top:3px">${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} avaliações</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
@@ -1726,7 +1886,8 @@ function buildAula(m,b,txt,j){
   const u=getU(currentUser.id);
   const done=(u.modTopics||[]).includes(aid);
   const src=AULA_VIDEOS[aid]||'';
-  const watched=((u.aulaVideo||{})[aid])||!src;
+  const vmeta=(u.aulaVideo||{})[aid];
+  const watched=!!vmeta||!src;
   return `<div class="aula${done?' done':''}" id="aula-${aid}">
     <div class="aula-h" onclick="toggleAulaOpen('${aid}')">
       <span class="aula-st">✓</span>
@@ -1734,7 +1895,13 @@ function buildAula(m,b,txt,j){
       <span class="aula-t">${txt}</span>
       <span class="aula-ar">▼</span></div>
     <div class="aula-b">
-      ${src?`<video id="v-${aid}" controls playsinline preload="metadata" onended="videoFim('${aid}')" ontimeupdate="videoProg('${aid}',this)"><source src="${src}" type="video/mp4"></video>`
+      ${src?`<video id="v-${aid}" controls playsinline preload="metadata"
+            onplay="videoPlay('${aid}')"
+            onseeking="videoSeeking('${aid}',this)"
+            onratechange="this.playbackRate=1"
+            onended="videoFim('${aid}')"
+            ontimeupdate="videoProg('${aid}',this)"><source src="${src}" type="video/mp4"></video>
+            ${!watched?'<p style="font-size:.68rem;color:var(--muted);margin-top:6px">Na primeira vez você só pode voltar o vídeo, não adiantar.</p>':''}`
            :`<div class="aula-soon">Vídeo em produção — será disponibilizado em breve.</div>`}
       <div class="aula-foot">
         ${done?`<span class="hint ok">Aula concluída</span><button class="btn-aula undo" onclick="desmarcarAula('${aid}')">Desmarcar</button>`
@@ -1742,6 +1909,33 @@ function buildAula(m,b,txt,j){
                 <button class="btn-aula" id="btn-${aid}" ${watched?'':'disabled'} onclick="concluirAula('${aid}')">Marcar aula como concluída · +${MOD_PTS_TOPICO} pts</button>`}
       </div></div></div>`;
 }
+
+const videoMaxTime={}, videoStart={};
+function videoPlay(aid){ if(!videoStart[aid]) videoStart[aid]=Date.now(); }
+function videoSeeking(aid,v){
+  const u=getU(currentUser.id);
+  if((u.aulaVideo||{})[aid]) return; // já assistido: libera seek livre
+  if(videoMaxTime[aid]===undefined) videoMaxTime[aid]=0;
+  if(v.currentTime>videoMaxTime[aid]+0.75){ v.currentTime=videoMaxTime[aid]; }
+}
+function videoProg(aid,v){
+  const u=getU(currentUser.id);
+  if(!(u.aulaVideo||{})[aid]){
+    if(v.currentTime>(videoMaxTime[aid]||0)) videoMaxTime[aid]=v.currentTime;
+  }
+  if(v.duration&&v.currentTime/v.duration>=0.97) videoFim(aid);
+}
+function videoFim(aid){
+  const u=getU(currentUser.id), av=u.aulaVideo||{};
+  if(av[aid])return;
+  const dur=videoStart[aid]?Math.round((Date.now()-videoStart[aid])/1000):null;
+  av[aid]={em:new Date().toISOString(),duracaoSegundos:dur};
+  setU(currentUser.id,{aulaVideo:av});
+  const b=document.getElementById('btn-'+aid); if(b)b.disabled=false;
+  const h=document.getElementById('hint-'+aid);
+  if(h){h.textContent='Vídeo assistido';h.classList.add('ok');}
+}
+
 
 function buildPratica(b,txt,j){
   const pid=b.id+'_p'+j;
@@ -1760,28 +1954,81 @@ function buildProva(b){
   const u=getU(currentUser.id);
   const pv=(u.modProvas||{})[b.id]||{};
   if(pv.submitted){
-    if(pv.nota!=null){
-      return `<div class="nota-box"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <div><div class="nota-val">${pv.nota}<span style="font-size:1rem;color:var(--muted)">/${b.prova.pts}</span></div>
-        <div style="font-size:.72rem;color:var(--muted);margin-top:2px">corrigido por ${pv.corrigidoPor||'Gestão'}</div></div>
-        <div style="flex:1;min-width:150px"><div class="bar-bg"><div class="bar-fill" style="width:${Math.round((pv.nota/b.prova.pts)*100)}%"></div></div></div></div>
-        ${pv.feedback?`<div class="nota-fb"><strong>Feedback:</strong><br>${pv.feedback}</div>`:''}</div>`;
-    }
-    return `<div class="aval-wait"><b>Avaliação enviada — aguardando correção</b>
-      <span>Sua nota será liberada assim que a gestão corrigir.</span>
-      <span style="margin-top:6px">Enviada em ${pv.enviadoEm?new Date(pv.enviadoEm).toLocaleString('pt-BR'):'-'}</span></div>`;
+    const pct=Math.round((pv.nota/b.prova.pts)*100);
+    return `<div class="quiz-result">
+      <div class="nv">${pv.nota}<span style="font-size:1.1rem;color:var(--muted)">/${b.prova.pts}</span></div>
+      <div style="font-size:.76rem;color:var(--muted);margin-top:4px">corrigido automaticamente · ${pv.acertos}/${pv.total} acertos</div>
+      <div class="bar-bg" style="margin-top:10px"><div class="bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
   }
-  let h=`<p class="prova-desc">Responda com suas palavras. Depois de enviar não é possível editar.</p>`;
-  b.prova.perguntas.forEach((q,i)=>{
-    const val=(pv.rascunho||{})[q.id]||'';
-    h+=`<div class="prova-q"><label>Questão ${i+1}</label><div class="q-enunciado">${q.txt}</div>
-      <textarea id="${q.id}" placeholder="Sua resposta...">${val}</textarea></div>`;
-  });
-  return h+`<div class="prova-status">
-    <button class="btn-save-eval" onclick="salvarRascunhoMod('${b.id}')">Salvar rascunho</button>
-    <button class="btn-submit-prova" onclick="submitModProva('${b.id}')">Enviar avaliação →</button>
-    <span class="eval-saved" id="msaved-${b.id}">Salvo</span></div>`;
+  return `<div class="quiz-warn" id="qwarn-${b.id}">
+    <h4>Avaliação cronometrada</h4>
+    <p>Você terá <b>5 minutos por pergunta</b>. O tempo começa a contar assim que a pergunta aparece na tela e não pode ser pausado.<br>
+    Se o tempo acabar sem resposta, a questão conta como errada e o sistema avança para a próxima automaticamente.<br>
+    São ${b.prova.perguntas.length} questões no total.</p>
+    <button class="btn-aula" onclick="iniciarQuiz('${b.id}')">Iniciar avaliação</button>
+  </div>`;
 }
+
+function iniciarQuiz(bid){
+  const f=findBloco(bid); if(!f)return;
+  activeQuiz={bid,perguntas:f.b.prova.perguntas,idx:0,respostas:{},tempos:{},inicioGeral:Date.now(),inicioPergunta:Date.now()};
+  renderQuizPergunta();
+}
+
+function renderQuizPergunta(){
+  const q=activeQuiz.perguntas[activeQuiz.idx];
+  const el=document.getElementById('qwarn-'+activeQuiz.bid)||document.getElementById('qbox-'+activeQuiz.bid);
+  if(!el)return;
+  el.outerHTML=`<div class="quiz-box" id="qbox-${activeQuiz.bid}">
+    <div class="quiz-top">
+      <span class="quiz-prog">Questão ${activeQuiz.idx+1} de ${activeQuiz.perguntas.length}</span>
+      <span class="quiz-timer" id="qtimer-${activeQuiz.bid}">05:00</span>
+    </div>
+    <div class="quiz-q">${q.txt}</div>
+    <div id="qopts-${activeQuiz.bid}">
+      ${q.opcoes.map((o,i)=>`<button class="quiz-opt" onclick="responderQuiz(${i})">${o}</button>`).join('')}
+    </div>
+  </div>`;
+  activeQuiz.inicioPergunta=Date.now();
+  let restante=TEMPO_POR_PERGUNTA;
+  if(activeQuiz.timer)clearInterval(activeQuiz.timer);
+  const timerEl=document.getElementById('qtimer-'+activeQuiz.bid);
+  activeQuiz.timer=setInterval(()=>{
+    restante--;
+    const m=Math.floor(restante/60),s=restante%60;
+    if(timerEl){timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+      timerEl.classList.toggle('warn',restante<=30);}
+    if(restante<=0){clearInterval(activeQuiz.timer);responderQuiz(null);}
+  },1000);
+}
+
+function responderQuiz(opcaoEscolhida){
+  if(!activeQuiz)return;
+  if(activeQuiz.timer)clearInterval(activeQuiz.timer);
+  const q=activeQuiz.perguntas[activeQuiz.idx];
+  activeQuiz.respostas[q.id]=opcaoEscolhida;
+  activeQuiz.tempos[q.id]=Math.round((Date.now()-activeQuiz.inicioPergunta)/1000);
+  activeQuiz.idx++;
+  if(activeQuiz.idx<activeQuiz.perguntas.length){ renderQuizPergunta(); }
+  else { finalizarQuiz(); }
+}
+
+function finalizarQuiz(){
+  const {bid,perguntas,respostas,tempos,inicioGeral}=activeQuiz;
+  const f=findBloco(bid); if(!f){activeQuiz=null;return;}
+  let acertos=0;
+  perguntas.forEach(q=>{ if(respostas[q.id]===q.correta) acertos++; });
+  const nota=Math.round((acertos/perguntas.length)*f.b.prova.pts);
+  const uid=currentUser.id,u=getU(uid),mp=u.modProvas||{};
+  const agora=new Date().toISOString();
+  mp[bid]={submitted:true,nota,acertos,total:perguntas.length,respostas,tempos,
+    enviadoEm:agora,duracaoSegundos:Math.round((Date.now()-inicioGeral)/1000),corrigidoPor:'Automático'};
+  setU(uid,{modProvas:mp}); setU(uid,{pts:modPoints()});
+  activeQuiz=null;
+  refreshTrilha();
+}
+
 
 function salvarRascunhoMod(bid){
   const f=findBloco(bid); if(!f)return;
@@ -2089,7 +2336,6 @@ function buildMadrinhaPanels(tabs,main){
   addTab(tabs,main,'acompanhamento','Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
   addTab(tabs,main,'provas-mentor','Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
   addTab(tabs,main,'diario-mentor','Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
-  addTab(tabs,main,'proc','Aval. Processos',buildProcPanel);
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
   main.querySelectorAll('.btn-mentor-save').forEach(btn=>{btn.onclick=()=>saveMentorEntry(btn.dataset.day);});
@@ -2121,22 +2367,21 @@ function buildSdrProvaCard(u,corrigir){
       <div class="sdr-prova-info"><strong>${u.name}</strong><span>${u.turno}</span>
         <div class="sdr-prova-stats">
           <span class="${s.env===TP?'stat-ok':'stat-pend'}">${s.env}/${TP} enviadas</span>
-          ${s.pend>0?`<span class="stat-vid">${s.pend} a corrigir</span>`:''}
-          ${s.corr>0?`<span class="stat-ok">${s.corr} corrigidas</span>`:''}
           <span class="stat-star">${s.pts} pts</span>
         </div></div>
       <span class="sdr-prova-arrow">▼</span></div>
     <div class="sdr-prova-days">`;
   MODULOS.forEach(m=>{
+    if(!moduloLiberado(m))return;
     html+=`<div style="font-size:.74rem;font-weight:800;color:var(--navy);margin:14px 0 7px">Módulo ${m.num} · ${m.data}</div>`;
     m.blocos.forEach(b=>{
       const pv=mp[b.id]; const ok=pv&&pv.submitted;
       const dA=b.aulas.filter((_,j)=>tops.includes(b.id+'_a'+j)).length;
       const dP=b.praticas.filter((_,j)=>(prats[b.id+'_p'+j]||{}).done).length;
-      const stat=!ok?'não enviada':(pv.nota!=null?`nota ${pv.nota}/${b.prova.pts}`:'aguardando correção');
+      const stat=!ok?'não enviada':`nota ${pv.nota}/${b.prova.pts} (${pv.acertos}/${pv.total} acertos) · automática`;
       html+=`<div class="day-card" style="margin-bottom:7px">
         <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
-          <div class="dh-left"><div class="module-num ${ok&&pv.nota!=null?'done':ok?'doing':''}" style="width:30px;height:30px;font-size:.66rem">${ok&&pv.nota!=null?'✓':''}</div>
+          <div class="dh-left"><div class="module-num ${ok?'done':''}" style="width:30px;height:30px;font-size:.66rem">${ok?'✓':''}</div>
           <div><strong style="font-size:.82rem">${b.fer}</strong>
           <div class="day-sub">${dA}/${b.aulas.length} aulas${b.praticas.length?` · ${dP}/${b.praticas.length} tarefas`:''}</div>
           <div class="day-sub">${stat}</div></div></div><span class="day-arrow">▼</span></div>
@@ -2152,26 +2397,14 @@ function buildSdrProvaCard(u,corrigir){
       if(ok&&pv.respostas){
         html+=`<div class="mentor-prova-view"><h5>Respostas de ${u.name}</h5>`;
         b.prova.perguntas.forEach((q,i)=>{
-          html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.txt.substring(0,65)}...</div><div class="mpv-text">${pv.respostas[q.id]||'<i style="color:var(--muted)">sem resposta</i>'}</div></div>`;});
+          const escolhida=pv.respostas[q.id];
+          const acertou=escolhida===q.correta;
+          html+=`<div class="mpv-row">
+            <div class="mpv-label">Q${i+1} — ${q.txt}</div>
+            <div class="mpv-text">Resposta: <b style="color:${acertou?'#15803d':'#b91c1c'}">${escolhida!=null?q.opcoes[escolhida]:'(sem resposta — tempo esgotado)'}</b> ${acertou?'✓':'✗ · correta: '+q.opcoes[q.correta]}</div>
+          </div>`;});
         html+=`</div>`;
-        if((pv.historico||[]).length>1){
-          html+=`<div style="margin-top:9px"><div style="font-size:.71rem;font-weight:700;color:var(--muted)">Histórico de envios</div>`;
-          pv.historico.forEach(h=>{html+=`<div class="hist-item">v${h.v} · ${new Date(h.em).toLocaleString('pt-BR')}</div>`;});
-          html+=`</div>`;
-        }
-        if(corrigir){
-          html+=`<div class="corr-box"><div style="font-size:.77rem;font-weight:800;color:var(--navy);margin-bottom:8px">Correção</div>
-            <label style="font-size:.72rem;color:var(--muted);font-weight:600">Nota (0 a ${b.prova.pts})</label><br>
-            <input type="number" id="nota-${u.id}-${b.id}" min="0" max="${b.prova.pts}" value="${pv.nota!=null?pv.nota:''}" placeholder="0">
-            <textarea id="fb-${u.id}-${b.id}" placeholder="Feedback para o SDR...">${pv.feedback||''}</textarea>
-            <button class="btn-corrigir" onclick="salvarCorrecao('${u.id}','${b.id}',${b.prova.pts})">${pv.nota!=null?'Atualizar correção':'Lançar nota'}</button>
-            ${pv.nota!=null?`<span style="font-size:.71rem;color:var(--green);font-weight:600;margin-left:9px">corrigido por ${pv.corrigidoPor||'-'}</span>`:''}</div>`;
-        } else if(pv.nota!=null){
-          html+=`<div style="margin-top:10px;background:#f0fdf4;border:1.5px solid var(--green);border-radius:8px;padding:10px 13px">
-            <strong style="font-size:.77rem;color:#15803d">Nota: ${pv.nota}/${b.prova.pts}</strong>
-            ${pv.feedback?`<div style="font-size:.74rem;margin-top:5px">${pv.feedback}</div>`:''}</div>`;
-        }
-      } else html+=`<div style="font-size:.74rem;color:var(--muted);padding:8px 0;font-style:italic">Avaliação ainda não enviada.</div>`;
+      } else html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Avaliação ainda não enviada.</div>`;
       html+=`</div></div>`;
     });
   });
@@ -2315,6 +2548,47 @@ function buildAdmProc(){
       });
     }
     html+=`</div></div>`;
+  });
+  return html;
+}
+
+
+function buildAdmHorarios(){
+  let html=`<div class="section-title">Relatório de Horários</div>
+  <p class="section-sub">Visível só para a gestão. Horário e tempo gasto em cada tarefa, avaliação e vídeo assistido pela primeira vez.</p>`;
+  NOVOS.forEach(u=>{
+    const d=getU(u.id);
+    const linhas=[];
+    Object.entries(d.aulaVideo||{}).forEach(([aid,v])=>{
+      if(!v||!v.em)return;
+      const mid=aid.split('_')[0];
+      const m=MODULOS.find(x=>x.id===mid);
+      const b=m?m.blocos.find(bb=>aid.startsWith(bb.id+'_a')):null;
+      const idx=b?parseInt(aid.split('_a').pop()):null;
+      const nome=b&&idx!=null?b.aulas[idx]:aid;
+      linhas.push({tipo:'Vídeo assistido',desc:nome,em:v.em,dur:v.duracaoSegundos});
+    });
+    Object.entries(d.modPrats||{}).forEach(([pid,v])=>{
+      if(!v||!v.done)return;
+      linhas.push({tipo:'Tarefa concluída',desc:pid,em:v.em||null,dur:v.dur||null});
+    });
+    Object.entries(d.modProvas||{}).forEach(([bid,v])=>{
+      if(!v||!v.submitted)return;
+      const f=findBloco(bid);
+      linhas.push({tipo:'Avaliação enviada',desc:f?f.b.fer+' (Mód. '+f.m.num+')':bid,em:v.enviadoEm,dur:v.duracaoSegundos});
+    });
+    linhas.sort((a,b)=>new Date(a.em||0)-new Date(b.em||0));
+    html+=`<div class="sdr-prova-wrapper"><div class="sdr-prova-summary" onclick="this.closest('.sdr-prova-wrapper').classList.toggle('open')">
+      ${avatarHtml(u,48)}<div class="sdr-prova-info"><strong>${u.name}</strong><span>${linhas.length} registros</span></div>
+      <span class="sdr-prova-arrow">▼</span></div>
+      <div class="sdr-prova-days"><table class="sched-table"><thead><tr><th>Horário</th><th>Tipo</th><th>Descrição</th><th>Duração</th></tr></thead><tbody>`;
+    if(!linhas.length) html+=`<tr><td colspan="4" style="color:var(--muted);font-style:italic">Nenhum registro ainda.</td></tr>`;
+    linhas.forEach(l=>{
+      const dt=l.em?new Date(l.em).toLocaleString('pt-BR'):'-';
+      const dur=l.dur!=null?Math.floor(l.dur/60)+'min '+(l.dur%60)+'s':'-';
+      html+=`<tr><td style="white-space:nowrap;font-size:.74rem">${dt}</td><td><span class="mod-cat">${l.tipo}</span></td><td style="font-size:.76rem">${l.desc}</td><td style="font-size:.74rem">${dur}</td></tr>`;
+    });
+    html+=`</tbody></table></div></div>`;
   });
   return html;
 }
