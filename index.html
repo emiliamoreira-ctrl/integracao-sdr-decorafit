@@ -516,6 +516,11 @@
   .bloco.open .bloco-b{display:block}
   .bloco-ck{width:19px;height:19px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.62rem;color:transparent;flex-shrink:0}
   .bloco.done .bloco-ck{background:var(--green);border-color:var(--green);color:#fff}
+
+  .bloco.open{border-color:var(--orange)!important;box-shadow:0 4px 16px rgba(249,115,22,.14);background:#fffefc}
+  .bloco.open .bloco-h{background:#fff7ed}
+  .bloco.open .bloco-n{color:var(--orange)}
+  .bloco:not(.open){opacity:.92}
 </style>
 </head>
 <body>
@@ -769,13 +774,13 @@ const DAYS=[
 /* ═══════ MÓDULOS — um por dia, blocos por ferramenta ═══════ */
 const MODULOS=[
 {num:1,data:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
- {fer:'De onde vêm os leads?',
-  aulas:['De onde vêm os leads?'],
-  praticas:['Liste os canais de origem dos leads que chegam hoje','Abra um lead de cada canal e identifique a origem no sistema'],
+ {fer:'Introdução à Plataforma',
+  aulas:['Introdução à Plataforma','Site Decorafit'],
+  praticas:['Navegue pela plataforma e identifique as principais áreas','Acesse o site da Decorafit e localize as informações institucionais'],
   prova:{pts:15,perguntas:[
-   {id:'p1a1',txt:'De onde vêm os leads da Decorafit? Liste todos os canais de origem.'},
-   {id:'p1a2',txt:'Como você identifica a origem de um lead no sistema?'},
-   {id:'p1a3',txt:'Por que saber a origem do lead muda a forma de abordar?'}]}},
+   {id:'p1a1',txt:'Quais são as principais áreas da plataforma e para que serve cada uma?'},
+   {id:'p1a2',txt:'O que você encontra no site da Decorafit que ajuda no seu trabalho como SDR?'},
+   {id:'p1a3',txt:'Por que conhecer bem a plataforma e o site institucional importa para o atendimento ao cliente?'}]}},
  {fer:'Google Agenda',
   aulas:['Criar invite','Disponibilidade de agenda','Adicionar tarefas e pausas','Boas práticas meet'],
   praticas:['Crie um invite de teste para um colega','Consulte sua disponibilidade para os próximos 3 dias','Adicione uma pausa e uma tarefa na sua agenda','Revise se sua agenda está com as boas práticas configuradas'],
@@ -783,7 +788,7 @@ const MODULOS=[
    {id:'p1b1',txt:'Descreva o passo a passo para criar um invite.'},
    {id:'p1b2',txt:'Como você verifica sua disponibilidade antes de marcar algo?'},
    {id:'p1b3',txt:'Por que bloquear tarefas e pausas na agenda importa para o time?'},
-   {id:'p1b4',txt:'Quais são as boas práticas em um meet? Explique a importância de cada uma.'}]}},
+   {id:'p1b4',txt:'Quais são as boas práticas em um meet?'}]}},
  {fer:'Slack',
   aulas:['Boas práticas no Slack','Canais do Slack','Círculo'],
   praticas:['Responda com o check verdinho a um aviso do canal','Confira se está em todos os canais e peça inclusão nos que faltam','Envie uma mensagem de apresentação no canal do time'],
@@ -1539,6 +1544,14 @@ function setDificuldade(pid,d){
   pr[pid].dif=d; setU(uid,{modPrats:pr});
   document.querySelectorAll('#prow-'+pid+' .dif-btn').forEach(b=>b.classList.toggle('sel',b.dataset.d===d));
 }
+
+function toggleBloco(bid,mid){
+  const el=document.getElementById('bl-'+bid); if(!el)return;
+  const abrindo=!el.classList.contains('open');
+  document.getElementById('mod-'+mid)?.querySelectorAll('.bloco.open').forEach(b=>{if(b.id!=='bl-'+bid)b.classList.remove('open');});
+  el.classList.toggle('open',abrindo);
+}
+
 function toggleCx(id){document.getElementById(id)?.classList.toggle('open');}
 function bindModEvents(root){
   root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
@@ -1656,7 +1669,7 @@ function buildModulosHTML(){
 function buildBloco(m,b){
   const p=blocoProg(b);
   return `<div class="bloco${p.done?' done':''}" id="bl-${b.id}">
-    <div class="bloco-h" onclick="document.getElementById('bl-${b.id}').classList.toggle('open')">
+    <div class="bloco-h" onclick="toggleBloco('${b.id}','${m.id}')">
       <span class="bloco-ar">▶</span>
       <span class="bloco-ck">✓</span>
       <span class="bloco-n">${b.fer}</span>
