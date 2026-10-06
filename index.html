@@ -440,6 +440,30 @@
   .login-box .logo h1{letter-spacing:-.3px;}
   footer.plat-foot{text-align:center;padding:26px 20px 34px;color:var(--muted);font-size:.7rem;border-top:1px solid var(--line);margin-top:34px;}
   footer.plat-foot b{color:var(--navy);}
+
+  /* VÍDEO DO MÓDULO */
+  .mvideo{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px;background:#fff;}
+  .mvideo-h{padding:11px 15px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .mvideo-h .mvl{font-size:.64rem;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--orange);}
+  .mvideo-h .mvt{font-size:.78rem;color:var(--muted);}
+  .mvideo video{width:100%;display:block;background:#0f1724;max-height:340px;}
+  .mvsoon{padding:28px 20px;text-align:center;font-size:.78rem;color:var(--muted);background:#fafbfc;}
+
+  /* VISUAL CLEAN */
+  .mod-chip{font-weight:700;letter-spacing:.2px;}
+  .chip-done{background:#ecfdf5;color:#047857;}
+  .chip-doing{background:#fff7ed;color:#c2410c;}
+  .chip-todo{background:#f1f5f9;color:#94a3b8;}
+  .mod-cat{background:#f1f5f9;color:#64748b;font-weight:700;}
+  .mode-on{background:#eff6ff;color:#2563eb;}
+  .mode-pres{background:#fff7ed;color:#ea580c;}
+  .course-hero{background:linear-gradient(135deg,#17254270 0%,#1a2b4a 100%),var(--navy);}
+  .course-hero::after{display:none;}
+  .ch-greet h2{font-weight:700;letter-spacing:-.3px;}
+  .badge{font-weight:600;}
+  .lesson-sec-title{font-weight:700;letter-spacing:.1px;}
+  .week-divider{color:#475569;}
+  .day-badge{font-weight:700;}
 </style>
 </head>
 <body>
@@ -457,10 +481,10 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.2</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.3</div>
     </div>
     <div id="create-pw-area" style="display:none">
-      <div class="login-section-label">🔑 Criar senha de acesso</div>
+      <div class="login-section-label">Criar senha de acesso</div>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:12px">Bem-vindo! Crie sua senha para acessar o sistema.</p>
       <div id="invite-email-display" style="font-size:.78rem;font-weight:700;color:var(--navy);background:var(--bg);padding:8px 12px;border-radius:8px;margin-bottom:12px"></div>
       <input type="password" id="new-pw1" class="login-input" placeholder="Nova senha (mínimo 4 caracteres)">
@@ -499,16 +523,16 @@ const GRAZI_IMG="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYF
 const EMILIA_IMG="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5gp+7IwaCtG3Azmp0ZmMxg0U7g0hOaYw60lFFMAp8ULSthfzNRmlDMOhIoAvpDbQDMz729BTmvEA/dRgCs7qaUnPAqOW+5PL3JZrqSXjOB6CocE8mlGF9zU0UEk3IHy1aXYeiIlGWAUZNaENkdhkkICiqrIYjhMbvXNJJPLJEsQzgdRSlfoG5O1xEpIHNVJZNx4FTC0KJvmIUeneoJCu7CD5aUUlsCt0GUZ/Gige1UUSRrvOBwPWtGJ0hCs3Kjt61WtLVppUjXv1o1FttxsQ/KnAqH7zsTu7Gk00ckgfaEz2q+mnC+tGKttcciuZtnJuVLHOTXV6fdRwyCBzgnoa6JZhVw2H9hRVk9+7+fYqhTg6y9pqc3fGVSYbkfOvQ1XSH5d0jBR6V2eq2UGoQkxY85O/rXF3EckUpWUEEetZOEo2U1ZvU1q0uR3jqieK4SKJlC5PY0VUoqeRGSRPIMKMdTUaDrT2kVjxSouY2ZegNLZE7EWMGkIxUjDio2ppgGeKSg0lUMDRR2pyjv2FAAeB70mT0FITk5p0alnAUEsTgAUgNfw9os+q3QihUEgbndjhI1HVmPYV2moaHFJpAi0e3mkt4+ZNQcbRI2PuoPT6V3vhfwXb6J4cWPU4wsAAm1KVjgyy/wQDH8Kg5bHcgda2m0m78SWyw2dqttp44QsOgHcL/AEryamNcqlo7I78PhXNanzRdpskMSKQVOCT3oNpNDIEkBUsocEjtX07a/CDSR+9nR5G6kv8AMTVHxb8L7O9iUQEwmIFUCgYArr+tx00Nf7Om09dT56FkbqFpFOGUZx2xWY6FWKsNrDtXa3/h250XUbizuJCkqgsD/wA9E9R61zms2jxrvcDejbXweGB5Vh6jFbRqJuyOOpQlFaoySMdauWUS4MknTtVQH1qaWXzNqIMKOMVq79DnZuaaVitp7oj7owK56RzJIzHua39XT7HoltCOGk+Y1z1Z09byIp63YqHawPoa27hQyxXDtgBfzrDq5dzs9vCoPygVpdxkpIqSvY29I1JJnEbERgd/WrOp2cN+h8sfvR0PrXIKSpypwa6HRdRzhHOHHT3rKrzOo6sndvc7aNSPKqUtjBnheCRo5Bgiiuk1eya+Rp0HzqOcUVrF8yujOdGUXpqjlwKkSRkjKjoaatIx5pnMTB1MZB+9UbHPSmilHWlawWEopSKaaYwpzcLj1pQPmHpSNy2e1IBvWu9+Cegrr3xA09LhN9pabrycEZBVOQD7Fiorg8ivWvhKZNL+HvjbWrcEXW61s0b/AGWYsw/QZrOvLlptoqC5pJHs1isPjHx5HpMe46Vp6meUDIEjE8A/jya9GWOCBRHAiJGvACjAFeZfs/SeX4M1rUZspJPck+acZ2hRwPYEmsLXPG4g1yKLTNQ1pJ5clNqCeN8ZydrKDgYOcYHFed7FR91bnrYeWnM9j29kDJ0rJ1FRk/Sk8M6zNfaFFczvDKxXLSIhQN+Hb6VwPjLxnfw3jQ21xolnbg4Mtyzs3vkAgfhmlyqWiZ3Rbi7yRz3xh0NbrSG1C3Oy7swXUjuO4rxDS5E1FPImKhZD5X+6CeD9AxB/OvftUuJNW0BnmuLW/ifh5LZSmUPqpJz16g1863avpur3lmhJWJzHnvgHg1tRV049UcuNspRn0ZjzxPBPJDMu2SNijD0IODUtonmXMSD1FdD8RrH7J4keYLiO8iS5XHqw+b9QaxtEA+2h26IN1dvPeHMjxay9m2uxb8T3Hm3EcQPEa4rEqa8lM11I57moadOPLFIinHlikFT2wEp8pjjPQ+9QUDg1ZTHyxtE5VxgikjcxuGU806SUyKA/JHQ1HSGjrNJvhLBy2GHUUVzNtO0EgKnjvRXO6ck/deh2U8TyxsxgGAaZipM5oK966DgIwaWkPWlpjFHvR16UEcChfvUgHZwtMPSnnmmHihCG17p8KLY3XwZ8SRhNxfUUOM9Skan+teGEV9J/s7wLcfDDV4pB8r6oy5PTJtx/gK58X/Cdjow7/eK5618PNHSx8I/Y1gWFFkaQBTnKsARSan4dsrktLeRpKT1yBk46ZNU/Ams6jfaZq8V1KrXFnJHGuECkptIyfU5B5q9PcQQXpg1G7ZZ23GGJEJLheTjArzubmtbc9ykrXaGTRwWOkGG0G0AE4U1y9x4Psdbjk3ok0MuGZG5B6kfXGT16ZNamra9bNZyK17PbpnBLp82PbjiqvhzXtOErx2eoQ3MjckBxu4/2aLOOp2ezfJ7yMqbwzZ+HdOuxaRGIzZZ1DEgnGOnQfhXgpsUm1jXrx4mkVvNjiI6bvX6DmvfviLrTW/h2/vHG1Ioz83vjj+dcD4fOl6jcXmnaUrPbx6YcNIm1ml4YnB5rSnNpN9zkxMYpJdjififb+Z4e8PXqgnCtbsfwDD+Z/KvPIJTErlepGK9l8V2JvPhtPFt/e2ojnA91JBx+BNeMkYhHua6cHLmpW7Hj4+HLU9SOiiiu04woNFB6UDCiiigYUUGigBz8EUo5FI3PNPQZFSQRnrRTmFNbimhkirv6U4REZNFmMyYNS3SmNOepqG9bCKwGTSMCOtAOKe4yM1ewEfavq34F2X2L4JC7x882qPc/8BVljH6A18pqMnHrX2P4IibTvg/bWMvD2+lRSvx0eUtJj8itcuNklTt3OjDq80ylHqqeFNVl1O4ONMuG8i6Y87F3YEn4cZ9s16NLaxXAWfcNwAaKVTnaccMD+P614d8SpnXwCDLw92rMFJ6gyKB+gNejfB7VBf8Awz0SR8yIImtye4MbFR+gFeXR+Dn8z1lNqXJ/W5Y1LxBrMUEkUtsZp14UrDGQRn1z9O1YmiWdw0suo6wqG6fO1Qo/dr6ZAHP09hXW6jq2m20L/aLlI2HXdwa891PWrnW737LpBaG26tcFcceo/pWkp3R6cZR5bRikcD8f/E4kt7fRLNgU8zfcMp4LDnb+HH5Vh/CrUhB4ztjMQY7hPLII7kYqj8Y7dLG/0yGIfKqOSTyWORkn1JrC8O3fkXtjcIcNC+OD75H88V1RinQTXmeNiZNYlp9Lf1+J69qsa/ZNQtdpKlZItvv1H8q8C1CLySsfpXu2q3IOrTsp+SfbMnoQRz/WvK/Enhy+W7LpBKUZ9qHYfm5xx61z5dU95xYsyivdZyVLg19h/DX4NeETbaXLq2ipcXCQbn+0szebIR8xZc4wOwrvF+Cvw7DOf+EXsssc43Px9Pm4r14y5ldHlH5/4pa+5H+AXgCSe/QaY6JLwgW5ceRkclefx5zXzt4X+FN3N45i0/UYZ30+2vvJuWVcN5YY857ZAH50ue24bHkhUjqCPwpQCSAAcmvuTxT8C/CWp2kQ0+x+yMgA/dyMcjPua4vUvgPpth4s0GeC3H9nPK6XEQYkHCEpnPuOaOZ9UFz5PZSDggg0V9VeKPg7pt14puBBB5FslqjgRjA3ZIP8qKyliFF2aNIwclc+XLeEk5P3a3P7IQ2Ujxn5wm8A8E+wr2TwJ8FbyS4Euq2zLbquQScEHGQMd69fk+FegS6BGllp0QuY1zuLHMmRyD71Tbb0MNXsfFNg0UVxHJcR70XnB6E19Eaf8JtHvvho2ryqY725t/NUscBSRkcdjXPyeEdDfx1otlHaC3aC68u9tnGdyjkEg/8A6iK+ifEXhIa/4dGlWt/JYnCnzIFAPHt0xihO4I+QNT8CPpltps0RkllnGXAGQB68dq43XV8u+aLHC19OazqOm+Crt9Av7XzNRhVVSYJkSptHzc9ySa+fryye+1ufbGxikk3L+PasYyvVu+xenKcmaljG5SK6fUvCU9otzIXQFIvOVGOMrnBwT3rmoXEMuTg+3b8a6b8y0JNjwVoUmv8AiWx04KwSZw0zD/lnCOXb/vkH8x6ivqfxDqlhp/h3ydQu4LAXkvn3Ad1UxQKAFQKTknaFAGO+a+UdP8QanpUV5DYTC2N0Ak0kagSMgOdofqFJwcDGcCsuR3mmeWZ2klbku5LMfxPNc1fDSrvV2R0UqiprY9D+J3joeKr5LfTR5djGFihHQBRwK+jfg/oh0b4bWlgZRI8bvLvHAJY5OPzr4uU4PXn1r6N+DvxEEmmpYT3Ci7Q/NEzAbh6jPrWGIo+wppQ26ndg5e1qO/xdD1u9tjKxLKN3ckdayzpot4p5ZF+Zulb8F1DK5LdGG4YrJ8S3wS3wqsUByxHYV5kpJK57lPmvax4b4+8Nya/qTt80YhQlOcZOeRXksyT6Rqc1rPt8yJtrY9f8mvUviJ4/gt5pLTRzDLOD/rV+YRnoQT0Y+35+lePTyyTyvLM7PK7FmZjksT1Jr1cDCo4e/wDD0PGzOpSdS9P4up6VZ67De6RZyGRRPbMYXGedjdD+dfWHhnTtP1z4eeGJ/syM2IZAQBncOG/Dg18BDj613vgr4teMfB9vFa6TqzSWEZytndoJol5zgA8r36Eda2pYSNKbkupw1cQ6sFGS2P0BihRAoVQAOgAqQgH6182+Bv2oLG5KweNNKeycnH2uwBki/wCBIfmH4Fq978O+JNG8SWS3eganaX9uwzugkDEf7w6qfYgV1nOT3haG5VwCQ42n09qxNA02C31/Vrghd91Isv0IUA/yFb95IjERv/F0rx7x74l1Dwn8RdIeZsaNeAxtL2jk7Z9jWUppMLHsN5P9mhOxQcdqqaxqtnZ20M106qm8AFjwCa54eIFuVaVWDxMmcjkAivl74reP9SvPEV/pH2gpYKyugGcqRzin7RPYLH1Zqd5b3tjd3FnIjYgZVcHIzg0V8p6f8QNTtfDc9pZzljt2bm9MUVx1U5yujRaH2aq/6aVABTbnOO9KgS1mYNhUkPHpmktCZLiZ1bMYbArg/jT8Q9L8FeH5I7ibOqXMbG0gUZZiO/sMkc13vRXMvMyPiR4esV8YaXrbeWqw+YbgnjK7PlJ9gQKksvF9g0lvJp9wsk8SMrRlvvAHGc+h7V8/+IviNe+JPCM6S3O28dAkiIDzzyM+hrG+Gwl1Bby3+0GKWJMhv4sH6+hrnc7O6Ivrob/xx8cx+JPFdq9jbPH9kV4HkZfvHI4/DB/OqPg+az1KxltI0P25WDIwXkY5zXNafqaQajPZajHHKTIwaYDJYg+nvXRfDHRZdR8ZXctpN5NvFkqo/iPHFRPfmZSbasVNe8N614i8eaX4b/cLqF5GZGKg7ETDEFvTAUn8a8yngkt5pILhGjmiYpIjdVYHBB+hFfU3wvsxf/GvxjqUjGVdLs4bKJz2LAZx+CsPxrzL9ovwm2j+Lm1q2jxYaqSzkDhJx94f8CHzf99VcKyU1TfY3VF+z50eRN90e3FIvWnEfzpFrpMgHU04ZOKTo1L06UATR3VzF/qridP92Rh/I0+fUb65j8u4vbqWP+7JMzD8iarnkZpKVluPmdrXAYpM80Ug6mmIO4pe1J/FTvSgBDWl4e13UfDWtW2q6LcyW19AwdXjYjd6qfVT0IPBpNC0W/17Uo7HSrZp7l+cDgKO7MewHrWj488Nt4Y1K1tGfzGaBWdx0L5+bHt0rN1IqSg3qzRUZuDqJaI++tP1a21/w5pur2pAhvLeO5j9gyg4/Dp+FeLfHRru6sEmXa8Vqwkde+Ae1Xfgl4k834PaGk0g32vm2v4JIcfoRU+vm31TT7uORgyMrAj1BFebXq++0OMbos/D67WbwvCylZBtxuA6g14H8UtOtP8AhOMghS6HdjjPpWj8NPGUvh/WbvSJpGawRiImbnaM1yfxV1ZNQ8UNPbMCgHykd6unzc/KFla5nrC8dtexwnKL0yetFaXhSWAaPerdkBnHBPWitlUs2mhOJ9peC/FejTeDLXUzfwpbyRmZndwMZyTn0xzXxv8AHnxjD4x8fzXVi4ksLZfIgcHO5ckk/ma4lNX1CPT3sY72dLN/vQhyFP4VnDGa6kn1MC2J2RfkJGeoq1Y6ncWbNJavsdhg1nAfIaUcAYqXFAaWklrjVoi5yxbJroV8RXvh7UJl09gjHqxHPSuc0CQR6tC56A81c8TsJdRd4+c1lOKlJJmsVaFz6F/ZdeS70rxbqVxzPc3cIZvXEbH+tegeM9AsvE2hXWl6kpaGccMv3o2H3XX3B/w71x37NFo1l8Lri6l4N5fyOp/2UVUH6hq9DZt4zXm4ufLU93oezgIXpa7HxJ4v8OX3hfXJ9M1FRvT5kkUfLKnZ19j6djxWIor6N/aS02OTw1ZagFHnW90I899rg8fmBXzoo5r1MLWdampPc83F0FRqOK2GsMNS0r9aQGug5haSgsKTrQAtJS0lACD71aOhaTea5qtvp2mwma6mbaq9gO5J7ADkms8fer3z9mjTIjY6vqTIvnecturkc7QoYgH6kflWOIq+xpuaOjC0fb1VBnoXgTwZY+DdBFtbgS3koDXNyRgyt7eijsP6149+0JbBbvTrgDnLofyB/pX0TdHamM14f8eLE3GlxTJ1imViSeAOh/nXhYeq3iIzkz6OvRSwk4RWiX5anKfDnxQdI8MyWzylUW4dgPqFq3qfxAlW1ljhz8/rXCPe28VrFa2qNsTks3VmPU1SkuQwOVFem8Opzcmj5hStojTbU0+zyOBi4Zt27uK56aV5JCzsSaV3ZvpTNp61106agS3cuLdzLEBnC0UsShosGiq5UK5AYs96BCBUvakqibCBQoxTflzims5yaaW70WCxZj+Q7kODT2d2JJJY/wA6qI5JxXT+ANO/tfxvoGnsMrcXsKsP9ncCf0BpOy1GlfQ+t/CumDw18PtC0hvllgtVMv8A10b52/VjWjan9yA3rxUfiK5El5gcDJOKx9Q1OS0hdYo/NnVDJFGG2+ZjqufXmvm6k+eq2fV4WjalGK3Zxn7Qq7vAt2D1S4gcf99Ef1r5jA4r334w+JYNY8HX8Xly210xhLQyKcjbINwBxg44rwAGvZy/Sm/U8fNqcqddRmrO36sGFM21JkZpGOa7TzBoWl20tKSMUAMxRilzxS0ANxzX0b+zZKv/AAil8nQ/bWP/AI4tfOZr6D/ZoXOg6kxPAu8f+OLXHj1eizvy3SuvRnsN7yvFedfESyS+0e6hfoUP4V6PeZA6cCuK8TpuicYyuO9fOydndH1NOKlGzPK774Kavb2kd0l3BJG6hhhT0IzXN6x8PL7TlQtMp3EDpivZovGnk+Fbe0nk/e2wMByecL90/livIfFPiye9uigf5Fbjmvoqc5TSaPi6sHTm4PodBZ/BeWTR1vZr/BK7toAxXF6x4Nkso5GimD7CRjNdlN8Qrs+HorMSbcLtJBrz6+1m4cvtmJDHJrSPMzK5kRNtJRuCKKryks+8Hmitxk9NY4FOpkgytAEbfNk03b8hNOAxmjontQAL8uDXpv7PEAu/itpDEZ8hJp/xEZA/nXmPVRXrH7NBCfE6DOP+POfH5Coqu0GXTV5I948UzyW907rk49K4PWdZtNU8uxvnaDEisJCjHYfUgdvp7V6r4gslnlORnPTFYg0O3LFzGu7vx1r5eScZs+zw1XlhGUXZo47Xbjw/4i0SSy1m+Rr+3j8uO52MqyjGM9OtfNur2UmmX81tIyuqN8sinKuOxBr7AfQoniJMY+pHFZd74Ks7pikkCHPZlBBrsw+NlResbo4sbhI4rXms0fJGc9KXNfTs/wAKdFuc7rKMEc5Ax9RxVf8A4U1oD5zbsoz2dhj9a7VmcHvFnmPKKnSS/H/I+aqQn1r6ai+DHh5WGbV2PfdI3+NbFn8KdEt5IJbDTbcNE++Qsu4mPawYc/WrWYwbsosh5XOKvKSPk9VeTAiVnPooJ/lXoHgL4c3OvN9o1bz7OyXogTEkn5/dHv1r6jtvDdhZIBbWsMa4GAiAAU25t4oVb92FAOOO9c9XMJyVoqx00ctpxknKVzyuP4a+HIYGRNORsjBaZmdvzzxVr4b2Nt4T1y502DK296fNjBbI3KMEDPfGPyrp9WnER4Iwa5i2uoE1y1llJYxyhsIu4jg+lec8RUbtJtnsxwtJRvGKTPULzCxlmOBXJa4FkjPvWit1JfN50ysI/wCCI9B7n1NZ+qrmNieB04rCobUVbQ8D8c3MlrqM8SMQj/Nx+VcI8jM+Sa7z4kDZqWcD5siuBc4bNfRYJ3oxPk8yjy4maHvM4G0k4qszE1NIwZfeoSK7EcAK1FKB7UUwLNIeaTtRmgBUUM+CcCmzKFBAORTWamFuCKXUOg5Ogr0X4D366f8AFHR/NICXPmWufd0OP1ArzhWxVy0uJba4iuLeRo54nEkbr1Vgcgj8RSnHmTRUHytM+6NQOSB6VFCiEHca8StPjXbX1rb/ANoQvbX2AsxAzEzf3geoB64PSu60HX5NTgWeKSJoXHyyI4cH8RXz1anOnK8kfT4apCcEoyO7UIBjAx6UMqM4PGcdazbWRmX5myTWnGqhRuI4FTF3LkrEOFLMOh6j0pzFVII4ps0kS5JOMVjX2vWVu3l+YHlzwqDcx/Ac03oCTextLKvUYGOtUdVvVFvJGkwjmwHUBsEgMM/4fjWC9/qdxzaabKA3R5m8sfXHJ/Ss+40LVtVuI/t00SrEyyKkcYOCD6nJ7e1JSV9SpU3Y6ODxpo0/S+jCrkFmyq5HXk1j6h4pgvJHXTFkuwOMxISD+PSqdr4Gs7ZgWRp3BzvlO4//AFq6Oz0mKAjy1CgdQOKic3J2ii6VNQ1k9TlfsF5qx3X263tx/wAsUb5m/wB5u30H510FjpdtaQ7IYVVAOij+daTW6IzEdCMUqqgI54bnFQos1lO+xCbcAAd/QVkauFSNsnpW3JLFH1P5muc1uaCUFd4GeetEojpvU8F+LOI7q2PQuzHH5V54WzXbfFbUIb7xEIbZgyW67WI6bj1H8q4zYK9/BR5aMUz5jMpc+Jk1/WhFuo3VJ5YpwjU9q6ro4eVkQNFWhAlFLnRXIyLcKNwxVfcaMmrsZk2FoKj1qDJ9aMn1osBOFUelPDAdKq5o5oAt+YvrVzTNYvNJuPP028mtpe5jbGfqOh/GsilocU9GNSad0er6L8adXsUVb+2t7wKPvrmNj+WR+leoaP431q71G1t9W0S80rT7lQyaisbXUHIBUlkGApH8Xbv7fLKIZHVF6sdo/GvefCHxkfRdFtbGXRUnhgjEKy21wYmcKMAlSCO3rXJUwkN4xOyljprScvwPco/D9pcKPtd/cXJPbcET8l6/nWjZaXYafGVtYokyey814Bqvxe0i+IZ9H1OJx/EsyZH4gg1CfixYhxNFcahbIxGIVLHYPQ5DAnvwcfSuGWFqfyHpxxdOS+M+iyhzwqGoZWw4AjAbBO7PbjjFfOZ+OV2tvOYY5fOU4ijmAbcOOSwxjv2qg/x110hW/s+18wEg5dsbeMfjnNEcLVd7IUsVRVryPpOXL7hkYP8AKqUxlQ8MPevnc/HPW2XDabafUSNSW3xj1G7kKXqw2gP3ZEQyAfUZB/LNRLBVVrY0hjqDduY94vLxoSeeOtclr/is2CF5J4okGeWOK851bVfEGqaeJbHWY1VukkSAxv7bhkqfqPyry/W4dTiuR/bHntI3KvI25W/3T0P4UqGFVZ25reXU0xWKeHV+Rvz6feeg+IfibM7MllPJN7qNq/n3rjrrxPq92WZ76YBh0Q4rniOKfC3BU/hXqQwlKmtEeJVx1aq9XZeRITkkk5OeTSDNMzyaM1tY57js8e9IpOabmgZzRYVywGwOtFQknFFTyl8xBtPpS7TRRWxgG00vlmiikMURml8s0UUXABEaURHvRRSuFh6p5QLjqBgfU8Vp25zZwqOy4ooq4MiaISrOzDPeq93Hsn2f3VH596KKGNELDAoxRRSKFx7UlFFAFrTNTvNLnMthcPCx+8Byrj0YHg/jWnrfiabV9NW0ms7aIhxI0ke7JYZHAJwOvNFFZyowlJTa1RtDE1YQdOMvdfQ5/tSfdYGiitDE2tL0qO9BLPioNasFsbkRxnIxRRUCTKUceetS+T7UUUyg8oUUUUwP/9k=";
 const ALLICE_IMG="data:image/jpeg;base64,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";
 const USERS=[
-  {id:'emilia', name:'Emília',  role:'admin',  turno:'Gestora de Operação SDR',  color:'#1a2b4a', emoji:'👑', photo:EMILIA_IMG},
-  {id:'dani',   name:'Dani',    role:'mentor', turno:'manhã/tarde (09h–18h)',    color:'#ec4899', emoji:'⭐', mentees:['Leandro','Larissa'], photo:DANI_IMG},
-  {id:'gaby',   name:'Gaby',    role:'mentor', turno:'manhã/tarde (09h–18h)',    color:'#ec4899', emoji:'⭐', mentees:['Leandro','Larissa'], photo:GABY_IMG},
-  {id:'grazi',  name:'Grazi',   role:'mentor', turno:'tarde',                    color:'#f59e0b', emoji:'⭐', mentees:['Allice'], photo:GRAZI_IMG},
-  {id:'leandro',name:'Leandro', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#3b82f6', emoji:'👨‍💼', mentor:'Dani / Gaby', photo:LEANDRO_IMG},
-  {id:'larissa',name:'Larissa', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#8b5cf6', emoji:'👩‍💼', mentor:'Dani / Gaby', photo:LARISSA_IMG},
-  {id:'allice', name:'Allice',  role:'novo',   turno:'tarde (12h–21h)',          color:'#14b8a6', emoji:'👩‍💼', mentor:'Grazi', photo:ALLICE_IMG},
-  {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'🧪', mentor:'—'},
-  {id:'teste_sdr',      name:'Teste — Novo SDR',  role:'novo',   turno:'visualização de teste', color:'#0ea5e9', emoji:'🧪', mentor:'Teste — Madrinha'},
-  {id:'teste_madrinha', name:'Teste — Madrinha',  role:'mentor', turno:'visualização de teste', color:'#a855f7', emoji:'🧪', mentees:['Leandro','Larissa']},
+  {id:'emilia', name:'Emília',  role:'admin',  turno:'Gestora de Operação SDR',  color:'#1a2b4a', emoji:'G', photo:EMILIA_IMG},
+  {id:'dani',   name:'Dani',    role:'mentor', turno:'manhã/tarde (09h–18h)',    color:'#ec4899', emoji:'M', mentees:['Leandro','Larissa'], photo:DANI_IMG},
+  {id:'gaby',   name:'Gaby',    role:'mentor', turno:'manhã/tarde (09h–18h)',    color:'#ec4899', emoji:'M', mentees:['Leandro','Larissa'], photo:GABY_IMG},
+  {id:'grazi',  name:'Grazi',   role:'mentor', turno:'tarde',                    color:'#f59e0b', emoji:'M', mentees:['Allice'], photo:GRAZI_IMG},
+  {id:'leandro',name:'Leandro', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#3b82f6', emoji:'S', mentor:'Dani / Gaby', photo:LEANDRO_IMG},
+  {id:'larissa',name:'Larissa', role:'novo',   turno:'manhã/tarde (09h–18h)',    color:'#8b5cf6', emoji:'S', mentor:'Dani / Gaby', photo:LARISSA_IMG},
+  {id:'allice', name:'Allice',  role:'novo',   turno:'tarde (12h–21h)',          color:'#14b8a6', emoji:'S', mentor:'Grazi', photo:ALLICE_IMG},
+  {id:'teste',  name:'Teste (Candidato)', role:'novo', turno:'visualização de teste', color:'#64748b', emoji:'T', mentor:'—'},
+  {id:'teste_sdr',      name:'Teste — Novo SDR',  role:'novo',   turno:'visualização de teste', color:'#0ea5e9', emoji:'T', mentor:'Teste — Madrinha'},
+  {id:'teste_madrinha', name:'Teste — Madrinha',  role:'mentor', turno:'visualização de teste', color:'#a855f7', emoji:'T', mentees:['Leandro','Larissa']},
 ];
 
 /* ══ PROVAS ══ */
@@ -559,88 +583,65 @@ const PROVAS={
 const DAYS=[
   /* ─── SEMANA ONLINE ─── */
   {
-    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online — início com Emília',color:'#3b82f6',pts:75,
-    videos:[{name:'Introdução ao Pipedrive',time:'14h',src:'PIPEDRIVE'}],
+    id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online',color:'#3b82f6',pts:75,
     blocks:[
-      {time:'13h15–14h',   title:'Daily PV — equipe tarde (observação)',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham a daily como ouvintes'},
-      {time:'14h–15h20',   title:'📹 Introdução ao Pipedrive + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
-      {time:'15h20–15h40', title:'☕ Pausa café',type:'async',conduct:'—',joint:true},
-      {time:'15h40–17h',   title:'📹 Vídeos Chatwoot + cumprir tarefas propostas',type:'async',conduct:'Auto',joint:true},
-      {time:'17h–17h40',   title:'💬 Momento Dúvidas — Emília',type:'live',conduct:'Emília',joint:true},
-      {time:'17h40–18h',   title:'Avaliação do dia + Prova Diária 1',type:'practice',conduct:'Auto',joint:true},
-      {time:'18h–19h30 (T)', title:'[ALLICE] Prática nos sistemas + revisão das tarefas',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'19h30–21h (T)', title:'[ALLICE] Acompanhar rotina da equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'13h15–14h',   title:'Daily PV — observação',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham como ouvintes',meet:''},
+      {time:'14h–15h20',   title:'Módulos Pipedrive I, Agenda I, Slack I e Chatwoot I',type:'async',conduct:'Auto',joint:true},
+      {time:'15h20–15h40', title:'Pausa',type:'async',conduct:'—',joint:true},
+      {time:'15h40–17h',   title:'Continuação dos módulos do dia',type:'async',conduct:'Auto',joint:true},
+      {time:'17h–17h40',   title:'Momento Dúvidas',type:'live',conduct:'Emília',joint:true,meet:''},
+      {time:'17h40–18h',   title:'Reflexão do dia',type:'practice',conduct:'Auto',joint:true},
+      {time:'18h–19h30',   title:'Prática nos sistemas + revisão das tarefas',type:'practice',conduct:'Grazi',turno:'allice'},
+      {time:'19h30–21h',   title:'Acompanhar rotina da equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
     ],
-    tasks:[
-      {id:'d1t1',label:'Participei do Daily PV como ouvinte',pts:5},
-      {id:'d1t2',label:'📹 Assisti ao vídeo Introdução ao Pipedrive',pts:10},
-      {id:'d1t3',label:'✅ Cumpri as tarefas propostas do Pipedrive',pts:15},
-      {id:'d1t4',label:'📹 Assisti aos vídeos do Chatwoot',pts:10},
-      {id:'d1t5',label:'✅ Cumpri as tarefas propostas do Chatwoot',pts:15},
-      {id:'d1t6',label:'Participei do Momento Dúvidas com a Emília',pts:5},
-      {id:'d1t7',label:'Pratiquei nos sistemas após os vídeos',pts:10},
-      {id:'d1t8',label:'Enviei a Prova do Dia 1',pts:15},
-    ]
-  },
+    tasks:[]},
   {
-    id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:55,
+    id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:60,
     blocks:[
-      {time:'09h–10h (M)',   title:'Acompanhar Rotina da manhã',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro com a Gaby',meet:''},
-      {time:'10h–11h30 (M)', title:'Módulos do dia + 🎥 Assistir uma R1',type:'practice',conduct:'Auto',turno:'manha'},
-      {time:'14h–15h30 (M)', title:'Resultados PV + Rotina part2 equipe manhã',type:'live',conduct:'Emília',turno:'manha'},
-      {time:'15h30–16h30 (M)',title:'Prática: Enviar 1 R01 supervisionado',type:'practice',conduct:'Madrinha',turno:'manha'},
-      {time:'13h–14h (T)',   title:'[ALLICE] Acompanhar Rotina da tarde',type:'live',conduct:'Grazi',turno:'allice',note:'Allice com a Grazi',meet:''},
-      {time:'14h–15h30 (T)', title:'[ALLICE] Módulos do dia + 🎥 Assistir uma R1',type:'practice',conduct:'Auto',turno:'allice'},
-      {time:'17h30–19h (T)', title:'[ALLICE] Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'19h–21h (T)',   title:'[ALLICE] Encaminhar 2 R01 (prática supervisionada)',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'17h',           title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true},
-      {time:'Fim do dia',    title:'Avaliação do dia + Prova Diária 2',type:'practice',conduct:'Auto'},
+      {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
+      {time:'10h–11h30',   title:'Módulos do dia: Pipedrive II, Slack II e Chatwoot II',type:'async',conduct:'Auto',turno:'manha'},
+      {time:'11h30–12h',   title:'Assistir uma R1 (gravação no módulo Agenda I)',type:'read',conduct:'Auto',turno:'manha'},
+      {time:'14h–15h30',   title:'Resultados PV + Rotina part2 — equipe manhã',type:'live',conduct:'Dani',turno:'manha',meet:''},
+      {time:'15h30–16h30', title:'Prática: enviar 1 R01 supervisionado',type:'practice',conduct:'Gaby',turno:'manha'},
+      {time:'16h30–17h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Gaby',turno:'manha'},
+      {time:'13h–14h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
+      {time:'14h–15h30',   title:'Módulos do dia + assistir uma R1',type:'async',conduct:'Auto',turno:'allice'},
+      {time:'17h30–19h',   title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'19h–20h30',   title:'Prática: encaminhar 2 R01',type:'practice',conduct:'Grazi',turno:'allice'},
+      {time:'20h30–21h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'17h',         title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true,meet:''},
     ],
-    tasks:[
-      {id:'d2t1',label:'Acompanhei a Rotina part1 do time',pts:10},
-      {id:'d2t2',label:'Participei / pratiquei o envio de R01',pts:15},
-      {id:'d2t3',label:'Enviei a Prova do Dia 2',pts:20},
-      {id:'d2t4',label:'Preenchi a avaliação do dia',pts:5},
-    ]
-  },
+    tasks:[]},
   {
     id:'d3',date:'08/10 (Qui)',label:'Quinta-feira',sub:'08/10 · Online',color:'#14b8a6',pts:60,
     blocks:[
-      {time:'09h30–11h30 (M)',title:'Rotina part1 — equipe manhã + Daily PV Manhã',type:'live',conduct:'Madrinha',turno:'manha'},
-      {time:'13h–15h30',      title:'Treinamento Integração — Novos (todos juntos)',type:'live',conduct:'Emília',joint:true,note:'Leandro, Larissa e Allice juntos'},
-      {time:'15h30–16h30',    title:'💬 Ler conversas do Chatwoot (ver aba Atividades)',type:'read',conduct:'Auto',joint:true},
-      {time:'17h',            title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true},
-      {time:'17h30–21h (T)',  title:'[ALLICE] Rotina equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'Fim do dia',     title:'Avaliação do dia + Prova Diária 3',type:'practice',conduct:'Auto'},
+      {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Dani',turno:'manha',note:'Larissa e Leandro',meet:''},
+      {time:'10h–11h30',   title:'Ler conversas do Chatwoot (links no módulo Chatwoot II)',type:'read',conduct:'Auto',turno:'manha'},
+      {time:'13h–15h30',   title:'Treinamento de Integração — todos juntos',type:'live',conduct:'Emília',joint:true,meet:''},
+      {time:'15h30–16h30', title:'Continuação dos módulos do dia',type:'async',conduct:'Auto',joint:true},
+      {time:'16h30–17h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Madrinha',joint:true},
+      {time:'17h',         title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true,meet:''},
+      {time:'13h–14h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
+      {time:'17h30–20h30', title:'Rotina equipe tarde + leitura de conversas',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'20h30–21h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
     ],
-    tasks:[
-      {id:'d3t1',label:'Participei do Treinamento de Integração',pts:15},
-      {id:'d3t2',label:'Li conversas reais do time com clientes',pts:10},
-      {id:'d3t3',label:'Enviei a Prova do Dia 3',pts:20},
-      {id:'d3t4',label:'Preenchi a avaliação do dia',pts:5},
-    ]
-  },
+    tasks:[]},
   {
-    id:'d4',date:'09/10 (Sex)',label:'Sexta-feira',sub:'09/10 · Online · Encerramento Semana 1',color:'#22c55e',pts:55,
+    id:'d4',date:'09/10 (Sex)',label:'Sexta-feira',sub:'09/10 · Online',color:'#22c55e',pts:60,
     blocks:[
-      {time:'09h30–11h30 (M)',title:'Rotina part2 equipe manhã (Gaby) + Daily PV Manhã',type:'live',conduct:'Gaby',turno:'manha'},
-      {time:'13h–14h30 (M)', title:'Rotina part2 (Dani) — reflexão e consolidação',type:'live',conduct:'Dani',turno:'manha'},
-      {time:'14h30–16h30 (M)',title:'🎧 Ouvir ligações (ver aba Atividades)',type:'listen',conduct:'Auto',turno:'manha'},
-      {time:'13h–14h30 (T)', title:'[ALLICE] Rotina part2 (Dani)',type:'live',conduct:'Dani',turno:'allice'},
-      {time:'14h30–16h30 (T)',title:'[ALLICE] 🎧 Ouvir ligações (ver aba Atividades)',type:'listen',conduct:'Auto',turno:'allice'},
-      {time:'18h–19h30 (T)', title:'[ALLICE] Rotina part2 equipe tarde (Grazi)',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'19h30–21h (T)', title:'[ALLICE] Ler conversas do time',type:'read',conduct:'Grazi',turno:'allice'},
-      {time:'16h30',         title:'Call conjunta — reflexão da 1ª semana online',type:'live',conduct:'Emília',joint:true,note:'Leandro, Larissa e Allice · encerramento da semana'},
-      {time:'Fim do dia',    title:'Avaliação final semana online + Prova Diária 4',type:'practice',conduct:'Auto'},
+      {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
+      {time:'10h–11h30',   title:'Módulos do dia: VoIP e Chatwoot III',type:'async',conduct:'Auto',turno:'manha'},
+      {time:'13h–14h30',   title:'Rotina part2 — consolidação da semana',type:'live',conduct:'Dani',turno:'manha',meet:''},
+      {time:'14h30–16h',   title:'Ouvir ligações (áudios no módulo VoIP)',type:'listen',conduct:'Auto',turno:'manha'},
+      {time:'16h–16h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Dani',turno:'manha'},
+      {time:'13h–14h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
+      {time:'14h30–16h30', title:'Ouvir ligações (áudios no módulo VoIP)',type:'listen',conduct:'Auto',turno:'allice'},
+      {time:'18h–19h30',   title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'19h30–20h30', title:'Leitura de conversas do time',type:'read',conduct:'Grazi',turno:'allice'},
+      {time:'20h30–21h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'16h30',       title:'Call conjunta — fechamento da 1ª semana',type:'live',conduct:'Emília',joint:true,note:'Todos juntos',meet:''},
     ],
-    tasks:[
-      {id:'d4t1',label:'Participei da Rotina part2 com Dani',pts:10},
-      {id:'d4t2',label:'Ouvi e/ou enviei ligações supervisionadas',pts:15},
-      {id:'d4t3',label:'Participei da call de reflexão da semana',pts:10},
-      {id:'d4t4',label:'Enviei a Prova do Dia 4',pts:15},
-    ]
-  },
-  /* ─── SEMANA PRESENCIAL ─── */
+    tasks:[]},
   {
     id:'d5',date:'13/10 (Ter)',label:'Terça-feira',sub:'13/10 · PRESENCIAL',color:'#f97316',pts:80,
     blocks:[
@@ -716,7 +717,7 @@ const DAYS=[
 /* ═══════ MÓDULOS DO CURSO — organizados por data ═══════ */
 const MODULOS=[
 /* ───── 06/10 ───── */
- {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#8b5cf6',icon:'💼',
+ {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#8b5cf6',
   topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Fazendo anotações no card','Mudando de etapa'],
   praticas:['Abra um card de teste do zero','Pesquise duplicidade antes de criar um segundo card','Faça uma anotação no card registrando o contato','Movimente o card de teste entre duas etapas do funil','Crie a próxima atividade no card com data e tipo'],
   prova:{pts:20,perguntas:[
@@ -725,10 +726,10 @@ const MODULOS=[
    {id:'m1q3',txt:'Por que registrar anotações no card é importante? O que não pode faltar numa anotação?'},
    {id:'m1q4',txt:'O que precisa estar pronto antes de mudar um card de etapa?'}]}},
 
- {id:'m2',num:2,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#3b82f6',icon:'📅',
+ {id:'m2',num:2,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#3b82f6',
   topicos:['Como agendar um meet com colegas','Como agendar um meet com o cliente','R01','Como colocar a R1 para gravar','Aceitar invite'],
   praticas:['Agende um meet de teste com um colega do time','Configure uma reunião de teste para gravar automaticamente','Aceite um invite enviado pela sua madrinha','Localize a gravação de uma R1 já realizada'],
-  materiais:{titulo:'🎥 Assistir uma R1',desc:'Assista à gravação abaixo e observe a condução do consultor.',
+  materiais:{titulo:'Assistir uma R1',desc:'Assista à gravação abaixo e observe a condução do consultor.',
     links:[{nome:'Gravação da R1',url:''}],
     obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
   prova:{pts:20,perguntas:[
@@ -737,7 +738,7 @@ const MODULOS=[
    {id:'m2q3',txt:'Como você deixa uma R1 configurada para gravar? Por que a gravação importa?'},
    {id:'m2q4',txt:'Por que aceitar o invite é obrigatório? O que acontece com a agenda do time se você não aceita?'}]}},
 
- {id:'m3',num:3,cat:'Slack',titulo:'Slack I — Comunicação do Time',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#14b8a6',icon:'💬',
+ {id:'m3',num:3,cat:'Slack',titulo:'Slack I — Comunicação do Time',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#14b8a6',
   topicos:['Estar incluído em todos os canais','Responder com check verdinho ✅ aos avisos','Como responder em qualquer canal','Círculo'],
   praticas:['Confira se está em todos os canais do time e peça inclusão nos que faltam','Responda com o check verdinho a um aviso do canal','Envie uma mensagem de apresentação no canal do time','Responda dentro de uma thread existente'],
   prova:{pts:15,perguntas:[
@@ -745,7 +746,7 @@ const MODULOS=[
    {id:'m3q2',txt:'Liste os canais em que você já foi incluído e para que serve cada um.'},
    {id:'m3q3',txt:'O que é o Círculo e qual seu papel nele?'}]}},
 
- {id:'m4',num:4,cat:'Chatwoot',titulo:'Chatwoot I — Introdução e Caixa de Entrada',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#f97316',icon:'📥',
+ {id:'m4',num:4,cat:'Chatwoot',titulo:'Chatwoot I — Introdução e Caixa de Entrada',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#f97316',
   topicos:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
   praticas:['Navegue pelas três caixas de entrada e identifique quantas conversas há em cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e identifique de qual canal ela veio','Atribua uma conversa de teste para você'],
   prova:{pts:20,perguntas:[
@@ -755,7 +756,7 @@ const MODULOS=[
    {id:'m4q4',txt:'Ao abrir o Chatwoot pela manhã, qual caixa você olha primeiro e por quê?'}]}},
 
 /* ───── 07/10 ───── */
- {id:'m5',num:5,cat:'Pipedrive',titulo:'Pipedrive II — Atividades',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#8b5cf6',icon:'📋',
+ {id:'m5',num:5,cat:'Pipedrive',titulo:'Pipedrive II — Atividades',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#8b5cf6',
   topicos:['Atividades do dia','Atividades atrasadas','Organizando a fila de trabalho'],
   praticas:['Abra a visão de atividades do dia e liste quantas estão pendentes','Identifique as atividades atrasadas e defina a ordem em que resolveria','Conclua uma atividade de teste e crie a próxima na sequência','Reagende uma atividade atrasada registrando o motivo na anotação'],
   prova:{pts:15,perguntas:[
@@ -763,7 +764,7 @@ const MODULOS=[
    {id:'m5q2',txt:'O que fazer ao encontrar atividades atrasadas? Descreva sua ordem de prioridade.'},
    {id:'m5q3',txt:'Por que nenhuma atividade pode ficar sem data de próximo passo?'}]}},
 
- {id:'m6',num:6,cat:'Slack',titulo:'Slack II — Status e Presença',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#14b8a6',icon:'🟢',
+ {id:'m6',num:6,cat:'Slack',titulo:'Slack II — Status e Presença',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#14b8a6',
   topicos:['Ligar a agenda no Slack','Status de almoço (pratinho 🍽️)','Sempre ativo (bolinha verde 🟢)'],
   praticas:['Conecte sua agenda ao Slack e confirme que os eventos aparecem','Configure o status de almoço e volte ao status ativo','Deixe seu perfil com foto e cargo preenchidos'],
   prova:{pts:15,perguntas:[
@@ -771,10 +772,10 @@ const MODULOS=[
    {id:'m6q2',txt:'Explique como e quando usar o status de almoço e o status ativo.'},
    {id:'m6q3',txt:'Por que o time precisa saber se você está disponível em tempo real?'}]}},
 
- {id:'m7',num:7,cat:'Chatwoot',titulo:'Chatwoot II — Contatos, Status e Mensagens',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#f97316',icon:'👤',
+ {id:'m7',num:7,cat:'Chatwoot',titulo:'Chatwoot II — Contatos, Status e Mensagens',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#f97316',
   topicos:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa','Mensagens prontas','Envio de template após a janela de 24 horas'],
   praticas:['Identifique o proprietário de três conversas diferentes','Localize uma conversa vinda do bot e outra do WhatsApp','Altere o status de uma conversa de teste e observe o que muda','Use uma mensagem pronta numa conversa de teste','Localize onde ficam os templates e simule o envio após 24h'],
-  materiais:{titulo:'💬 Ler conversas do Chatwoot',desc:'Abra as conversas abaixo e analise cada uma com atenção.',
+  materiais:{titulo:'Ler conversas do Chatwoot',desc:'Abra as conversas abaixo e analise cada uma com atenção.',
     links:[{nome:'Conversa 1',url:''},{nome:'Conversa 2',url:''},{nome:'Conversa 3',url:''},{nome:'Conversa 4',url:''},{nome:'Conversa 5',url:''}],
     obs:['Qual cliente foi atendido pela Cora','Quais perguntas de qualificação foram feitas aos clientes de WhatsApp','Em quais momentos o cliente parou de responder']},
   prova:{pts:25,perguntas:[
@@ -785,10 +786,10 @@ const MODULOS=[
    {id:'m7q5',txt:'Quando usar uma mensagem pronta e quando escrever do zero?'}]}},
 
 /* ───── 09/10 ───── */
- {id:'m8',num:8,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f59e0b',icon:'☎️',
+ {id:'m8',num:8,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f59e0b',
   topicos:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
   praticas:['Faça uma ligação de teste para um colega do time','Confirme que a ligação foi registrada automaticamente no card do Pipedrive','Abra o relatório de ligações e identifique o total do dia','Localize a gravação de uma ligação pelo número ou pela data'],
-  materiais:{titulo:'🎧 Ouvir ligações',desc:'Ouça os áudios abaixo e registre suas observações.',
+  materiais:{titulo:'Ouvir ligações',desc:'Ouça os áudios abaixo e registre suas observações.',
     links:[{nome:'Ligação 1',url:''},{nome:'Ligação 2',url:''},{nome:'Ligação 3',url:''}],
     obs:['Principais perguntas feitas pelos clientes','Se houve um OK claro sobre o valor ou ficou subentendido','Qual foi a resposta do cliente sobre valor e prazo']},
   prova:{pts:20,perguntas:[
@@ -797,7 +798,7 @@ const MODULOS=[
    {id:'m8q3',txt:'Como você localiza a gravação de uma ligação específica? Para que isso serve no dia a dia?'},
    {id:'m8q4',txt:'Para que serve o relatório de ligações e com que frequência você deve consultá-lo?'}]}},
 
- {id:'m9',num:9,cat:'Chatwoot',titulo:'Chatwoot III — Etiquetas e Registro no Pipedrive',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f97316',icon:'🏷️',
+ {id:'m9',num:9,cat:'Chatwoot',titulo:'Chatwoot III — Etiquetas e Registro no Pipedrive',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f97316',
   topicos:['Etiquetas: para que servem','Como aplicar etiquetas corretamente','Preenchimento lateral','Salvar dados','Salvar mensagem no Pipedrive'],
   praticas:['Aplique pelo menos três etiquetas diferentes em conversas de teste','Preencha todos os campos da barra lateral de uma conversa','Salve os dados e confirme que ficaram registrados','Salve uma mensagem da conversa direto no card do Pipedrive','Filtre a caixa por uma etiqueta e veja o resultado'],
   prova:{pts:25,perguntas:[
@@ -808,7 +809,7 @@ const MODULOS=[
    {id:'m9q5',txt:'Por que o registro no Pipedrive não pode depender só da memória da conversa no Chatwoot?'}]}},
 
 /* ───── 13/10 ───── */
- {id:'m10',num:10,cat:'Rotinas',titulo:'Rotinas do Time',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#ec4899',icon:'⏰',
+ {id:'m10',num:10,cat:'Rotinas',titulo:'Rotinas do Time',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#ec4899',
   topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
   praticas:[],
   prova:{pts:15,perguntas:[
@@ -816,7 +817,7 @@ const MODULOS=[
    {id:'m10q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
    {id:'m10q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
 
- {id:'m11',num:11,cat:'Chatwoot',titulo:'Chatwoot IV — Atendimento Cora',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#f97316',icon:'🤖',
+ {id:'m11',num:11,cat:'Chatwoot',titulo:'Chatwoot IV — Atendimento Cora',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#f97316',
   topicos:['O que é o Atendimento Cora','Quando a Cora entra na conversa','Como assumir um atendimento da Cora','O que revisar no histórico da Cora'],
   praticas:['Abra um atendimento Cora e acompanhe o fluxo completo','Identifique em qual ponto a Cora passou a conversa para o humano','Assuma um atendimento da Cora e registre a continuidade','Revise o histórico da Cora e anote o que já foi qualificado'],
   prova:{pts:20,perguntas:[
@@ -825,7 +826,7 @@ const MODULOS=[
    {id:'m11q3',txt:'Ao assumir um atendimento da Cora, o que você revisa antes de responder ao cliente?'},
    {id:'m11q4',txt:'O que a Cora já pergunta e o que ainda cabe a você perguntar?'}]}},
 
- {id:'m12',num:12,cat:'Estimativa',titulo:'Simulador de Estimativa',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#0ea5e9',icon:'🧮',
+ {id:'m12',num:12,cat:'Estimativa',titulo:'Simulador de Estimativa',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#0ea5e9',
   topicos:['O que é o simulador de estimativa','Refazendo uma estimativa','Quando a estimativa precisa ser refeita'],
   praticas:['Monte uma estimativa de teste no simulador','Refaça uma estimativa alterando o escopo e compare os valores','Registre a nova estimativa no card do cliente'],
   prova:{pts:20,perguntas:[
@@ -835,7 +836,7 @@ const MODULOS=[
    {id:'m12q4',txt:'O que você comunica ao cliente quando o valor muda depois de refazer a estimativa?'}]}},
 
 /* ───── 14/10 ───── */
- {id:'m13',num:13,cat:'Metas',titulo:'Metas e Performance',modo:'presencial',data:'14/10',dia:'Quarta-feira',sem:2,cor:'#ef4444',icon:'🎯',
+ {id:'m13',num:13,cat:'Metas',titulo:'Metas e Performance',modo:'presencial',data:'14/10',dia:'Quarta-feira',sem:2,cor:'#ef4444',
   topicos:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
   praticas:['Calcule quantas ligações precisa por dia útil para bater as 500','Calcule quantos agendamentos precisa por semana para bater os 29','Monte sua rotina diária alinhada às metas e valide com a madrinha'],
   prova:{pts:25,perguntas:[
@@ -845,7 +846,7 @@ const MODULOS=[
    {id:'m13q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'}]}},
 
 /* ───── 15/10 ───── */
- {id:'m14',num:14,cat:'Agenda',titulo:'Agenda II — Arquitetos e Regras',modo:'presencial',data:'15/10',dia:'Quinta-feira',sem:2,cor:'#3b82f6',icon:'🗓️',
+ {id:'m14',num:14,cat:'Agenda',titulo:'Agenda II — Arquitetos e Regras',modo:'presencial',data:'15/10',dia:'Quinta-feira',sem:2,cor:'#3b82f6',
   topicos:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Regra: agendar com no mínimo 6h de antecedência','Participar de todas as reuniões diárias','Câmera aberta','Levantar a mão para falar','Atenção total durante as reuniões'],
   praticas:['Salve as agendas de todos os arquitetos no seu calendário','Consulte a disponibilidade de um arquiteto para os próximos 3 dias','Agende uma R1 de teste respeitando a regra das 6 horas','Simule um agendamento que fura a regra e descreva como contornaria'],
   prova:{pts:25,perguntas:[
@@ -855,7 +856,7 @@ const MODULOS=[
    {id:'m14q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'}]}},
 
 /* ───── 16/10 ───── */
- {id:'m15',num:15,cat:'Pipedrive',titulo:'Pipedrive III — Perdas e Ganhos',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#8b5cf6',icon:'🏁',
+ {id:'m15',num:15,cat:'Pipedrive',titulo:'Pipedrive III — Perdas e Ganhos',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#8b5cf6',
   topicos:['Preenchimento obrigatório','Motivos de perda: quais existem','Quando usar cada motivo de perda','Ganho: passo a passo do card','Informações obrigatórias para dar um ganho'],
   praticas:['Confira todos os campos obrigatórios de um card antes de fechá-lo','Marque um card de teste como perdido escolhendo o motivo correto','Registre a anotação justificando o motivo de perda','Faça o passo a passo completo de ganho em um card de teste'],
   prova:{pts:25,perguntas:[
@@ -865,7 +866,7 @@ const MODULOS=[
    {id:'m15q4',txt:'Descreva o passo a passo completo para dar um ganho no card.'},
    {id:'m15q5',txt:'Quais são as informações obrigatórias para dar um GANHO? O que acontece se faltar alguma?'}]}},
 
- {id:'m16',num:16,cat:'WhatsApp',titulo:'WhatsApp — Grupos e Cliente',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#22c55e',icon:'📱',
+ {id:'m16',num:16,cat:'WhatsApp',titulo:'WhatsApp — Grupos e Cliente',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#22c55e',
   topicos:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
   praticas:['Crie um grupo de teste com o padrão de nome do time','Inclua um colega simulando o cliente','Envie a mensagem com o link da reunião no formato padrão','Envie o evento e confirme o recebimento'],
   prova:{pts:20,perguntas:[
@@ -875,7 +876,7 @@ const MODULOS=[
    {id:'m16q4',txt:'Qual o padrão de nome dos grupos e por que seguir esse padrão importa?'}]}},
 
 /* ───── 21/10 ───── */
- {id:'m17',num:17,cat:'Pipedrive',titulo:'Pipedrive IV — Indicadores',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#8b5cf6',icon:'📊',
+ {id:'m17',num:17,cat:'Pipedrive',titulo:'Pipedrive IV — Indicadores',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#8b5cf6',
   topicos:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
   praticas:['Abra o painel de indicadores e anote seus números da semana','Calcule sua taxa de conversão do período','Identifique quantos MQL você gerou e quantos viraram agendamento','Compare seus indicadores com as metas do time'],
   prova:{pts:25,perguntas:[
@@ -885,7 +886,7 @@ const MODULOS=[
    {id:'m17q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'},
    {id:'m17q5',txt:'Olhando seus próprios números desta semana, onde você está melhor e onde precisa evoluir?'}]}},
 
- {id:'m18',num:18,cat:'Slack',titulo:'Slack III — Fluxos Operacionais',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#14b8a6',icon:'🔄',
+ {id:'m18',num:18,cat:'Slack',titulo:'Slack III — Fluxos Operacionais',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#14b8a6',
   topicos:['Roleta','Medição','Vistoria'],
   praticas:['Acompanhe uma rodada de roleta do início ao fim','Abra uma solicitação de medição de teste','Localize onde as vistorias são registradas e acompanhe uma'],
   prova:{pts:20,perguntas:[
@@ -895,7 +896,7 @@ const MODULOS=[
    {id:'m18q4',txt:'O que acontece se um desses fluxos não for registrado no canal correto?'}]}},
 
 /* ───── 22/10 ───── */
- {id:'m19',num:19,cat:'Chatwoot',titulo:'Chatwoot V — Filtros Personalizados',modo:'online',data:'22/10',dia:'Quinta-feira',sem:3,cor:'#f97316',icon:'🔍',
+ {id:'m19',num:19,cat:'Chatwoot',titulo:'Chatwoot V — Filtros Personalizados',modo:'online',data:'22/10',dia:'Quinta-feira',sem:3,cor:'#f97316',
   topicos:['O que são filtros personalizados','Como criar um filtro','Combinando critérios','Salvando e reutilizando filtros'],
   praticas:['Crie um filtro de conversas não respondidas há mais de 1 hora','Crie um filtro combinando etiqueta e status','Salve o filtro e use-o na sua rotina','Compartilhe com a madrinha o filtro que mais te ajudou'],
   prova:{pts:20,perguntas:[
@@ -907,10 +908,16 @@ const MODULOS=[
 const MOD_PTS_TOPICO=5;
 const MOD_PTS_PRATICA=10;
 const DIFICULDADES=['Fácil','Médio','Difícil'];
+/* Vídeo de treinamento por módulo. Preencher a URL conforme forem gravados. */
+const MOD_VIDEOS={
+  m1:'pipedrive-intro.mp4',
+  m2:'', m3:'', m4:'', m5:'', m6:'', m7:'', m8:'', m9:'', m10:'',
+  m11:'', m12:'', m13:'', m14:'', m15:'', m16:'', m17:'', m18:'', m19:''
+};
 const SEMANAS=[
- {n:1,label:'🌐 Semana 1 — Online · 06 a 09/10'},
- {n:2,label:'🏢 Semana 2 — Presencial · 13 a 16/10'},
- {n:3,label:'🌐 Semana 3 — Online · 19 a 23/10'},
+ {n:1,label:'Semana 1 · Online · 06 a 09/10'},
+ {n:2,label:'Semana 2 · Presencial · 13 a 16/10'},
+ {n:3,label:'Semana 3 · Online · 19 a 23/10'},
 ];
 const MAX_MOD_PTS=MODULOS.reduce((a,m)=>a+m.topicos.length*MOD_PTS_TOPICO+m.praticas.length*MOD_PTS_PRATICA+m.prova.pts,0);
 
@@ -924,30 +931,30 @@ const AVAL_PROCESSOS={
   pts:90,
   desc:'Avaliação aplicada a todo o time de Pré-Vendas após o treinamento de processos com a Gaby. Responda com suas palavras, como você responderia ao cliente no dia a dia.',
   blocos:[
-    {nome:'🔧 Operacional e sistemas',perguntas:[
+    {nome:'Operacional e sistemas',perguntas:[
       {id:'pr1',txt:'Como abrir uma solicitação de medição? Descreva o passo a passo.'},
       {id:'pr2',txt:'O Chatwoot parou de funcionar. O que você faz? Para quem avisa e como segue atendendo?'},
       {id:'pr3',txt:'A mensagem ficou vermelha, você clicou em reenviar e não foi. O que faz agora?'},
       {id:'pr4',txt:'Qual é o nosso SLA de resposta ao cliente? O que você faz para garantir que ele seja cumprido?'},
     ]},
-    {nome:'📐 Projeto, planta e escopo',perguntas:[
+    {nome:'Projeto, planta e escopo',perguntas:[
       {id:'pr5',txt:'O apartamento é antigo. Posso fazer escopo parcial? Justifique a sua resposta.'},
       {id:'pr6',txt:'O que é uma planta com escala?'},
       {id:'pr7',txt:'Como fazer a leitura de planta e o cálculo parcial? Descreva o processo.'},
       {id:'pr8',txt:'Na estimativa estão inclusos quais materiais de acabamento?'},
     ]},
-    {nome:'💰 Valores e qualificação',perguntas:[
+    {nome:'Valores e qualificação',perguntas:[
       {id:'pr9',txt:'Qual é o valor mínimo para um projeto de só móveis?'},
       {id:'pr10',txt:'O cliente quer comprar apenas o projeto e a entrega não é acima de 15 meses. Como você conduz?'},
       {id:'pr11',txt:'Cliente investidor: falamos de orçamento exato? Explique o porquê.'},
       {id:'pr12',txt:'Onde você verifica se o cliente é investidor ou não?'},
     ]},
-    {nome:'🗣️ Objeções e condução do cliente',perguntas:[
+    {nome:'Objeções e condução do cliente',perguntas:[
       {id:'pr13',txt:'O cliente diz que pode ficar 30 dias fora, mas depois vai precisar morar no apartamento enquanto a obra termina. Como você responde?'},
       {id:'pr14',txt:'Você já ofereceu a agenda da semana e o cliente disse que não consegue nenhum horário. O que você faz?'},
       {id:'pr15',txt:'Depois de passar o valor, o cliente responde "é bem perto do que eu imaginava". Isso é um sim ou não? Como você conduz a partir daí?'},
     ]},
-    {nome:'🏁 Fechamento, perda e ganho',perguntas:[
+    {nome:'Fechamento, perda e ganho',perguntas:[
       {id:'pr16',txt:'Cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
       {id:'pr17',txt:'O cliente ainda não assinou o contrato de compra e venda e não tem previsão. Como seguir com esse lead?'},
       {id:'pr18',txt:'Quais são as informações principais necessárias para dar um GANHO?'},
@@ -956,7 +963,7 @@ const AVAL_PROCESSOS={
 };
 function totalPerguntasProc(){return AVAL_PROCESSOS.blocos.reduce((a,b)=>a+b.perguntas.length,0);}
 
-const TYPE_LABELS={live:'🔴 Ao vivo',async:'🟣 Assíncrono',listen:'🟢 Escuta',read:'🟡 Leitura',practice:'🔴 Prática',meet:'🔵 Meet'};
+const TYPE_LABELS={live:'Ao vivo',async:'Assíncrono',listen:'Escuta',read:'Leitura',practice:'Prática',meet:'Reunião'};
 const TYPE_CLASSES={live:'pill-live',async:'pill-async',listen:'pill-listen',read:'pill-read',practice:'pill-practice',meet:'pill-meet'};
 const MAX_PTS=DAYS.reduce((a,d)=>a+d.pts,0)+Object.values(PROVAS).reduce((a,p)=>a+p.pts,0);
 const TESTE_IDS=['teste','teste_sdr','teste_madrinha'];
@@ -1090,7 +1097,7 @@ function doCreatePw(){
 function showCreatePw(email){
   document.getElementById('login-form-area').style.display='none';
   document.getElementById('create-pw-area').style.display='block';
-  document.getElementById('invite-email-display').textContent='📧 '+email;
+  document.getElementById('invite-email-display').textContent=''+email;
 }
 function showLoginForm(){
   document.getElementById('create-pw-area').style.display='none';
@@ -1148,12 +1155,12 @@ function addTab(tabs,main,id,label,builder){
 
 /* ══════ ADM ══════ */
 function buildAdminPanels(tabs,main){
-  addTab(tabs,main,'adm-dashboard','📊 Dashboard',   buildAdmDashboard);
-  addTab(tabs,main,'adm-provas',   '📋 Avaliações',  buildAdmProvas);
+  addTab(tabs,main,'adm-dashboard','Dashboard',   buildAdmDashboard);
+  addTab(tabs,main,'adm-provas',   'Avaliações',  buildAdmProvas);
   addTab(tabs,main,'adm-diarios',  '📓 Diários',     buildAdmDiarios);
-  addTab(tabs,main,'adm-duvidas',  '💬 Dúvidas',     buildAdmDuvidas);
-  addTab(tabs,main,'adm-proc',    '📝 Aval. Processos', buildAdmProc);
-  addTab(tabs,main,'adm-acessos',  '🔐 Acessos',     buildAdmAcessos);
+  addTab(tabs,main,'adm-duvidas',  'Dúvidas',     buildAdmDuvidas);
+  addTab(tabs,main,'adm-proc',    'Aval. Processos', buildAdmProc);
+  addTab(tabs,main,'adm-acessos',  'Acessos',     buildAdmAcessos);
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.adm-diary-entry-header').forEach(h=>{h.onclick=()=>h.closest('.adm-diary-entry').classList.toggle('open');});
 }
@@ -1199,17 +1206,17 @@ function buildAdmDashboard(){
         <div class="adm-sdr-row"><span>Avaliações</span><strong>${s.env}/${MODULOS.length}${s.vid?' 🎥':''}</strong></div>
         <div class="adm-sdr-row"><span>Conteúdos vistos</span><strong>${s.tops}</strong></div>
         <div class="adm-sdr-row"><span>Pontos</span><strong>${s.pts}</strong></div>
-        ${s.duv?`<div style="margin-top:9px;background:#fef9c3;border-radius:8px;padding:7px 9px;font-size:.72rem;color:#92400e"><strong>💬 Última dúvida:</strong><br>${s.duv}</div>`:''}
+        ${s.duv?`<div style="margin-top:9px;background:#fef9c3;border-radius:8px;padding:7px 9px;font-size:.72rem;color:#92400e"><strong>Última dúvida:</strong><br>${s.duv}</div>`:''}
       </div></div>`;
   });
   html+=`</div>`;
   const rows=NOVOS.map((u,i)=>({name:u.name,photo:u.photo,color:u.color,pts:S[i].pts,done:S[i].done})).sort((a,b)=>b.pts-a.pts);
   const mx=Math.max(...rows.map(r=>r.pts),1);
-  html+=`<div class="leaderboard"><div class="lb-header">🏆 Ranking da Formação</div>`;
+  html+=`<div class="leaderboard"><div class="lb-header">Ranking da Formação</div>`;
   rows.forEach((r,i)=>{
     const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
       :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem">${r.name[0]}</div>`;
-    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div>${av}
+    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['1º','2º','3º'][i]||i+1}</div>${av}
       <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.done}/${MODULOS.length} módulos</div></div>
       <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/mx)*100)}%"></div></div>
       <div class="lb-pts">${r.pts} pts</div></div>`;
@@ -1246,10 +1253,10 @@ function buildAdmDiarios(){
           html+=`<div class="adm-diary-entry"><div class="adm-diary-entry-header" onclick="this.closest('.adm-diary-entry').classList.toggle('open')">${day.label} · ${day.date}<span style="color:var(--muted);font-size:.68rem">${filled} campos ▼</span></div>
             <div class="adm-diary-entry-body">
               ${e.mom?`<div class="adm-diary-field"><label>🕐 Momentos acompanhados</label><p>${e.mom}</p></div>`:''}
-              ${e.exp?`<div class="adm-diary-field"><label>📌 O que aconteceu</label><p>${e.exp}</p></div>`:''}
-              ${e.atencao?`<div class="adm-diary-field"><label>🔎 Pontos de atenção</label><p>${e.atencao}</p></div>`:''}
-              ${e.bem?`<div class="adm-diary-field"><label>✅ O que funcionou</label><p>${e.bem}</p></div>`:''}
-              ${e.prova?`<div class="adm-diary-field"><label>📋 Desempenho nas atividades</label><p>${e.prova}</p></div>`:''}
+              ${e.exp?`<div class="adm-diary-field"><label>O que aconteceu</label><p>${e.exp}</p></div>`:''}
+              ${e.atencao?`<div class="adm-diary-field"><label>Pontos de atenção</label><p>${e.atencao}</p></div>`:''}
+              ${e.bem?`<div class="adm-diary-field"><label>O que funcionou</label><p>${e.bem}</p></div>`:''}
+              ${e.prova?`<div class="adm-diary-field"><label>Desempenho nas atividades</label><p>${e.prova}</p></div>`:''}
             </div></div>`;
         });
       });
@@ -1275,10 +1282,10 @@ function buildAdmDuvidas(){
 
 /* ══════ NOVO SDR ══════ */
 function buildNovoPanels(tabs,main){
-  addTab(tabs,main,'modulos','📚 Módulos',()=>buildModHero()+buildModulosHTML());
-  addTab(tabs,main,'cronograma','📅 Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
-  addTab(tabs,main,'proc','📝 Aval. Processos',buildProcPanel);
-  addTab(tabs,main,'progresso','🏆 Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
+  addTab(tabs,main,'modulos','Módulos',()=>buildModHero()+buildModulosHTML());
+  addTab(tabs,main,'cronograma','Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
+  addTab(tabs,main,'proc','Aval. Processos',buildProcPanel);
+  addTab(tabs,main,'progresso','Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
 
   const mp=document.getElementById('panel-modulos');
@@ -1365,14 +1372,14 @@ function buildProgressBanner(){
 
   // Conquistas
   const badges=[
-    {label:'🌱 Primeiros passos',earned:pts>=5},
-    {label:'🔥 50 pontos',earned:pts>=50},
-    {label:'📝 3 provas',earned:provasEnv>=3},
-    {label:'⭐ 150 pontos',earned:pts>=150},
-    {label:'🎥 Enviou vídeo',earned:hasVideo()},
-    {label:'🏅 SDR Ativado',earned:pts>=MAX_PTS*.9},
+    {label:'Primeiros passos',earned:pts>=5},
+    {label:'50 pontos',earned:pts>=50},
+    {label:'3 avaliações',earned:provasEnv>=3},
+    {label:'150 pontos',earned:pts>=150},
+    {label:'300 pontos',earned:pts>=300},
+    {label:'Formação concluída',earned:pts>=MAX_MOD_PTS*.9},
   ];
-  html+=`<div class="progress-banner"><div class="pb-top"><strong>🏆 Suas conquistas</strong><span class="pb-pts">${pts} / ${MAX_PTS} pts</span></div>
+  html+=`<div class="progress-banner"><div class="pb-top"><strong>Conquistas</strong><span class="pb-pts">${pts} / ${MAX_PTS} pts</span></div>
     <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
     <div class="pb-badges">${badges.map(b=>`<span class="badge${b.earned?' earned':''}">${b.label}</span>`).join('')}</div></div>`;
   return html;
@@ -1384,7 +1391,7 @@ function abrirModulo(did){
 }
 function buildVideoSection(day){
   if(!day.videos||!day.videos.length)return'';
-  let h='<div class="day-video-section"><div style="font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:8px">🎬 Vídeos do dia</div>';
+  let h='<div class="day-video-section"><div style="font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:8px">Vídeos do dia</div>';
   day.videos.forEach(v=>{
     const src=VIDEO_SOURCES[v.src]||'';
     h+=`<div class="day-video-card" id="vc-${day.id}-${v.src}">
@@ -1429,14 +1436,29 @@ function hasVideo(){return false;}
 
 /* ─── Render dos módulos ─── */
 
+
+function buildModVideo(m){
+  const src=MOD_VIDEOS[m.id]||'';
+  if(src){
+    return `<div class="mvideo">
+      <div class="mvideo-h"><span class="mvl">Aula em vídeo</span><span class="mvt">${m.titulo}</span></div>
+      <video controls playsinline preload="metadata"><source src="${src}" type="video/mp4"></video>
+    </div>`;
+  }
+  return `<div class="mvideo pend">
+    <div class="mvideo-h"><span class="mvl">Aula em vídeo</span><span class="mvt">${m.titulo}</span></div>
+    <div class="mvsoon">Vídeo em produção — será disponibilizado em breve.</div>
+  </div>`;
+}
+
 function buildMateriais(m){
   if(!m.materiais)return'';
   const M=m.materiais;
   let h=`<div class="mat-box"><h5>${M.titulo}</h5><div class="md">${M.desc}</div><div class="mat-links">`;
   M.links.forEach(l=>{
     h+= l.url
-      ? `<a class="mat-link" href="${l.url}" target="_blank" rel="noopener">🔗 ${l.nome}</a>`
-      : `<span class="mat-link off">⏳ ${l.nome} — em breve</span>`;
+      ? `<a class="mat-link" href="${l.url}" target="_blank" rel="noopener">${l.nome}</a>`
+      : `<span class="mat-link off">${l.nome} — em breve</span>`;
   });
   h+=`</div><div class="mat-obs"><div class="ot">O que observar e anotar</div><ul>`;
   M.obs.forEach(o=>h+=`<li>${o}</li>`);
@@ -1453,13 +1475,13 @@ function buildProcPanel(){
   const enviada=pv.submitted;
 
   let html=`<div class="proc-hero">
-    <h2>📝 ${AVAL_PROCESSOS.titulo}</h2>
+    <h2>${AVAL_PROCESSOS.titulo}</h2>
     <div class="ph-meta">
-      <span class="ph-tag">👤 Responsável: ${AVAL_PROCESSOS.responsavel}</span>
-      <span class="ph-tag">📅 ${AVAL_PROCESSOS.data}</span>
-      <span class="ph-tag">❓ ${total} questões</span>
-      <span class="ph-tag">⭐ ${AVAL_PROCESSOS.pts} pontos</span>
-      <span class="ph-tag">${enviada?'✅ Enviada':'⏳ '+resp+'/'+total+' respondidas'}</span>
+      <span class="ph-tag">Responsável: ${AVAL_PROCESSOS.responsavel}</span>
+      <span class="ph-tag">${AVAL_PROCESSOS.data}</span>
+      <span class="ph-tag">${total} questões</span>
+      <span class="ph-tag">${AVAL_PROCESSOS.pts} pontos</span>
+      <span class="ph-tag">${enviada?'Enviada':''+resp+'/'+total+' respondidas'}</span>
     </div>
     <p>${AVAL_PROCESSOS.desc}</p></div>`;
 
@@ -1469,9 +1491,9 @@ function buildProcPanel(){
         <div><div class="nota-val">${pv.nota}<span style="font-size:1rem;color:var(--muted)">/${AVAL_PROCESSOS.pts}</span></div>
         <div style="font-size:.72rem;color:var(--muted);margin-top:2px">corrigido por ${pv.corrigidoPor||'Gestão'}</div></div>
         <div style="flex:1;min-width:150px"><div class="bar-bg"><div class="bar-fill" style="width:${Math.round((pv.nota/AVAL_PROCESSOS.pts)*100)}%"></div></div></div></div>
-        ${pv.feedback?`<div class="nota-fb"><strong>💬 Feedback:</strong><br>${pv.feedback}</div>`:''}</div>`;
+        ${pv.feedback?`<div class="nota-fb"><strong>Feedback:</strong><br>${pv.feedback}</div>`:''}</div>`;
     } else {
-      html+=`<div class="aval-wait"><div class="ic">⏳</div>
+      html+=`<div class="aval-wait">
         <b>Avaliação enviada — aguardando correção</b>
         <span>Sua nota será liberada assim que a gestão corrigir.</span>
         <span style="margin-top:6px">Enviada em ${pv.enviadoEm?new Date(pv.enviadoEm).toLocaleString('pt-BR'):'-'}</span></div>`;
@@ -1497,7 +1519,7 @@ function buildProcPanel(){
   });
 
   html+=`<div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <button class="btn-save-eval" onclick="salvarProcRascunho()">💾 Salvar rascunho</button>
+    <button class="btn-save-eval" onclick="salvarProcRascunho()">Salvar rascunho</button>
     <button class="proc-submit" onclick="enviarProcAval()">Enviar avaliação →</button>
     <span class="eval-saved" id="proc-saved">✓ Rascunho salvo!</span></div>
     <p style="font-size:.73rem;color:var(--muted);margin-top:9px">Depois de enviar não é possível editar. Salve o rascunho quantas vezes quiser antes disso.</p>`;
@@ -1548,27 +1570,28 @@ function buildModulosHTML(){
     lista.forEach(m=>{
       if(m.data!==dataAtual){
         dataAtual=m.data;
-        html+=`<div style="font-size:.73rem;font-weight:800;color:var(--muted);letter-spacing:.4px;margin:8px 0 2px">📆 ${m.dia} · ${m.data}</div>`;
+        html+=`<div style="font-size:.73rem;font-weight:800;color:var(--muted);letter-spacing:.4px;margin:8px 0 2px">${m.dia} · ${m.data}</div>`;
       }
       const p=modProgress(m);
-      const chip={done:'<span class="mod-chip chip-done">✅ Concluído</span>',
-                  doing:'<span class="mod-chip chip-doing">▶️ Em andamento</span>',
+      const chip={done:'<span class="mod-chip chip-done">Concluído</span>',
+                  doing:'<span class="mod-chip chip-doing">Em andamento</span>',
                   todo:'<span class="mod-chip chip-todo">A iniciar</span>'}[p.status];
       html+=`<div class="day-card" id="mod-${m.id}">
         <div class="day-header"><div class="dh-left">
           <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
-            <strong>${m.icon} ${m.titulo}</strong>${chip}
+            <strong>${m.titulo}</strong>${chip}
             <div class="day-sub" style="margin-top:3px">
               <span class="mod-cat">${m.cat}</span>
-              <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'🌐 Online':'🏢 Presencial'}</span>
+              <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'Online':'Presencial'}</span>
               <span style="margin-left:5px">${m.data}</span></div>
-            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos${p.tP?` · ${p.dP}/${p.tP} práticas`:''} · ${p.env?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
+            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos${p.tP?` · ${p.dP}/${p.tP} práticas`:''} · ${p.env?'avaliação enviada':'avaliação pendente'}</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
+          ${buildModVideo(m)}
           ${buildMateriais(m)}
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo do módulo</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo</div>
             <div class="task-list">${m.topicos.map((t,i)=>`
               <div class="topic-row" id="trow-${m.id}_t${i}">
                 <div class="topic-head">
@@ -1577,11 +1600,11 @@ function buildModulosHTML(){
                   <span class="task-pts">+${MOD_PTS_TOPICO}</span>
                 </div></div>`).join('')}</div>
           </div>
-          ${m.praticas.length?`<div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Tarefas práticas no sistema</div>
+          ${m.praticas.length?`<div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Prática no sistema</div>
             <p style="font-size:.74rem;color:var(--muted);margin-bottom:9px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
             ${m.praticas.map((t,i)=>buildPratica(m,t,i)).join('')}
           </div>`:''}
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">${m.praticas.length?3:2}</span> Avaliação do módulo</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">${m.praticas.length?3:2}</span> Avaliação</div>
             ${buildModProva(m)}
           </div>
         </div></div>`;
@@ -1630,7 +1653,7 @@ function toggleTopic(el){
   refreshTrilha();
 }
 
-/* ─── Avaliação do módulo: envio, espera e nota ─── */
+/* ─── Avaliação: envio, espera e nota ─── */
 function buildModProva(m){
   const u=getU(currentUser.id);
   const pv=(u.modProvas||{})[m.id]||{};
@@ -1642,16 +1665,16 @@ function buildModProva(m){
           <div style="font-size:.72rem;color:var(--muted);margin-top:2px">corrigido por ${pv.corrigidoPor||'Gestão'}</div></div>
           <div style="flex:1;min-width:150px"><div class="bar-bg"><div class="bar-fill" style="width:${Math.round((pv.nota/m.prova.pts)*100)}%"></div></div></div>
         </div>
-        ${pv.feedback?`<div class="nota-fb"><strong>💬 Feedback:</strong><br>${pv.feedback}</div>`:''}
+        ${pv.feedback?`<div class="nota-fb"><strong>Feedback:</strong><br>${pv.feedback}</div>`:''}
       </div>`;
     }
-    return `<div class="aval-wait"><div class="ic">⏳</div>
+    return `<div class="aval-wait">
       <b>Avaliação enviada — aguardando correção</b>
       <span>Sua nota será liberada assim que a gestão corrigir. Enquanto isso, siga com o conteúdo e as tarefas práticas do módulo.</span>
       <span style="margin-top:6px">Enviada em ${pv.enviadoEm?new Date(pv.enviadoEm).toLocaleString('pt-BR'):'-'}</span></div>`;
   }
   let h=`<div class="prova-section" id="mprova-${m.id}">
-    <div class="prova-header"><span class="prova-icon">📋</span><h4>Avaliação — ${m.titulo}</h4><span class="prova-pts-badge">${m.prova.pts} pts</span></div>
+    <div class="prova-header"><h4>Avaliação — ${m.titulo}</h4><span class="prova-pts-badge">${m.prova.pts} pts</span></div>
     <p class="prova-desc">Responda com suas palavras. Depois de enviar não é possível editar e a avaliação sai da tela — a nota é liberada após a correção.</p>`;
   m.prova.perguntas.forEach((q,i)=>{
     const val=(pv.rascunho||{})[q.id]||'';
@@ -1659,7 +1682,7 @@ function buildModProva(m){
       <textarea id="${q.id}" placeholder="Sua resposta...">${val}</textarea></div>`;
   });
   h+=`<div class="prova-status">
-      <button class="btn-save-eval" onclick="salvarRascunhoMod('${m.id}')">💾 Salvar rascunho</button>
+      <button class="btn-save-eval" onclick="salvarRascunhoMod('${m.id}')">Salvar rascunho</button>
       <button class="btn-submit-prova" onclick="submitModProva('${m.id}')">Enviar avaliação →</button>
       <span class="eval-saved" id="msaved-${m.id}">✓ Salvo!</span>
     </div></div>`;
@@ -1713,7 +1736,7 @@ function buildModHero(){
     :`<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
   const h=new Date().getHours(), saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
   let out=`<div class="course-hero"><div class="ch-top">${av}
-      <div class="ch-greet"><div class="eyebrow">Trilha de Formação Pré-Vendas</div>
+      <div class="ch-greet"><div class="eyebrow">Formação Pré-Vendas</div>
       <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
       <p>${done} de ${MODULOS.length} módulos concluídos</p></div>
       <div class="ch-ring"><svg width="74" height="74">
@@ -1731,12 +1754,12 @@ function buildModHero(){
   const prox=MODULOS.find(m=>modProgress(m).status!=='done');
   if(prox){
     const p=modProgress(prox);
-    out+=`<div class="resume-card"><span class="ric">${p.status==='doing'?'▶️':'🎯'}</span>
+    out+=`<div class="resume-card"><span class="ric">${p.status==='doing'?'▸':'○'}</span>
       <div class="rtx"><b>${p.status==='doing'?'Continue de onde parou':'Próximo módulo'}</b>
       <span>Módulo ${prox.num} — ${prox.titulo} · ${p.done}/${p.total} conteúdos</span></div>
       <button class="btn-resume" onclick="abrirMod('${prox.id}')">Abrir módulo</button></div>`;
   } else {
-    out+=`<div class="cert-banner"><h3>🏅 Formação concluída!</h3><p>Você completou todos os ${MODULOS.length} módulos da trilha Pré-Vendas. Parabéns!</p></div>`;
+    out+=`<div class="cert-banner"><h3>Formação concluída</h3><p>Você completou todos os ${MODULOS.length} módulos da trilha Pré-Vendas. Parabéns!</p></div>`;
   }
   return out;
 }
@@ -1746,18 +1769,24 @@ function abrirMod(id){
 }
 
 function buildDaysHTML(){
-  let html=`<div style="background:#eef2f8;border-left:4px solid var(--navy);border-radius:10px;padding:13px 16px;margin-bottom:18px;font-size:.78rem;color:var(--navy)">
-    <strong>Esta é a sua agenda diária.</strong> O conteúdo do curso e as avaliações ficam na aba <b>📚 Módulos</b>.
-  </div>`;
-  const weeks=[{label:'🌐 Semana 1 — Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
-               {label:'🏢 Semana 2 — Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
+  const eq = currentUser.id==='allice' ? 'Equipe Tarde' : 'Equipe Manhã';
+  const mad = currentUser.mentor || '—';
+  let html=`<div style="background:#f8fafc;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:14px 17px;margin-bottom:18px">
+    <div style="font-size:.78rem;color:var(--navy);margin-bottom:9px"><strong>Sua agenda diária.</strong> O conteúdo e as avaliações ficam na aba <b>Módulos</b>.</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <span style="background:#eff6ff;color:#2563eb;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">${eq}</span>
+      <span style="background:#fdf2f8;color:#9d174d;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">Madrinha: ${mad}</span>
+      <span style="background:#f1f5f9;color:#475569;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">${currentUser.turno}</span>
+    </div></div>`;
+  const weeks=[{label:'Semana 1 · Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
+               {label:'Semana 2 · Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
   weeks.forEach(w=>{
     html+=`<div class="week-divider">${w.label}</div><div class="days-grid" style="margin-bottom:10px">`;
     w.ids.forEach(did=>{
       const day=DAYS.find(d=>d.id===did);if(!day)return;
       html+=`<div class="day-card" id="card-${day.id}">
         <div class="day-header"><div class="dh-left">
-          <div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}<br><span style="font-size:.58rem">${day.sub.includes('Online')?'🌐':'🏢'}</span></div>
+          <div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}<br><span style="font-size:.58rem"></span></div>
           <div><strong>${day.label}</strong><div class="day-sub">${day.sub}</div></div>
         </div><span class="day-arrow">▼</span></div>
         <div class="day-body">
@@ -1780,9 +1809,9 @@ function buildScheduleTable(day){
   });
   let html=`<table class="sched-table"><thead><tr><th>Horário</th><th>Atividade</th><th>Tipo</th><th>Condutor</th></tr></thead><tbody>`;
   visible.forEach(b=>{
-    const jt=b.joint?`<span class="joint-badge">👥 Conjunta</span>`:'';
-    const meetHtml=(b.meet!==undefined)?(b.meet?`<a class="meet-btn" href="${b.meet}" target="_blank" rel="noopener">📹 Entrar no meet</a>`:`<span class="meet-btn off">📹 Link do meet em breve</span>`):'';
-    html+=`<tr><td style="white-space:nowrap;font-weight:600;font-size:.75rem">${b.time}</td><td>${b.title}${jt}${b.note?`<div style="font-size:.68rem;color:var(--muted);margin-top:3px">💡 ${b.note}</div>`:''}${meetHtml?`<div>${meetHtml}</div>`:''}</td><td><span class="type-pill ${TYPE_CLASSES[b.type]}">${TYPE_LABELS[b.type]}</span></td><td style="font-size:.75rem;color:var(--muted)">${b.conduct}</td></tr>`;
+    const jt=b.joint?`<span class="joint-badge">Conjunta</span>`:'';
+    const meetHtml=(b.meet!==undefined)?(b.meet?`<a class="meet-btn" href="${b.meet}" target="_blank" rel="noopener">Entrar no meet</a>`:`<span class="meet-btn off">Link do meet em breve</span>`):'';
+    html+=`<tr><td style="white-space:nowrap;font-weight:600;font-size:.75rem">${b.time}</td><td>${b.title}${jt}${b.note?`<div style="font-size:.68rem;color:var(--muted);margin-top:3px">${b.note}</div>`:''}${meetHtml?`<div>${meetHtml}</div>`:''}</td><td><span class="type-pill ${TYPE_CLASSES[b.type]}">${TYPE_LABELS[b.type]}</span></td><td style="font-size:.75rem">${["Dani","Gaby","Grazi","Madrinha"].includes(b.conduct)?`<span style="background:#fdf2f8;color:#9d174d;padding:2px 8px;border-radius:20px;font-weight:700;font-size:.7rem">${b.conduct}</span>`:`<span style="color:var(--muted)">${b.conduct}</span>`}</td></tr>`;
   });
   return html+`</tbody></table>`;
 }
@@ -1793,7 +1822,7 @@ function buildTaskChecklist(day){
 }
 function buildProvaSection(day){
   const p=PROVAS[day.id];if(!p)return'';
-  let html=`<div class="prova-section" id="prova-${day.id}"><div class="prova-header"><span class="prova-icon">📋</span><h4>${p.titulo}</h4><span class="prova-pts-badge">+${p.pts} pts</span></div><p class="prova-desc">${p.desc}</p>`;
+  let html=`<div class="prova-section" id="prova-${day.id}"><div class="prova-header"><h4>${p.titulo}</h4><span class="prova-pts-badge">+${p.pts} pts</span></div><p class="prova-desc">${p.desc}</p>`;
   p.perguntas.forEach((q,i)=>{html+=`<div class="prova-q"><label>Questão ${i+1}</label><div class="q-enunciado">${q.enunciado}</div><textarea id="${q.id}" placeholder="Escreva sua resposta aqui..."></textarea></div>`;});
   html+=`<div class="video-or">— ou adicione um vídeo —</div>
     <div class="video-upload-area" data-day="${day.id}"><input type="file" accept="video/*"><div class="vu-icon">🎥</div>
@@ -1806,7 +1835,7 @@ function buildProvaSection(day){
   return html;
 }
 function buildEvalForm(day){
-  return `<div class="eval-section"><h4>📝 Avaliação do dia</h4>
+  return `<div class="eval-section"><h4>Avaliação do dia</h4>
     <div class="eval-q"><label>O que aprendi hoje?</label><textarea id="eval-aprendi-${day.id}" placeholder="Descreva em algumas frases..."></textarea></div>
     <div class="eval-q"><label>O que ficou com dúvida?</label><textarea id="eval-duvida-${day.id}" placeholder="Liste suas dúvidas..."></textarea></div>
     <div class="eval-q"><label>Minha confiança hoje (1–5)</label><div class="stars-row">${[1,2,3,4,5].map(i=>`<span class="star-btn" data-day="${day.id}" data-star="${i}">★</span>`).join('')}</div></div>
@@ -1817,7 +1846,7 @@ function handleVideoUpload(e,dayId){
   const file=e.target.files[0];if(!file)return;
   const prev=document.getElementById('vpreview-'+dayId);
   prev.querySelector('video').src=URL.createObjectURL(file);
-  document.getElementById('vname-'+dayId).textContent='📎 '+file.name;
+  document.getElementById('vname-'+dayId).textContent=''+file.name;
   prev.style.display='block';
   const uid=currentUser.id;const u=getU(uid);const provas=u.provas||{};
   if(!provas[dayId])provas[dayId]={};
@@ -1844,7 +1873,7 @@ function refreshProvaStates(){
     const pv=provas[dayId];const p=PROVAS[dayId];if(!p)return;
     if(pv.respostas){p.perguntas.forEach(q=>{const el=document.getElementById(q.id);if(el&&pv.respostas[q.id])el.value=pv.respostas[q.id];});}
     if(pv.submitted){const done=document.getElementById('prova-done-'+dayId);if(done)done.style.display='flex';const btn=document.querySelector(`.btn-submit-prova[data-day="${dayId}"]`);if(btn)btn.disabled=true;}
-    if(pv.hasVideo&&pv.videoName){const n=document.getElementById('vname-'+dayId);if(n){n.textContent='📎 '+pv.videoName;const pr=document.getElementById('vpreview-'+dayId);if(pr)pr.style.display='block';}}
+    if(pv.hasVideo&&pv.videoName){const n=document.getElementById('vname-'+dayId);if(n){n.textContent=''+pv.videoName;const pr=document.getElementById('vpreview-'+dayId);if(pr)pr.style.display='block';}}
   });
 }
 function toggleTask(item){
@@ -1901,11 +1930,11 @@ function buildLeaderboardHTML(){
             provas:Object.values(d.modProvas||{}).filter(v=>v.submitted).length};
   }).sort((a,b)=>b.pts-a.pts);
   const maxP=Math.max(...rows.map(r=>r.pts),1);
-  let html=`<div class="leaderboard"><div class="lb-header">🏆 Ranking da Formação</div>`;
+  let html=`<div class="leaderboard"><div class="lb-header">Ranking da Formação</div>`;
   rows.forEach((r,i)=>{
     const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
       :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem;flex-shrink:0">${r.name[0]}</div>`;
-    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['🥇','🥈','🥉'][i]||i+1}</div>
+    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${['1º','2º','3º'][i]||i+1}</div>
       ${av}
       <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.mods}/${MODULOS.length} módulos · ${r.provas} avaliações</div></div>
       <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/maxP)*100)}%"></div></div>
@@ -1920,10 +1949,10 @@ function refreshLeaderboard(){
 
 /* ══════ MENTOR ══════ */
 function buildMadrinhaPanels(tabs,main){
-  addTab(tabs,main,'acompanhamento','👁 Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
-  addTab(tabs,main,'provas-mentor','📋 Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
-  addTab(tabs,main,'diario-mentor','📓 Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
-  addTab(tabs,main,'proc','📝 Aval. Processos',buildProcPanel);
+  addTab(tabs,main,'acompanhamento','Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
+  addTab(tabs,main,'provas-mentor','Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
+  addTab(tabs,main,'diario-mentor','Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
+  addTab(tabs,main,'proc','Aval. Processos',buildProcPanel);
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
   main.querySelectorAll('.btn-mentor-save').forEach(btn=>{btn.onclick=()=>saveMentorEntry(btn.dataset.day);});
@@ -1947,7 +1976,7 @@ function buildMentorOverview(){
     const dv=Object.entries(d.evals||{}).filter(([,e])=>e.duvida).map(([did,e])=>{
       const day=DAYS.find(x=>x.id===did);
       return `<div style="margin-bottom:7px"><strong style="font-size:.73rem;color:var(--navy)">${day?day.date:did}</strong><div style="font-size:.75rem;color:var(--muted);margin-top:2px">${e.duvida}</div></div>`;}).join('');
-    if(dv)html+=`<div class="mentor-obs-box" style="grid-column:1/-1"><strong>💬 Dúvidas de ${u.name}</strong>${dv}</div>`;
+    if(dv)html+=`<div class="mentor-obs-box" style="grid-column:1/-1"><strong>Dúvidas de ${u.name}</strong>${dv}</div>`;
   });
   return html+`</div>`;
 }
@@ -1965,8 +1994,8 @@ function buildSdrProvaCard(u,corrigir){
       <div class="sdr-prova-info"><strong>${u.name}</strong><span>${u.turno}</span>
         <div class="sdr-prova-stats">
           <span class="${env===MODULOS.length?'stat-ok':'stat-pend'}">${env}/${MODULOS.length} enviadas</span>
-          ${pend>0?`<span class="stat-vid">⏳ ${pend} a corrigir</span>`:''}
-          ${corr>0?`<span class="stat-ok">✅ ${corr} corrigidas</span>`:''}
+          ${pend>0?`<span class="stat-vid">${pend} a corrigir</span>`:''}
+          ${corr>0?`<span class="stat-ok">${corr} corrigidas</span>`:''}
           <span class="stat-star">${pts} pts</span>
         </div></div>
       <span class="sdr-prova-arrow">▼</span></div>
@@ -1975,18 +2004,18 @@ function buildSdrProvaCard(u,corrigir){
     const pv=mp[m.id]; const ok=pv&&pv.submitted;
     const tOk=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
     const pOk=m.praticas.filter((_,i)=>(prats[m.id+'_p'+i]||{}).done).length;
-    const stat=!ok?'⏳ não enviada':(pv.nota!=null?`✅ nota ${pv.nota}/${m.prova.pts}`:'📝 aguardando correção');
+    const stat=!ok?'não enviada':(pv.nota!=null?`nota ${pv.nota}/${m.prova.pts}`:'aguardando correção');
     html+=`<div class="day-card">
       <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
         <div class="dh-left"><div class="module-num ${ok&&pv.nota!=null?'done':ok?'doing':''}">${ok&&pv.nota!=null?'✓':m.num}</div>
-        <div><strong>${m.icon} ${m.titulo}</strong>
+        <div><strong>${m.titulo}</strong>
         <div class="day-sub">${m.data} · ${tOk}/${m.topicos.length} conteúdos · ${pOk}/${m.praticas.length} práticas</div>
         <div class="day-sub">${stat}</div></div></div><span class="day-arrow">▼</span></div>
       <div class="day-body">`;
     // dificuldades relatadas
     const difs=m.praticas.map((t,i)=>({t,d:(prats[m.id+'_p'+i]||{}).dif})).filter(x=>x.d);
     if(difs.length){
-      html+=`<div style="margin-bottom:11px"><div style="font-size:.74rem;font-weight:700;color:var(--navy);margin-bottom:5px">🎚️ Dificuldade relatada nas práticas</div>`;
+      html+=`<div style="margin-bottom:11px"><div style="font-size:.74rem;font-weight:700;color:var(--navy);margin-bottom:5px">Dificuldade relatada</div>`;
       difs.forEach(x=>{
         const c=x.d==='Fácil'?'#dcfce7;color:#15803d':x.d==='Médio'?'#fef9c3;color:#a16207':'#fee2e2;color:#b91c1c';
         html+=`<div style="font-size:.73rem;margin-bottom:3px"><span style="background:${c};padding:1px 8px;border-radius:20px;font-weight:700;font-size:.66rem">${x.d}</span> ${x.t}</div>`;
@@ -1994,18 +2023,18 @@ function buildSdrProvaCard(u,corrigir){
       html+=`</div>`;
     }
     if(ok&&pv.respostas){
-      html+=`<div class="mentor-prova-view"><h5>📋 Respostas de ${u.name}</h5>`;
+      html+=`<div class="mentor-prova-view"><h5>Respostas de ${u.name}</h5>`;
       m.prova.perguntas.forEach((q,i)=>{
         html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.txt.substring(0,70)}...</div><div class="mpv-text">${pv.respostas[q.id]||'<i style="color:var(--muted)">sem resposta</i>'}</div></div>`;});
       html+=`</div>`;
       if((pv.historico||[]).length>1){
-        html+=`<div style="margin-top:9px"><div style="font-size:.72rem;font-weight:700;color:var(--muted)">🕘 Histórico de envios</div>`;
+        html+=`<div style="margin-top:9px"><div style="font-size:.72rem;font-weight:700;color:var(--muted)">Histórico de envios</div>`;
         pv.historico.forEach(h=>{html+=`<div class="hist-item">v${h.v} · ${new Date(h.em).toLocaleString('pt-BR')}</div>`;});
         html+=`</div>`;
       }
       if(corrigir){
         html+=`<div class="corr-box">
-          <div style="font-size:.78rem;font-weight:800;color:var(--navy);margin-bottom:8px">✏️ Correção</div>
+          <div style="font-size:.78rem;font-weight:800;color:var(--navy);margin-bottom:8px">Correção</div>
           <label style="font-size:.73rem;color:var(--muted);font-weight:600">Nota (0 a ${m.prova.pts})</label><br>
           <input type="number" id="nota-${u.id}-${m.id}" min="0" max="${m.prova.pts}" value="${pv.nota!=null?pv.nota:''}" placeholder="0">
           <textarea id="fb-${u.id}-${m.id}" placeholder="Feedback para o SDR...">${pv.feedback||''}</textarea>
@@ -2069,11 +2098,11 @@ function buildMentorDiary(){
       const day=DAYS.find(d=>d.id===did);if(!day)return;
       html+=`<div class="day-card"><div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')"><div class="dh-left"><div class="day-badge" style="background:${day.color}">${day.date.split(' ')[0]}</div><div><strong>${day.label} · ${day.sub}</strong><div class="day-sub" id="dstat-${day.id}"></div></div></div><span class="day-arrow">▼</span></div>
         <div class="day-body"><div class="mentor-section">
-          <div class="mentor-q"><label>🕐 Em quais momentos deste dia você acompanhou?</label><textarea id="m-mom-${day.id}" placeholder="Ex.: escuta de ligações 11h–12h, role-play da tarde..."></textarea></div>
-          <div class="mentor-q"><label>📌 O que aconteceu nesses momentos?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que você observou diretamente..."></textarea></div>
-          <div class="mentor-q"><label>🔎 Pontos de atenção que você notou</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, dúvidas recorrentes, o que reforçar..."></textarea></div>
-          <div class="mentor-q"><label>✅ O que funcionou bem</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
-          <div class="mentor-q"><label>📋 Desempenho nas tarefas/provas que você acompanhou</label><textarea id="m-prova-${day.id}" placeholder="Só sobre as atividades que passaram por você..."></textarea></div>
+          <div class="mentor-q"><label>Em quais momentos deste dia você acompanhou?</label><textarea id="m-mom-${day.id}" placeholder="Ex.: escuta de ligações 11h–12h, role-play da tarde..."></textarea></div>
+          <div class="mentor-q"><label>O que aconteceu nesses momentos?</label><textarea id="m-exp-${day.id}" placeholder="Descreva o que você observou diretamente..."></textarea></div>
+          <div class="mentor-q"><label>Pontos de atenção que você notou</label><textarea id="m-atencao-${day.id}" placeholder="Dificuldades, dúvidas recorrentes, o que reforçar..."></textarea></div>
+          <div class="mentor-q"><label>O que funcionou bem</label><textarea id="m-bem-${day.id}" placeholder="Destaque positivo do dia..."></textarea></div>
+          <div class="mentor-q"><label>Desempenho nas tarefas/provas que você acompanhou</label><textarea id="m-prova-${day.id}" placeholder="Só sobre as atividades que passaram por você..."></textarea></div>
           <button class="btn-mentor-save" data-day="${day.id}">Salvar registro do dia</button>
           <span class="eval-saved" id="m-saved-${day.id}">✓ Salvo!</span>
         </div></div></div>`;
@@ -2144,7 +2173,7 @@ function buildAdmProc(){
         <div class="sdr-prova-info"><strong>${u.name}</strong>
           <span>${u.role==='mentor'?'Madrinha':'Novo SDR'} · ${u.turno}</span>
           <div class="sdr-prova-stats">
-            <span class="${pa.submitted?'stat-ok':'stat-pend'}">${pa.submitted?'✅ Enviada':'⏳ Pendente'}</span>
+            <span class="${pa.submitted?'stat-ok':'stat-pend'}">${pa.submitted?'Enviada':'Pendente'}</span>
             <span class="stat-star">${feitas}/${total} respondidas</span>
           </div></div>
         <span class="sdr-prova-arrow">▼</span></div>
@@ -2181,7 +2210,7 @@ function buildAdmAcessos(){
   </div>`;
 
   // ── Usuários cadastrados ──
-  html+=`<div style="font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:10px">👥 Colaboradores cadastrados</div>`;
+  html+=`<div style="font-size:.8rem;font-weight:800;color:var(--navy);margin-bottom:10px">Colaboradores cadastrados</div>`;
   allManaged.forEach(u=>{
     const au=users.find(a=>a.userId===u.id)||{};
     const hasEmail=au.email&&au.email.length>0;
@@ -2196,23 +2225,23 @@ function buildAdmAcessos(){
           <span style="font-size:.72rem;color:var(--muted);display:block">${isMe?'Gestora ADM':(u.role==='mentor'?'Madrinha':'Novo SDR')} · ${u.turno||''}</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end">
-          <span class="status-tag ${hasEmail?'tag-ok':'tag-pend'}">${hasEmail?'✅ E-mail ok':'⏳ Sem e-mail'}</span>
-          <span class="status-tag ${hasPwd?'tag-ok':'tag-warn'}">${hasPwd?'🔒 Senha criada':'🔑 Aguardando'}</span>
+          <span class="status-tag ${hasEmail?'tag-ok':'tag-pend'}">${hasEmail?'E-mail ok':'Sem e-mail'}</span>
+          <span class="status-tag ${hasPwd?'tag-ok':'tag-warn'}">${hasPwd?'Senha criada':'🔑 Aguardando'}</span>
         </div>
       </div>
       <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
         <input type="text" id="email-${u.id}" class="invite-input" placeholder="E-mail de acesso" value="${hasEmail?au.email:''}">
         <button class="btn-acesso btn-salvar" onclick="saveUserEmail('${u.id}')">Salvar</button>
-        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="gmailInvite('${u.id}')">📧 Enviar convite Gmail</button><button class="btn-acesso" id="cbtn-${u.id}" onclick="copyInvite('${u.id}')" style="background:#e0e7ff;color:#3730a3">🔗 Copiar link</button>`:''}
-        ${hasPwd&&!isMe?`<button class="btn-acesso btn-reset" onclick="resetPwd('${u.id}')">↺ Redefinir senha</button>`:''}
-        ${!isMe&&extraUsers.find(e=>e.id===u.id)?`<button class="btn-acesso" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5" onclick="removeExtraUser('${u.id}')">🗑 Remover</button>`:''}
+        ${hasEmail?`<button class="btn-acesso btn-link" id="ibtn-${u.id}" onclick="gmailInvite('${u.id}')">Enviar convite por e-mail</button><button class="btn-acesso" id="cbtn-${u.id}" onclick="copyInvite('${u.id}')" style="background:#e0e7ff;color:#3730a3">Copiar link</button>`:''}
+        ${hasPwd&&!isMe?`<button class="btn-acesso btn-reset" onclick="resetPwd('${u.id}')">Redefinir senha</button>`:''}
+        ${!isMe&&extraUsers.find(e=>e.id===u.id)?`<button class="btn-acesso" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5" onclick="removeExtraUser('${u.id}')">Remover</button>`:''}
       </div>
     </div>`;
   });
 
   // ── Adicionar Novo Colaborador ──
   html+=`<div style="background:var(--card);border:2px dashed var(--line);border-radius:12px;padding:18px;margin-top:20px">
-    <div style="font-size:.85rem;font-weight:800;color:var(--navy);margin-bottom:14px">➕ Adicionar Novo Colaborador</div>
+    <div style="font-size:.85rem;font-weight:800;color:var(--navy);margin-bottom:14px">Adicionar Novo Colaborador</div>
     <div style="display:grid;gap:10px">
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <input type="text" id="new-user-name" class="invite-input" placeholder="Nome completo" style="flex:2;min-width:140px">
@@ -2227,7 +2256,7 @@ function buildAdmAcessos(){
         <input type="text" id="new-user-email" class="invite-input" placeholder="E-mail de acesso" style="flex:2;min-width:140px">
       </div>
       <div id="new-user-error" style="color:var(--red);font-size:.74rem;font-weight:600;display:none"></div>
-      <button class="btn-acesso btn-salvar" style="width:fit-content;padding:9px 20px" onclick="addNewUser()">➕ Adicionar e gerar convite</button>
+      <button class="btn-acesso btn-salvar" style="width:fit-content;padding:9px 20px" onclick="addNewUser()">Adicionar e gerar convite</button>
     </div>
   </div>`;
 
@@ -2290,7 +2319,7 @@ function gmailInvite(userId){
   // Também copiar o link
   navigator.clipboard.writeText(invUrl).catch(()=>{});
   const btn=document.getElementById('ibtn-'+userId);
-  if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Gmail aberto!';setTimeout(()=>btn.innerHTML=orig,3000);}
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='E-mail aberto';setTimeout(()=>btn.innerHTML=orig,3000);}
 }
 
 function copyInvite(userId){
@@ -2300,7 +2329,7 @@ function copyInvite(userId){
   const url=`https://emiliamoreira-ctrl.github.io/plataforma-treinamento-pre-vendas/?invite=${encodeURIComponent(au.email)}`;
   navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('cbtn-'+userId);
-    if(btn){const orig=btn.innerHTML;btn.innerHTML='✅ Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
+    if(btn){const orig=btn.innerHTML;btn.innerHTML='Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
   }).catch(()=>{prompt('Copie o link:',url);});
 }
 
