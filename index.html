@@ -364,6 +364,34 @@
   .topic-row.vopen .topic-vbody{display:block;}
   .topic-vbody video{width:100%;border-radius:8px;background:#000;max-height:280px;}
   .vsoon{background:var(--bg);border:1.5px dashed var(--line);border-radius:8px;padding:16px;text-align:center;font-size:.75rem;color:var(--muted);}
+
+  .prat-row{background:#fff;border:1.5px solid var(--line);border-radius:9px;margin-bottom:8px;padding:11px 13px;}
+  .prat-row.done{background:#f0fdf4;border-color:var(--green);}
+  .prat-head{display:flex;align-items:flex-start;gap:11px;}
+  .prat-cb{width:20px;height:20px;border-radius:5px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;cursor:pointer;margin-top:1px;}
+  .prat-row.done .prat-cb{background:var(--green);border-color:var(--green);color:#fff;}
+  .prat-txt{font-size:.79rem;color:var(--txt);flex:1;cursor:pointer;}
+  .prat-row.done .prat-txt{color:var(--muted);}
+  .dif-row{display:none;gap:6px;margin-top:9px;padding-left:31px;align-items:center;flex-wrap:wrap;}
+  .prat-row.done .dif-row{display:flex;}
+  .dif-row .dlbl{font-size:.7rem;color:var(--muted);font-weight:600;}
+  .dif-btn{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;color:var(--muted);}
+  .dif-btn:hover{border-color:var(--orange);}
+  .dif-btn.sel[data-d="Fácil"]{background:#dcfce7;border-color:var(--green);color:#15803d;}
+  .dif-btn.sel[data-d="Médio"]{background:#fef9c3;border-color:var(--gold);color:#a16207;}
+  .dif-btn.sel[data-d="Difícil"]{background:#fee2e2;border-color:var(--red);color:#b91c1c;}
+  .aval-wait{background:#eff6ff;border:1.5px solid var(--blue);border-radius:10px;padding:16px 18px;text-align:center;}
+  .aval-wait .ic{font-size:1.6rem;}
+  .aval-wait b{display:block;font-size:.85rem;color:#1d4ed8;margin-top:5px;}
+  .aval-wait span{font-size:.76rem;color:var(--muted);display:block;margin-top:4px;}
+  .nota-box{background:#f0fdf4;border:2px solid var(--green);border-radius:12px;padding:18px;}
+  .nota-val{font-size:2rem;font-weight:800;color:#15803d;line-height:1;}
+  .nota-fb{background:#fff;border-radius:8px;padding:11px 13px;margin-top:11px;font-size:.78rem;color:var(--txt);line-height:1.5;}
+  .corr-box{background:#fffbeb;border:1.5px solid var(--gold);border-radius:10px;padding:14px 16px;margin-top:12px;}
+  .corr-box input[type=number]{width:90px;padding:8px 10px;border:1.5px solid var(--line);border-radius:7px;font-family:'Montserrat',sans-serif;font-size:.8rem;}
+  .corr-box textarea{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:7px;font-family:'Montserrat',sans-serif;font-size:.77rem;min-height:70px;margin-top:8px;resize:vertical;}
+  .btn-corrigir{background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;margin-top:9px;}
+  .hist-item{font-size:.7rem;color:var(--muted);border-left:2px solid var(--line);padding-left:9px;margin-top:5px;}
 </style>
 </head>
 <body>
@@ -381,7 +409,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v2.1</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.0</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -633,111 +661,177 @@ const DAYS=[
 ];
 
 
-/* ═══════ MÓDULOS DO CURSO ═══════ */
+/* ═══════ MÓDULOS DO CURSO — organizados por data ═══════ */
 const MODULOS=[
- /* ─────── PIPEDRIVE (online) ─────── */
- {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'💼',
-  video:'PIPEDRIVE',
-  topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Preenchimento obrigatório','Motivos de perda','Ganho: passo a passo dos dois cards'],
+/* ───── 06/10 ───── */
+ {id:'m1',num:1,cat:'Pipedrive',titulo:'Pipedrive I — Negócio',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#8b5cf6',icon:'💼',
+  topicos:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card','Pesquisar duplicidade','Preenchimento obrigatório'],
+  praticas:['Abra um card de teste do zero preenchendo todos os campos obrigatórios','Pesquise duplicidade antes de criar um segundo card de teste','Movimente o card de teste entre duas etapas do funil','Faça uma anotação no card registrando o contato','Crie a próxima atividade no card com data e tipo'],
   prova:{pts:20,perguntas:[
-    {id:'m1q1',txt:'Descreva as etapas do funil no Pipedrive e o que caracteriza cada uma.'},
-    {id:'m1q2',txt:'Quais são os campos de preenchimento obrigatório ao abrir um card? Por que cada um importa?'},
-    {id:'m1q3',txt:'Como você pesquisa duplicidade antes de criar um card? O que faz se encontrar uma?'},
-    {id:'m1q4',txt:'Liste os motivos de perda e dê um exemplo de situação para pelo menos três deles.'},
-    {id:'m1q5',txt:'VÍDEO OPCIONAL: grave a tela abrindo um card do zero até marcá-lo como ganho.'}]}},
+   {id:'m1q1',txt:'Descreva as etapas do funil no Pipedrive e o que caracteriza cada uma.'},
+   {id:'m1q2',txt:'Quais são os campos de preenchimento obrigatório ao abrir um card? Por que cada um importa?'},
+   {id:'m1q3',txt:'Como você pesquisa duplicidade antes de criar um card? O que faz se encontrar uma?'},
+   {id:'m1q4',txt:'Para que serve o Pipedrive na rotina do SDR? Explique com suas palavras.'}]}},
 
- {id:'m2',num:2,cat:'Pipedrive',titulo:'Pipedrive II — Atividades',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'📋',
-  topicos:['Atividades do dia','Atividades atrasadas','Como organizar a fila de trabalho'],
-  prova:{pts:15,perguntas:[
-    {id:'m2q1',txt:'Como você consulta suas atividades do dia? Qual a primeira coisa que faz ao abrir o Pipedrive pela manhã?'},
-    {id:'m2q2',txt:'O que fazer ao encontrar atividades atrasadas? Descreva sua ordem de prioridade.'},
-    {id:'m2q3',txt:'VÍDEO OPCIONAL: mostre sua tela de atividades e explique como organizaria o dia.'}]}},
-
- {id:'m3',num:3,cat:'Pipedrive',titulo:'Pipedrive III — Indicadores',modo:'online',prazo:'até 09/10',cor:'#8b5cf6',icon:'📊',
-  topicos:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
-  prova:{pts:20,perguntas:[
-    {id:'m3q1',txt:'Explique o que é MQL e como ele se diferencia de um lead comum.'},
-    {id:'m3q2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
-    {id:'m3q3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
-    {id:'m3q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'}]}},
-
- /* ─────── SLACK (online) ─────── */
- {id:'m4',num:4,cat:'Slack',titulo:'Slack I — Comunicação do time',modo:'online',prazo:'até 09/10',cor:'#14b8a6',icon:'💬',
-  topicos:['Estar incluído em todos os canais','Responder com check verdinho ✅ aos avisos','Como responder em qualquer canal','Círculo'],
-  prova:{pts:15,perguntas:[
-    {id:'m4q1',txt:'Por que responder com o check verdinho nos avisos é importante para o time? O que acontece se você não responde?'},
-    {id:'m4q2',txt:'Liste os canais em que você já foi incluído e para que serve cada um.'},
-    {id:'m4q3',txt:'O que é o Círculo e qual seu papel nele?'}]}},
-
- {id:'m5',num:5,cat:'Slack',titulo:'Slack II — Status e rotinas',modo:'online',prazo:'até 09/10',cor:'#14b8a6',icon:'🟢',
-  topicos:['Ligar a agenda no Slack','Status de almoço (pratinho 🍽️)','Sempre ativo (bolinha verde 🟢)','Roleta','Medição','Vistoria'],
-  prova:{pts:15,perguntas:[
-    {id:'m5q1',txt:'Como você conecta sua agenda ao Slack e por que isso importa para o time?'},
-    {id:'m5q2',txt:'Explique como e quando usar o status de almoço e o status ativo.'},
-    {id:'m5q3',txt:'O que são Roleta, Medição e Vistoria? Explique cada uma com suas palavras.'},
-    {id:'m5q4',txt:'VÍDEO OPCIONAL: mostre seu Slack configurado com agenda e status.'}]}},
-
- /* ─────── AGENDA I (online) ─────── */
- {id:'m6',num:6,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',prazo:'até 09/10',cor:'#3b82f6',icon:'📅',
+ {id:'m2',num:2,cat:'Agenda',titulo:'Agenda I — Reuniões e R1',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#3b82f6',icon:'📅',
   topicos:['Como agendar um meet com colegas','Como agendar um meet com o cliente','R01','Como colocar a R1 para gravar','Aceitar invite'],
+  praticas:['Agende um meet de teste com um colega do time','Configure uma reunião de teste para gravar automaticamente','Aceite um invite enviado pela sua madrinha','Localize a gravação de uma R1 já realizada'],
   prova:{pts:20,perguntas:[
-    {id:'m6q1',txt:'Descreva o passo a passo para agendar uma reunião com o cliente, do convite até a confirmação.'},
-    {id:'m6q2',txt:'O que é a R01 e qual seu objetivo dentro do processo?'},
-    {id:'m6q3',txt:'Como você deixa uma R1 configurada para gravar? Por que a gravação importa?'},
-    {id:'m6q4',txt:'Por que aceitar o invite é obrigatório? O que acontece com a agenda do time se você não aceita?'}]}},
+   {id:'m2q1',txt:'Descreva o passo a passo para agendar uma reunião com o cliente, do convite até a confirmação.'},
+   {id:'m2q2',txt:'O que é a R01 e qual seu objetivo dentro do processo?'},
+   {id:'m2q3',txt:'Como você deixa uma R1 configurada para gravar? Por que a gravação importa?'},
+   {id:'m2q4',txt:'Por que aceitar o invite é obrigatório? O que acontece com a agenda do time se você não aceita?'}]}},
 
- /* ─────── VOIP (online) ─────── */
- {id:'m7',num:7,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',prazo:'até 09/10',cor:'#f59e0b',icon:'☎️',
-  topicos:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
-  prova:{pts:20,perguntas:[
-    {id:'m7q1',txt:'Descreva o passo a passo de uma ligação, do discar até registrar o resultado no Pipedrive.'},
-    {id:'m7q2',txt:'Como a integração com o Pipedrive funciona e o que ela registra automaticamente?'},
-    {id:'m7q3',txt:'Como você localiza a gravação de uma ligação específica? Para que isso serve no dia a dia?'},
-    {id:'m7q4',txt:'VÍDEO OPCIONAL: mostre a tela fazendo uma ligação de teste e buscando uma gravação.'}]}},
-
- /* ─────── AGENDA II (presencial) ─────── */
- {id:'m8',num:8,cat:'Agenda',titulo:'Agenda II — Arquitetos e regras',modo:'presencial',prazo:'13 a 16/10',cor:'#3b82f6',icon:'🗓️',
-  topicos:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Regra: agendar com no mínimo 6h de antecedência','Participar de todas as reuniões diárias','Câmera aberta','Levantar a mão para falar','Atenção total durante as reuniões'],
-  prova:{pts:25,perguntas:[
-    {id:'m8q1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
-    {id:'m8q2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
-    {id:'m8q3',txt:'Explique a regra das 6 horas de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
-    {id:'m8q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'},
-    {id:'m8q5',txt:'PRÁTICA: agende uma R1 de teste respeitando todas as regras e descreva o que fez.'}]}},
-
- /* ─────── WHATSAPP (presencial) ─────── */
- {id:'m9',num:9,cat:'WhatsApp',titulo:'WhatsApp — Grupos e cliente',modo:'presencial',prazo:'13 a 16/10',cor:'#22c55e',icon:'📱',
-  topicos:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
-  prova:{pts:20,perguntas:[
-    {id:'m9q1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente corretamente.'},
-    {id:'m9q2',txt:'Escreva a mensagem que você enviaria ao cliente junto com o link da reunião.'},
-    {id:'m9q3',txt:'Como você envia o evento e confirma que o cliente recebeu?'},
-    {id:'m9q4',txt:'PRÁTICA: monte um grupo de teste e descreva (ou grave) o processo completo.'}]}},
-
- /* ─────── ROTINAS (presencial) ─────── */
- {id:'m10',num:10,cat:'Rotinas',titulo:'Rotinas do time',modo:'presencial',prazo:'13 a 16/10',cor:'#ec4899',icon:'⏰',
-  topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir para outra pessoa cuidar dos leads quando não puder trabalhar'],
+ {id:'m3',num:3,cat:'Slack',titulo:'Slack I — Comunicação do Time',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#14b8a6',icon:'💬',
+  topicos:['Estar incluído em todos os canais','Responder com check verdinho ✅ aos avisos','Como responder em qualquer canal','Círculo'],
+  praticas:['Confira se está em todos os canais do time e peça inclusão nos que faltam','Responda com o check verdinho a um aviso do canal','Envie uma mensagem de apresentação no canal do time','Responda dentro de uma thread existente'],
   prova:{pts:15,perguntas:[
-    {id:'m10q1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
-    {id:'m10q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
-    {id:'m10q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
+   {id:'m3q1',txt:'Por que responder com o check verdinho nos avisos é importante para o time? O que acontece se você não responde?'},
+   {id:'m3q2',txt:'Liste os canais em que você já foi incluído e para que serve cada um.'},
+   {id:'m3q3',txt:'O que é o Círculo e qual seu papel nele?'}]}},
 
- /* ─────── METAS (presencial) ─────── */
- {id:'m11',num:11,cat:'Metas',titulo:'Metas e indicadores',modo:'presencial',prazo:'13 a 16/10',cor:'#ef4444',icon:'🎯',
+ {id:'m4',num:4,cat:'Chatwoot',titulo:'Chatwoot I — Introdução e Caixa de Entrada',modo:'online',data:'06/10',dia:'Terça-feira',sem:1,cor:'#f97316',icon:'📥',
+  topicos:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
+  praticas:['Navegue pelas três caixas de entrada e identifique quantas conversas há em cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e identifique de qual canal ela veio','Atribua uma conversa de teste para você'],
+  prova:{pts:20,perguntas:[
+   {id:'m4q1',txt:'O que é o Chatwoot e qual seu papel no trabalho do SDR?'},
+   {id:'m4q2',txt:'Explique a diferença entre as caixas Minhas, Não atribuídas e Geral. Quando você usa cada uma?'},
+   {id:'m4q3',txt:'Como pesquisar um cliente no Chatwoot? Quais dados você pode usar na busca?'},
+   {id:'m4q4',txt:'Ao abrir o Chatwoot pela manhã, qual caixa você olha primeiro e por quê?'}]}},
+
+/* ───── 07/10 ───── */
+ {id:'m5',num:5,cat:'Pipedrive',titulo:'Pipedrive II — Atividades',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#8b5cf6',icon:'📋',
+  topicos:['Atividades do dia','Atividades atrasadas','Organizando a fila de trabalho'],
+  praticas:['Abra a visão de atividades do dia e liste quantas estão pendentes','Identifique as atividades atrasadas e defina a ordem em que resolveria','Conclua uma atividade de teste e crie a próxima na sequência','Reagende uma atividade atrasada registrando o motivo na anotação'],
+  prova:{pts:15,perguntas:[
+   {id:'m5q1',txt:'Como você consulta suas atividades do dia? Qual a primeira coisa que faz ao abrir o Pipedrive pela manhã?'},
+   {id:'m5q2',txt:'O que fazer ao encontrar atividades atrasadas? Descreva sua ordem de prioridade.'},
+   {id:'m5q3',txt:'Por que nenhuma atividade pode ficar sem data de próximo passo?'}]}},
+
+ {id:'m6',num:6,cat:'Slack',titulo:'Slack II — Status e Presença',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#14b8a6',icon:'🟢',
+  topicos:['Ligar a agenda no Slack','Status de almoço (pratinho 🍽️)','Sempre ativo (bolinha verde 🟢)'],
+  praticas:['Conecte sua agenda ao Slack e confirme que os eventos aparecem','Configure o status de almoço e volte ao status ativo','Deixe seu perfil com foto e cargo preenchidos'],
+  prova:{pts:15,perguntas:[
+   {id:'m6q1',txt:'Como você conecta sua agenda ao Slack e por que isso importa para o time?'},
+   {id:'m6q2',txt:'Explique como e quando usar o status de almoço e o status ativo.'},
+   {id:'m6q3',txt:'Por que o time precisa saber se você está disponível em tempo real?'}]}},
+
+ {id:'m7',num:7,cat:'Chatwoot',titulo:'Chatwoot II — Contatos e Status',modo:'online',data:'07/10',dia:'Quarta-feira',sem:1,cor:'#f97316',icon:'👤',
+  topicos:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa'],
+  praticas:['Identifique o proprietário de três conversas diferentes','Localize uma conversa vinda do bot e outra do WhatsApp','Altere o status de uma conversa de teste e observe o que muda','Reatribua uma conversa para outro proprietário'],
+  prova:{pts:20,perguntas:[
+   {id:'m7q1',txt:'O que significa o proprietário de uma conversa? O que acontece quando ela não tem um?'},
+   {id:'m7q2',txt:'Qual a diferença entre cliente bot e cliente WhatsApp? Como você identifica cada um?'},
+   {id:'m7q3',txt:'Quais são os status possíveis de uma conversa e quando usar cada um?'},
+   {id:'m7q4',txt:'Por que manter o status atualizado afeta o SLA do time?'}]}},
+
+/* ───── 09/10 ───── */
+ {id:'m8',num:8,cat:'VoIP',titulo:'VoIP — Ligações',modo:'online',data:'09/10',dia:'Sexta-feira',sem:1,cor:'#f59e0b',icon:'☎️',
+  topicos:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
+  praticas:['Faça uma ligação de teste para um colega do time','Confirme que a ligação foi registrada automaticamente no card do Pipedrive','Abra o relatório de ligações e identifique o total do dia','Localize a gravação de uma ligação pelo número ou pela data'],
+  prova:{pts:20,perguntas:[
+   {id:'m8q1',txt:'Descreva o passo a passo de uma ligação, do discar até registrar o resultado no Pipedrive.'},
+   {id:'m8q2',txt:'Como a integração com o Pipedrive funciona e o que ela registra automaticamente?'},
+   {id:'m8q3',txt:'Como você localiza a gravação de uma ligação específica? Para que isso serve no dia a dia?'},
+   {id:'m8q4',txt:'Para que serve o relatório de ligações e com que frequência você deve consultá-lo?'}]}},
+
+/* ───── 13/10 ───── */
+ {id:'m9',num:9,cat:'Rotinas',titulo:'Rotinas do Time',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#ec4899',icon:'⏰',
+  topicos:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
+  praticas:['Confirme seu horário de entrada e saída com a madrinha','Simule um aviso de impedimento no canal correto do Slack','Identifique quem seria seu backup de leads em caso de ausência'],
+  prova:{pts:15,perguntas:[
+   {id:'m9q1',txt:'Qual o seu horário de início e por que a pontualidade afeta o resultado do time?'},
+   {id:'m9q2',txt:'CENÁRIO: você acorda passando mal e não vai conseguir trabalhar. Descreva exatamente o que faz, para quem avisa e em que ordem.'},
+   {id:'m9q3',txt:'Por que os leads não podem ficar sem responsável? O que acontece com o SLA nesse caso?'}]}},
+
+ {id:'m10',num:10,cat:'Chatwoot',titulo:'Chatwoot III — Atendimento Cora e Etiquetas',modo:'presencial',data:'13/10',dia:'Terça-feira',sem:2,cor:'#f97316',icon:'🏷️',
+  topicos:['Atendimento Cora','Etiquetas: para que servem','Como aplicar etiquetas corretamente'],
+  praticas:['Abra um atendimento Cora e acompanhe o fluxo completo','Aplique pelo menos três etiquetas diferentes em conversas de teste','Remova uma etiqueta aplicada por engano','Filtre a caixa por uma etiqueta e veja o resultado'],
+  prova:{pts:20,perguntas:[
+   {id:'m10q1',txt:'O que é o atendimento Cora e em que situações ele aparece?'},
+   {id:'m10q2',txt:'Para que servem as etiquetas? O que acontece se você não etiquetar uma conversa?'},
+   {id:'m10q3',txt:'Liste as etiquetas que você usou e explique quando aplicar cada uma.'},
+   {id:'m10q4',txt:'Como as etiquetas ajudam na organização da sua fila de atendimento?'}]}},
+
+/* ───── 14/10 ───── */
+ {id:'m11',num:11,cat:'Metas',titulo:'Metas e Indicadores de Performance',modo:'presencial',data:'14/10',dia:'Quarta-feira',sem:2,cor:'#ef4444',icon:'🎯',
   topicos:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
+  praticas:['Calcule quantas ligações precisa por dia útil para bater as 500','Calcule quantos agendamentos precisa por semana para bater os 29','Monte sua rotina diária alinhada às metas e valide com a madrinha'],
   prova:{pts:25,perguntas:[
-    {id:'m11q1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
-    {id:'m11q2',txt:'O que é o SLA de 1 hora na prática? O que você faz para garantir que ele seja cumprido?'},
-    {id:'m11q3',txt:'Com 500 ligações por mês, quantas você precisa fazer por dia útil? E quantos agendamentos por semana para bater os 29?'},
-    {id:'m11q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'},
-    {id:'m11q5',txt:'VÍDEO FINAL: explique em até 3 minutos como pretende organizar sua rotina para bater todas as metas.'}]}},
+   {id:'m11q1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
+   {id:'m11q2',txt:'O que é o SLA de 1 hora na prática? O que você faz para garantir que ele seja cumprido?'},
+   {id:'m11q3',txt:'Com 500 ligações por mês, quantas você precisa fazer por dia útil? E quantos agendamentos por semana para bater os 29?'},
+   {id:'m11q4',txt:'Como você evita ultrapassar os 5% de desalinhados e os 10% de queda em R0?'}]}},
+
+/* ───── 15/10 ───── */
+ {id:'m12',num:12,cat:'Agenda',titulo:'Agenda II — Arquitetos e Regras',modo:'presencial',data:'15/10',dia:'Quinta-feira',sem:2,cor:'#3b82f6',icon:'🗓️',
+  topicos:['Salvar agendas dos arquitetos','Verificar a agenda disponível de um arquiteto','Intervalo entre R1, R2 e R3','Regra: agendar com no mínimo 6h de antecedência','Participar de todas as reuniões diárias','Câmera aberta','Levantar a mão para falar','Atenção total durante as reuniões'],
+  praticas:['Salve as agendas de todos os arquitetos no seu calendário','Consulte a disponibilidade de um arquiteto para os próximos 3 dias','Agende uma R1 de teste respeitando a regra das 6 horas','Simule um agendamento que fura a regra e descreva como contornaria'],
+  prova:{pts:25,perguntas:[
+   {id:'m12q1',txt:'Como você verifica a agenda disponível de um arquiteto antes de agendar?'},
+   {id:'m12q2',txt:'Qual o intervalo correto entre R1, R2 e R3? Por que esse espaçamento existe?'},
+   {id:'m12q3',txt:'Explique a regra das 6 horas de antecedência. O que fazer quando o cliente só pode num horário que fura essa regra?'},
+   {id:'m12q4',txt:'Quais são as regras de postura nas reuniões diárias? Por que cada uma importa para o time?'}]}},
+
+/* ───── 16/10 ───── */
+ {id:'m13',num:13,cat:'Pipedrive',titulo:'Pipedrive III — Perdas e Ganhos',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#8b5cf6',icon:'🏁',
+  topicos:['Motivos de perda: quais existem','Quando usar cada motivo de perda','Ganho: passo a passo do card','Informações obrigatórias para dar um ganho'],
+  praticas:['Marque um card de teste como perdido escolhendo o motivo correto','Registre a anotação justificando o motivo de perda','Faça o passo a passo completo de ganho em um card de teste','Confira se todas as informações obrigatórias estão no card antes do ganho'],
+  prova:{pts:25,perguntas:[
+   {id:'m13q1',txt:'Liste os motivos de perda e dê um exemplo de situação para pelo menos três deles.'},
+   {id:'m13q2',txt:'CENÁRIO: cliente com chaves para março de 29 disse que está fazendo orçamento e qualquer coisa volta. Qual motivo de perda você registra e por quê?'},
+   {id:'m13q3',txt:'Descreva o passo a passo completo para dar um ganho no card.'},
+   {id:'m13q4',txt:'Quais são as informações obrigatórias para dar um GANHO? O que acontece se faltar alguma?'},
+   {id:'m13q5',txt:'Por que registrar o motivo de perda correto importa para o time e para os indicadores?'}]}},
+
+ {id:'m14',num:14,cat:'WhatsApp',titulo:'WhatsApp — Grupos e Cliente',modo:'presencial',data:'16/10',dia:'Sexta-feira',sem:2,cor:'#22c55e',icon:'📱',
+  topicos:['Criar grupos','Incluir o cliente no grupo','Mandar mensagem com o link da reunião','Mandar o evento'],
+  praticas:['Crie um grupo de teste com o padrão de nome do time','Inclua um colega simulando o cliente','Envie a mensagem com o link da reunião no formato padrão','Envie o evento e confirme o recebimento'],
+  prova:{pts:20,perguntas:[
+   {id:'m14q1',txt:'Descreva o passo a passo para criar o grupo e incluir o cliente corretamente.'},
+   {id:'m14q2',txt:'Escreva a mensagem que você enviaria ao cliente junto com o link da reunião.'},
+   {id:'m14q3',txt:'Como você envia o evento e confirma que o cliente recebeu?'},
+   {id:'m14q4',txt:'Qual o padrão de nome dos grupos e por que seguir esse padrão importa?'}]}},
+
+/* ───── 21/10 ───── */
+ {id:'m15',num:15,cat:'Pipedrive',titulo:'Pipedrive IV — Indicadores',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#8b5cf6',icon:'📊',
+  topicos:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
+  praticas:['Abra o painel de indicadores e anote seus números da semana','Calcule sua taxa de conversão do período','Identifique quantos MQL você gerou e quantos viraram agendamento','Compare seus indicadores com as metas do time'],
+  prova:{pts:25,perguntas:[
+   {id:'m15q1',txt:'Explique o que é MQL e como ele se diferencia de um lead comum.'},
+   {id:'m15q2',txt:'O que é Queda em R0? O que pode causar e como evitar?'},
+   {id:'m15q3',txt:'O que caracteriza um lead desalinhado? Dê dois exemplos reais.'},
+   {id:'m15q4',txt:'Como se calcula a conversão do SDR e o indicador de lead por arquiteta?'},
+   {id:'m15q5',txt:'Olhando seus próprios números desta semana, onde você está melhor e onde precisa evoluir?'}]}},
+
+ {id:'m16',num:16,cat:'Slack',titulo:'Slack III — Fluxos Operacionais',modo:'online',data:'21/10',dia:'Quarta-feira',sem:3,cor:'#14b8a6',icon:'🔄',
+  topicos:['Roleta','Medição','Vistoria'],
+  praticas:['Acompanhe uma rodada de roleta do início ao fim','Abra uma solicitação de medição de teste','Localize onde as vistorias são registradas e acompanhe uma'],
+  prova:{pts:20,perguntas:[
+   {id:'m16q1',txt:'O que é a Roleta? Como ela funciona e qual seu papel nela?'},
+   {id:'m16q2',txt:'Descreva o fluxo de Medição: quem solicita, quem executa e o que você precisa informar.'},
+   {id:'m16q3',txt:'O que é a Vistoria e em que momento do processo ela acontece?'},
+   {id:'m16q4',txt:'O que acontece se um desses fluxos não for registrado no canal correto?'}]}},
+
+/* ───── 22/10 ───── */
+ {id:'m17',num:17,cat:'Chatwoot',titulo:'Chatwoot IV — Filtros Personalizados',modo:'online',data:'22/10',dia:'Quinta-feira',sem:3,cor:'#f97316',icon:'🔍',
+  topicos:['O que são filtros personalizados','Como criar um filtro','Combinando critérios','Salvando e reutilizando filtros'],
+  praticas:['Crie um filtro de conversas não respondidas há mais de 1 hora','Crie um filtro combinando etiqueta e status','Salve o filtro e use-o na sua rotina','Compartilhe com a madrinha o filtro que mais te ajudou'],
+  prova:{pts:20,perguntas:[
+   {id:'m17q1',txt:'O que são filtros personalizados e como eles ajudam no cumprimento do SLA?'},
+   {id:'m17q2',txt:'Descreva o passo a passo para criar um filtro combinando dois critérios.'},
+   {id:'m17q3',txt:'Qual filtro você criou que mais ajuda na sua rotina? Explique por quê.'},
+   {id:'m17q4',txt:'Como os filtros se conectam com as etiquetas que você aprendeu no Chatwoot III?'}]}},
 ];
 const MOD_PTS_TOPICO=5;
-/* Vídeo por tópico: chave = <idModulo>_t<indice>, valor = arquivo .mp4 */
-const TOPIC_VIDEOS={
-  'm1_t0':'pipedrive-intro.mp4'
-};
-const MAX_MOD_PTS=MODULOS.reduce((a,m)=>a+m.topicos.length*MOD_PTS_TOPICO+m.prova.pts,0);
+const MOD_PTS_PRATICA=10;
+const DIFICULDADES=['Fácil','Médio','Difícil'];
+const SEMANAS=[
+ {n:1,label:'🌐 Semana 1 — Online · 06 a 09/10'},
+ {n:2,label:'🏢 Semana 2 — Presencial · 13 a 16/10'},
+ {n:3,label:'🌐 Semana 3 — Online · 19 a 23/10'},
+];
+const MAX_MOD_PTS=MODULOS.reduce((a,m)=>a+m.topicos.length*MOD_PTS_TOPICO+m.praticas.length*MOD_PTS_PRATICA+m.prova.pts,0);
 
 
 /* ═══════ AVALIAÇÃO DE PROCESSOS — todos os SDRs ═══════ */
@@ -1039,9 +1133,11 @@ function buildAdmDashboard(){
   return html+`</div>`;
 }
 function buildAdmProvas(){
+  const pend=NOVOS.reduce((a,u)=>a+Object.values(getU(u.id).modProvas||{}).filter(v=>v.submitted&&v.nota==null).length,0);
   let html=`<div class="section-title">Avaliações dos Módulos</div>
-  <p class="section-sub">Clique no card de cada novo SDR para ver as respostas por módulo.</p>`;
-  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u);});
+  <p class="section-sub">Clique no card de cada novo SDR para ver as respostas e lançar a nota.</p>
+  ${pend>0?`<div style="background:#fffbeb;border:1.5px solid var(--gold);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:.8rem;color:#92400e;font-weight:600">⏳ ${pend} avaliação(ões) aguardando sua correção</div>`:''}`;
+  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,true);});
   return html;
 }
 function applyProvaFilter(btn,main){
@@ -1224,131 +1320,43 @@ function buildVideoSection(day){
   return h+'</div>';
 }
 
+/* ─── Estado e progresso dos módulos ─── */
 function modProgress(m){
   const u=getU(currentUser.id);
-  const tops=(u.modTopics||[]);
-  const done=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
-  const prova=((u.modProvas||{})[m.id]||{}).submitted?1:0;
-  const total=m.topicos.length;
-  const pct=Math.round(((done+prova)/(total+1))*100);
-  return {done,total,prova,pct,status:(done===total&&prova)?'done':(done>0||prova)?'doing':'todo'};
+  const tops=(u.modTopics||[]), prats=(u.modPrats||{});
+  const dT=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
+  const dP=m.praticas.filter((_,i)=>(prats[m.id+'_p'+i]||{}).done).length;
+  const env=((u.modProvas||{})[m.id]||{}).submitted?1:0;
+  const tot=m.topicos.length+m.praticas.length+1;
+  return {dT,tT:m.topicos.length,dP,tP:m.praticas.length,env,
+          pct:Math.round(((dT+dP+env)/tot)*100),
+          status:(dT===m.topicos.length&&dP===m.praticas.length&&env)?'done':(dT+dP+env>0)?'doing':'todo'};
 }
 function modPoints(){
   const u=getU(currentUser.id);
-  const tops=(u.modTopics||[]).length*MOD_PTS_TOPICO;
+  const t=(u.modTopics||[]).length*MOD_PTS_TOPICO;
+  const p=Object.values(u.modPrats||{}).filter(v=>v.done).length*MOD_PTS_PRATICA;
   const pr=Object.entries(u.modProvas||{}).filter(([,v])=>v.submitted)
-      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
-  return tops+pr;
+    .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
+  return t+p+pr;
 }
-function modProvasEnviadas(){
-  const u=getU(currentUser.id);
-  return Object.values(u.modProvas||{}).filter(v=>v.submitted).length;
-}
-function modHasVideo(){
-  const u=getU(currentUser.id);
-  return Object.values(u.modProvas||{}).some(v=>v.hasVideo);
-}
+function modProvasEnviadas(){return Object.values(getU(currentUser.id).modProvas||{}).filter(v=>v.submitted).length;}
+function hasVideo(){return false;}
 
-
-/* ─── Avaliação de Processos ─── */
-function buildProcPanel(){
-  const u=getU(currentUser.id);
-  const pv=u.procAval||{};
-  const total=totalPerguntasProc();
-  const resp=Object.values(pv.respostas||{}).filter(v=>v&&v.trim()).length;
-  const enviada=pv.submitted;
-
-  let html=`<div class="proc-hero">
-    <h2>📝 ${AVAL_PROCESSOS.titulo}</h2>
-    <div class="ph-meta">
-      <span class="ph-tag">👤 Responsável: ${AVAL_PROCESSOS.responsavel}</span>
-      <span class="ph-tag">📅 ${AVAL_PROCESSOS.data}</span>
-      <span class="ph-tag">❓ ${total} questões</span>
-      <span class="ph-tag">⭐ ${AVAL_PROCESSOS.pts} pontos</span>
-      <span class="ph-tag">${enviada?'✅ Enviada':'⏳ '+resp+'/'+total+' respondidas'}</span>
-    </div>
-    <p>${AVAL_PROCESSOS.desc}</p>
-  </div>`;
-
-  if(enviada){
-    html+=`<div style="background:#f0fdf4;border:1.5px solid var(--green);border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:.82rem;color:#15803d;font-weight:600">
-      ✅ Avaliação enviada. Suas respostas foram registradas e estão disponíveis para a gestora.</div>`;
-  }
-
-  let n=0;
-  AVAL_PROCESSOS.blocos.forEach((b,bi)=>{
-    const feitas=b.perguntas.filter(q=>(pv.respostas||{})[q.id]&&(pv.respostas||{})[q.id].trim()).length;
-    html+=`<div class="proc-bloco${bi===0?' open':''}" id="pb-${bi}">
-      <div class="proc-bloco-h" onclick="document.getElementById('pb-${bi}').classList.toggle('open')">
-        <strong>${b.nome}</strong><span class="cnt">${feitas}/${b.perguntas.length} respondidas ▼</span></div>
-      <div class="proc-bloco-b">`;
-    b.perguntas.forEach(q=>{
-      n++;
-      const val=(pv.respostas||{})[q.id]||'';
-      html+=`<div class="proc-q${val.trim()?' answered':''}" id="pq-${q.id}">
-        <span class="qn">Questão ${n}</span>
-        <div class="qt">${q.txt}</div>
-        <textarea id="${q.id}" ${enviada?'disabled':''} placeholder="Responda como você responderia no dia a dia...">${val}</textarea>
-      </div>`;
-    });
-    html+=`</div></div>`;
-  });
-
-  if(!enviada){
-    html+=`<div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <button class="btn-save-eval" onclick="salvarProcRascunho()">💾 Salvar rascunho</button>
-      <button class="proc-submit" onclick="enviarProcAval()">Enviar avaliação →</button>
-      <span class="eval-saved" id="proc-saved">✓ Rascunho salvo!</span>
-    </div>
-    <p style="font-size:.73rem;color:var(--muted);margin-top:9px">Depois de enviar não é possível editar. Salve o rascunho quantas vezes quiser antes disso.</p>`;
-  }
-  return html;
-}
-
-function coletarProcRespostas(){
-  const r={};
-  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
-    const el=document.getElementById(q.id); if(el)r[q.id]=el.value;
-  }));
-  return r;
-}
-function salvarProcRascunho(){
-  const uid=currentUser.id,u=getU(uid);
-  const pa=u.procAval||{};
-  pa.respostas=coletarProcRespostas();
-  setU(uid,{procAval:pa});
-  const s=document.getElementById('proc-saved');
-  if(s){s.style.display='inline';setTimeout(()=>s.style.display='none',2500);}
-  // atualiza contadores
-  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
-    const box=document.getElementById('pq-'+q.id);
-    if(box)box.classList.toggle('answered',!!(pa.respostas[q.id]||'').trim());
-  }));
-}
-function enviarProcAval(){
-  const r=coletarProcRespostas();
-  const total=totalPerguntasProc();
-  const feitas=Object.values(r).filter(v=>v&&v.trim()).length;
-  if(feitas<total){
-    if(!confirm(`Você respondeu ${feitas} de ${total} questões. Enviar mesmo assim? Não será possível editar depois.`))return;
-  } else if(!confirm('Enviar a avaliação? Não será possível editar depois.')) return;
-  const uid=currentUser.id,u=getU(uid);
-  setU(uid,{procAval:{respostas:r,submitted:true,enviadoEm:new Date().toISOString()}});
-  const p=document.getElementById('panel-proc');
-  if(p)p.innerHTML=buildProcPanel();
-}
-
+/* ─── Render dos módulos ─── */
 function buildModulosHTML(){
   let html='';
-  const grupos=[
-    {label:'🌐 Módulos Online — concluir até sexta 09/10', modo:'online'},
-    {label:'🏢 Módulos Presenciais — 13 a 16/10',          modo:'presencial'}
-  ];
-  grupos.forEach(g=>{
-    const lista=MODULOS.filter(m=>m.modo===g.modo);
+  SEMANAS.forEach(S=>{
+    const lista=MODULOS.filter(m=>m.sem===S.n);
+    if(!lista.length)return;
     const ok=lista.filter(m=>modProgress(m).status==='done').length;
-    html+=`<div class="week-divider">${g.label} <span style="color:var(--orange);font-weight:800;margin-left:6px">${ok}/${lista.length}</span></div><div class="days-grid" style="margin-bottom:10px">`;
+    html+=`<div class="week-divider">${S.label} <span style="color:var(--orange);font-weight:800;margin-left:6px">${ok}/${lista.length}</span></div><div class="days-grid" style="margin-bottom:10px">`;
+    let dataAtual='';
     lista.forEach(m=>{
+      if(m.data!==dataAtual){
+        dataAtual=m.data;
+        html+=`<div style="font-size:.73rem;font-weight:800;color:var(--muted);letter-spacing:.4px;margin:8px 0 2px">📆 ${m.dia} · ${m.data}</div>`;
+      }
       const p=modProgress(m);
       const chip={done:'<span class="mod-chip chip-done">✅ Concluído</span>',
                   doing:'<span class="mod-chip chip-doing">▶️ Em andamento</span>',
@@ -1361,146 +1369,145 @@ function buildModulosHTML(){
             <div class="day-sub" style="margin-top:3px">
               <span class="mod-cat">${m.cat}</span>
               <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'🌐 Online':'🏢 Presencial'}</span>
-              <span style="margin-left:5px">${m.prazo}</span>
-            </div>
-            <div class="day-sub" style="margin-top:3px">${p.done}/${p.total} conteúdos · ${p.prova?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
+              <span style="margin-left:5px">${m.data}</span></div>
+            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos · ${p.dP}/${p.tP} práticas · ${p.env?'avaliação enviada ✅':'avaliação pendente 📝'}</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
-          </div>
-        </div><span class="day-arrow">▼</span></div>
+          </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
-          ${m.video?buildModVideo(m):''}
           <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo do módulo</div>
-            <div class="task-list">${m.topicos.map((t,i)=>{
-              const tid=m.id+'_t'+i;
-              const vsrc=(TOPIC_VIDEOS[tid]||'');
-              return `<div class="topic-row" id="trow-${tid}">
+            <div class="task-list">${m.topicos.map((t,i)=>`
+              <div class="topic-row" id="trow-${m.id}_t${i}">
                 <div class="topic-head">
-                  <div class="topic-cb" id="top-${tid}" data-tid="${tid}" onclick="toggleTopic(this)">✓</div>
-                  <span class="topic-txt" onclick="document.getElementById('top-${tid}').click()">${t}</span>
-                  <button class="topic-vbtn" onclick="document.getElementById('trow-${tid}').classList.toggle('vopen')">${vsrc?'▶ Vídeo':'📹 Vídeo'}</button>
+                  <div class="topic-cb" id="top-${m.id}_t${i}" data-tid="${m.id}_t${i}" onclick="toggleTopic(this)">✓</div>
+                  <span class="topic-txt" onclick="document.getElementById('top-${m.id}_t${i}').click()">${t}</span>
                   <span class="task-pts">+${MOD_PTS_TOPICO}</span>
-                </div>
-                <div class="topic-vbody">${vsrc
-                  ? `<video controls playsinline preload="metadata"><source src="${vsrc}" type="video/mp4"></video>`
-                  : `<div class="vsoon">📹 Vídeo explicativo deste tópico será disponibilizado em breve.</div>`}
-                </div>
-              </div>`;}).join('')}
-            </div>
+                </div></div>`).join('')}</div>
           </div>
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Avaliação do módulo</div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Tarefas práticas no sistema</div>
+            <p style="font-size:.74rem;color:var(--muted);margin-bottom:9px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
+            ${m.praticas.map((t,i)=>buildPratica(m,t,i)).join('')}
+          </div>
+          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">3</span> Avaliação do módulo</div>
             ${buildModProva(m)}
           </div>
-        </div>
-      </div>`;
+        </div></div>`;
     });
     html+=`</div>`;
   });
   return html;
 }
 
-function buildModVideo(m){
-  const src=VIDEO_SOURCES[m.video]||'';
-  return `<div class="day-video-card" id="mv-${m.id}">
-    <div class="day-video-header" onclick="document.getElementById('mv-${m.id}').classList.toggle('open')">
-      <span class="vhour">AULA</span><span class="vtitle">📹 Vídeo do módulo</span><span class="vplay">▼</span>
+function buildPratica(m,txt,i){
+  const pid=m.id+'_p'+i;
+  const st=(getU(currentUser.id).modPrats||{})[pid]||{};
+  return `<div class="prat-row${st.done?' done':''}" id="prow-${pid}">
+    <div class="prat-head">
+      <div class="prat-cb" data-pid="${pid}" onclick="togglePratica('${pid}')">✓</div>
+      <span class="prat-txt" onclick="togglePratica('${pid}')">${txt}</span>
+      <span class="task-pts">+${MOD_PTS_PRATICA}</span>
     </div>
-    <div class="day-video-body">
-      <video controls playsinline preload="metadata" style="width:100%;border-radius:8px;background:#000">
-        <source src="${src}" type="video/mp4">
-      </video>
+    <div class="dif-row">
+      <span class="dlbl">Nível de dificuldade:</span>
+      ${DIFICULDADES.map(d=>`<button class="dif-btn${st.dif===d?' sel':''}" data-d="${d}" onclick="setDificuldade('${pid}','${d}')">${d}</button>`).join('')}
     </div></div>`;
 }
 
+function togglePratica(pid){
+  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
+  if(!pr[pid])pr[pid]={};
+  pr[pid].done=!pr[pid].done;
+  if(!pr[pid].done)delete pr[pid].dif;
+  setU(uid,{modPrats:pr}); setU(uid,{pts:modPoints()});
+  refreshTrilha();
+}
+function setDificuldade(pid,d){
+  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
+  if(!pr[pid])pr[pid]={done:true};
+  pr[pid].dif=d; setU(uid,{modPrats:pr});
+  document.querySelectorAll(`#prow-${pid} .dif-btn`).forEach(b=>b.classList.toggle('sel',b.dataset.d===d));
+}
+function toggleTopic(el){
+  const uid=currentUser.id,tid=el.dataset.tid;
+  const row=document.getElementById('trow-'+tid);
+  const u=getU(uid),tops=u.modTopics||[];const i=tops.indexOf(tid);
+  if(i===-1){tops.push(tid);if(row)row.classList.add('done');}
+  else{tops.splice(i,1);if(row)row.classList.remove('done');}
+  setU(uid,{modTopics:tops}); setU(uid,{pts:modPoints()});
+  refreshTrilha();
+}
+
+/* ─── Avaliação do módulo: envio, espera e nota ─── */
 function buildModProva(m){
+  const u=getU(currentUser.id);
+  const pv=(u.modProvas||{})[m.id]||{};
+  if(pv.submitted){
+    if(pv.nota!=null){
+      return `<div class="nota-box">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div><div class="nota-val">${pv.nota}<span style="font-size:1rem;color:var(--muted)">/${m.prova.pts}</span></div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:2px">corrigido por ${pv.corrigidoPor||'Gestão'}</div></div>
+          <div style="flex:1;min-width:150px"><div class="bar-bg"><div class="bar-fill" style="width:${Math.round((pv.nota/m.prova.pts)*100)}%"></div></div></div>
+        </div>
+        ${pv.feedback?`<div class="nota-fb"><strong>💬 Feedback:</strong><br>${pv.feedback}</div>`:''}
+      </div>`;
+    }
+    return `<div class="aval-wait"><div class="ic">⏳</div>
+      <b>Avaliação enviada — aguardando correção</b>
+      <span>Sua nota será liberada assim que a gestão corrigir. Enquanto isso, siga com o conteúdo e as tarefas práticas do módulo.</span>
+      <span style="margin-top:6px">Enviada em ${pv.enviadoEm?new Date(pv.enviadoEm).toLocaleString('pt-BR'):'-'}</span></div>`;
+  }
   let h=`<div class="prova-section" id="mprova-${m.id}">
-    <div class="prova-header"><span class="prova-icon">📋</span><h4>Avaliação — ${m.titulo}</h4><span class="prova-pts-badge">+${m.prova.pts} pts</span></div>
-    <p class="prova-desc">Responda com suas palavras. Conclua o conteúdo acima antes de enviar.</p>`;
+    <div class="prova-header"><span class="prova-icon">📋</span><h4>Avaliação — ${m.titulo}</h4><span class="prova-pts-badge">${m.prova.pts} pts</span></div>
+    <p class="prova-desc">Responda com suas palavras. Depois de enviar não é possível editar e a avaliação sai da tela — a nota é liberada após a correção.</p>`;
   m.prova.perguntas.forEach((q,i)=>{
+    const val=(pv.rascunho||{})[q.id]||'';
     h+=`<div class="prova-q"><label>Questão ${i+1}</label><div class="q-enunciado">${q.txt}</div>
-      <textarea id="${q.id}" placeholder="Sua resposta..."></textarea></div>`;
+      <textarea id="${q.id}" placeholder="Sua resposta...">${val}</textarea></div>`;
   });
-  h+=`<div class="video-or">— ou envie um vídeo —</div>
-    <div class="video-upload-area" data-mod="${m.id}"><input type="file" accept="video/*"><div class="vu-icon">🎥</div>
-      <p><strong>Grave um vídeo e envie aqui</strong><br>Mostre sua tela ou explique oralmente.</p></div>
-    <div class="video-preview" id="mvp-${m.id}"><video controls></video><div class="vp-name" id="mvn-${m.id}"></div></div>
-    <div class="prova-status">
-      <button class="btn-submit-prova" data-mod="${m.id}">Enviar avaliação do módulo</button>
-      <div class="prova-done-banner" id="mdone-${m.id}">✅ Avaliação enviada! +${m.prova.pts} pts</div>
+  h+=`<div class="prova-status">
+      <button class="btn-save-eval" onclick="salvarRascunhoMod('${m.id}')">💾 Salvar rascunho</button>
+      <button class="btn-submit-prova" onclick="submitModProva('${m.id}')">Enviar avaliação →</button>
+      <span class="eval-saved" id="msaved-${m.id}">✓ Salvo!</span>
     </div></div>`;
   return h;
 }
-
-function toggleTopic(el){
-  const uid=currentUser.id, tid=el.dataset.tid;
-  const row=document.getElementById('trow-'+tid);
-  const u=getU(uid); const tops=u.modTopics||[];
-  const i=tops.indexOf(tid);
-  if(i===-1){tops.push(tid);if(row)row.classList.add('done');}
-  else{tops.splice(i,1);if(row)row.classList.remove('done');}
-  setU(uid,{modTopics:tops,pts:modPoints()});
-  refreshTrilha();
-}
-
-function submitModProva(mid){
-  const m=MODULOS.find(x=>x.id===mid); if(!m)return;
-  const uid=currentUser.id, u=getU(uid), mp=u.modProvas||{};
-  if(!mp[mid])mp[mid]={};
-  const r={}; m.prova.perguntas.forEach(q=>{r[q.id]=document.getElementById(q.id)?.value||'';});
-  mp[mid].respostas=r; mp[mid].submitted=true;
-  setU(uid,{modProvas:mp});
-  setU(uid,{pts:modPoints()});
-  const b=document.getElementById('mdone-'+mid); if(b)b.style.display='flex';
-  const btn=document.querySelector(`.btn-submit-prova[data-mod="${mid}"]`); if(btn)btn.disabled=true;
-  refreshTrilha();
-}
-
-function handleModVideo(e,mid){
-  const f=e.target.files[0]; if(!f)return;
-  const p=document.getElementById('mvp-'+mid);
-  p.querySelector('video').src=URL.createObjectURL(f);
-  document.getElementById('mvn-'+mid).textContent='📎 '+f.name;
-  p.style.display='block';
+function salvarRascunhoMod(mid){
+  const m=MODULOS.find(x=>x.id===mid);if(!m)return;
   const uid=currentUser.id,u=getU(uid),mp=u.modProvas||{};
   if(!mp[mid])mp[mid]={};
-  mp[mid].hasVideo=true;mp[mid].videoName=f.name;
-  setU(uid,{modProvas:mp});
+  const r={};m.prova.perguntas.forEach(q=>{r[q.id]=document.getElementById(q.id)?.value||'';});
+  mp[mid].rascunho=r;setU(uid,{modProvas:mp});
+  const s=document.getElementById('msaved-'+mid);
+  if(s){s.style.display='inline';setTimeout(()=>s.style.display='none',2200);}
+}
+function submitModProva(mid){
+  const m=MODULOS.find(x=>x.id===mid);if(!m)return;
+  const r={};m.prova.perguntas.forEach(q=>{r[q.id]=document.getElementById(q.id)?.value||'';});
+  const feitas=Object.values(r).filter(v=>v&&v.trim()).length;
+  if(feitas<m.prova.perguntas.length){
+    if(!confirm(`Você respondeu ${feitas} de ${m.prova.perguntas.length} questões. Enviar mesmo assim? Não poderá editar depois.`))return;
+  } else if(!confirm('Enviar a avaliação? Não será possível editar depois.'))return;
+  const uid=currentUser.id,u=getU(uid),mp=u.modProvas||{};
+  const hist=(mp[mid]||{}).historico||[];
+  hist.push({respostas:r,em:new Date().toISOString(),v:hist.length+1});
+  mp[mid]={respostas:r,submitted:true,enviadoEm:new Date().toISOString(),historico:hist};
+  setU(uid,{modProvas:mp}); setU(uid,{pts:modPoints()});
+  refreshTrilha();
 }
 
 function restoreModStates(){
   const u=getU(currentUser.id);
   (u.modTopics||[]).forEach(t=>document.getElementById('trow-'+t)?.classList.add('done'));
-  Object.entries(u.modProvas||{}).forEach(([mid,pv])=>{
-    const m=MODULOS.find(x=>x.id===mid); if(!m)return;
-    if(pv.respostas)m.prova.perguntas.forEach(q=>{const el=document.getElementById(q.id);if(el&&pv.respostas[q.id])el.value=pv.respostas[q.id];});
-    if(pv.submitted){
-      const b=document.getElementById('mdone-'+mid); if(b)b.style.display='flex';
-      const btn=document.querySelector(`.btn-submit-prova[data-mod="${mid}"]`); if(btn)btn.disabled=true;
-    }
-    if(pv.hasVideo&&pv.videoName){
-      const n=document.getElementById('mvn-'+mid);
-      if(n){n.textContent='📎 '+pv.videoName;const pr=document.getElementById('mvp-'+mid);if(pr)pr.style.display='block';}
-    }
-  });
 }
-
 function refreshTrilha(){
-  const p=document.getElementById('panel-modulos');
-  if(!p)return;
+  const p=document.getElementById('panel-modulos');if(!p)return;
   const abertos=[...p.querySelectorAll('.day-card.open')].map(c=>c.id);
   p.innerHTML=buildModHero()+buildModulosHTML();
   abertos.forEach(id=>document.getElementById(id)?.classList.add('open'));
-  bindModEvents(p);
-  restoreModStates();
-  refreshLeaderboard();
+  bindModEvents(p);restoreModStates();refreshLeaderboard();
 }
-
 function bindModEvents(root){
   root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
-  root.querySelectorAll('.btn-submit-prova[data-mod]').forEach(b=>{b.onclick=()=>submitModProva(b.dataset.mod);});
-  root.querySelectorAll('.video-upload-area[data-mod]').forEach(a=>{
-    a.onclick=(e)=>{if(e.target.tagName!=='INPUT')a.querySelector('input').click();};
-    a.querySelector('input').onchange=(e)=>handleModVideo(e,a.dataset.mod);
-  });
 }
 
 function buildModHero(){
@@ -1749,50 +1756,101 @@ function buildMentorOverview(){
   });
   return html+`</div>`;
 }
-function buildSdrProvaCard(u){
-  const d=getU(u.id);
-  const mp=d.modProvas||{}, tops=(d.modTopics||[]);
+function buildSdrProvaCard(u,corrigir){
+  const d=getU(u.id), mp=d.modProvas||{}, tops=(d.modTopics||[]), prats=(d.modPrats||{});
   const env=Object.values(mp).filter(v=>v.submitted).length;
-  const vid=Object.values(mp).some(v=>v.hasVideo);
-  const pts=tops.length*MOD_PTS_TOPICO+Object.entries(mp).filter(([,v])=>v.submitted)
-      .reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
+  const corr=Object.values(mp).filter(v=>v.submitted&&v.nota!=null).length;
+  const pend=env-corr;
+  const pts=tops.length*MOD_PTS_TOPICO
+    +Object.values(prats).filter(v=>v.done).length*MOD_PTS_PRATICA
+    +Object.entries(mp).filter(([,v])=>v.submitted).reduce((a,[k])=>{const m=MODULOS.find(x=>x.id===k);return a+(m?m.prova.pts:0);},0);
   let html=`<div class="sdr-prova-wrapper">
     <div class="sdr-prova-summary" onclick="this.closest('.sdr-prova-wrapper').classList.toggle('open')">
       ${avatarHtml(u,52)}
       <div class="sdr-prova-info"><strong>${u.name}</strong><span>${u.turno}</span>
         <div class="sdr-prova-stats">
-          <span class="${env===MODULOS.length?'stat-ok':'stat-pend'}">${env}/${MODULOS.length} avaliações</span>
+          <span class="${env===MODULOS.length?'stat-ok':'stat-pend'}">${env}/${MODULOS.length} enviadas</span>
+          ${pend>0?`<span class="stat-vid">⏳ ${pend} a corrigir</span>`:''}
+          ${corr>0?`<span class="stat-ok">✅ ${corr} corrigidas</span>`:''}
           <span class="stat-star">${pts} pts</span>
-          ${vid?'<span class="stat-vid">🎥 enviou vídeo</span>':''}
         </div></div>
       <span class="sdr-prova-arrow">▼</span></div>
     <div class="sdr-prova-days">`;
   MODULOS.forEach(m=>{
     const pv=mp[m.id]; const ok=pv&&pv.submitted;
     const tOk=m.topicos.filter((_,i)=>tops.includes(m.id+'_t'+i)).length;
+    const pOk=m.praticas.filter((_,i)=>(prats[m.id+'_p'+i]||{}).done).length;
+    const stat=!ok?'⏳ não enviada':(pv.nota!=null?`✅ nota ${pv.nota}/${m.prova.pts}`:'📝 aguardando correção');
     html+=`<div class="day-card">
       <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
-        <div class="dh-left"><div class="module-num ${ok?'done':''}">${ok?'✓':m.num}</div>
+        <div class="dh-left"><div class="module-num ${ok&&pv.nota!=null?'done':ok?'doing':''}">${ok&&pv.nota!=null?'✓':m.num}</div>
         <div><strong>${m.icon} ${m.titulo}</strong>
-        <div class="day-sub">${tOk}/${m.topicos.length} conteúdos · ${ok?'✅ avaliação enviada':'⏳ pendente'}${pv&&pv.hasVideo?' · 🎥':''}</div></div>
-        </div><span class="day-arrow">▼</span></div>
+        <div class="day-sub">${m.data} · ${tOk}/${m.topicos.length} conteúdos · ${pOk}/${m.praticas.length} práticas</div>
+        <div class="day-sub">${stat}</div></div></div><span class="day-arrow">▼</span></div>
       <div class="day-body">`;
+    // dificuldades relatadas
+    const difs=m.praticas.map((t,i)=>({t,d:(prats[m.id+'_p'+i]||{}).dif})).filter(x=>x.d);
+    if(difs.length){
+      html+=`<div style="margin-bottom:11px"><div style="font-size:.74rem;font-weight:700;color:var(--navy);margin-bottom:5px">🎚️ Dificuldade relatada nas práticas</div>`;
+      difs.forEach(x=>{
+        const c=x.d==='Fácil'?'#dcfce7;color:#15803d':x.d==='Médio'?'#fef9c3;color:#a16207':'#fee2e2;color:#b91c1c';
+        html+=`<div style="font-size:.73rem;margin-bottom:3px"><span style="background:${c};padding:1px 8px;border-radius:20px;font-weight:700;font-size:.66rem">${x.d}</span> ${x.t}</div>`;
+      });
+      html+=`</div>`;
+    }
     if(ok&&pv.respostas){
       html+=`<div class="mentor-prova-view"><h5>📋 Respostas de ${u.name}</h5>`;
       m.prova.perguntas.forEach((q,i)=>{
-        html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.txt.substring(0,65)}...</div><div class="mpv-text">${pv.respostas[q.id]||'(sem resposta)'}</div></div>`;});
-      if(pv.hasVideo)html+=`<div style="margin-top:7px;font-size:.75rem;color:var(--green);font-weight:600">🎥 Vídeo: ${pv.videoName||'enviado'}</div>`;
+        html+=`<div class="mpv-row"><div class="mpv-label">Q${i+1} — ${q.txt.substring(0,70)}...</div><div class="mpv-text">${pv.respostas[q.id]||'<i style="color:var(--muted)">sem resposta</i>'}</div></div>`;});
       html+=`</div>`;
+      if((pv.historico||[]).length>1){
+        html+=`<div style="margin-top:9px"><div style="font-size:.72rem;font-weight:700;color:var(--muted)">🕘 Histórico de envios</div>`;
+        pv.historico.forEach(h=>{html+=`<div class="hist-item">v${h.v} · ${new Date(h.em).toLocaleString('pt-BR')}</div>`;});
+        html+=`</div>`;
+      }
+      if(corrigir){
+        html+=`<div class="corr-box">
+          <div style="font-size:.78rem;font-weight:800;color:var(--navy);margin-bottom:8px">✏️ Correção</div>
+          <label style="font-size:.73rem;color:var(--muted);font-weight:600">Nota (0 a ${m.prova.pts})</label><br>
+          <input type="number" id="nota-${u.id}-${m.id}" min="0" max="${m.prova.pts}" value="${pv.nota!=null?pv.nota:''}" placeholder="0">
+          <textarea id="fb-${u.id}-${m.id}" placeholder="Feedback para o SDR...">${pv.feedback||''}</textarea>
+          <button class="btn-corrigir" onclick="salvarCorrecao('${u.id}','${m.id}',${m.prova.pts})">${pv.nota!=null?'Atualizar correção':'Lançar nota'}</button>
+          ${pv.nota!=null?`<span style="font-size:.72rem;color:var(--green);font-weight:600;margin-left:9px">✅ corrigido por ${pv.corrigidoPor||'-'}</span>`:''}
+        </div>`;
+      } else if(pv.nota!=null){
+        html+=`<div style="margin-top:10px;background:#f0fdf4;border:1.5px solid var(--green);border-radius:8px;padding:10px 13px">
+          <strong style="font-size:.78rem;color:#15803d">Nota: ${pv.nota}/${m.prova.pts}</strong>
+          ${pv.feedback?`<div style="font-size:.75rem;color:var(--txt);margin-top:5px">${pv.feedback}</div>`:''}</div>`;
+      }
     } else html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Avaliação ainda não enviada.</div>`;
     html+=`</div></div>`;
   });
   return html+`</div></div>`;
 }
+
+function salvarCorrecao(uid,mid,max){
+  const nEl=document.getElementById('nota-'+uid+'-'+mid);
+  const fEl=document.getElementById('fb-'+uid+'-'+mid);
+  const n=parseFloat(nEl.value);
+  if(isNaN(n)||n<0||n>max){alert('Informe uma nota entre 0 e '+max);return;}
+  const d=getU(uid),mp=d.modProvas||{};
+  if(!mp[mid]){alert('Avaliação não encontrada.');return;}
+  mp[mid].nota=n;
+  mp[mid].feedback=fEl.value;
+  mp[mid].corrigidoPor=currentUser.name;
+  mp[mid].corrigidoEm=new Date().toISOString();
+  setU(uid,{modProvas:mp});
+  const p=document.getElementById('panel-adm-provas');
+  if(p){const ab=[...p.querySelectorAll('.sdr-prova-wrapper.open,.day-card.open')].map(x=>x.id).filter(Boolean);
+    p.innerHTML=buildAdmProvas();
+    p.querySelectorAll('.sdr-prova-wrapper').forEach(w=>w.classList.add('open'));}
+  alert('✅ Nota lançada! O SDR já consegue ver a nota e o feedback.');
+}
 function buildMentorProvas(){
   const mentees=currentUser.mentees||[];
   if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR vinculado.</div>';
-  let html='';
-  mentees.forEach(n=>{const u=USERS.find(x=>x.name===n); if(u)html+=buildSdrProvaCard(u);});
+  let html=`<p class="section-sub">Respostas dos novos SDRs sob sua responsabilidade. A nota é lançada pela gestão.</p>`;
+  mentees.forEach(n=>{const u=USERS.find(x=>x.name===n);if(u)html+=buildSdrProvaCard(u,false);});
   return html;
 }
 function buildMentorDiary(){
