@@ -464,6 +464,44 @@
   .lesson-sec-title{font-weight:700;letter-spacing:.1px;}
   .week-divider{color:#475569;}
   .day-badge{font-weight:700;}
+
+  /* ═══ AULAS ═══ */
+  .aula{border:1px solid var(--line);border-radius:9px;margin-bottom:7px;background:#fff;overflow:hidden;transition:border-color .15s;}
+  .aula:hover{border-color:#cbd5e1;}
+  .aula.done{background:#fbfefc;border-color:#bbf7d0;}
+  .aula.open{border-color:var(--orange);box-shadow:0 2px 10px rgba(249,115,22,.08);}
+  .aula-h{display:flex;align-items:center;gap:11px;padding:11px 14px;cursor:pointer;}
+  .aula-st{width:21px;height:21px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.68rem;flex-shrink:0;color:transparent;}
+  .aula.done .aula-st{background:var(--green);border-color:var(--green);color:#fff;}
+  .aula-n{font-size:.68rem;font-weight:800;color:var(--orange);letter-spacing:.3px;flex-shrink:0;}
+  .aula-t{font-size:.79rem;color:var(--txt);flex:1;font-weight:500;}
+  .aula.done .aula-t{color:var(--muted);}
+  .aula-ar{font-size:.7rem;color:var(--muted);transition:transform .2s;flex-shrink:0;}
+  .aula.open .aula-ar{transform:rotate(180deg);}
+  .aula-b{display:none;padding:0 14px 14px;}
+  .aula.open .aula-b{display:block;}
+  .aula-b video{width:100%;border-radius:8px;background:#0f1724;max-height:330px;display:block;}
+  .aula-soon{padding:26px 18px;text-align:center;font-size:.77rem;color:var(--muted);background:#fafbfc;border:1px dashed var(--line);border-radius:8px;}
+  .aula-foot{margin-top:11px;padding:12px 14px;background:#f8fafc;border-radius:8px;text-align:center;}
+  .aula-foot .hint{font-size:.74rem;color:var(--muted);margin-bottom:8px;display:block;}
+  .aula-foot .hint.ok{color:var(--green);font-weight:600;}
+  .btn-aula{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .15s;}
+  .btn-aula:hover:not(:disabled){background:#ea6c0a;}
+  .btn-aula:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed;}
+  .btn-aula.undo{background:transparent;color:var(--muted);border:1.5px solid var(--line);}
+  .btn-aula.undo:hover{border-color:var(--navy);color:var(--navy);}
+  .aulas-count{font-size:.7rem;color:var(--muted);font-weight:600;}
+  /* ═══ CAIXAS COLAPSÁVEIS ═══ */
+  .cx{border:1px solid var(--line);border-radius:10px;margin-top:11px;background:#fff;overflow:hidden;}
+  .cx-h{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;transition:background .15s;}
+  .cx-h:hover{background:#f8fafc;}
+  .cx-ar{font-size:.72rem;color:var(--muted);transition:transform .2s;}
+  .cx.open .cx-ar{transform:rotate(90deg);}
+  .cx-t{font-size:.81rem;font-weight:700;color:var(--navy);flex:1;}
+  .cx-m{font-size:.71rem;color:var(--muted);font-weight:600;}
+  .cx-b{display:none;padding:0 16px 16px;border-top:1px solid var(--line);}
+  .cx.open .cx-b{display:block;padding-top:14px;}
+  .sec-lbl{font-size:.68rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:16px 0 9px;display:flex;align-items:center;justify-content:space-between;}
 </style>
 </head>
 <body>
@@ -481,7 +519,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.3</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.4</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -908,11 +946,9 @@ const MODULOS=[
 const MOD_PTS_TOPICO=5;
 const MOD_PTS_PRATICA=10;
 const DIFICULDADES=['Fácil','Médio','Difícil'];
-/* Vídeo de treinamento por módulo. Preencher a URL conforme forem gravados. */
-const MOD_VIDEOS={
-  m1:'pipedrive-intro.mp4',
-  m2:'', m3:'', m4:'', m5:'', m6:'', m7:'', m8:'', m9:'', m10:'',
-  m11:'', m12:'', m13:'', m14:'', m15:'', m16:'', m17:'', m18:'', m19:''
+/* Vídeo por AULA. Chave = <idModulo>_t<indice da aula>. Preencher conforme gravados. */
+const AULA_VIDEOS={
+  'm1_t0':'pipedrive-intro.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
@@ -1437,19 +1473,77 @@ function hasVideo(){return false;}
 /* ─── Render dos módulos ─── */
 
 
-function buildModVideo(m){
-  const src=MOD_VIDEOS[m.id]||'';
-  if(src){
-    return `<div class="mvideo">
-      <div class="mvideo-h"><span class="mvl">Aula em vídeo</span><span class="mvt">${m.titulo}</span></div>
-      <video controls playsinline preload="metadata"><source src="${src}" type="video/mp4"></video>
-    </div>`;
-  }
-  return `<div class="mvideo pend">
-    <div class="mvideo-h"><span class="mvl">Aula em vídeo</span><span class="mvt">${m.titulo}</span></div>
-    <div class="mvsoon">Vídeo em produção — será disponibilizado em breve.</div>
-  </div>`;
+
+
+
+/* ─── Aulas ─── */
+function buildAula(m,txt,i){
+  const aid=m.id+'_t'+i;
+  const u=getU(currentUser.id);
+  const done=(u.modTopics||[]).includes(aid);
+  const watched=((u.aulaVideo||{})[aid])||!AULA_VIDEOS[aid];
+  const src=AULA_VIDEOS[aid]||'';
+  return `<div class="aula${done?' done':''}" id="aula-${aid}">
+    <div class="aula-h" onclick="toggleAulaOpen('${aid}')">
+      <span class="aula-st">✓</span>
+      <span class="aula-n">AULA ${i+1}</span>
+      <span class="aula-t">${txt}</span>
+      <span class="aula-ar">▼</span>
+    </div>
+    <div class="aula-b">
+      ${src
+        ? `<video id="v-${aid}" controls playsinline preload="metadata" onended="videoFim('${aid}')" ontimeupdate="videoProg('${aid}',this)"><source src="${src}" type="video/mp4"></video>`
+        : `<div class="aula-soon">Vídeo em produção — será disponibilizado em breve.</div>`}
+      <div class="aula-foot">
+        ${done
+          ? `<span class="hint ok">Aula concluída</span>
+             <button class="btn-aula undo" onclick="desmarcarAula('${aid}')">Desmarcar</button>`
+          : `<span class="hint${watched?' ok':''}" id="hint-${aid}">${watched?(src?'Vídeo assistido':'Aula sem vídeo — pode concluir'):'Assista ao vídeo até o fim para liberar'}</span>
+             <button class="btn-aula" id="btn-${aid}" ${watched?'':'disabled'} onclick="concluirAula('${aid}')">Marcar aula como concluída · +${MOD_PTS_TOPICO} pts</button>`}
+      </div>
+    </div></div>`;
 }
+function toggleAulaOpen(aid){
+  const el=document.getElementById('aula-'+aid); if(!el)return;
+  const abrindo=!el.classList.contains('open');
+  el.closest('.aulas-wrap')?.querySelectorAll('.aula.open').forEach(a=>{if(a!==el)a.classList.remove('open');});
+  el.classList.toggle('open',abrindo);
+}
+function videoProg(aid,v){
+  if(!v.duration)return;
+  if(v.currentTime/v.duration>=0.95) videoFim(aid);
+}
+function videoFim(aid){
+  const u=getU(currentUser.id); const av=u.aulaVideo||{};
+  if(av[aid])return;
+  av[aid]=true; setU(currentUser.id,{aulaVideo:av});
+  const b=document.getElementById('btn-'+aid); if(b)b.disabled=false;
+  const h=document.getElementById('hint-'+aid);
+  if(h){h.textContent='Vídeo assistido';h.classList.add('ok');}
+}
+function concluirAula(aid){
+  const uid=currentUser.id,u=getU(uid),tops=u.modTopics||[];
+  if(!tops.includes(aid))tops.push(aid);
+  setU(uid,{modTopics:tops}); setU(uid,{pts:modPoints()});
+  const mid=aid.split('_t')[0], idx=parseInt(aid.split('_t')[1]);
+  const m=MODULOS.find(x=>x.id===mid);
+  refreshTrilha();
+  // abrir a próxima aula
+  if(m&&idx+1<m.topicos.length){
+    setTimeout(()=>{
+      document.getElementById('mod-'+mid)?.classList.add('open');
+      toggleAulaOpen(mid+'_t'+(idx+1));
+    },60);
+  }
+}
+function desmarcarAula(aid){
+  const uid=currentUser.id,u=getU(uid),tops=u.modTopics||[];
+  const i=tops.indexOf(aid); if(i>=0)tops.splice(i,1);
+  setU(uid,{modTopics:tops}); setU(uid,{pts:modPoints()});
+  refreshTrilha();
+  setTimeout(()=>{document.getElementById('mod-'+aid.split('_t')[0])?.classList.add('open');toggleAulaOpen(aid);},60);
+}
+function toggleCx(id){document.getElementById(id)?.classList.toggle('open');}
 
 function buildMateriais(m){
   if(!m.materiais)return'';
@@ -1576,37 +1670,37 @@ function buildModulosHTML(){
       const chip={done:'<span class="mod-chip chip-done">Concluído</span>',
                   doing:'<span class="mod-chip chip-doing">Em andamento</span>',
                   todo:'<span class="mod-chip chip-todo">A iniciar</span>'}[p.status];
+      const provaTxt=p.env?'avaliação enviada':`${m.prova.perguntas.length} questões · ${m.prova.pts} pts`;
       html+=`<div class="day-card" id="mod-${m.id}">
         <div class="day-header"><div class="dh-left">
           <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
-            <strong>${m.titulo}</strong>${chip}
+            <strong>Módulo ${m.num} — ${m.titulo}</strong>${chip}
             <div class="day-sub" style="margin-top:3px">
               <span class="mod-cat">${m.cat}</span>
               <span class="mod-mode ${m.modo==='online'?'mode-on':'mode-pres'}">${m.modo==='online'?'Online':'Presencial'}</span>
               <span style="margin-left:5px">${m.data}</span></div>
-            <div class="day-sub" style="margin-top:3px">${p.dT}/${p.tT} conteúdos${p.tP?` · ${p.dP}/${p.tP} práticas`:''} · ${p.env?'avaliação enviada':'avaliação pendente'}</div>
+            <div class="day-sub" style="margin-top:3px">${m.topicos.length} aulas${m.praticas.length?` · ${m.praticas.length} tarefas`:''} · ${p.env?'avaliação enviada':'avaliação pendente'}</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
-          ${buildModVideo(m)}
           ${buildMateriais(m)}
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">1</span> Conteúdo</div>
-            <div class="task-list">${m.topicos.map((t,i)=>`
-              <div class="topic-row" id="trow-${m.id}_t${i}">
-                <div class="topic-head">
-                  <div class="topic-cb" id="top-${m.id}_t${i}" data-tid="${m.id}_t${i}" onclick="toggleTopic(this)">✓</div>
-                  <span class="topic-txt" onclick="document.getElementById('top-${m.id}_t${i}').click()">${t}</span>
-                  <span class="task-pts">+${MOD_PTS_TOPICO}</span>
-                </div></div>`).join('')}</div>
-          </div>
-          ${m.praticas.length?`<div class="lesson-sec"><div class="lesson-sec-title"><span class="n">2</span> Prática no sistema</div>
-            <p style="font-size:.74rem;color:var(--muted);margin-bottom:9px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
-            ${m.praticas.map((t,i)=>buildPratica(m,t,i)).join('')}
-          </div>`:''}
-          <div class="lesson-sec"><div class="lesson-sec-title"><span class="n">${m.praticas.length?3:2}</span> Avaliação</div>
-            ${buildModProva(m)}
-          </div>
+          <div class="sec-lbl"><span>Conteúdo do módulo</span><span class="aulas-count">${p.dT}/${p.tT} aulas</span></div>
+          <div class="aulas-wrap">${m.topicos.map((t,i)=>buildAula(m,t,i)).join('')}</div>
+          ${m.praticas.length?`
+          <div class="cx" id="cx-prat-${m.id}">
+            <div class="cx-h" onclick="toggleCx('cx-prat-${m.id}')">
+              <span class="cx-ar">▶</span><span class="cx-t">Tarefas Práticas</span>
+              <span class="cx-m">${p.dP}/${p.tP} concluídas</span></div>
+            <div class="cx-b">
+              <p style="font-size:.75rem;color:var(--muted);margin-bottom:11px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
+              ${m.praticas.map((t,i)=>buildPratica(m,t,i)).join('')}
+            </div></div>`:''}
+          <div class="cx" id="cx-aval-${m.id}">
+            <div class="cx-h" onclick="toggleCx('cx-aval-${m.id}')">
+              <span class="cx-ar">▶</span><span class="cx-t">Avaliação do Módulo</span>
+              <span class="cx-m">${provaTxt}</span></div>
+            <div class="cx-b">${buildModProva(m)}</div></div>
         </div></div>`;
     });
     html+=`</div>`;
@@ -1620,7 +1714,7 @@ function buildPratica(m,txt,i){
   return `<div class="prat-row${st.done?' done':''}" id="prow-${pid}">
     <div class="prat-head">
       <div class="prat-cb" data-pid="${pid}" onclick="togglePratica('${pid}')">✓</div>
-      <span class="prat-txt" onclick="togglePratica('${pid}')">${txt}</span>
+      <span class="prat-txt" onclick="togglePratica('${pid}')"><b style="color:var(--orange);font-size:.68rem;letter-spacing:.3px">TAREFA ${i+1}</b> · ${txt}</span>
       <span class="task-pts">+${MOD_PTS_PRATICA}</span>
     </div>
     <div class="dif-row">
@@ -1712,16 +1806,13 @@ function submitModProva(mid){
   refreshTrilha();
 }
 
-function restoreModStates(){
-  const u=getU(currentUser.id);
-  (u.modTopics||[]).forEach(t=>document.getElementById('trow-'+t)?.classList.add('done'));
-}
+function restoreModStates(){}
 function refreshTrilha(){
   const p=document.getElementById('panel-modulos');if(!p)return;
-  const abertos=[...p.querySelectorAll('.day-card.open')].map(c=>c.id);
+  const ab=[...p.querySelectorAll('.day-card.open,.aula.open,.cx.open')].map(c=>c.id).filter(Boolean);
   p.innerHTML=buildModHero()+buildModulosHTML();
-  abertos.forEach(id=>document.getElementById(id)?.classList.add('open'));
-  bindModEvents(p);restoreModStates();refreshLeaderboard();
+  ab.forEach(id=>document.getElementById(id)?.classList.add('open'));
+  bindModEvents(p);refreshLeaderboard();
 }
 function bindModEvents(root){
   root.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
