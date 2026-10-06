@@ -457,7 +457,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.1</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v3.2</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">🔑 Criar senha de acesso</div>
@@ -1135,11 +1135,14 @@ function buildApp(){
   else buildNovoPanels(tabs,main);
 }
 function addTab(tabs,main,id,label,builder){
+  let conteudo='';
+  try{conteudo=builder();}
+  catch(e){console.error('Erro na aba '+id,e);conteudo='<div style="padding:18px;font-size:.82rem;color:var(--muted)">Não foi possível carregar esta seção.</div>';}
   const btn=document.createElement('div');btn.className='ntab';btn.textContent=label;
   btn.onclick=()=>{tabs.querySelectorAll('.ntab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');main.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+id)?.classList.add('active');};
   tabs.appendChild(btn);
   const panel=document.createElement('div');panel.id='panel-'+id;panel.className='panel';
-  panel.innerHTML=builder();
+  panel.innerHTML=conteudo;
   main.appendChild(panel);
 }
 
@@ -1438,6 +1441,100 @@ function buildMateriais(m){
   h+=`</div><div class="mat-obs"><div class="ot">O que observar e anotar</div><ul>`;
   M.obs.forEach(o=>h+=`<li>${o}</li>`);
   return h+`</ul></div></div>`;
+}
+
+
+/* ─── Avaliação de Processos ─── */
+function buildProcPanel(){
+  const u=getU(currentUser.id);
+  const pv=u.procAval||{};
+  const total=totalPerguntasProc();
+  const resp=Object.values(pv.respostas||{}).filter(v=>v&&v.trim()).length;
+  const enviada=pv.submitted;
+
+  let html=`<div class="proc-hero">
+    <h2>📝 ${AVAL_PROCESSOS.titulo}</h2>
+    <div class="ph-meta">
+      <span class="ph-tag">👤 Responsável: ${AVAL_PROCESSOS.responsavel}</span>
+      <span class="ph-tag">📅 ${AVAL_PROCESSOS.data}</span>
+      <span class="ph-tag">❓ ${total} questões</span>
+      <span class="ph-tag">⭐ ${AVAL_PROCESSOS.pts} pontos</span>
+      <span class="ph-tag">${enviada?'✅ Enviada':'⏳ '+resp+'/'+total+' respondidas'}</span>
+    </div>
+    <p>${AVAL_PROCESSOS.desc}</p></div>`;
+
+  if(enviada){
+    if(pv.nota!=null){
+      html+=`<div class="nota-box"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <div><div class="nota-val">${pv.nota}<span style="font-size:1rem;color:var(--muted)">/${AVAL_PROCESSOS.pts}</span></div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:2px">corrigido por ${pv.corrigidoPor||'Gestão'}</div></div>
+        <div style="flex:1;min-width:150px"><div class="bar-bg"><div class="bar-fill" style="width:${Math.round((pv.nota/AVAL_PROCESSOS.pts)*100)}%"></div></div></div></div>
+        ${pv.feedback?`<div class="nota-fb"><strong>💬 Feedback:</strong><br>${pv.feedback}</div>`:''}</div>`;
+    } else {
+      html+=`<div class="aval-wait"><div class="ic">⏳</div>
+        <b>Avaliação enviada — aguardando correção</b>
+        <span>Sua nota será liberada assim que a gestão corrigir.</span>
+        <span style="margin-top:6px">Enviada em ${pv.enviadoEm?new Date(pv.enviadoEm).toLocaleString('pt-BR'):'-'}</span></div>`;
+    }
+    return html;
+  }
+
+  let n=0;
+  AVAL_PROCESSOS.blocos.forEach((b,bi)=>{
+    const feitas=b.perguntas.filter(q=>((pv.respostas||{})[q.id]||'').trim()).length;
+    html+=`<div class="proc-bloco${bi===0?' open':''}" id="pb-${bi}">
+      <div class="proc-bloco-h" onclick="document.getElementById('pb-${bi}').classList.toggle('open')">
+        <strong>${b.nome}</strong><span class="cnt">${feitas}/${b.perguntas.length} respondidas ▼</span></div>
+      <div class="proc-bloco-b">`;
+    b.perguntas.forEach(q=>{
+      n++;
+      const val=(pv.respostas||{})[q.id]||'';
+      html+=`<div class="proc-q${val.trim()?' answered':''}" id="pq-${q.id}">
+        <span class="qn">Questão ${n}</span><div class="qt">${q.txt}</div>
+        <textarea id="${q.id}" placeholder="Responda como você responderia no dia a dia...">${val}</textarea></div>`;
+    });
+    html+=`</div></div>`;
+  });
+
+  html+=`<div style="margin-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <button class="btn-save-eval" onclick="salvarProcRascunho()">💾 Salvar rascunho</button>
+    <button class="proc-submit" onclick="enviarProcAval()">Enviar avaliação →</button>
+    <span class="eval-saved" id="proc-saved">✓ Rascunho salvo!</span></div>
+    <p style="font-size:.73rem;color:var(--muted);margin-top:9px">Depois de enviar não é possível editar. Salve o rascunho quantas vezes quiser antes disso.</p>`;
+  return html;
+}
+
+function coletarProcRespostas(){
+  const r={};
+  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
+    const el=document.getElementById(q.id); if(el)r[q.id]=el.value;}));
+  return r;
+}
+function salvarProcRascunho(){
+  const uid=currentUser.id,u=getU(uid);
+  const pa=u.procAval||{};
+  pa.respostas=coletarProcRespostas();
+  setU(uid,{procAval:pa});
+  const s=document.getElementById('proc-saved');
+  if(s){s.style.display='inline';setTimeout(()=>s.style.display='none',2500);}
+  AVAL_PROCESSOS.blocos.forEach(b=>b.perguntas.forEach(q=>{
+    const box=document.getElementById('pq-'+q.id);
+    if(box)box.classList.toggle('answered',!!(pa.respostas[q.id]||'').trim());}));
+}
+function enviarProcAval(){
+  const r=coletarProcRespostas();
+  const total=totalPerguntasProc();
+  const feitas=Object.values(r).filter(v=>v&&v.trim()).length;
+  if(feitas<total){
+    if(!confirm(`Você respondeu ${feitas} de ${total} questões. Enviar mesmo assim? Não será possível editar depois.`))return;
+  } else if(!confirm('Enviar a avaliação? Não será possível editar depois.')) return;
+  const uid=currentUser.id,u=getU(uid);
+  const prev=u.procAval||{};
+  const hist=prev.historico||[];
+  hist.push({respostas:r,em:new Date().toISOString(),v:hist.length+1});
+  setU(uid,{procAval:{respostas:r,submitted:true,enviadoEm:new Date().toISOString(),historico:hist}});
+  const p=document.getElementById('panel-proc');
+  if(p)p.innerHTML=buildProcPanel();
 }
 
 function buildModulosHTML(){
