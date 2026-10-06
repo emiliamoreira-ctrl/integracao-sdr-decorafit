@@ -642,50 +642,40 @@ const DAYS=[
   {
     id:'d1',date:'06/10 (Ter)',label:'Terça-feira',sub:'06/10 · Online',color:'#3b82f6',pts:75,
     blocks:[
-      {time:'13h15–14h',   title:'Daily PV — observação',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham como ouvintes',meet:''},
-      {auto:'m1',from:'14h',to:'17h',joint:true,apenas:['Introdução à Plataforma','Pipedrive','Chatwoot']},
-      {time:'17h–17h40',   title:'Momento Dúvidas',type:'live',conduct:'Emília',joint:true,meet:''},
-      {time:'17h40–18h',   title:'Reflexão do dia',type:'practice',conduct:'Auto',joint:true},
-      {time:'18h–19h30',   title:'Prática nos sistemas + revisão das tarefas',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'19h30–21h',   title:'Acompanhar rotina da equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
+      {time:'13h15–14h', title:'Daily PV — observação',type:'meet',conduct:'Equipe SDR',joint:true,note:'Todos acompanham como ouvintes',meet:''},
+      {auto:'m1',apenas:['Introdução à Plataforma','Pipedrive','Chatwoot'],joint:true},
+      {time:'16h30–17h', title:'Encontro com a madrinha',type:'live',conduct:'Madrinha',turno:'manha'},
+      {time:'17h–17h40', title:'Momento Dúvidas',type:'live',conduct:'Emília',joint:true,meet:''},
+      {time:'17h40–18h', title:'Reflexão do dia',type:'practice',conduct:'Auto',joint:true},
+      {time:'19h30–20h', title:'Dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
     ],
     tasks:[]},
   {
     id:'d2',date:'07/10 (Qua)',label:'Quarta-feira',sub:'07/10 · Online',color:'#8b5cf6',pts:60,
     blocks:[
-      {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
-      {auto:'m2',from:'10h',to:'12h',turno:'manha'},
-      {time:'12h–13h',     title:'Almoço',type:'async',conduct:'—',turno:'manha'},
-      {time:'13h–14h',     title:'Resultados PV + Rotina part2 — equipe manhã',type:'live',conduct:'Dani',turno:'manha',meet:''},
-      {time:'14h–15h',     title:'Prática: enviar 1 R01 supervisionado',type:'practice',conduct:'Gaby',turno:'manha'},
-      {time:'15h–15h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Gaby',turno:'manha'},
-      {time:'15h30–18h',   title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'manha'},
-      {time:'12h–13h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
-      {auto:'m2',from:'13h',to:'15h',turno:'allice'},
-      {time:'15h–16h',     title:'Prática: encaminhar 2 R01',type:'practice',conduct:'Grazi',turno:'allice'},
-      {time:'16h–16h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'16h30–17h',   title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true,meet:''},
-      {time:'17h–18h',     title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'18h–19h',     title:'Almoço',type:'async',conduct:'—',turno:'allice'},
-      {time:'19h–21h',     title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'allice'},
+      {time:'09h–10h',   title:'Início de turno — encontro com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro'},
+      {auto:'m2',turno:'manha'},
+      {auto:'m1',apenas:['Google Agenda','Slack'],turno:'manha'},
+      {time:'12h–13h',   title:'Almoço',type:'async',conduct:'—',turno:'manha'},
+      {time:'16h30–17h', title:'Final de tarde — encontro com a madrinha',type:'live',conduct:'Gaby',turno:'manha'},
+      {time:'13h–14h',   title:'Rotina com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice'},
+      {auto:'m2',turno:'allice'},
+      {auto:'m1',apenas:['Google Agenda','Slack'],turno:'allice'},
+      {time:'18h–19h',   title:'Almoço',type:'async',conduct:'—',turno:'allice'},
+      {time:'19h30–20h', title:'Dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
     ],
     tasks:[]},
   {
     id:'d3',date:'08/10 (Qui)',label:'Quinta-feira',sub:'08/10 · Online',color:'#14b8a6',pts:60,
     blocks:[
-      {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Dani',turno:'manha',note:'Larissa e Leandro',meet:''},
-      {auto:'m3',from:'10h',to:'12h',turno:'manha'},
-      {time:'12h–13h',     title:'Almoço',type:'async',conduct:'—',turno:'manha'},
-      {time:'13h–14h',     title:'Rotina part2 — consolidação da semana',type:'live',conduct:'Dani',turno:'manha',meet:''},
-      {time:'14h–14h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Dani',turno:'manha'},
-      {time:'14h30–18h',   title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'manha'},
-      {time:'12h–13h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
-      {auto:'m3',from:'13h',to:'15h',turno:'allice'},
-      {time:'15h–15h30',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'15h30–17h30', title:'Rotina part2 — equipe tarde',type:'live',conduct:'Grazi',turno:'allice'},
-      {time:'17h30–18h',   title:'Leitura de conversas do time',type:'read',conduct:'Grazi',turno:'allice'},
-      {time:'18h–19h',     title:'Almoço',type:'async',conduct:'—',turno:'allice'},
-      {time:'19h–21h',     title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'allice'},
+      {time:'09h–10h',   title:'Início de turno — encontro com a madrinha',type:'live',conduct:'Dani',turno:'manha',note:'Larissa e Leandro'},
+      {auto:'m3',turno:'manha'},
+      {time:'12h–13h',   title:'Almoço',type:'async',conduct:'—',turno:'manha'},
+      {time:'16h30–17h', title:'Final de tarde — encontro com a madrinha',type:'live',conduct:'Dani',turno:'manha'},
+      {time:'13h–14h',   title:'Rotina com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice'},
+      {auto:'m3',turno:'allice'},
+      {time:'18h–19h',   title:'Almoço',type:'async',conduct:'—',turno:'allice'},
+      {time:'19h30–20h', title:'Dúvidas com a madrinha',type:'live',conduct:'Grazi',turno:'allice'},
     ],
     tasks:[]},
   {
@@ -806,11 +796,7 @@ const MODULOS=[
    {id:'p1e4',txt:'Ao abrir o Chatwoot pela manhã, qual caixa você olha primeiro e por quê?'}]}},
 ]},
 
-{num:2,data:'07/10',dia:'Quarta-feira',modo:'online',sem:1,
- materiais:{titulo:'Assistir R1',desc:'Assista às gravações e observe a condução do consultor.',
-  links:[{nome:'R1 Franciele',url:''},{nome:'R1 (2)',url:''},{nome:'R1 (3)',url:''}],
-  obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
- blocos:[
+{num:2,data:'07/10',dia:'Quarta-feira',modo:'online',sem:1, blocos:[
  {fer:'Pipedrive',
   aulas:['Pesquisar duplicidade','Fazendo anotações no card','Mudando de etapa','Atividades do dia','Atividades atrasadas','Organizando a fila de trabalho'],
   praticas:['Pesquise duplicidade antes de criar um card de teste','Faça uma anotação registrando o contato','Movimente o card entre duas etapas do funil','Abra as atividades do dia e liste as pendentes','Conclua uma atividade e crie a próxima na sequência'],
@@ -831,7 +817,11 @@ const MODULOS=[
    {id:'p2b5',txt:'Quando usar uma mensagem pronta e quando escrever do zero?'}]}},
 ]},
 
-{num:3,data:'08/10',dia:'Quinta-feira',modo:'online',sem:1,blocos:[
+{num:3,data:'08/10',dia:'Quinta-feira',modo:'online',sem:1,
+ materiais:{titulo:'Assistir R1',desc:'Assista às gravações e observe a condução do consultor.',
+  links:[{nome:'R1 Franciele',url:''},{nome:'R1 (2)',url:''},{nome:'R1 (3)',url:''}],
+  obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
+ blocos:[
  {fer:'VoIP',
   aulas:['Como fazer uma ligação','Como integrar com o Pipedrive','Relatório de ligações','Pesquisa de gravação'],
   materiais:{titulo:'Ouvir ligações',desc:'Ouça os áudios e registre suas observações.',
@@ -1890,25 +1880,14 @@ function buildDaysHTML(){
   return html;
 }
 function gerarBlocosAulas(m,inicioStr,fimStr,apenas){
-  const [ih,im]=inicioStr.split('h').map(Number);
-  const [fh,fm]=fimStr.split('h').map(Number);
-  const inicio=ih*60+(im||0), fim=fh*60+(fm||0);
-  const totalMin=fim-inicio;
   const aulas=[];
   m.blocos.forEach(b=>{
     if(apenas && !apenas.includes(b.fer)) return;
     b.aulas.forEach((t,j)=>aulas.push({fer:b.fer,nome:t,num:b.ini+j+1}));
   });
-  const n=aulas.length;
-  const fmt=mn=>{const h=Math.floor(mn/60),mi=mn%60;return h+'h'+(mi?String(mi).padStart(2,'0'):'');};
-  const passo=totalMin/n;
-  const blocks=[];
-  aulas.forEach((a,i)=>{
-    const ini=inicio+Math.round(i*passo), fimA=inicio+Math.round((i+1)*passo);
-    blocks.push({time:fmt(ini)+'–'+fmt(fimA),title:'Aula '+a.num+' · '+a.fer+' — '+a.nome,type:'async',conduct:'Auto',joint:true});
-  });
-  return blocks;
+  return aulas.map(a=>({time:'—',title:'Aula '+a.num+' · '+a.fer+' — '+a.nome,type:'async',conduct:'Auto'}));
 }
+
 function buildScheduleTable(day){
   const uid=currentUser.id;
   let expanded=[];
