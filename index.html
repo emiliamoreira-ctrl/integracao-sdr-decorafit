@@ -538,7 +538,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v4.7</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v4.8</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1069,9 +1069,23 @@ function initAuth(){
     localStorage.setItem('sdrAuth_v1',JSON.stringify(users));
     localStorage.setItem('sdrPwd_v1',JSON.stringify({'Decorafit':'2218'}));
   }
-  // Verificar link de convite na URL
-  const inv=new URLSearchParams(window.location.search).get('invite');
-  if(inv){pendingEmail=decodeURIComponent(inv).toLowerCase();showCreatePw(pendingEmail);}
+  // Verificar link de convite na URL — o próprio link já autoriza (não depende de nada salvo antes)
+  const params=new URLSearchParams(window.location.search);
+  const inv=params.get('invite');
+  const uidLink=params.get('uid');
+  if(inv){
+    pendingEmail=decodeURIComponent(inv).toLowerCase();
+    if(uidLink){
+      const base=USERS.find(u=>u.id===uidLink);
+      const u2=getAuthUsers();
+      let au=u2.find(u=>u.userId===uidLink);
+      if(!au){au={userId:uidLink,name:base?base.name:uidLink,role:base?base.role:'novo',email:pendingEmail,approved:true};u2.push(au);}
+      au.email=pendingEmail;au.approved=true;
+      if(base)au.role=base.role;
+      saveAuthUsers(u2);
+    }
+    showCreatePw(pendingEmail);
+  }
 }
 let pendingEmail=null;
 function getAuthUsers(){return JSON.parse(localStorage.getItem('sdrAuth_v1')||'[]');}
@@ -2359,7 +2373,7 @@ function gmailInvite(userId){
   const allUsers=[...USERS,...extras];
   const u=allUsers.find(u=>u.id===userId)||{name:au.name,role:au.role};
   const isNovo=au.role==='novo';
-  const invUrl=`https://emiliamoreira-ctrl.github.io/plataforma-treinamento-pre-vendas/?invite=${encodeURIComponent(au.email)}`;
+  const invUrl=`https://emiliamoreira-ctrl.github.io/plataforma-treinamento-pre-vendas/?invite=${encodeURIComponent(au.email)}&uid=${encodeURIComponent(userId)}`;
 
   let subject, body;
   if(isNovo){
@@ -2400,7 +2414,7 @@ function copyInvite(userId){
   const users=getAuthUsers();
   const au=users.find(u=>u.userId===userId);
   if(!au||!au.email){alert('Salve um e-mail primeiro.');return;}
-  const url=`https://emiliamoreira-ctrl.github.io/plataforma-treinamento-pre-vendas/?invite=${encodeURIComponent(au.email)}`;
+  const url=`https://emiliamoreira-ctrl.github.io/plataforma-treinamento-pre-vendas/?invite=${encodeURIComponent(au.email)}&uid=${encodeURIComponent(userId)}`;
   navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('cbtn-'+userId);
     if(btn){const orig=btn.innerHTML;btn.innerHTML='Copiado!';setTimeout(()=>btn.innerHTML=orig,2500);}
@@ -2438,7 +2452,7 @@ function addNewUser(){
   users.push({userId:uid,name,role,email,approved:true});
   saveAuthUsers(users);
   // Gerar link convite
-  const invUrl=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(email)}`;
+  const invUrl=`${window.location.origin}${window.location.pathname}?invite=${encodeURIComponent(email)}&uid=${encodeURIComponent(uid)}`;
   // Abrir Gmail com mensagem de convite
   const isNovo=role==='novo';
   const subject=encodeURIComponent('Plataforma de Treinamento Decorafit 🏠');
