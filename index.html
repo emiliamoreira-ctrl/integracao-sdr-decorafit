@@ -679,6 +679,28 @@
   .task-timer b{color:#fbbf24;font-variant-numeric:tabular-nums;}
   .btn-check{background:transparent;border:2px solid var(--green);color:var(--green);border-radius:9px;padding:9px 20px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;}
   .btn-check:hover{background:var(--green);color:#fff;}
+
+  /* ═══ TAREFAS (layout novo) ═══ */
+  .tk{display:flex;gap:13px;align-items:flex-start;background:#1a2332;border:1.5px solid #2d3748;border-radius:11px;padding:14px 16px;margin-bottom:9px;}
+  .tk-done{background:#13301f;border-color:#2f6b45;}
+  .tk-lock{opacity:.5;}
+  .tk-ic{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;border:2px solid #3d4a5f;color:#64748b;}
+  .tk-done .tk-ic{background:var(--green);border-color:var(--green);color:#fff;}
+  .tk-body{flex:1;}
+  .tk-n{font-size:.64rem;font-weight:800;letter-spacing:.5px;color:var(--orange);}
+  .tk-done .tk-n{color:#4ade80;}
+  .tk-t{font-size:.84rem;color:#e2e8f0;margin:3px 0 0;line-height:1.4;}
+  .tk-done .tk-t{color:#a7d8b9;}
+  .tk-hint{font-size:.72rem;color:#64748b;margin-top:7px;font-style:italic;}
+  .tk-timer{display:inline-flex;align-items:center;gap:6px;background:#0f1724;border:1px solid #334155;border-radius:8px;padding:8px 13px;font-size:.75rem;color:#94a3b8;margin-top:9px;}
+  .tk-timer b{color:#fbbf24;font-variant-numeric:tabular-nums;font-size:.85rem;}
+  .tk-open .btn-check{margin-top:10px;}
+  /* ═══ ITEM COMPACTO NA LISTA (tarefas/teste) ═══ */
+  .lib-item.compact{align-items:center;padding:10px 12px;gap:11px;}
+  .lib-item.compact .lib-cover{width:34px;height:34px;border-radius:8px;box-shadow:none;}
+  .lib-item.compact:hover .lib-cover{transform:none;box-shadow:none;}
+  .lib-item.compact .litxt{padding-top:0;font-size:.79rem;}
+  .lib-item.compact .lis{margin-top:0;}
 </style>
 </head>
 <body>
@@ -699,7 +721,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.2</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.3</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -919,7 +941,7 @@ const DAYS=[
 const MODULOS=[
 {num:1,data:'06/10',libera:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
  {fer:'Introdução à Plataforma',
-  aulas:['Introdução à Plataforma','De onde vem o lead'],
+  aulas:['Introdução à Plataforma','De onde vem o lead?'],
   praticas:['Navegue pela plataforma e identifique as principais áreas','Acesse o site da Decorafit e localize as informações institucionais'],
   prova:{pts:27,perguntas:[
    {id:'p1a1',txt:'Qual é a principal finalidade da plataforma de treinamento para o novo SDR?',
@@ -938,8 +960,8 @@ const MODULOS=[
     opcoes:['A ordem de chegada dos leads no dia','O estágio de avanço do lead rumo ao fechamento','O nível de prioridade definido pelo gestor','O canal de origem de cada lead'],correta:1},
    {id:'p1d3',txt:'Por que favoritar o seu usuário no Pipedrive ajuda na rotina?',
     opcoes:['Aumenta o limite de cards que você pode criar','Facilita filtrar e encontrar rapidamente os seus próprios cards','Dá acesso a relatórios exclusivos da gestão','Notifica o cliente de que você é o responsável'],correta:1},
-   {id:'p1d4',txt:'Para que serve a aba Pré-Venda dentro do card?',
-    opcoes:['Para registrar o pagamento do projeto','Para concentrar o preenchimento das informações do cliente levantadas na qualificação','Para agendar a visita técnica automaticamente','Para arquivar o card ao final do processo'],correta:1}]}},
+   {id:'p1d4',txt:'Ao abrir um card, onde ficam concentradas as informações do cliente levantadas na qualificação?',
+    opcoes:['Na aba de Pagamentos','Na aba Pré-Venda','No histórico de e-mails','No campo de observações gerais'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
   praticas:['Navegue pelas três caixas e conte as conversas de cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e veja de qual canal veio','Atribua uma conversa de teste para você'],
@@ -1243,6 +1265,26 @@ function loadState(){try{state=JSON.parse(localStorage.getItem('sdrInt26')||'{}'
 function saveState(){try{localStorage.setItem('sdrInt26',JSON.stringify(state));}catch{}}
 function getU(uid){return(state[uid]||{});}
 function setU(uid,data){state[uid]={...getU(uid),...data};saveState();}
+/* Reset de progresso — roda uma vez por navegador ao subir esta versão */
+(function resetProgressoV73(){
+  try{
+    const MARCA='sdrResetV73';
+    if(localStorage.getItem(MARCA)) return;
+    const raw=localStorage.getItem('sdrInt26');
+    if(raw){
+      const dados=JSON.parse(raw)||{};
+      Object.keys(dados).forEach(uid=>{
+        const d=dados[uid]||{};
+        delete d.modTopics; delete d.modPrats; delete d.modProvas;
+        delete d.aulaVideo; delete d.tarefaInicio; delete d.procAval;
+        delete d.pts; delete d.evals;
+        dados[uid]=d;
+      });
+      localStorage.setItem('sdrInt26',JSON.stringify(dados));
+    }
+    localStorage.setItem(MARCA,'1');
+  }catch(e){}
+})();
 loadState();
 
 /* ══ LOGIN ══ */
@@ -1841,6 +1883,9 @@ function toggleTheme(){
   document.documentElement.setAttribute('data-theme',novo);
   try{localStorage.setItem('sdrTheme',novo);}catch(e){}
 }
+
+
+
 (function initTheme(){
   try{
     const saved=localStorage.getItem('sdrTheme');
@@ -2144,9 +2189,10 @@ function fgTema(fer){ return (PALETA_TEMAS[fer] || {bg:'#334155',fg:'#fff'}).fg;
 function gerarCapa(fer,aid){
   const bg=corTema(fer), fg=fgTema(fer);
   const prev=aid?AULA_PREVIEWS[aid]:null;
+  const rotulo = fer==='Introdução à Plataforma' ? 'Decorafit' : fer;
   return `<div class="lib-cover" style="background:${bg}"
       ${prev?`onmouseenter="const v=this.querySelector('video.cv-prev');if(v){v.currentTime=0;const p=v.play();if(p)p.catch(function(){});}" onmouseleave="const v=this.querySelector('video.cv-prev');if(v){v.pause();v.currentTime=0;}"`:''}>
-    <span class="cv-label" style="color:${fg}">${fer}</span>
+    <span class="cv-label" style="color:${fg}">${rotulo}</span>
     <span class="cv-play">▶</span>
     ${prev?`<video class="cv-prev" muted loop playsinline preload="none"><source src="${prev}" type="video/mp4"></video>`:''}
   </div>`;
@@ -2254,7 +2300,7 @@ function renderBiblioteca(){
     if(!visivelBusca) return;
     const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
     const cover = et.type==='aula' ? gerarCapa(et.fer, et.aid) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.5rem;position:relative;z-index:1">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
-    sideHtml+=`<div class="lib-item ${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
+    sideHtml+=`<div class="lib-item ${et.type!=='aula'?'compact ':''}${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
       ${cover}
       <span class="lis">${done?'✓':'▶'}</span>
@@ -2282,7 +2328,7 @@ function renderBiblioteca(){
   if(alvo.type==='tarefas') iniciarContadoresTarefa(m.blocos.find(x=>x.id===alvo.bid));
 }
 
-const TEMPO_MIN_TAREFA=180; // 3 minutos
+const TEMPO_MIN_TAREFA=60; // 1 minuto
 function tempoRestanteTarefa(pid){
   const u=getU(currentUser.id);
   const ini=((u.tarefaInicio||{})[pid]);
@@ -2296,37 +2342,46 @@ function marcarInicioTarefa(pid){
 }
 function buildPraticaLib(b,txt,j){
   const pid=b.id+'_p'+j;
-  const st=(getU(currentUser.id).modPrats||{})[pid]||{};
+  const u=getU(currentUser.id);
+  const st=(u.modPrats||{})[pid]||{};
+  // trava sequencial: só libera a tarefa seguinte depois de concluir a anterior
+  const anteriorOk = j===0 || ((u.modPrats||{})[b.id+'_p'+(j-1)]||{}).done;
   if(st.done){
-    return `<div class="prat-row2 done" style="background:#13301f;border-color:#2f6b45">
-      <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
-      <div class="dif-row" style="display:flex;padding-left:0">
-        <span class="dlbl" style="color:#94a3b8">Dificuldade:</span>
-        ${DIFICULDADES.map(d=>`<button class="dif-btn${st.dif===d?' sel':''}" onclick="setDificuldadeLib('${pid}','${d}')">${d}</button>`).join('')}
-      </div>
-      <button class="btn-task done" disabled>✓ Concluída</button>
+    return `<div class="tk tk-done">
+      <span class="tk-ic">✓</span>
+      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div></div>
+    </div>`;
+  }
+  if(!anteriorOk){
+    return `<div class="tk tk-lock">
+      <span class="tk-ic">🔒</span>
+      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div>
+      <div class="tk-hint">Conclua a tarefa ${j} para liberar</div></div>
     </div>`;
   }
   const rest=tempoRestanteTarefa(pid);
-  const liberado = rest<=0;
-  return `<div class="prat-row2" id="prow-${pid}" style="background:#1a2332;border-color:#2d3748">
-    <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
-    <div id="tarea-acao-${pid}">
-      ${liberado
-        ? `<button class="btn-check" onclick="concluirTarefaLib('${pid}')">✓ Marcar como concluída</button>`
-        : `<div class="task-timer">Faça a tarefa no sistema e volte aqui · libera em <b id="tt-${pid}">${fmtMMSS(rest)}</b></div>`}
-    </div>
-  </div>`;
+  return `<div class="tk tk-open" id="prow-${pid}">
+    <span class="tk-ic">○</span>
+    <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div>
+      <div id="tarea-acao-${pid}">
+        ${rest<=0
+          ? `<button class="btn-check" onclick="concluirTarefaLib('${pid}')">✓ Marcar como concluída</button>`
+          : `<div class="tk-timer">Faça a tarefa solicitada e volte aqui · libera em <b id="tt-${pid}">${fmtMMSS(rest)}</b></div>`}
+      </div>
+    </div></div>`;
 }
 function fmtMMSS(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0');}
 let tarefaTimers=[];
 function iniciarContadoresTarefa(b){
   tarefaTimers.forEach(t=>clearInterval(t)); tarefaTimers=[];
   if(!b) return;
+  const u=getU(currentUser.id);
   b.praticas.forEach((_,j)=>{
     const pid=b.id+'_p'+j;
-    const st=(getU(currentUser.id).modPrats||{})[pid]||{};
+    const st=(u.modPrats||{})[pid]||{};
     if(st.done) return;
+    const anteriorOk = j===0 || ((u.modPrats||{})[b.id+'_p'+(j-1)]||{}).done;
+    if(!anteriorOk) return; // tarefa travada não conta tempo ainda
     marcarInicioTarefa(pid);
     const t=setInterval(()=>{
       const rest=tempoRestanteTarefa(pid);
@@ -2348,12 +2403,7 @@ function concluirTarefaLib(pid){
   renderBiblioteca();
 }
 
-function setDificuldadeLib(pid,d){
-  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
-  if(!pr[pid])pr[pid]={done:true};
-  pr[pid].dif=d; setU(uid,{modPrats:pr});
-  renderBiblioteca();
-}
+
 
 function videoFimLib(aid){
   videoFim(aid);
