@@ -721,7 +721,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.4</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.5</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2275,7 +2275,7 @@ function renderBiblioteca(){
         <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
         ${watched
           ? `<div class="lib-watched">Você já assistiu este vídeo. Pode navegar livremente e ajustar a velocidade.</div>`
-          : `<div class="lib-warn">Primeira vez assistindo: só é possível voltar o vídeo, nunca adiantar ou acelerar.</div>`}
+          : ''}
         <button class="btn-lib-done" id="libdonebtn" ${watched?'':'disabled'} onclick="concluirAulaLib('${alvo.aid}')">
           ${(u.modTopics||[]).includes(alvo.aid)?'✓ Aula concluída':'Marcar aula como concluída'}
         </button>
@@ -2674,15 +2674,7 @@ function abrirMod(id){
 }
 
 function buildDaysHTML(){
-  const eq = currentUser.id==='allice' ? 'Equipe Tarde' : 'Equipe Manhã';
-  const mad = currentUser.mentor || '—';
-  let html=`<div style="background:#f8fafc;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:14px 17px;margin-bottom:18px">
-    <div style="font-size:.78rem;color:var(--navy);margin-bottom:9px"><strong>Sua agenda diária.</strong> O conteúdo e as avaliações ficam na aba <b>Módulos</b>.</div>
-    <div style="display:flex;gap:9px;flex-wrap:wrap">
-      <span style="background:#eff6ff;color:#2563eb;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">${eq}</span>
-      <span style="background:#fdf2f8;color:#9d174d;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">Madrinha: ${mad}</span>
-      <span style="background:#f1f5f9;color:#475569;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:20px">${currentUser.turno}</span>
-    </div></div>`;
+  let html='';
   const weeks=[{label:'Semana 1 · Online · 06 a 09/10',ids:['d1','d2','d3','d4']},
                {label:'Semana 2 · Presencial · 13 a 16/10',ids:['d5','d6','d7','d8']}];
   weeks.forEach(w=>{
