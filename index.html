@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.2</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.3</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2428,8 +2428,8 @@ function renderBiblioteca(){
       <div class="lib-info">
         <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
         ${watched
-          ? `<div class="lib-watched">✓ Aula concluída — navegação e velocidade liberadas.</div>`
-          : `<div class="lib-warn">A aula é concluída automaticamente ao terminar o vídeo. Você pode voltar à vontade, mas não adiantar.</div>`}
+          ? `<div class="lib-watched">✓ Aula concluída</div>`
+          : ''}
       </div>`;
   } else if(alvo.type==='tarefas'){
     const b=m.blocos.find(x=>x.id===alvo.bid);
