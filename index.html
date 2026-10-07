@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.7</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.8</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1039,7 +1039,7 @@ const MODULOS=[
 
 {num:2,data:'07/10',libera:'07/10',dia:'Quarta-feira',modo:'online',sem:1, blocos:[
  {fer:'Pipedrive',
-  aulas:['Pesquisar duplicidade','Fazendo anotações no card','Mudando de etapa','Atividades do dia','Atividades atrasadas','Organizando a fila de trabalho'],
+  aulas:['Pesquisar duplicidade','Fazendo anotações no card','Mudando o card de etapa','Atividades do dia e atrasadas'],
   praticas:['Pesquise duplicidade antes de criar um card de teste','Faça uma anotação registrando o contato','Movimente o card entre duas etapas do funil','Abra as atividades do dia e liste as pendentes','Conclua uma atividade e crie a próxima na sequência'],
   prova:{pts:29,perguntas:[
    {id:'p2a1',txt:'Ao encontrar um lead duplicado, qual é a conduta correta?',
@@ -1253,7 +1253,11 @@ const AULA_VIDEOS={
   'm1_b1_a2':'aula-abrindo-um-card.mp4',
   'm1_b2_a0':'chatwoot-intro.mp4',
   'm1_b2_a1':'chatwoot-conversas.mp4',
-  'm1_b2_a2':'chatwoot-pesquisar.mp4'
+  'm1_b2_a2':'chatwoot-pesquisar.mp4',
+  'm2_b0_a0':'pd-duplicidade.mp4',
+  'm2_b0_a1':'pd-anotacoes.mp4',
+  'm2_b0_a2':'pd-etapa.mp4',
+  'm2_b0_a3':'pd-atividades.mp4'
 };
 /* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
 const AULA_PREVIEWS={
@@ -1264,7 +1268,11 @@ const AULA_PREVIEWS={
   'm1_b1_a2':'prev-m1b1a2.mp4',
   'm1_b2_a0':'prev-chatwoot-intro.mp4',
   'm1_b2_a1':'prev-chatwoot-conversas.mp4',
-  'm1_b2_a2':'prev-chatwoot-pesquisar.mp4'
+  'm1_b2_a2':'prev-chatwoot-pesquisar.mp4',
+  'm2_b0_a0':'prev-pd-duplicidade.mp4',
+  'm2_b0_a1':'prev-pd-anotacoes.mp4',
+  'm2_b0_a2':'prev-pd-etapa.mp4',
+  'm2_b0_a3':'prev-pd-atividades.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
