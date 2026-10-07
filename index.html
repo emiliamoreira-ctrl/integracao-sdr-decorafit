@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.3</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.4</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2797,7 +2797,7 @@ function desmarcarAula(aid){
 function refreshTrilha(){
   const p=document.getElementById('panel-modulos');if(!p)return;
   const ab=[...p.querySelectorAll('.day-card.open,.bloco.open,.aula.open,.cx.open')].map(c=>c.id).filter(Boolean);
-  p.innerHTML=buildModHero()+buildModulosHTML();
+  p.innerHTML=buildModulosHTML();
   ab.forEach(id=>document.getElementById(id)?.classList.add('open'));
   bindModEvents(p);refreshLeaderboard();
 }
