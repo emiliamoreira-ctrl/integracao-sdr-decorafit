@@ -668,6 +668,17 @@
   .lib-item .litxt{font-size:.8rem;padding-top:5px;}
   .lib-item .lifer{font-size:.68rem;margin-top:3px;}
   .lib-item .lis{margin-top:7px;}
+
+  /* Capa profissional com nome da ferramenta */
+  .lib-cover .cv-label{position:relative;z-index:1;font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:-.2px;text-align:center;line-height:1.15;padding:0 6px;text-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .lib-cover{box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform .2s ease, box-shadow .2s ease;}
+  .lib-item:hover .lib-cover{transform:scale(1.07);box-shadow:0 6px 18px rgba(0,0,0,.45);}
+  .lib-item{transition:background .15s;}
+  /* Contador de tarefa */
+  .task-timer{display:inline-flex;align-items:center;gap:7px;background:#1e293b;border:1.5px solid #334155;border-radius:9px;padding:9px 16px;font-size:.78rem;font-weight:700;color:#94a3b8;}
+  .task-timer b{color:#fbbf24;font-variant-numeric:tabular-nums;}
+  .btn-check{background:transparent;border:2px solid var(--green);color:var(--green);border-radius:9px;padding:9px 20px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;}
+  .btn-check:hover{background:var(--green);color:#fff;}
 </style>
 </head>
 <body>
@@ -688,7 +699,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.1</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.2</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -919,16 +930,16 @@ const MODULOS=[
     opcoes:['Porque é exigido apenas no primeiro dia de trabalho','Porque ajuda a passar segurança e informação correta ao cliente','Porque evita o uso do Chatwoot','Porque substitui a necessidade de treinamento de produto'],correta:1}]}},
  {fer:'Pipedrive',
   aulas:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card'],
-  praticas:['Navegue pelo funil e identifique quantos cards há em cada etapa','Abra um card de teste do zero','Confira os campos preenchidos no card que você criou'],
+  praticas:['Criar o card teste','Favoritar seu usuário','Localizar a aba Pré-Venda dentro do card e o preenchimento do cliente'],
   prova:{pts:36,perguntas:[
    {id:'p1d1',txt:'Qual é a função principal do Pipedrive na rotina do SDR?',
-    opcoes:['Enviar e-mails em massa','Organizar e acompanhar os leads pelas etapas do funil','Gravar as ligações do time','Substituir o WhatsApp Business'],correta:1},
-   {id:'p1d2',txt:'O que caracteriza as etapas do funil no Pipedrive?',
-    opcoes:['São etapas fixas que nunca mudam de nome','Representam o estágio de avanço do lead até o fechamento','Servem apenas para organizar por data de criação','Indicam o departamento responsável pelo card'],correta:1},
-   {id:'p1d3',txt:'Ao abrir um card novo no Pipedrive, qual é o primeiro cuidado a ter?',
-    opcoes:['Pesquisar duplicidade antes de criar o card','Marcar o card como ganho imediatamente','Excluir cards antigos da mesma pessoa','Ignorar o preenchimento até o final do dia'],correta:0},
-   {id:'p1d4',txt:'O que não pode faltar em um card recém-criado?',
-    opcoes:['Uma foto do cliente','Os dados de contato e a origem do lead','O valor final do contrato','A assinatura do contrato'],correta:1}]}},
+    opcoes:['Enviar e-mails em massa para a base','Organizar e acompanhar os leads pelas etapas do funil','Gravar e transcrever as ligações do time','Controlar as metas individuais de cada arquiteto'],correta:1},
+   {id:'p1d2',txt:'O que as etapas do funil representam no Pipedrive?',
+    opcoes:['A ordem de chegada dos leads no dia','O estágio de avanço do lead rumo ao fechamento','O nível de prioridade definido pelo gestor','O canal de origem de cada lead'],correta:1},
+   {id:'p1d3',txt:'Por que favoritar o seu usuário no Pipedrive ajuda na rotina?',
+    opcoes:['Aumenta o limite de cards que você pode criar','Facilita filtrar e encontrar rapidamente os seus próprios cards','Dá acesso a relatórios exclusivos da gestão','Notifica o cliente de que você é o responsável'],correta:1},
+   {id:'p1d4',txt:'Para que serve a aba Pré-Venda dentro do card?',
+    opcoes:['Para registrar o pagamento do projeto','Para concentrar o preenchimento das informações do cliente levantadas na qualificação','Para agendar a visita técnica automaticamente','Para arquivar o card ao final do processo'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
   praticas:['Navegue pelas três caixas e conte as conversas de cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e veja de qual canal veio','Atribua uma conversa de teste para você'],
@@ -1155,14 +1166,16 @@ const AULA_VIDEOS={
   'm1_b0_a0':'aula1-introducao-plataforma.mp4',
   'm1_b0_a1':'aula-de-onde-vem-o-lead.mp4',
   'm1_b1_a0':'pipedrive-intro.mp4',
-  'm1_b1_a1':'aula-etapas-do-funil.mp4'
+  'm1_b1_a1':'aula-etapas-do-funil.mp4',
+  'm1_b1_a2':'aula-abrindo-um-card.mp4'
 };
 /* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
 const AULA_PREVIEWS={
   'm1_b0_a0':'prev-m1b0a0.mp4',
   'm1_b0_a1':'prev-m1b0a1.mp4',
   'm1_b1_a0':'prev-m1b1a0.mp4',
-  'm1_b1_a1':'prev-m1b1a1.mp4'
+  'm1_b1_a1':'prev-m1b1a1.mp4',
+  'm1_b1_a2':'prev-m1b1a2.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
@@ -2115,17 +2128,25 @@ function fecharBiblioteca(){
 }
 
 const PALETA_TEMAS={
-  'Introdução à Plataforma':'#1e3a5f','Google Agenda':'#0f766e','Slack':'#7c3aed',
-  'Pipedrive':'#c2410c','Chatwoot':'#be123c','VoIP':'#0369a1','Rotinas':'#4d7c0f',
-  'Simulador de Estimativa':'#a16207','Metas':'#9333ea','WhatsApp':'#15803d'
+  'Introdução à Plataforma':{bg:'#f97316',fg:'#fff'},   /* laranja Decorafit */
+  'Pipedrive':{bg:'#017737',fg:'#fff'},                  /* verde Pipedrive */
+  'Slack':{bg:'#4A154B',fg:'#fff'},                      /* aubergine Slack */
+  'Chatwoot':{bg:'#1F93FF',fg:'#fff'},                   /* azul Chatwoot */
+  'Google Agenda':{bg:'#1A73E8',fg:'#fff'},              /* azul Google */
+  'WhatsApp':{bg:'#25D366',fg:'#06351a'},                /* verde WhatsApp */
+  'VoIP':{bg:'#0369a1',fg:'#fff'},
+  'Rotinas':{bg:'#1a2b4a',fg:'#fff'},                    /* navy Decorafit */
+  'Simulador de Estimativa':{bg:'#b45309',fg:'#fff'},
+  'Metas':{bg:'#7c3aed',fg:'#fff'}
 };
-function corTema(fer){ return PALETA_TEMAS[fer] || '#334155'; }
+function corTema(fer){ return (PALETA_TEMAS[fer] || {bg:'#334155',fg:'#fff'}).bg; }
+function fgTema(fer){ return (PALETA_TEMAS[fer] || {bg:'#334155',fg:'#fff'}).fg; }
 function gerarCapa(fer,aid){
-  const cor=corTema(fer);
+  const bg=corTema(fer), fg=fgTema(fer);
   const prev=aid?AULA_PREVIEWS[aid]:null;
-  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)"
+  return `<div class="lib-cover" style="background:${bg}"
       ${prev?`onmouseenter="const v=this.querySelector('video.cv-prev');if(v){v.currentTime=0;const p=v.play();if(p)p.catch(function(){});}" onmouseleave="const v=this.querySelector('video.cv-prev');if(v){v.pause();v.currentTime=0;}"`:''}>
-    <span class="cv-label" style="position:relative;z-index:1">${fer}</span>
+    <span class="cv-label" style="color:${fg}">${fer}</span>
     <span class="cv-play">▶</span>
     ${prev?`<video class="cv-prev" muted loop playsinline preload="none"><source src="${prev}" type="video/mp4"></video>`:''}
   </div>`;
@@ -2172,6 +2193,9 @@ function selecionarEtapa(m,chave){
 }
 
 function renderBiblioteca(){
+  // preservar posição de rolagem da lista lateral
+  const listaAntiga=document.querySelector('#video-lib .lib-list');
+  const scrollSalvo=listaAntiga?listaAntiga.scrollTop:0;
   const m=MODULOS.find(x=>x.id===libState.mid);
   const u=getU(currentUser.id);
   const etapas=todasEtapasDoModulo(m);
@@ -2229,7 +2253,7 @@ function renderBiblioteca(){
     const visivelBusca=!filtro || et.fer.toLowerCase().includes(filtro) || (et.nome||'').toLowerCase().includes(filtro) || (et.type!=='aula'&&et.type.includes(filtro));
     if(!visivelBusca) return;
     const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
-    const cover = et.type==='aula' ? gerarCapa(et.fer, et.aid) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
+    const cover = et.type==='aula' ? gerarCapa(et.fer, et.aid) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.5rem;position:relative;z-index:1">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
     sideHtml+=`<div class="lib-item ${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
       ${cover}
@@ -2251,13 +2275,30 @@ function renderBiblioteca(){
         <div class="lib-list">${sideHtml}</div>
       </div>
     </div>`;
+
+  // restaurar rolagem e iniciar contador de tarefa se aplicável
+  const novaLista=document.querySelector('#video-lib .lib-list');
+  if(novaLista) novaLista.scrollTop=scrollSalvo;
+  if(alvo.type==='tarefas') iniciarContadoresTarefa(m.blocos.find(x=>x.id===alvo.bid));
 }
 
+const TEMPO_MIN_TAREFA=180; // 3 minutos
+function tempoRestanteTarefa(pid){
+  const u=getU(currentUser.id);
+  const ini=((u.tarefaInicio||{})[pid]);
+  if(!ini) return TEMPO_MIN_TAREFA;
+  const decorrido=Math.floor((Date.now()-new Date(ini).getTime())/1000);
+  return Math.max(0, TEMPO_MIN_TAREFA-decorrido);
+}
+function marcarInicioTarefa(pid){
+  const uid=currentUser.id,u=getU(uid),ti=u.tarefaInicio||{};
+  if(!ti[pid]){ ti[pid]=new Date().toISOString(); setU(uid,{tarefaInicio:ti}); }
+}
 function buildPraticaLib(b,txt,j){
   const pid=b.id+'_p'+j;
   const st=(getU(currentUser.id).modPrats||{})[pid]||{};
   if(st.done){
-    return `<div class="prat-row2 done" style="background:#1a2332;border-color:#2f6b45">
+    return `<div class="prat-row2 done" style="background:#13301f;border-color:#2f6b45">
       <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
       <div class="dif-row" style="display:flex;padding-left:0">
         <span class="dlbl" style="color:#94a3b8">Dificuldade:</span>
@@ -2266,18 +2307,47 @@ function buildPraticaLib(b,txt,j){
       <button class="btn-task done" disabled>✓ Concluída</button>
     </div>`;
   }
+  const rest=tempoRestanteTarefa(pid);
+  const liberado = rest<=0;
   return `<div class="prat-row2" id="prow-${pid}" style="background:#1a2332;border-color:#2d3748">
     <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
-    <button class="btn-task" onclick="confirmarTarefaLib('${pid}','${txt.replace(/'/g,"\\\\'")}')">Marcar como concluída</button>
+    <div id="tarea-acao-${pid}">
+      ${liberado
+        ? `<button class="btn-check" onclick="concluirTarefaLib('${pid}')">✓ Marcar como concluída</button>`
+        : `<div class="task-timer">Faça a tarefa no sistema e volte aqui · libera em <b id="tt-${pid}">${fmtMMSS(rest)}</b></div>`}
+    </div>
   </div>`;
 }
-function confirmarTarefaLib(pid,txt){
-  if(!confirm('Confirmar conclusão da tarefa?\\n\\n"'+txt+'"\\n\\nDepois de confirmada não será possível desmarcar.'))return;
+function fmtMMSS(s){const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0');}
+let tarefaTimers=[];
+function iniciarContadoresTarefa(b){
+  tarefaTimers.forEach(t=>clearInterval(t)); tarefaTimers=[];
+  if(!b) return;
+  b.praticas.forEach((_,j)=>{
+    const pid=b.id+'_p'+j;
+    const st=(getU(currentUser.id).modPrats||{})[pid]||{};
+    if(st.done) return;
+    marcarInicioTarefa(pid);
+    const t=setInterval(()=>{
+      const rest=tempoRestanteTarefa(pid);
+      const el=document.getElementById('tt-'+pid);
+      if(rest<=0){
+        clearInterval(t);
+        const acao=document.getElementById('tarea-acao-'+pid);
+        if(acao) acao.innerHTML=`<button class="btn-check" onclick="concluirTarefaLib('${pid}')">✓ Marcar como concluída</button>`;
+      } else if(el){ el.textContent=fmtMMSS(rest); }
+    },1000);
+    tarefaTimers.push(t);
+  });
+}
+function concluirTarefaLib(pid){
+  if(tempoRestanteTarefa(pid)>0) return;
   const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
   pr[pid]={done:true,em:new Date().toISOString()};
   setU(uid,{modPrats:pr});
   renderBiblioteca();
 }
+
 function setDificuldadeLib(pid,d){
   const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
   if(!pr[pid])pr[pid]={done:true};
