@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.5</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.6</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2226,7 +2226,10 @@ function blocoCompleto(b){
 function aulaDesbloqueada(b,j){
   if(j===0)return true;
   const u=getU(currentUser.id);
-  return (u.modTopics||[]).includes(b.id+'_a'+(j-1));
+  const ant=b.id+'_a'+(j-1);
+  // a aula anterior precisa ter vídeo E estar concluída
+  if(!temVideo(ant)) return false;
+  return (u.modTopics||[]).includes(ant);
 }
 function proximaAulaFaltando(b){
   for(let j=0;j<b.aulas.length;j++){
@@ -2374,11 +2377,20 @@ function etapaConcluida(m,et){
   if(et.type==='tarefas') return b.praticas.every((_,j)=>((u.modPrats||{})[b.id+'_p'+j]||{}).done);
   if(et.type==='teste') return !!((u.modProvas||{})[b.id]||{}).submitted;
 }
+function temVideo(aid){ return !!AULA_VIDEOS[aid]; }
+function aulaSemVideoNoBloco(b){
+  for(let j=0;j<b.aulas.length;j++){
+    if(!temVideo(b.id+'_a'+j)) return {idx:j, nome:b.aulas[j]};
+  }
+  return null;
+}
 function etapaDesbloqueada(m,et){
   const b=m.blocos.find(x=>x.id===et.bid);
   const bi=m.blocos.findIndex(x=>x.id===et.bid);
   if(bi>0 && !blocoCompleto(m.blocos[bi-1])) return false;
   if(et.type==='aula') return aulaDesbloqueada(b,et.idx);
+  // tarefas e teste só liberam se todas as aulas do tema tiverem vídeo publicado
+  if(aulaSemVideoNoBloco(b)) return false;
   const dA=blocoProg(b).dA, tA=blocoProg(b).tA;
   if(et.type==='tarefas') return b.tarefasBloqueadas ? false : (dA===tA);
   if(et.type==='teste'){
@@ -2431,16 +2443,28 @@ function renderBiblioteca(){
       </div>`;
   } else if(alvo.type==='tarefas'){
     const b=m.blocos.find(x=>x.id===alvo.bid);
+    const semVid=aulaSemVideoNoBloco(b);
+    if(semVid){
+      mainHtml=`<div class="lib-info" style="margin:0 auto;max-width:700px">
+        <h4>Tarefas de ${b.fer}</h4>
+        <div class="lib-warn">Aguardando o vídeo da <b>Aula ${b.ini+semVid.idx+1} — ${semVid.nome}</b>. As tarefas liberam assim que ele for publicado.</div>
+      </div>`;
+      // segue para o render
+    } else {
     mainHtml=`<div class="lib-info" style="margin:0 auto;max-width:700px">
       <h4>Tarefas de ${b.fer}</h4>
       <p style="color:#94a3b8;font-size:.78rem;margin-bottom:14px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
       <div id="lib-tarefas-box">${b.praticas.map((t,j)=>buildPraticaLib(b,t,j)).join('')}</div>
     </div>`;
+    }
   } else if(alvo.type==='teste'){
     const b=m.blocos.find(x=>x.id===alvo.bid);
+    const semVid=aulaSemVideoNoBloco(b);
     mainHtml=`<div class="lib-info" style="margin:0 auto;max-width:700px">
       <h4>Teste de ${b.fer}</h4>
-      <div id="lib-teste-box">${buildProva(b)}</div>
+      ${semVid
+        ? `<div class="lib-warn">Aguardando o vídeo da <b>Aula ${b.ini+semVid.idx+1} — ${semVid.nome}</b>. O teste libera assim que ele for publicado.</div>`
+        : `<div id="lib-teste-box">${buildProva(b)}</div>`}
     </div>`;
   }
 
@@ -2455,7 +2479,10 @@ function renderBiblioteca(){
     const ativo=chave===chaveEtapa(alvo);
     const visivelBusca=!filtro || et.fer.toLowerCase().includes(filtro) || (et.nome||'').toLowerCase().includes(filtro) || (et.type!=='aula'&&et.type.includes(filtro));
     if(!visivelBusca) return;
-    const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
+    const semVideoAqui = et.type==='aula' && !temVideo(et.aid);
+    const label = et.type==='aula'
+      ? `Aula ${et.num} — ${et.nome}${semVideoAqui?'<span class="lifer" style="color:#fbbf24">vídeo em produção</span>':''}`
+      : (et.type==='tarefas'?'Tarefas':'Teste');
     const cover = et.type==='aula' ? gerarCapa(et.fer, et.aid) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.5rem;position:relative;z-index:1">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
     sideHtml+=`<div class="lib-item ${et.type!=='aula'?'compact ':''}${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
@@ -2567,12 +2594,7 @@ function videoFimLib(aid){
   videoFim(aid, el?el.duration:null);
   renderBiblioteca();
 }
-function concluirAulaLib(aid){
-  const uid=currentUser.id,u=getU(uid),tops=u.modTopics||[];
-  if(!tops.includes(aid))tops.push(aid);
-  setU(uid,{modTopics:tops});
-  renderBiblioteca();
-}
+
 
 
 const videoMaxTime={}, videoStart={};
