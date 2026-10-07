@@ -720,10 +720,6 @@
   .hlogo .ltxt b{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.3px;}
   .hlogo .ltxt small{font-size:.6rem;letter-spacing:1.1px;font-weight:700;color:rgba(255,255,255,.55);}
 
-  video.sem-seek::-webkit-media-controls-timeline{display:none!important;}
-  video.sem-seek::-webkit-media-controls-seek-back-button,
-  video.sem-seek::-webkit-media-controls-seek-forward-button{display:none!important;}
-
   .ed-bar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap;}
   .ed-msg{font-size:.78rem;font-weight:700;}
   .ed-mod{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;}
@@ -757,6 +753,14 @@
   .ed-mod-corpo{display:none;margin-top:14px;}
   .ed-mod.aberto .ed-mod-corpo{display:block;}
   .ed-mod.aberto{border-color:var(--orange);}
+
+  .ed-bloco-topo{display:flex;align-items:center;gap:10px;cursor:pointer;padding:3px 2px;}
+  .ed-bloco-topo:hover{opacity:.85;}
+  .ed-tema-nome{font-size:.82rem;color:var(--navy);text-transform:uppercase;letter-spacing:.3px;}
+  .ed-bloco-corpo{display:none;margin-top:12px;}
+  .ed-bloco.aberto .ed-bloco-corpo{display:block;}
+  .ed-bloco.aberto{border-color:var(--orange);background:var(--card);}
+  .ed-flag{font-size:.64rem;font-weight:700;background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:20px;}
 </style>
 </head>
 <body>
@@ -777,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.1</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.2</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2412,12 +2416,11 @@ function renderBiblioteca(){
     const vmeta=(u.aulaVideo||{})[alvo.aid];
     const watched=!!vmeta||!src;
     mainHtml=`<div class="lib-video-wrap">
-        ${src?`<video id="libvideo" ${watched?'controls':'controls controlsList="nodownload noplaybackrate" disablePictureInPicture'} playsinline preload="metadata"
-              class="${watched?'':'sem-seek'}"
+        ${src?`<video id="libvideo" controls ${watched?'':'controlsList="nodownload" disablePictureInPicture'} playsinline preload="metadata"
               onplay="videoPlay('${alvo.aid}')"
               onseeking="videoSeeking('${alvo.aid}',this)"
               onseeked="videoSeeking('${alvo.aid}',this)"
-              onratechange="if(this.playbackRate>1)this.playbackRate=1"
+              onratechange="if(this.playbackRate>1.25)this.playbackRate=1.25"
               onended="videoFimLib('${alvo.aid}')"
               ontimeupdate="videoProg('${alvo.aid}',this)"><source src="${src}" type="video/mp4"></video>`
             :`<div style="padding:60px 20px;text-align:center;color:#94a3b8;font-size:.85rem">Vídeo em produção — será disponibilizado em breve.</div>`}
@@ -2425,11 +2428,8 @@ function renderBiblioteca(){
       <div class="lib-info">
         <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
         ${watched
-          ? `<div class="lib-watched">Você já assistiu este vídeo. Pode navegar livremente e ajustar a velocidade.</div>`
-          : ''}
-        <button class="btn-lib-done" id="libdonebtn" ${watched?'':'disabled'} onclick="concluirAulaLib('${alvo.aid}')">
-          ${(u.modTopics||[]).includes(alvo.aid)?'✓ Aula concluída':'Marcar aula como concluída'}
-        </button>
+          ? `<div class="lib-watched">✓ Aula concluída — navegação e velocidade liberadas.</div>`
+          : `<div class="lib-warn">A aula é concluída automaticamente ao terminar o vídeo. Você pode voltar à vontade, mas não adiantar.</div>`}
       </div>`;
   } else if(alvo.type==='tarefas'){
     const b=m.blocos.find(x=>x.id===alvo.bid);
@@ -2593,32 +2593,35 @@ function setMaxTime(aid,t){
 }
 function videoSeeking(aid,v){
   const u=getU(currentUser.id);
-  if((u.aulaVideo||{})[aid]) return; // já concluído: navegação livre
+  if((u.aulaVideo||{})[aid]) return; // já concluído: navegação totalmente livre
   const limite=getMaxTime(aid);
+  // voltar é livre; só bloqueia passar do ponto já assistido
   if(v.currentTime > limite+0.5){ v.currentTime=limite; }
 }
 function videoProg(aid,v){
   const u=getU(currentUser.id);
-  if(v.playbackRate && v.playbackRate>1) v.playbackRate=1;
+  if(v.playbackRate && v.playbackRate>1.25) v.playbackRate=1.25;
   if((u.aulaVideo||{})[aid]) return;
   if(v.seeking) return;
   const limite=getMaxTime(aid);
   const salto=v.currentTime-limite;
-  if(salto>3){ v.currentTime=limite; return; }   // pulo grande: volta
+  if(salto>3){ v.currentTime=limite; return; }
   if(v.currentTime>limite) setMaxTime(aid, v.currentTime);
   if(v.duration && v.currentTime >= v.duration-1.0) videoFim(aid, v.duration);
 }
 function videoFim(aid, duracao){
-  const u=getU(currentUser.id), av=u.aulaVideo||{};
+  const uid=currentUser.id, u=getU(uid), av=u.aulaVideo||{};
   if(av[aid])return;
   let dur=duracao;
   if(dur==null){ const el=document.getElementById('libvideo'); dur=el?el.duration:null; }
-  // só conclui se tiver realmente percorrido o vídeo inteiro
   if(dur && getMaxTime(aid) < dur-2) return;
-  if(!dur) return; // sem duração conhecida, não conclui
+  if(!dur) return;
   const tempo=videoStart[aid]?Math.round((Date.now()-videoStart[aid])/1000):null;
   av[aid]={em:new Date().toISOString(),duracaoSegundos:tempo};
-  setU(currentUser.id,{aulaVideo:av});
+  setU(uid,{aulaVideo:av});
+  // marca a aula como concluída automaticamente (sem botão)
+  const tops=getU(uid).modTopics||[];
+  if(!tops.includes(aid)){ tops.push(aid); setU(uid,{modTopics:tops}); }
 }
 
 
@@ -3251,8 +3254,26 @@ function buildAdmProc(){
 
 /* ═══════════ ABA: GERENCIAR CONTEÚDO ═══════════ */
 function podeEditar(u){ return u && (u.role==='admin' || u.editor===true); }
-let edModAberto=0; // índice do módulo aberto no gerenciador
-function edToggleModulo(mi){ edModAberto = (edModAberto===mi) ? -1 : mi; edRefresh(); }
+let edModAberto=0;        // índice do módulo aberto
+let edTemaAberto=null;    // "mi:bi" do tema aberto
+function edToggleModulo(mi){
+  edModAberto = (edModAberto===mi) ? -1 : mi;
+  edTemaAberto = null;
+  edRefresh();
+}
+function edToggleTema(mi,bi,ev){
+  if(ev) ev.stopPropagation();
+  const chave = mi+':'+bi;
+  edTemaAberto = (edTemaAberto===chave) ? null : chave;
+  edRefresh();
+}
+function edRemoverBloco(mi,bi){
+  const b=MODULOS[mi].blocos[bi];
+  if(!confirm('Remover o tema "'+b.fer+'" do Módulo '+MODULOS[mi].num+'?\n\nIsso apaga suas '+b.aulas.length+' aulas, '+b.praticas.length+' tarefas e '+b.prova.perguntas.length+' questões.'))return;
+  MODULOS[mi].blocos.splice(bi,1);
+  edTemaAberto=null;
+  edRecalc(); edRefresh();
+}
 
 function buildEditor(){
   let h=`<div class="section-title">Gerenciar Conteúdo</div>
@@ -3289,10 +3310,20 @@ function buildEditor(){
         <button class="ed-x" onclick="edRemoverModulo(${mi})" title="Remover módulo">✕</button>
       </div>`;
     m.blocos.forEach((b,bi)=>{
-      h+=`<div class="ed-bloco">
+      const temaAberto = edTemaAberto===(mi+':'+bi);
+      h+=`<div class="ed-bloco${temaAberto?' aberto':''}">
+        <div class="ed-bloco-topo" onclick="edToggleTema(${mi},${bi},event)">
+          <span class="ed-seta">${temaAberto?'▾':'▸'}</span>
+          <strong class="ed-tema-nome">${b.fer}</strong>
+          <span class="ed-tag">${b.aulas.length} aulas · ${b.praticas.length} tarefas · ${b.prova.perguntas.length} questões</span>
+          <span style="flex:1"></span>
+          ${b.tarefasBloqueadas?'<span class="ed-flag">tarefas bloqueadas</span>':''}
+          ${b.testeBloqueado?'<span class="ed-flag">teste bloqueado</span>':''}
+          <button class="ed-x" onclick="event.stopPropagation();edRemoverBloco(${mi},${bi})" title="Remover tema">✕</button>
+        </div>
+        <div class="ed-bloco-corpo">
         <div class="ed-bloco-h">
           <input class="ed-inp" style="font-weight:700;width:220px" value="${b.fer}" onchange="edSetFer(${mi},${bi},this.value)">
-          <span class="ed-tag">${b.aulas.length} aulas · ${b.praticas.length} tarefas · ${b.prova.perguntas.length} questões</span>
           <span style="flex:1"></span>
           <label class="ed-chk"><input type="checkbox" ${b.tarefasBloqueadas?'':'checked'} onchange="edToggle(${mi},${bi},'tarefasBloqueadas',!this.checked)"> Tarefas liberadas</label>
           <label class="ed-chk"><input type="checkbox" ${b.testeBloqueado?'':'checked'} onchange="edToggle(${mi},${bi},'testeBloqueado',!this.checked)"> Teste liberado</label>
@@ -3330,6 +3361,7 @@ function buildEditor(){
               </div>`).join('')}
           </div>`).join('')}
         <button class="ed-add" onclick="edAddQ(${mi},${bi})">+ questão</button>
+        </div>
       </div>`;
     });
     h+=`<button class="ed-add" style="margin:10px 0 0 4px" onclick="edAddBloco(${mi})">+ tema neste módulo</button></div></div>`;
@@ -3382,6 +3414,7 @@ function edRemoverQ(mi,bi,qi){
 function edAddBloco(mi){
   MODULOS[mi].blocos.push({fer:'Novo tema',aulas:['Nova aula'],praticas:[],
     prova:{pts:100,perguntas:[{id:'q'+Date.now(),txt:'Nova pergunta',opcoes:['Opção A','Opção B','Opção C','Opção D'],correta:0}]}});
+  edTemaAberto = mi+':'+(MODULOS[mi].blocos.length-1);
   edRecalc(); edRefresh();
 }
 function edNovoModulo(){
