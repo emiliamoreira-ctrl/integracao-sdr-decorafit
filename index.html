@@ -528,16 +528,32 @@
   .teste-badge{display:inline-block;background:#f1f5f9;color:#64748b;font-size:.65rem;font-weight:800;letter-spacing:.4px;padding:2px 9px;border-radius:20px;margin-left:8px;text-transform:uppercase;}
 
   /* TEMA ESCURO */
-  [data-theme="dark"]{--bg:#0f1420;--card:#161d2e;--line:#2a3348;--txt:#e2e8f0;--muted:#94a3b8;--navy:#1a2b4a;}
+  [data-theme="dark"]{--bg:#12161f;--card:#1b2130;--line:#39415a;--txt:#f1f5f9;--muted:#b6c0d4;--navy:#2d4a7a;--orange:#fb923c;}
   [data-theme="dark"] body{background:var(--bg);color:var(--txt);}
   [data-theme="dark"] .day-card,[data-theme="dark"] .bloco,[data-theme="dark"] .cx,[data-theme="dark"] .aula{background:var(--card);border-color:var(--line);}
-  [data-theme="dark"] .aula.done{background:#0d2016;}
-  [data-theme="dark"] .bloco-h:hover,[data-theme="dark"] .cx-h:hover{background:#1c2438;}
-  [data-theme="dark"] textarea,[data-theme="dark"] input{background:#1c2438;color:var(--txt);border-color:var(--line);}
-  [data-theme="dark"] .mat-box,[data-theme="dark"] .eval-section,[data-theme="dark"] .mod-cat{background:#1c2438;}
-  [data-theme="dark"] .q-enunciado,[data-theme="dark"] .mpv-text{background:#1c2438;}
-  [data-theme="dark"] .week-divider{color:#cbd5e1;}
-  [data-theme="dark"] .login-box{background:#161d2e;}
+  [data-theme="dark"] .day-header strong,[data-theme="dark"] .bloco-n,[data-theme="dark"] .cx-t,[data-theme="dark"] .aula-t,[data-theme="dark"] .sdr-prova-info strong,[data-theme="dark"] .adm-sdr-header strong,[data-theme="dark"] .lb-name{color:#fff;}
+  [data-theme="dark"] .aula.done{background:#13301f;border-color:#2f6b45;}
+  [data-theme="dark"] .bloco-h:hover,[data-theme="dark"] .cx-h:hover,[data-theme="dark"] .day-header:hover{background:#242c40;}
+  [data-theme="dark"] textarea,[data-theme="dark"] input{background:#242c40;color:var(--txt);border-color:var(--line);}
+  [data-theme="dark"] .mat-box,[data-theme="dark"] .eval-section,[data-theme="dark"] .mod-cat,[data-theme="dark"] .mode-on,[data-theme="dark"] .mode-pres{background:#242c40;}
+  [data-theme="dark"] .q-enunciado,[data-theme="dark"] .mpv-text,[data-theme="dark"] .mpv-label{background:#242c40;color:var(--txt);}
+  [data-theme="dark"] .week-divider{color:#e2e8f0;}
+  [data-theme="dark"] .login-box{background:#1b2130;}
+  [data-theme="dark"] .section-sub,[data-theme="dark"] .day-sub,[data-theme="dark"] .prova-desc,[data-theme="dark"] .cx-m,[data-theme="dark"] .bloco-c{color:#c3cbdd;}
+  [data-theme="dark"] .mod-chip.chip-todo{background:#2a3348;color:#c3cbdd;}
+  [data-theme="dark"] .adm-sdr-row,[data-theme="dark"] .ov-row{color:#e2e8f0;}
+  [data-theme="dark"] .adm-sdr-row span,[data-theme="dark"] .ov-row span{color:#aab4c8;}
+  [data-theme="dark"] .quiz-q,[data-theme="dark"] .quiz-box{color:#fff;}
+  [data-theme="dark"] .quiz-box{background:#1b2130;}
+  [data-theme="dark"] .quiz-opt{background:#242c40;color:#fff;border-color:var(--line);}
+  [data-theme="dark"] .quiz-opt:hover{background:#2d3550;}
+  [data-theme="dark"] .quiz-timer{background:#242c40;color:#fff;}
+  [data-theme="dark"] .proc-q,[data-theme="dark"] .proc-bloco,[data-theme="dark"] .proc-bloco-h{background:var(--card);border-color:var(--line);}
+  [data-theme="dark"] .mentor-prova-view,[data-theme="dark"] .mentor-obs-box{background:#242c40;}
+  [data-theme="dark"] .badge{background:#242c40;color:#c3cbdd;border-color:var(--line);}
+  [data-theme="dark"] .sched-table th{background:#242c40;color:#c3cbdd;}
+  [data-theme="dark"] .sched-table td{color:#e2e8f0;}
+  [data-theme="dark"] .sched-table tr:hover td{background:#242c40;}
   .theme-btn{background:rgba(255,255,255,.12);border:none;color:#fff;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:.9rem;margin-left:6px;display:flex;align-items:center;justify-content:center;}
   .theme-btn:hover{background:rgba(255,255,255,.22);}
   /* VIEW SWITCH */
@@ -564,6 +580,21 @@
   .quiz-opt.errada{background:#fee2e2;border-color:var(--red);}
   .quiz-result{text-align:center;padding:10px;}
   .quiz-result .nv{font-size:2.2rem;font-weight:800;color:var(--green);}
+
+  /* ABAS DO TEMA + SEQUENCIAL */
+  .tema-tabs{display:flex;gap:4px;margin-bottom:14px;background:var(--bg);border-radius:9px;padding:3px;}
+  .tema-tab{flex:1;text-align:center;padding:9px;border:none;background:none;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;color:var(--muted);border-radius:7px;cursor:pointer;transition:all .15s;}
+  .tema-tab.active{background:var(--card);color:var(--orange);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+  .tema-tab .tt-ok{color:var(--green);}
+  .tema-tab .tt-lock{color:var(--muted);}
+  .tema-pane{display:none;}
+  .tema-pane.active{display:block;}
+  .bloco-locked{opacity:.55;}
+  .bloco-locked .bloco-h{cursor:not-allowed;}
+  .lock-aval{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:18px;text-align:center;font-size:.78rem;color:var(--muted);}
+  .mini-prog{display:flex;gap:3px;margin-top:6px;}
+  .mini-prog span{height:4px;flex:1;border-radius:99px;background:var(--line);}
+  .mini-prog span.on{background:var(--orange);}
 </style>
 </head>
 <body>
@@ -581,7 +612,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v5.0</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v5.1</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1100,7 +1131,7 @@ function totalPerguntasProc(){return AVAL_PROCESSOS.blocos.reduce((a,b)=>a+b.per
 const TYPE_LABELS={live:'Ao vivo',async:'Assíncrono',listen:'Escuta',read:'Leitura',practice:'Prática',meet:'Reunião'};
 const TYPE_CLASSES={live:'pill-live',async:'pill-async',listen:'pill-listen',read:'pill-read',practice:'pill-practice',meet:'pill-meet'};
 const MAX_PTS=DAYS.reduce((a,d)=>a+d.pts,0)+Object.values(PROVAS).reduce((a,p)=>a+p.pts,0);
-const TESTE_IDS=['teste','teste_sdr','teste_madrinha'];
+const TESTE_IDS=['teste','teste_madrinha'];
 const isTeste=u=>TESTE_IDS.includes(u.id||u.userId);
 // Listagens visíveis não incluem contas de teste
 const NOVOS=USERS.filter(u=>u.role==='novo'&&!isTeste(u));
@@ -1850,7 +1881,7 @@ function buildModulosHTML(){
           </div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">
           ${m.materiais?buildMateriais(m.materiais):''}
-          ${m.blocos.map(b=>buildBloco(m,b)).join('')}
+          ${m.blocos.map((b,idx)=>buildBloco(m,b,idx)).join('')}
         </div></div>`;
     });
     html+=`</div>`;
@@ -1858,8 +1889,20 @@ function buildModulosHTML(){
   return html;
 }
 
-function buildBloco(m,b){
+function blocoCompleto(b){
   const p=blocoProg(b);
+  return p.dA===p.tA && p.dP===p.tP && p.env===1;
+}
+function buildBloco(m,b,idx){
+  const p=blocoProg(b);
+  const anterior=idx>0?m.blocos[idx-1]:null;
+  const bloqueado=anterior && !blocoCompleto(anterior);
+  if(bloqueado){
+    return `<div class="bloco bloco-locked" id="bl-${b.id}">
+      <div class="bloco-h"><span class="bloco-ar">🔒</span><span class="bloco-n">${b.fer}</span>
+      <span class="bloco-c">conclua "${anterior.fer}" para liberar</span></div></div>`;
+  }
+  const avalPronta = p.dA===p.tA && p.dP===p.tP;
   return `<div class="bloco${p.done?' done':''}" id="bl-${b.id}">
     <div class="bloco-h" onclick="toggleBloco('${b.id}','${m.id}')">
       <span class="bloco-ar">▶</span>
@@ -1869,16 +1912,30 @@ function buildBloco(m,b){
     </div>
     <div class="bloco-b">
       ${b.materiais?buildMateriais(b.materiais):''}
-      <div class="aulas-wrap">${b.aulas.map((t,j)=>buildAula(m,b,t,j)).join('')}</div>
-      ${b.praticas.length?`
-      <div class="cx" id="cx-p-${b.id}">
-        <div class="cx-h" onclick="toggleCx('cx-p-${b.id}')"><span class="cx-ar">▶</span><span class="cx-t">Tarefas</span><span class="cx-m">${p.dP}/${p.tP} concluídas</span></div>
-        <div class="cx-b"><p style="font-size:.75rem;color:var(--muted);margin-bottom:11px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
-          ${b.praticas.map((t,j)=>buildPratica(b,t,j)).join('')}</div></div>`:''}
-      <div class="cx" id="cx-a-${b.id}">
-        <div class="cx-h" onclick="toggleCx('cx-a-${b.id}')"><span class="cx-ar">▶</span><span class="cx-t">Avaliação</span><span class="cx-m">${p.env?'enviada':`${b.prova.perguntas.length} questões · ${b.prova.pts} pts`}</span></div>
-        <div class="cx-b">${buildProva(b)}</div></div>
+      <div class="tema-tabs" id="tabs-${b.id}">
+        <button class="tema-tab active" data-tab="aulas" onclick="switchTemaTab('${b.id}','aulas')">Aulas <span class="${p.dA===p.tA?'tt-ok':''}">${p.dA}/${p.tA}</span></button>
+        ${b.praticas.length?`<button class="tema-tab" data-tab="tarefas" onclick="switchTemaTab('${b.id}','tarefas')">Tarefas <span class="${p.dP===p.tP?'tt-ok':''}">${p.dP}/${p.tP}</span></button>`:''}
+        <button class="tema-tab" data-tab="aval" onclick="switchTemaTab('${b.id}','aval')">Avaliação ${!avalPronta?'<span class="tt-lock">🔒</span>':(p.env?'<span class="tt-ok">✓</span>':'')}</button>
+      </div>
+      <div class="tema-pane active" id="pane-aulas-${b.id}">
+        <div class="aulas-wrap">${b.aulas.map((t,j)=>buildAula(m,b,t,j)).join('')}</div>
+      </div>
+      ${b.praticas.length?`<div class="tema-pane" id="pane-tarefas-${b.id}">
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:11px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
+        ${b.praticas.map((t,j)=>buildPratica(b,t,j)).join('')}
+      </div>`:''}
+      <div class="tema-pane" id="pane-aval-${b.id}">
+        ${avalPronta ? buildProva(b) : `<div class="lock-aval">🔒 Conclua todas as aulas${b.praticas.length?' e tarefas':''} deste tema para liberar a avaliação.</div>`}
+      </div>
     </div></div>`;
+}
+function switchTemaTab(bid,tab){
+  const tabsEl=document.getElementById('tabs-'+bid);
+  if(tabsEl)tabsEl.querySelectorAll('.tema-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));
+  ['aulas','tarefas','aval'].forEach(t=>{
+    const p=document.getElementById('pane-'+t+'-'+bid);
+    if(p)p.classList.toggle('active',t===tab);
+  });
 }
 
 function buildAula(m,b,txt,j){
@@ -1978,6 +2035,10 @@ function iniciarQuiz(bid){
 
 function renderQuizPergunta(){
   const q=activeQuiz.perguntas[activeQuiz.idx];
+  // embaralha a ordem das alternativas a cada exibição (evita padrão de posição)
+  const ordem=[0,1,2,3];
+  for(let i=ordem.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ordem[i],ordem[j]]=[ordem[j],ordem[i]];}
+  activeQuiz.ordemAtual=ordem;
   const el=document.getElementById('qwarn-'+activeQuiz.bid)||document.getElementById('qbox-'+activeQuiz.bid);
   if(!el)return;
   el.outerHTML=`<div class="quiz-box" id="qbox-${activeQuiz.bid}">
@@ -1987,7 +2048,7 @@ function renderQuizPergunta(){
     </div>
     <div class="quiz-q">${q.txt}</div>
     <div id="qopts-${activeQuiz.bid}">
-      ${q.opcoes.map((o,i)=>`<button class="quiz-opt" onclick="responderQuiz(${i})">${o}</button>`).join('')}
+      ${ordem.map((origIdx,pos)=>`<button class="quiz-opt" onclick="responderQuiz(${origIdx})">${q.opcoes[origIdx]}</button>`).join('')}
     </div>
   </div>`;
   activeQuiz.inicioPergunta=Date.now();
@@ -2343,8 +2404,7 @@ function buildMadrinhaPanels(tabs,main){
 }
 function buildMentorOverview(){
   let html=`<div class="overview-grid">`;
-  (currentUser.mentees||[]).forEach(n=>{
-    const u=USERS.find(x=>x.name===n); if(!u)return;
+  NOVOS.forEach(u=>{
     const s=sdrStats(u);
     html+=`<div class="ov-card" style="border-top-color:${u.color}"><h3>${u.name} <span style="font-size:.73rem;color:var(--muted);font-weight:500">${u.turno}</span></h3>
       <div class="ov-row"><span>Módulos concluídos</span><strong>${s.modsOk}/${MODULOS.length}</strong></div>
@@ -2426,21 +2486,19 @@ function salvarCorrecao(uid,bid,max){
   alert('Nota lançada. O SDR já consegue ver a nota e o feedback.');
 }
 function buildMentorProvas(){
-  const mentees=currentUser.mentees||[];
-  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR vinculado.</div>';
-  let html=`<p class="section-sub">Respostas dos novos SDRs sob sua responsabilidade. A nota é lançada pela gestão.</p>`;
-  mentees.forEach(n=>{const u=USERS.find(x=>x.name===n);if(u)html+=buildSdrProvaCard(u,false);});
+  let html=`<p class="section-sub">Respostas de todos os novos SDRs. A correção é automática.</p>`;
+  NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,false);});
   return html;
 }
 function buildMentorDiary(){
-  const mentees=(currentUser.mentees||[]);
-  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR vinculado.</div>';
+  const mentees=NOVOS.map(u=>u.name);
+  if(!mentees.length) return '<div style="font-size:.8rem;color:var(--muted)">Nenhum novo SDR cadastrado.</div>';
 
   let html=`<div style="background:#fdf2f8;border:1.5px solid var(--mentor);border-radius:10px;padding:12px 15px;margin-bottom:16px;font-size:.76rem;color:#9d174d">
     <strong>Registre apenas os momentos em que você acompanhou.</strong> Escolha o novo SDR e o dia, e descreva só o que você conduziu ou observou diretamente.
   </div>`;
 
-  // Seletor de novo SDR
+  // Seletor de novo SDR — agora qualquer madrinha pode registrar sobre qualquer SDR
   html+=`<div style="margin-bottom:16px"><label style="display:block;font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:6px">Sobre qual novo SDR você vai registrar?</label>
     <select id="diary-target" class="invite-input" style="max-width:320px" onchange="switchDiaryTarget()">`;
   mentees.forEach((m,i)=>{html+=`<option value="${m}"${i===0?' selected':''}>${m}</option>`;});
@@ -2468,7 +2526,7 @@ function buildMentorDiary(){
 }
 function currentDiaryTarget(){
   const el=document.getElementById('diary-target');
-  return el?el.value:((currentUser.mentees||['geral'])[0]);
+  return el?el.value:(NOVOS[0]?NOVOS[0].name:'geral');
 }
 
 function switchDiaryTarget(){
@@ -2508,11 +2566,11 @@ function refreshMentorDiary(){ switchDiaryTarget(); }
 
 
 function buildAdmProc(){
-  const todos=[...NOVOS,...MENTORS];
+  const todos=NOVOS; // madrinhas não fazem esta avaliação
   const total=totalPerguntasProc();
   const env=todos.filter(u=>(getU(u.id).procAval||{}).submitted).length;
   let html=`<div class="section-title">${AVAL_PROCESSOS.titulo}</div>
-  <p class="section-sub">${AVAL_PROCESSOS.data} · responsável: ${AVAL_PROCESSOS.responsavel} · aplicada a todo o time</p>
+  <p class="section-sub">${AVAL_PROCESSOS.data} · responsável: ${AVAL_PROCESSOS.responsavel} · aplicada aos novos SDRs</p>
   <div class="adm-kpi-grid">
     <div class="adm-kpi" style="border-left-color:var(--purple)"><div class="kpi-val">${env}</div><div class="kpi-label">Avaliações enviadas</div><div class="kpi-sub">de ${todos.length} do time</div></div>
     <div class="adm-kpi" style="border-left-color:var(--orange)"><div class="kpi-val">${total}</div><div class="kpi-label">Questões</div><div class="kpi-sub">em ${AVAL_PROCESSOS.blocos.length} blocos</div></div>
