@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.6</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.7</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1024,14 +1024,14 @@ const MODULOS=[
    {id:'p1d4',txt:'Ao abrir um card, onde ficam concentradas as informações do cliente levantadas na qualificação?',
     opcoes:['Na aba de Pagamentos','Na aba Pré-Venda','No histórico de e-mails','No campo de observações gerais'],correta:1}]}},
  {fer:'Chatwoot',
-  aulas:['O que é o Chatwoot','Caixa de entrada: Minhas','Caixa de entrada: Não atribuídas','Caixa de entrada: Geral','Como pesquisar um cliente'],
-  praticas:['Navegue pelas três caixas e conte as conversas de cada','Pesquise um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e veja de qual canal veio','Atribua uma conversa de teste para você'],
+  aulas:['Introdução ao Chatwoot','Conversas: Minhas, Não atribuídas e Todas','Pesquisar histórico de conversa'],
+  praticas:['Navegue pelas três caixas e conte as conversas de cada','Pesquise o histórico de um cliente pelo nome e outro pelo telefone','Abra uma conversa não atribuída e veja de qual canal veio'],
   prova:{pts:37,perguntas:[
    {id:'p1e1',txt:'Qual é o papel do Chatwoot no trabalho do SDR?',
     opcoes:['É usado só pelo time financeiro','Centraliza o atendimento das conversas com os clientes','Serve para agendar reuniões no Google Agenda','É um sistema de folha de pagamento'],correta:1},
    {id:'p1e2',txt:'O que diferencia a caixa "Não atribuídas" das demais?',
     opcoes:['São conversas finalizadas e arquivadas','São conversas que ainda não têm um responsável definido','São conversas só do setor financeiro','São conversas que já foram respondidas'],correta:1},
-   {id:'p1e3',txt:'Quais dados costumam ser usados para pesquisar um cliente no Chatwoot?',
+   {id:'p1e3',txt:'Quais dados costumam ser usados para pesquisar o histórico de conversa no Chatwoot?',
     opcoes:['Apenas o CPF do cliente','Nome, telefone ou e-mail do cliente','Somente o número do pedido','O nome do arquiteto responsável'],correta:1},
    {id:'p1e4',txt:'Por que é importante checar a caixa de conversas logo no início do turno?',
     opcoes:['Para não perder o SLA de resposta ao cliente','Para fechar o sistema mais cedo','Porque é uma exigência só às sextas-feiras','Porque a caixa é apagada automaticamente à noite'],correta:0}]}},
@@ -1250,7 +1250,10 @@ const AULA_VIDEOS={
   'm1_b0_a1':'aula-de-onde-vem-o-lead.mp4',
   'm1_b1_a0':'pipedrive-intro.mp4',
   'm1_b1_a1':'aula-etapas-do-funil.mp4',
-  'm1_b1_a2':'aula-abrindo-um-card.mp4'
+  'm1_b1_a2':'aula-abrindo-um-card.mp4',
+  'm1_b2_a0':'chatwoot-intro.mp4',
+  'm1_b2_a1':'chatwoot-conversas.mp4',
+  'm1_b2_a2':'chatwoot-pesquisar.mp4'
 };
 /* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
 const AULA_PREVIEWS={
@@ -1258,7 +1261,10 @@ const AULA_PREVIEWS={
   'm1_b0_a1':'prev-m1b0a1.mp4',
   'm1_b1_a0':'prev-m1b1a0.mp4',
   'm1_b1_a1':'prev-m1b1a1.mp4',
-  'm1_b1_a2':'prev-m1b1a2.mp4'
+  'm1_b1_a2':'prev-m1b1a2.mp4',
+  'm1_b2_a0':'prev-chatwoot-intro.mp4',
+  'm1_b2_a1':'prev-chatwoot-conversas.mp4',
+  'm1_b2_a2':'prev-chatwoot-pesquisar.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
