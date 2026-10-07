@@ -669,7 +669,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v6.0</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v6.2</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2211,9 +2211,10 @@ function buildProva(b){
   const u=getU(currentUser.id);
   const pv=(u.modProvas||{})[b.id]||{};
   if(pv.submitted){
-    const pct=Math.round((pv.nota10/10)*100);
+    const n10 = pv.nota10!=null ? pv.nota10 : (pv.pts&&pv.nota!=null ? Math.round((pv.nota/pv.pts)*100)/10 : (pv.acertos!=null&&pv.total ? Math.round((pv.acertos/pv.total)*100)/10 : 0));
+    const pct=Math.round((n10/10)*100);
     return `<div class="quiz-result">
-      <div class="nota10">${pv.nota10.toFixed(1)}<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <div class="nota10">${n10.toFixed(1)}<span style="font-size:1rem;color:var(--muted)">/10</span></div>
       <div style="font-size:.76rem;color:var(--muted);margin-top:4px">corrigido automaticamente · ${pv.acertos}/${pv.total} acertos</div>
       <div class="bar-bg" style="margin-top:10px"><div class="bar-fill" style="width:${pct}%"></div></div>
     </div>`;
@@ -2633,7 +2634,8 @@ function buildSdrProvaCard(u,corrigir){
       const pv=mp[b.id]; const ok=pv&&pv.submitted;
       const dA=b.aulas.filter((_,j)=>tops.includes(b.id+'_a'+j)).length;
       const dP=b.praticas.filter((_,j)=>(prats[b.id+'_p'+j]||{}).done).length;
-      const stat=!ok?'teste não enviado':`nota ${pv.nota10.toFixed(1)}/10 (${pv.acertos}/${pv.total} acertos)`;
+      const n10b = ok ? (pv.nota10!=null ? pv.nota10 : (pv.acertos!=null&&pv.total ? Math.round((pv.acertos/pv.total)*100)/10 : 0)) : 0;
+      const stat=!ok?'teste não enviado':`nota ${n10b.toFixed(1)}/10 (${pv.acertos}/${pv.total} acertos)`;
       html+=`<div class="day-card" style="margin-bottom:7px">
         <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
           <div class="dh-left"><div class="module-num ${ok?'done':''}" style="width:30px;height:30px;font-size:.66rem">${ok?'✓':''}</div>
