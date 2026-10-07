@@ -595,6 +595,63 @@
   .mini-prog{display:flex;gap:3px;margin-top:6px;}
   .mini-prog span{height:4px;flex:1;border-radius:99px;background:var(--line);}
   .mini-prog span.on{background:var(--orange);}
+
+  /* ═══ MÓDULO SEQUENCIAL ═══ */
+  .tema-sec{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line);}
+  .tema-sec:last-child{border-bottom:none;}
+  .tema-sec.locked{opacity:.5;}
+  .tema-head{display:flex;align-items:center;gap:9px;margin-bottom:11px;}
+  .tema-head h5{font-size:.82rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.3px;}
+  .tema-head .thc{font-size:.72rem;color:var(--muted);font-weight:600;}
+  .aula-row{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#fff;border:1.5px solid var(--line);border-radius:9px;margin-bottom:6px;cursor:pointer;transition:all .15s;}
+  .aula-row:hover{border-color:var(--orange);}
+  .aula-row.done{background:#f0fdf4;border-color:var(--green);}
+  .aula-row.locked{opacity:.5;cursor:not-allowed;background:var(--bg);}
+  .aula-row .ast2{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;}
+  .aula-row.done .ast2{background:var(--green);border-color:var(--green);color:#fff;}
+  .aula-row .atxt{font-size:.78rem;flex:1;}
+  .aula-row .atag{font-size:.68rem;color:var(--muted);font-weight:600;}
+  .sub-bloqueado{background:var(--bg);border:1px dashed var(--line);border-radius:9px;padding:12px 14px;font-size:.76rem;color:var(--muted);}
+  .mod-sec-title{font-size:.68rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+  /* ═══ TAREFAS ═══ */
+  .prat-row2{background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:12px 14px;margin-bottom:8px;}
+  .prat-row2.done{background:#f0fdf4;border-color:var(--green);}
+  .prat-row2 .ptxt{font-size:.8rem;margin-bottom:9px;}
+  .btn-task{background:var(--card);border:1.5px solid var(--orange);color:var(--orange);border-radius:8px;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;}
+  .btn-task:hover{background:#fff7ed;}
+  .btn-task.done{background:var(--green);border-color:var(--green);color:#fff;cursor:default;}
+  /* ═══ TESTE ═══ */
+  .nota10{font-size:2.3rem;font-weight:800;color:var(--green);}
+  /* ═══ BIBLIOTECA DE VÍDEO ═══ */
+  #video-lib{display:none;position:fixed;inset:0;background:#000;z-index:9999;}
+  #video-lib.open{display:flex;flex-direction:column;}
+  .lib-top{background:var(--navy);color:#fff;padding:13px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .lib-back{background:rgba(255,255,255,.12);border:none;color:#fff;padding:7px 14px;border-radius:7px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;}
+  .lib-back:hover{background:rgba(255,255,255,.22);}
+  .lib-title{font-size:.86rem;font-weight:700;}
+  .lib-body{flex:1;display:flex;overflow:hidden;background:#0a0e17;}
+  .lib-main{flex:1;display:flex;flex-direction:column;padding:22px;overflow-y:auto;}
+  .lib-video-wrap{background:#000;border-radius:10px;overflow:hidden;max-width:900px;margin:0 auto;width:100%;}
+  .lib-video-wrap video{width:100%;display:block;max-height:60vh;}
+  .lib-info{max-width:900px;margin:16px auto 0;width:100%;color:#fff;}
+  .lib-info h4{font-size:.95rem;font-weight:700;margin-bottom:8px;}
+  .lib-warn{font-size:.76rem;color:#fbbf24;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
+  .lib-watched{font-size:.76rem;color:#4ade80;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
+  .lib-side{width:320px;background:#111826;border-left:1px solid #232c3d;display:flex;flex-direction:column;flex-shrink:0;}
+  .lib-search{padding:14px;border-bottom:1px solid #232c3d;}
+  .lib-search input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #2d3748;background:#1a2332;color:#fff;font-family:'Montserrat',sans-serif;font-size:.78rem;}
+  .lib-search input::placeholder{color:#64748b;}
+  .lib-list{flex:1;overflow-y:auto;padding:10px;}
+  .lib-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;cursor:pointer;margin-bottom:5px;transition:background .15s;}
+  .lib-item:hover{background:#1a2332;}
+  .lib-item.active{background:#f97316;}
+  .lib-item.locked{opacity:.4;cursor:not-allowed;}
+  .lib-item .lis{width:20px;height:20px;border-radius:50%;border:2px solid #3d4a5f;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:#fff;flex-shrink:0;}
+  .lib-item.done .lis{background:#22c55e;border-color:#22c55e;}
+  .lib-item .litxt{font-size:.74rem;color:#fff;flex:1;line-height:1.3;}
+  .lib-item .lifer{font-size:.63rem;color:#94a3b8;display:block;}
+  .btn-lib-done{background:var(--orange);color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;}
+  .btn-lib-done:disabled{background:#2d3748;color:#64748b;cursor:not-allowed;}
 </style>
 </head>
 <body>
@@ -612,7 +669,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v5.1</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v6.0</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -645,6 +702,7 @@
   <footer class="plat-foot"><b>Decorafit</b> · Plataforma de Treinamento Pré-Vendas · uso interno</footer>
 </div>
 
+<div id="video-lib"></div>
 <script>
 const LARISSA_IMG="data:image/jpeg;base64,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";
 const LEANDRO_IMG="data:image/jpeg;base64,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";
@@ -1361,7 +1419,7 @@ function addTab(tabs,main,id,label,builder){
 /* ══════ ADM ══════ */
 function buildAdminPanels(tabs,main){
   addTab(tabs,main,'adm-dashboard','Dashboard',   buildAdmDashboard);
-  addTab(tabs,main,'adm-provas',   'Avaliações',  buildAdmProvas);
+  addTab(tabs,main,'adm-provas',   'Testes',  buildAdmProvas);
   addTab(tabs,main,'adm-horarios', 'Relatório de Horários', buildAdmHorarios);
   addTab(tabs,main,'adm-diarios',  'Diários',     buildAdmDiarios);
   addTab(tabs,main,'adm-duvidas',  'Dúvidas',     buildAdmDuvidas);
@@ -1372,23 +1430,24 @@ function buildAdminPanels(tabs,main){
 }
 
 function sdrStats(u){
-  const d=getU(u.id), mp=d.modProvas||{}, tops=(d.modTopics||[]), prats=(d.modPrats||{});
-  let env=0,corr=0,pts=0,modsOk=0;
+  const d=getU(u.id), mp=d.modProvas||{}, tops=(d.modTopics||[]);
+  let env=0,modsOk=0;
   MODULOS.forEach(m=>{
     let okMod=true;
     m.blocos.forEach(b=>{
       const pv=mp[b.id]||{};
-      if(pv.submitted){env++;pts+=b.prova.pts;if(pv.nota!=null)corr++;}else okMod=false;
+      if(pv.submitted){env++;}else okMod=false;
       const dA=b.aulas.filter((_,j)=>tops.includes(b.id+'_a'+j)).length;
-      const dP=b.praticas.filter((_,j)=>(prats[b.id+'_p'+j]||{}).done).length;
+      const dP=b.praticas.filter((_,j)=>((d.modPrats||{})[b.id+'_p'+j]||{}).done).length;
       if(dA<b.aulas.length||dP<b.praticas.length)okMod=false;
     });
     if(okMod)modsOk++;
   });
-  pts+=tops.length*MOD_PTS_TOPICO+Object.values(prats).filter(v=>v.done).length*MOD_PTS_PRATICA;
+  const participacao=pontosParticipacao(u.id);
+  const notaMedia=notaMediaTestes(u.id);
   const st=Object.values(d.evals||{}).map(e=>e.stars||0).filter(Boolean);
-  return {env,corr,pend:env-corr,pts,modsOk,aulas:tops.length,
-    prats:Object.values(prats).filter(v=>v.done).length,
+  return {env,modsOk,participacao,notaMedia,aulas:tops.length,
+    prats:Object.values(d.modPrats||{}).filter(v=>v.done).length,
     conf:st.length?(st.reduce((a,b)=>a+b,0)/st.length).toFixed(1):'-',
     duv:Object.values(d.evals||{}).map(e=>e.duvida).filter(Boolean).pop()};
 }
@@ -1427,49 +1486,38 @@ function buildTesteSection(comCorrecao){
 }
 
 function buildAdmDashboard(){
-  const S=NOVOS.map(sdrStats), TP=totalProvas();
-  const tPts=S.reduce((a,s)=>a+s.pts,0), tMod=S.reduce((a,s)=>a+s.modsOk,0), tEnv=S.reduce((a,s)=>a+s.env,0);
-  const cs=S.map(s=>parseFloat(s.conf)).filter(n=>!isNaN(n));
-  const conf=cs.length?(cs.reduce((a,b)=>a+b,0)/cs.length).toFixed(1):'-';
+  const S=NOVOS.map(sdrStats);
+  const tPart=S.reduce((a,s)=>a+s.participacao,0), tMod=S.reduce((a,s)=>a+s.modsOk,0), tEnv=S.reduce((a,s)=>a+s.env,0);
+  const notas=S.map(s=>s.notaMedia).filter(n=>n!=null);
+  const notaGeral=notas.length?(notas.reduce((a,b)=>a+b,0)/notas.length).toFixed(1):'-';
   let html=`<div class="section-title">Dashboard</div>
   <p class="section-sub">${new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})}</p>
   <div class="adm-kpi-grid">
     <div class="adm-kpi" style="border-left-color:var(--orange)"><div class="kpi-val">${tMod}</div><div class="kpi-label">Módulos concluídos</div><div class="kpi-sub">de ${NOVOS.length*MODULOS.length}</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--blue)"><div class="kpi-val">${tEnv}</div><div class="kpi-label">Avaliações enviadas</div><div class="kpi-sub">de ${NOVOS.length*TP}</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--green)"><div class="kpi-val">${tPts}</div><div class="kpi-label">Pontos acumulados</div><div class="kpi-sub">pelos ${NOVOS.length} novos SDRs</div></div>
-    <div class="adm-kpi" style="border-left-color:var(--gold)"><div class="kpi-val">${conf}</div><div class="kpi-label">Confiança média</div><div class="kpi-sub">escala 1–5</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--blue)"><div class="kpi-val">${tEnv}</div><div class="kpi-label">Testes enviados</div><div class="kpi-sub">de ${NOVOS.length*totalProvas()}</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--green)"><div class="kpi-val">${tPart}</div><div class="kpi-label">Pontos de participação</div><div class="kpi-sub">somados do time</div></div>
+    <div class="adm-kpi" style="border-left-color:var(--gold)"><div class="kpi-val">${notaGeral}</div><div class="kpi-label">Nota média geral</div><div class="kpi-sub">escala 0-10</div></div>
   </div><div class="adm-sdr-grid">`;
   NOVOS.forEach((u,i)=>{
-    const s=S[i], pct=Math.round((s.pts/MAX_MOD_PTS)*100);
+    const s=S[i];
     html+=`<div class="adm-sdr-card"><div class="adm-sdr-header">${avatarHtml(u,38)}
       <div class="info"><strong>${u.name}</strong><span>${u.turno} · ${u.mentor}</span></div></div>
       <div class="adm-sdr-body">
-        <div class="adm-sdr-row"><span>Progresso</span><div style="display:flex;align-items:center;gap:7px"><strong>${pct}%</strong><div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div></div></div>
         <div class="adm-sdr-row"><span>Módulos</span><strong>${s.modsOk}/${MODULOS.length}</strong></div>
-        <div class="adm-sdr-row"><span>Avaliações</span><strong>${s.env}/${TP}${s.pend?` · ${s.pend} a corrigir`:''}</strong></div>
-        <div class="adm-sdr-row"><span>Aulas</span><strong>${s.aulas}</strong></div>
-        <div class="adm-sdr-row"><span>Pontos</span><strong>${s.pts}</strong></div>
+        <div class="adm-sdr-row"><span>Testes enviados</span><strong>${s.env}/${totalProvas()}</strong></div>
+        <div class="adm-sdr-row"><span>Nota média</span><strong>${s.notaMedia!=null?s.notaMedia.toFixed(1):'-'}/10</strong></div>
+        <div class="adm-sdr-row"><span>Pontos de participação</span><strong>${s.participacao}</strong></div>
         ${s.duv?`<div style="margin-top:9px;background:#fef9c3;border-radius:8px;padding:7px 9px;font-size:.72rem;color:#92400e"><strong>Última dúvida:</strong><br>${s.duv}</div>`:''}
       </div></div>`;
   });
   html+=`</div>`;
-  const rows=NOVOS.map((u,i)=>({name:u.name,photo:u.photo,color:u.color,pts:S[i].pts,mods:S[i].modsOk})).sort((a,b)=>b.pts-a.pts);
-  const mx=Math.max(...rows.map(r=>r.pts),1);
-  html+=`<div class="leaderboard"><div class="lb-header">Ranking da Formação</div>`;
-  rows.forEach((r,i)=>{
-    const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
-      :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem">${r.name[0]}</div>`;
-    html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${i+1}</div>${av}
-      <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.mods}/${MODULOS.length} módulos</div></div>
-      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/mx)*100)}%"></div></div>
-      <div class="lb-pts">${r.pts} pts</div></div>`;
-  });
-  return html+`</div>`+buildTesteSection(false);
+  html += buildLeaderboardHTML();
+  return html;
 }
 
 function buildAdmProvas(){
-  let html=`<div class="section-title">Avaliações</div>
-  <p class="section-sub">Múltipla escolha com correção automática. Clique no card de cada SDR para ver as respostas.</p>`;
+  let html=`<div class="section-title">Testes</div>
+  <p class="section-sub">Testes de múltipla escolha com correção automática. Clique no card de cada SDR para ver as respostas.</p>`;
   NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,false);});
   html += buildTesteSection(false);
   return html;
@@ -1481,21 +1529,23 @@ function applyProvaFilter(btn,main){
 }
 function buildAdmDiarios(){
   let html=`<div class="section-title">Diários das Madrinhas</div><p class="section-sub">Registros das madrinhas sobre os momentos que acompanharam.</p>`;
-  MENTORS.forEach(m=>{
+  const todas=[...MENTORS, USERS.find(u=>u.id==='teste_madrinha')].filter(Boolean);
+  todas.forEach(m=>{
     const diary=getU(m.id).diary||{};
     const alvos=Object.keys(diary);
-    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name} · acompanha: ${(m.mentees||[]).join(', ')}</strong></div>`;
+    const isTeste2=m.id==='teste_madrinha';
+    html+=`<div class="adm-diary-mentor"><div class="adm-diary-mentor-header"><div class="mentor-avatar" style="background:${m.color}">${m.name[0]}</div><strong>${m.name}${isTeste2?' (conta de teste)':''}</strong></div>`;
     if(!alvos.length){html+=`<div style="font-size:.76rem;color:var(--muted);font-style:italic;padding:7px 0">Nenhum registro ainda.</div>`;}
     else{
       alvos.forEach(alvo=>{
-        html+=`<div style="font-size:.78rem;font-weight:700;color:var(--orange);margin:12px 0 7px">↳ sobre ${alvo}</div>`;
+        html+=`<div style="font-size:.78rem;font-weight:700;color:var(--purple);margin:12px 0 7px">↳ sobre ${alvo}</div>`;
         DAYS.forEach(day=>{
           const e=(diary[alvo]||{})[day.id];if(!e)return;
           const filled=[e.mom,e.exp,e.atencao,e.bem,e.prova].filter(Boolean).length;
           if(!filled)return;
           html+=`<div class="adm-diary-entry"><div class="adm-diary-entry-header" onclick="this.closest('.adm-diary-entry').classList.toggle('open')">${day.label} · ${day.date}<span style="color:var(--muted);font-size:.68rem">${filled} campos ▼</span></div>
             <div class="adm-diary-entry-body">
-              ${e.mom?`<div class="adm-diary-field"><label>🕐 Momentos acompanhados</label><p>${e.mom}</p></div>`:''}
+              ${e.mom?`<div class="adm-diary-field"><label>Momentos acompanhados</label><p>${e.mom}</p></div>`:''}
               ${e.exp?`<div class="adm-diary-field"><label>O que aconteceu</label><p>${e.exp}</p></div>`:''}
               ${e.atencao?`<div class="adm-diary-field"><label>Pontos de atenção</label><p>${e.atencao}</p></div>`:''}
               ${e.bem?`<div class="adm-diary-field"><label>O que funcionou</label><p>${e.bem}</p></div>`:''}
@@ -1535,7 +1585,12 @@ function buildNovoPanels(tabs,main){
   if(mp){bindModEvents(mp);}
   const cp=document.getElementById('panel-cronograma');
   if(cp){
-    cp.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
+    cp.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>{
+      const card=h.closest('.day-card');
+      const abrindo=!card.classList.contains('open');
+      cp.querySelectorAll('.day-card.open').forEach(c=>{if(c!==card)c.classList.remove('open');});
+      card.classList.toggle('open',abrindo);
+    };});
     cp.querySelectorAll('.star-btn').forEach(s=>{s.onclick=()=>setStars(s.dataset.day,parseInt(s.dataset.star));});
     cp.querySelectorAll('.btn-save-eval').forEach(b=>{b.onclick=()=>saveEval(b.dataset.day);});
   }
@@ -1676,6 +1731,21 @@ function moduloLiberado(m){
 function procLiberado(){
   const dataLib=new Date(2026,9,16,0,0,0); // 16/10/2026
   return new Date()>=dataLib;
+}
+
+
+function pontosParticipacao(uid){
+  const u=getU(uid);
+  const prat=Object.values(u.modPrats||{}).filter(v=>v&&v.done).length;
+  const testes=Object.values(u.modProvas||{}).filter(v=>v&&v.submitted).length;
+  const anot=Object.values(u.evals||{}).filter(e=>e&&e.aprendi&&e.aprendi.trim()).length;
+  return prat+testes+anot;
+}
+function notaMediaTestes(uid){
+  const u=getU(uid);
+  const notas=Object.values(u.modProvas||{}).filter(v=>v&&v.submitted&&v.nota10!=null).map(v=>v.nota10);
+  if(!notas.length)return null;
+  return Math.round((notas.reduce((a,b)=>a+b,0)/notas.length)*10)/10;
 }
 
 function modProgress(m){
@@ -1893,41 +1963,73 @@ function blocoCompleto(b){
   const p=blocoProg(b);
   return p.dA===p.tA && p.dP===p.tP && p.env===1;
 }
+function aulaDesbloqueada(b,j){
+  if(j===0)return true;
+  const u=getU(currentUser.id);
+  return (u.modTopics||[]).includes(b.id+'_a'+(j-1));
+}
+function proximaAulaFaltando(b){
+  for(let j=0;j<b.aulas.length;j++){
+    const u=getU(currentUser.id);
+    if(!(u.modTopics||[]).includes(b.id+'_a'+j)) return {idx:j,nome:b.aulas[j]};
+  }
+  return null;
+}
+function blocoCompleto(b){
+  const p=blocoProg(b);
+  return p.dA===p.tA && p.dP===p.tP && p.env===1;
+}
 function buildBloco(m,b,idx){
   const p=blocoProg(b);
   const anterior=idx>0?m.blocos[idx-1]:null;
   const bloqueado=anterior && !blocoCompleto(anterior);
   if(bloqueado){
-    return `<div class="bloco bloco-locked" id="bl-${b.id}">
-      <div class="bloco-h"><span class="bloco-ar">🔒</span><span class="bloco-n">${b.fer}</span>
-      <span class="bloco-c">conclua "${anterior.fer}" para liberar</span></div></div>`;
+    return `<div class="tema-sec locked"><div class="tema-head"><h5>${b.fer}</h5></div>
+      <div class="sub-bloqueado">Conclua o tema "${anterior.fer}" (aulas, tarefas e teste) para liberar.</div></div>`;
   }
   const avalPronta = p.dA===p.tA && p.dP===p.tP;
-  return `<div class="bloco${p.done?' done':''}" id="bl-${b.id}">
-    <div class="bloco-h" onclick="toggleBloco('${b.id}','${m.id}')">
-      <span class="bloco-ar">▶</span>
-      <span class="bloco-ck">✓</span>
-      <span class="bloco-n">${b.fer}</span>
-      <span class="bloco-c">${p.dA}/${p.tA} aulas</span>
-    </div>
-    <div class="bloco-b">
-      ${b.materiais?buildMateriais(b.materiais):''}
-      <div class="tema-tabs" id="tabs-${b.id}">
-        <button class="tema-tab active" data-tab="aulas" onclick="switchTemaTab('${b.id}','aulas')">Aulas <span class="${p.dA===p.tA?'tt-ok':''}">${p.dA}/${p.tA}</span></button>
-        ${b.praticas.length?`<button class="tema-tab" data-tab="tarefas" onclick="switchTemaTab('${b.id}','tarefas')">Tarefas <span class="${p.dP===p.tP?'tt-ok':''}">${p.dP}/${p.tP}</span></button>`:''}
-        <button class="tema-tab" data-tab="aval" onclick="switchTemaTab('${b.id}','aval')">Avaliação ${!avalPronta?'<span class="tt-lock">🔒</span>':(p.env?'<span class="tt-ok">✓</span>':'')}</button>
-      </div>
-      <div class="tema-pane active" id="pane-aulas-${b.id}">
-        <div class="aulas-wrap">${b.aulas.map((t,j)=>buildAula(m,b,t,j)).join('')}</div>
-      </div>
-      ${b.praticas.length?`<div class="tema-pane" id="pane-tarefas-${b.id}">
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:11px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
-        ${b.praticas.map((t,j)=>buildPratica(b,t,j)).join('')}
-      </div>`:''}
-      <div class="tema-pane" id="pane-aval-${b.id}">
-        ${avalPronta ? buildProva(b) : `<div class="lock-aval">🔒 Conclua todas as aulas${b.praticas.length?' e tarefas':''} deste tema para liberar a avaliação.</div>`}
-      </div>
-    </div></div>`;
+  const u=getU(currentUser.id);
+  let html=`<div class="tema-sec" id="tema-${b.id}">
+    <div class="tema-head"><h5>${b.fer}</h5><span class="thc">${p.dA}/${p.tA} aulas</span></div>`;
+
+  // Lista de aulas (status, abre biblioteca ao clicar)
+  html+=`<div class="aulas-list">`;
+  b.aulas.forEach((t,j)=>{
+    const aid=b.id+'_a'+j;
+    const done=(u.modTopics||[]).includes(aid);
+    const unlocked=aulaDesbloqueada(b,j);
+    html+=`<div class="aula-row ${done?'done':''} ${!unlocked?'locked':''}" ${unlocked?`onclick="abrirBiblioteca('${m.id}','${aid}')"`:''}>
+      <span class="ast2">${done?'✓':(j+1)}</span>
+      <span class="atxt">Aula ${b.ini+j+1} — ${t}</span>
+      <span class="atag">${done?'Já assistido':unlocked?'Assistir':'🔒 bloqueada'}</span>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Tarefas — só se todas aulas feitas
+  if(b.praticas.length){
+    html+=`<div class="mod-sec-title" style="margin-top:16px">Tarefas · ${p.dP}/${p.tP}</div>`;
+    if(p.dA<p.tA){
+      html+=`<div class="sub-bloqueado">Assista todas as aulas acima para liberar as tarefas.</div>`;
+    } else {
+      html+=b.praticas.map((t,j)=>buildPratica(b,t,j)).join('');
+    }
+  }
+
+  // Teste — só se aulas + tarefas completas
+  html+=`<div class="mod-sec-title" style="margin-top:16px">Teste de ${b.fer}</div>`;
+  if(!avalPronta){
+    const falta=proximaAulaFaltando(b);
+    if(falta){
+      html+=`<div class="sub-bloqueado">Assista a <b>Aula ${b.ini+falta.idx+1} — ${falta.nome}</b> (tema ${b.fer}) para avançar.</div>`;
+    } else {
+      html+=`<div class="sub-bloqueado">Conclua todas as tarefas de ${b.fer} para liberar o teste.</div>`;
+    }
+  } else {
+    html+=buildProva(b);
+  }
+
+  return html+`</div>`;
 }
 function switchTemaTab(bid,tab){
   const tabsEl=document.getElementById('tabs-'+bid);
@@ -1938,34 +2040,112 @@ function switchTemaTab(bid,tab){
   });
 }
 
-function buildAula(m,b,txt,j){
-  const aid=b.id+'_a'+j;
-  const u=getU(currentUser.id);
-  const done=(u.modTopics||[]).includes(aid);
-  const src=AULA_VIDEOS[aid]||'';
-  const vmeta=(u.aulaVideo||{})[aid];
-  const watched=!!vmeta||!src;
-  return `<div class="aula${done?' done':''}" id="aula-${aid}">
-    <div class="aula-h" onclick="toggleAulaOpen('${aid}')">
-      <span class="aula-st">✓</span>
-      <span class="aula-n">AULA ${b.ini+j+1}</span>
-      <span class="aula-t">${txt}</span>
-      <span class="aula-ar">▼</span></div>
-    <div class="aula-b">
-      ${src?`<video id="v-${aid}" controls playsinline preload="metadata"
-            onplay="videoPlay('${aid}')"
-            onseeking="videoSeeking('${aid}',this)"
-            onratechange="this.playbackRate=1"
-            onended="videoFim('${aid}')"
-            ontimeupdate="videoProg('${aid}',this)"><source src="${src}" type="video/mp4"></video>
-            ${!watched?'<p style="font-size:.68rem;color:var(--muted);margin-top:6px">Na primeira vez você só pode voltar o vídeo, não adiantar.</p>':''}`
-           :`<div class="aula-soon">Vídeo em produção — será disponibilizado em breve.</div>`}
-      <div class="aula-foot">
-        ${done?`<span class="hint ok">Aula concluída</span><button class="btn-aula undo" onclick="desmarcarAula('${aid}')">Desmarcar</button>`
-              :`<span class="hint${watched?' ok':''}" id="hint-${aid}">${watched?(src?'Vídeo assistido':'Aula sem vídeo — pode concluir'):'Assista ao vídeo até o fim para liberar'}</span>
-                <button class="btn-aula" id="btn-${aid}" ${watched?'':'disabled'} onclick="concluirAula('${aid}')">Marcar aula como concluída · +${MOD_PTS_TOPICO} pts</button>`}
-      </div></div></div>`;
+
+/* ═══ BIBLIOTECA DE VÍDEO POR MÓDULO ═══ */
+let libState=null; // {mid, aid, filtro}
+
+function todasAulasDoModulo(m){
+  const lista=[];
+  m.blocos.forEach(b=>{ b.aulas.forEach((t,j)=>{ lista.push({bid:b.id,fer:b.fer,idx:j,nome:t,aid:b.id+'_a'+j,num:b.ini+j+1}); }); });
+  return lista;
 }
+
+function abrirBiblioteca(mid,aid){
+  const m=MODULOS.find(x=>x.id===mid); if(!m)return;
+  if(!moduloLiberado(m)){alert('Este módulo ainda não está liberado.');return;}
+  libState={mid,aid,filtro:''};
+  const el=document.getElementById('video-lib');
+  el.classList.add('open');
+  renderBiblioteca();
+}
+function fecharBiblioteca(){
+  const el=document.getElementById('video-lib');
+  el.classList.remove('open'); el.innerHTML='';
+  libState=null;
+  refreshTrilha();
+}
+function abrirAulaNaBiblioteca(aid){
+  const m=MODULOS.find(x=>x.id===libState.mid);
+  const todas=todasAulasDoModulo(m);
+  const alvo=todas.find(a=>a.aid===aid);
+  if(!alvo)return;
+  // bloco anterior precisa estar completo e aula anterior assistida
+  const bloco=m.blocos.find(b=>b.id===alvo.bid);
+  if(!aulaDesbloqueadaGlobal(m,alvo)){return;}
+  libState.aid=aid;
+  renderBiblioteca();
+}
+function aulaDesbloqueadaGlobal(m,alvo){
+  // dentro do mesmo bloco: sequencial. bloco só acessível se bloco anterior completo.
+  const bi=m.blocos.findIndex(b=>b.id===alvo.bid);
+  if(bi>0){ const ant=m.blocos[bi-1]; if(!blocoCompleto(ant))return false; }
+  return aulaDesbloqueada(m.blocos[bi],alvo.idx);
+}
+function renderBiblioteca(){
+  const m=MODULOS.find(x=>x.id===libState.mid);
+  const u=getU(currentUser.id);
+  const todas=todasAulasDoModulo(m);
+  const alvo=todas.find(a=>a.aid===libState.aid)||todas[0];
+  const src=AULA_VIDEOS[alvo.aid]||'';
+  const vmeta=(u.aulaVideo||{})[alvo.aid];
+  const watched=!!vmeta||!src;
+  const filtro=(libState.filtro||'').toLowerCase();
+  const visiveis=todas.filter(a=>!filtro||a.nome.toLowerCase().includes(filtro)||a.fer.toLowerCase().includes(filtro));
+
+  const el=document.getElementById('video-lib');
+  el.innerHTML=`
+    <div class="lib-top">
+      <button class="lib-back" onclick="fecharBiblioteca()">← Voltar</button>
+      <span class="lib-title">Módulo ${m.num} — ${alvo.fer}</span>
+    </div>
+    <div class="lib-body">
+      <div class="lib-main">
+        <div class="lib-video-wrap">
+          ${src?`<video id="libvideo" controls playsinline preload="metadata"
+                onplay="videoPlay('${alvo.aid}')"
+                onseeking="videoSeeking('${alvo.aid}',this)"
+                onratechange="this.playbackRate=1"
+                onended="videoFimLib('${alvo.aid}')"
+                ontimeupdate="videoProg('${alvo.aid}',this)"><source src="${src}" type="video/mp4"></video>`
+              :`<div style="padding:60px 20px;text-align:center;color:#94a3b8;font-size:.85rem">Vídeo em produção — será disponibilizado em breve.</div>`}
+        </div>
+        <div class="lib-info">
+          <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
+          ${watched
+            ? `<div class="lib-watched">Você já assistiu este vídeo. Pode navegar livremente e ajustar a velocidade.</div>`
+            : `<div class="lib-warn">Primeira vez assistindo: só é possível voltar o vídeo, nunca adiantar ou acelerar.</div>`}
+          <button class="btn-lib-done" id="libdonebtn" ${watched?'':'disabled'} onclick="concluirAulaLib('${alvo.aid}')">
+            ${(u.modTopics||[]).includes(alvo.aid)?'✓ Aula concluída':'Marcar aula como concluída · +0 pts (libera avanço)'}
+          </button>
+        </div>
+      </div>
+      <div class="lib-side">
+        <div class="lib-search"><input type="text" placeholder="Pesquisar aula..." value="${libState.filtro||''}" oninput="libState.filtro=this.value;renderBiblioteca();"></div>
+        <div class="lib-list">
+          ${visiveis.map(a=>{
+            const done=(u.modTopics||[]).includes(a.aid);
+            const unlocked=aulaDesbloqueadaGlobal(m,a);
+            return `<div class="lib-item ${a.aid===alvo.aid?'active':''} ${done?'done':''} ${!unlocked?'locked':''}"
+              ${unlocked?`onclick="abrirAulaNaBiblioteca('${a.aid}')"`:''}>
+              <span class="lis">${done?'✓':(unlocked?'▶':'🔒')}</span>
+              <span class="litxt">Aula ${a.num} — ${a.nome}<span class="lifer">${a.fer}</span></span>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+function videoFimLib(aid){
+  videoFim(aid);
+  renderBiblioteca();
+}
+function concluirAulaLib(aid){
+  const uid=currentUser.id,u=getU(uid),tops=u.modTopics||[];
+  if(!tops.includes(aid))tops.push(aid);
+  setU(uid,{modTopics:tops});
+  renderBiblioteca();
+}
+
 
 const videoMaxTime={}, videoStart={};
 function videoPlay(aid){ if(!videoStart[aid]) videoStart[aid]=Date.now(); }
@@ -1997,33 +2177,50 @@ function videoFim(aid){
 function buildPratica(b,txt,j){
   const pid=b.id+'_p'+j;
   const st=(getU(currentUser.id).modPrats||{})[pid]||{};
-  return `<div class="prat-row${st.done?' done':''}" id="prow-${pid}">
-    <div class="prat-head">
-      <div class="prat-cb" onclick="togglePratica('${pid}')">✓</div>
-      <span class="prat-txt" onclick="togglePratica('${pid}')"><b style="color:var(--orange);font-size:.66rem;letter-spacing:.3px">TAREFA ${j+1}</b> · ${txt}</span>
-      <span class="task-pts">+${MOD_PTS_PRATICA}</span></div>
-    <div class="dif-row"><span class="dlbl">Nível de dificuldade:</span>
-      ${DIFICULDADES.map(d=>`<button class="dif-btn${st.dif===d?' sel':''}" data-d="${d}" onclick="setDificuldade('${pid}','${d}')">${d}</button>`).join('')}
-    </div></div>`;
+  if(st.done){
+    return `<div class="prat-row2 done">
+      <div class="ptxt"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
+      <div class="dif-row" style="display:flex;padding-left:0">
+        <span class="dlbl">Dificuldade:</span>
+        ${DIFICULDADES.map(d=>`<button class="dif-btn${st.dif===d?' sel':''}" onclick="setDificuldade('${pid}','${d}')">${d}</button>`).join('')}
+      </div>
+      <button class="btn-task done" disabled>✓ Concluída</button>
+    </div>`;
+  }
+  return `<div class="prat-row2" id="prow-${pid}">
+    <div class="ptxt"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
+    <button class="btn-task" onclick="confirmarTarefa('${pid}','${txt.replace(/'/g,"\\'")}')">Marcar como concluída</button>
+  </div>`;
+}
+function confirmarTarefa(pid,txt){
+  if(!confirm('Confirmar conclusão da tarefa?\n\n"'+txt+'"\n\nDepois de confirmada não será possível desmarcar.'))return;
+  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
+  pr[pid]={done:true,em:new Date().toISOString()};
+  setU(uid,{modPrats:pr});
+  refreshTrilha();
+  setTimeout(()=>{
+    const mid=pid.split('_b')[0];
+    document.getElementById('mod-'+mid)?.classList.add('open');
+  },60);
 }
 
 function buildProva(b){
   const u=getU(currentUser.id);
   const pv=(u.modProvas||{})[b.id]||{};
   if(pv.submitted){
-    const pct=Math.round((pv.nota/b.prova.pts)*100);
+    const pct=Math.round((pv.nota10/10)*100);
     return `<div class="quiz-result">
-      <div class="nv">${pv.nota}<span style="font-size:1.1rem;color:var(--muted)">/${b.prova.pts}</span></div>
+      <div class="nota10">${pv.nota10.toFixed(1)}<span style="font-size:1rem;color:var(--muted)">/10</span></div>
       <div style="font-size:.76rem;color:var(--muted);margin-top:4px">corrigido automaticamente · ${pv.acertos}/${pv.total} acertos</div>
       <div class="bar-bg" style="margin-top:10px"><div class="bar-fill" style="width:${pct}%"></div></div>
     </div>`;
   }
   return `<div class="quiz-warn" id="qwarn-${b.id}">
-    <h4>Avaliação cronometrada</h4>
+    <h4>Teste cronometrado</h4>
     <p>Você terá <b>5 minutos por pergunta</b>. O tempo começa a contar assim que a pergunta aparece na tela e não pode ser pausado.<br>
     Se o tempo acabar sem resposta, a questão conta como errada e o sistema avança para a próxima automaticamente.<br>
-    São ${b.prova.perguntas.length} questões no total.</p>
-    <button class="btn-aula" onclick="iniciarQuiz('${b.id}')">Iniciar avaliação</button>
+    São ${b.prova.perguntas.length} questões no total. Nota final de 0 a 10.</p>
+    <button class="btn-aula" onclick="iniciarQuiz('${b.id}')">Iniciar teste</button>
   </div>`;
 }
 
@@ -2080,12 +2277,12 @@ function finalizarQuiz(){
   const f=findBloco(bid); if(!f){activeQuiz=null;return;}
   let acertos=0;
   perguntas.forEach(q=>{ if(respostas[q.id]===q.correta) acertos++; });
-  const nota=Math.round((acertos/perguntas.length)*f.b.prova.pts);
+  const nota10=Math.round((acertos/perguntas.length)*10*10)/10;
   const uid=currentUser.id,u=getU(uid),mp=u.modProvas||{};
   const agora=new Date().toISOString();
-  mp[bid]={submitted:true,nota,acertos,total:perguntas.length,respostas,tempos,
+  mp[bid]={submitted:true,nota10,acertos,total:perguntas.length,respostas,tempos,
     enviadoEm:agora,duracaoSegundos:Math.round((Date.now()-inicioGeral)/1000),corrigidoPor:'Automático'};
-  setU(uid,{modProvas:mp}); setU(uid,{pts:modPoints()});
+  setU(uid,{modProvas:mp});
   activeQuiz=null;
   refreshTrilha();
 }
@@ -2158,46 +2355,38 @@ function buildMateriais(M){
 }
 
 function buildModHero(){
-  const pts=modPoints();
-  const pct=Math.min(100,Math.round((pts/MAX_MOD_PTS)*100));
+  const stats=sdrStats(currentUser);
   const done=MODULOS.filter(m=>modProgress(m).status==='done').length;
-  const R=32,C=2*Math.PI*R,off=C-(pct/100)*C;
   const av=currentUser.photo?`<div class="ch-avatar"><img src="${currentUser.photo}"></div>`
     :`<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
   const h=new Date().getHours(), saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
-  const aulas=(getU(currentUser.id).modTopics||[]).length;
   const totalAulas=MODULOS.reduce((a,m)=>a+m.totalAulas,0);
   let out=`<div class="course-hero"><div class="ch-top">${av}
       <div class="ch-greet"><div class="eyebrow">Formação Pré-Vendas</div>
       <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
       <p>${done} de ${MODULOS.length} módulos concluídos</p></div>
-      <div class="ch-ring"><svg width="74" height="74">
-        <circle cx="37" cy="37" r="${R}" stroke="rgba(255,255,255,.18)" stroke-width="7" fill="none"/>
-        <circle cx="37" cy="37" r="${R}" stroke="#f97316" stroke-width="7" fill="none" stroke-linecap="round"
-          stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/></svg>
-        <div class="rtxt"><b>${pct}%</b><small>concluído</small></div></div></div>
+    </div>
     <div class="ch-stats">
       <div class="ch-stat"><b>${done}/${MODULOS.length}</b><span>módulos</span></div>
-      <div class="ch-stat"><b>${aulas}/${totalAulas}</b><span>aulas</span></div>
-      <div class="ch-stat"><b>${modProvasEnviadas()}/${totalProvas()}</b><span>avaliações</span></div>
-      <div class="ch-stat"><b>${pts}</b><span>pontos</span></div>
+      <div class="ch-stat"><b>${stats.aulas}/${totalAulas}</b><span>aulas</span></div>
+      <div class="ch-stat"><b>${stats.notaMedia!=null?stats.notaMedia.toFixed(1):'-'}/10</b><span>nota média</span></div>
+      <div class="ch-stat"><b>${stats.participacao}</b><span>pts participação</span></div>
     </div></div>`;
   const prox=MODULOS.find(m=>modProgress(m).status!=='done');
   if(prox){
     const p=modProgress(prox);
     out+=`<div class="resume-card"><span class="ric">${p.status==='doing'?'▸':'○'}</span>
       <div class="rtx"><b>${p.status==='doing'?'Continue de onde parou':'Próximo módulo'}</b>
-      <span>Módulo ${prox.num} · ${prox.data} · ${p.dA}/${p.tA} aulas</span></div>
+      <span>Módulo ${prox.num} · ${p.dA}/${p.tA} aulas</span></div>
       <button class="btn-resume" onclick="abrirMod('${prox.id}')">Abrir módulo</button></div>`;
   } else {
     out+=`<div class="cert-banner"><h3>Formação concluída</h3><p>Você completou todos os ${MODULOS.length} módulos da trilha Pré-Vendas.</p></div>`;
   }
   const badges=[
-    {label:'Primeiros passos',earned:pts>=5},{label:'100 pontos',earned:pts>=100},
-    {label:'3 avaliações',earned:modProvasEnviadas()>=3},{label:'300 pontos',earned:pts>=300},
-    {label:'Metade da trilha',earned:pct>=50},{label:'Formação concluída',earned:pct>=90}];
-  out+=`<div class="progress-banner"><div class="pb-top"><strong>Conquistas</strong><span class="pb-pts">${pts} / ${MAX_MOD_PTS} pts</span></div>
-    <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+    {label:'Primeiro passo',earned:stats.participacao>=1},{label:'10 pts de participação',earned:stats.participacao>=10},
+    {label:'3 testes enviados',earned:stats.env>=3},{label:'Nota média 7+',earned:stats.notaMedia!=null&&stats.notaMedia>=7},
+    {label:'Metade da trilha',earned:(done/MODULOS.length)>=0.5},{label:'Formação concluída',earned:done===MODULOS.length}];
+  out+=`<div class="progress-banner"><div class="pb-top"><strong>Conquistas</strong><span class="pb-pts">${stats.participacao} pts de participação</span></div>
     <div class="pb-badges">${badges.map(b=>`<span class="badge${b.earned?' earned':''}">${b.label}</span>`).join('')}</div></div>`;
   return out;
 }
@@ -2374,16 +2563,18 @@ function refreshProgressBanner(){
   [pts>=5,pts>=50,countProvas()>=3,pts>=150,hasVideo(),pts>=MAX_PTS*.9].forEach((v,i)=>badges[i]?.classList.toggle('earned',v));
 }
 function buildLeaderboardHTML(){
-  const rows=NOVOS.map(u=>{const s=sdrStats(u);return {name:u.name,photo:u.photo,color:u.color,pts:s.pts,mods:s.modsOk,env:s.env};}).sort((a,b)=>b.pts-a.pts);
-  const mx=Math.max(...rows.map(r=>r.pts),1);
+  const rows=NOVOS.map(u=>{const s=sdrStats(u);return {name:u.name,photo:u.photo,color:u.color,
+    participacao:s.participacao,nota:s.notaMedia,mods:s.modsOk,env:s.env};})
+    .sort((a,b)=>b.participacao-a.participacao);
+  const mx=Math.max(...rows.map(r=>r.participacao),1);
   let html=`<div class="leaderboard"><div class="lb-header">Ranking da Formação</div>`;
   rows.forEach((r,i)=>{
     const av=r.photo?`<div style="width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${r.photo}" style="width:100%;height:100%;object-fit:cover"></div>`
       :`<div style="width:30px;height:30px;border-radius:50%;background:${r.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem">${r.name[0]}</div>`;
     html+=`<div class="lb-row"><div class="lb-pos ${['pos-1','pos-2','pos-3'][i]||''}">${i+1}</div>${av}
-      <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.mods}/${MODULOS.length} módulos · ${r.env} avaliações</div></div>
-      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.pts/mx)*100)}%"></div></div>
-      <div class="lb-pts">${r.pts} pts</div></div>`;
+      <div class="lb-name">${r.name}<div style="font-size:.68rem;color:var(--muted);font-weight:500">${r.mods}/${MODULOS.length} módulos · nota média ${r.nota!=null?r.nota.toFixed(1):'-'}/10</div></div>
+      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.round((r.participacao/mx)*100)}%"></div></div>
+      <div class="lb-pts">${r.participacao} pts</div></div>`;
   });
   return html+`</div>`;
 }
@@ -2395,7 +2586,7 @@ function refreshLeaderboard(){
 /* ══════ MENTOR ══════ */
 function buildMadrinhaPanels(tabs,main){
   addTab(tabs,main,'acompanhamento','Novos SDRs',()=>`<div class="section-title">Acompanhamento dos novos SDRs</div>`+buildMentorOverview());
-  addTab(tabs,main,'provas-mentor','Avaliações',()=>`<div class="section-title">Avaliações dos Módulos</div>`+buildMentorProvas());
+  addTab(tabs,main,'provas-mentor','Testes',()=>`<div class="section-title">Testes dos Módulos</div>`+buildMentorProvas());
   addTab(tabs,main,'diario-mentor','Diário',()=>`<div class="section-title">Diário da Madrinha — ${currentUser.name}</div>`+buildMentorDiary());
   tabs.querySelectorAll('.ntab')[0].click();
   main.querySelectorAll('.day-header').forEach(h=>{h.onclick=()=>h.closest('.day-card').classList.toggle('open');});
@@ -2426,19 +2617,20 @@ function buildSdrProvaCard(u,corrigir){
       ${avatarHtml(u,52)}
       <div class="sdr-prova-info"><strong>${u.name}</strong><span>${u.turno}</span>
         <div class="sdr-prova-stats">
-          <span class="${s.env===TP?'stat-ok':'stat-pend'}">${s.env}/${TP} enviadas</span>
-          <span class="stat-star">${s.pts} pts</span>
+          <span class="${s.env===TP?'stat-ok':'stat-pend'}">${s.env}/${TP} testes</span>
+          <span class="stat-star">nota ${s.notaMedia!=null?s.notaMedia.toFixed(1):'-'}/10</span>
+          <span class="stat-vid">${s.participacao} pts participação</span>
         </div></div>
       <span class="sdr-prova-arrow">▼</span></div>
     <div class="sdr-prova-days">`;
   MODULOS.forEach(m=>{
     if(!moduloLiberado(m))return;
-    html+=`<div style="font-size:.74rem;font-weight:800;color:var(--navy);margin:14px 0 7px">Módulo ${m.num} · ${m.data}</div>`;
+    html+=`<div style="font-size:.74rem;font-weight:800;color:var(--navy);margin:14px 0 7px">Módulo ${m.num}</div>`;
     m.blocos.forEach(b=>{
       const pv=mp[b.id]; const ok=pv&&pv.submitted;
       const dA=b.aulas.filter((_,j)=>tops.includes(b.id+'_a'+j)).length;
       const dP=b.praticas.filter((_,j)=>(prats[b.id+'_p'+j]||{}).done).length;
-      const stat=!ok?'não enviada':`nota ${pv.nota}/${b.prova.pts} (${pv.acertos}/${pv.total} acertos) · automática`;
+      const stat=!ok?'teste não enviado':`nota ${pv.nota10.toFixed(1)}/10 (${pv.acertos}/${pv.total} acertos)`;
       html+=`<div class="day-card" style="margin-bottom:7px">
         <div class="day-header" onclick="this.closest('.day-card').classList.toggle('open')">
           <div class="dh-left"><div class="module-num ${ok?'done':''}" style="width:30px;height:30px;font-size:.66rem">${ok?'✓':''}</div>
@@ -2464,7 +2656,7 @@ function buildSdrProvaCard(u,corrigir){
             <div class="mpv-text">Resposta: <b style="color:${acertou?'#15803d':'#b91c1c'}">${escolhida!=null?q.opcoes[escolhida]:'(sem resposta — tempo esgotado)'}</b> ${acertou?'✓':'✗ · correta: '+q.opcoes[q.correta]}</div>
           </div>`;});
         html+=`</div>`;
-      } else html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Avaliação ainda não enviada.</div>`;
+      } else html+=`<div style="font-size:.75rem;color:var(--muted);padding:8px 0;font-style:italic">Teste ainda não enviado.</div>`;
       html+=`</div></div>`;
     });
   });
@@ -2486,7 +2678,7 @@ function salvarCorrecao(uid,bid,max){
   alert('Nota lançada. O SDR já consegue ver a nota e o feedback.');
 }
 function buildMentorProvas(){
-  let html=`<p class="section-sub">Respostas de todos os novos SDRs. A correção é automática.</p>`;
+  let html=`<p class="section-sub">Respostas dos testes de todos os novos SDRs. A correção é automática.</p>`;
   NOVOS.forEach(u=>{html+=buildSdrProvaCard(u,false);});
   return html;
 }
