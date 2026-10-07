@@ -637,7 +637,7 @@
   .lib-info h4{font-size:.95rem;font-weight:700;margin-bottom:8px;}
   .lib-warn{font-size:.76rem;color:#fbbf24;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
   .lib-watched{font-size:.76rem;color:#4ade80;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
-  .lib-side{width:320px;background:#111826;border-left:1px solid #232c3d;display:flex;flex-direction:column;flex-shrink:0;}
+  .lib-side{width:340px;background:#111826;border-right:1px solid #232c3d;display:flex;flex-direction:column;flex-shrink:0;order:-1;}
   .lib-search{padding:14px;border-bottom:1px solid #232c3d;}
   .lib-search input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #2d3748;background:#1a2332;color:#fff;font-family:'Montserrat',sans-serif;font-size:.78rem;}
   .lib-search input::placeholder{color:#64748b;}
@@ -653,7 +653,8 @@
   .btn-lib-done{background:var(--orange);color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;}
   .btn-lib-done:disabled{background:#2d3748;color:#64748b;cursor:not-allowed;}
 
-  .lib-cover{width:52px;height:38px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:.6rem;font-weight:800;color:#fff;text-align:center;line-height:1.1;padding:2px;}
+  .lib-cover{width:92px;height:62px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:.68rem;font-weight:800;color:#fff;text-align:center;line-height:1.2;padding:4px;}
+  .lib-cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
   .lib-cover .cv-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);font-size:.85rem;}
   .lib-item.step-tarefas .lib-cover,.lib-item.step-teste .lib-cover{background:#1e293b;}
   .lib-item.step-tarefas .lis,.lib-item.step-teste .lis{display:none;}
@@ -678,7 +679,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.0</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.1</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -898,7 +899,7 @@ const DAYS=[
 const MODULOS=[
 {num:1,data:'06/10',libera:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
  {fer:'Introdução à Plataforma',
-  aulas:['Introdução à Plataforma','Site Decorafit'],
+  aulas:['Introdução à Plataforma','De onde vem o lead'],
   praticas:['Navegue pela plataforma e identifique as principais áreas','Acesse o site da Decorafit e localize as informações institucionais'],
   prova:{pts:27,perguntas:[
    {id:'p1a1',txt:'Qual é a principal finalidade da plataforma de treinamento para o novo SDR?',
@@ -1143,8 +1144,9 @@ const DIFICULDADES=['Fácil','Médio','Difícil'];
 /* Vídeo por aula. Chave = <idBloco>_a<indice>. */
 const AULA_VIDEOS={
   'm1_b0_a0':'aula1-introducao-plataforma.mp4',
-  'm1_b0_a1':'aula2-site-decorafit.mp4',
-  'm1_b1_a0':'pipedrive-intro.mp4'
+  'm1_b0_a1':'aula-de-onde-vem-o-lead.mp4',
+  'm1_b1_a0':'pipedrive-intro.mp4',
+  'm1_b1_a1':'aula-etapas-do-funil.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
@@ -2102,12 +2104,25 @@ const PALETA_TEMAS={
   'Simulador de Estimativa':'#a16207','Metas':'#9333ea','WhatsApp':'#15803d'
 };
 function corTema(fer){ return PALETA_TEMAS[fer] || '#334155'; }
-function gerarCapa(fer,pequena){
+function gerarCapa(fer,src){
   const cor=corTema(fer);
-  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)">
-    <span style="position:relative;z-index:1">${fer}</span>
+  const onEnter = src ? `onmouseenter="iniciarPreview(this,'${src}')"` : '';
+  const onLeave = src ? `onmouseleave="pararPreview(this)"` : '';
+  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)" ${onEnter} ${onLeave}>
+    <span class="cv-label" style="position:relative;z-index:1">${fer}</span>
     <span class="cv-play">▶</span>
   </div>`;
+}
+function iniciarPreview(el,src){
+  if(el.querySelector('video'))return;
+  const v=document.createElement('video');
+  v.src=src; v.muted=true; v.autoplay=true; v.loop=true; v.playsInline=true;
+  el.insertBefore(v, el.firstChild);
+  v.play().catch(()=>{});
+}
+function pararPreview(el){
+  const v=el.querySelector('video');
+  if(v){v.pause();v.remove();}
 }
 
 function todasEtapasDoModulo(m){
@@ -2206,7 +2221,7 @@ function renderBiblioteca(){
     const visivelBusca=!filtro || et.fer.toLowerCase().includes(filtro) || (et.nome||'').toLowerCase().includes(filtro) || (et.type!=='aula'&&et.type.includes(filtro));
     if(!visivelBusca) return;
     const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
-    const cover = et.type==='aula' ? gerarCapa(et.fer) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
+    const cover = et.type==='aula' ? gerarCapa(et.fer, AULA_VIDEOS[et.aid]||'') : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
     sideHtml+=`<div class="lib-item ${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
       ${cover}
