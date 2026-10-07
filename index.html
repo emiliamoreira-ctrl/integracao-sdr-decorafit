@@ -721,7 +721,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.3</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.4</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1260,7 +1260,7 @@ const MENTORS=USERS.filter(u=>u.role==='mentor'&&!isTeste(u));
 /* ══ STATE ══ */
 let currentUser=null,state={};
 let activeQuiz=null;
-let realAdmin=null;
+let perfilReal=null;
 function loadState(){try{state=JSON.parse(localStorage.getItem('sdrInt26')||'{}');}catch{state={};}}
 function saveState(){try{localStorage.setItem('sdrInt26',JSON.stringify(state));}catch{}}
 function getU(uid){return(state[uid]||{});}
@@ -1445,7 +1445,7 @@ function showLoginForm(){
 }
 
 function loginSuccess(){
-  if(currentUser.role==='admin') realAdmin=currentUser;
+  if(currentUser.role==='admin'||currentUser.role==='mentor') perfilReal=currentUser;
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.cssText='display:flex;flex-direction:column;min-height:100vh;';
   atualizarHeaderPerfil();
@@ -1464,14 +1464,22 @@ function atualizarHeaderPerfil(){
 
 function buildViewSwitch(){
   const vs=document.getElementById('view-switch');
-  if(!realAdmin){vs.style.display='none';return;}
+  if(!perfilReal){vs.style.display='none';return;}
   vs.style.display='flex';
-  const views=[{k:'gestao',l:'Gestão',id:'emilia'},{k:'sdr',l:'Visão SDR',id:'teste_sdr'},{k:'madrinha',l:'Visão Madrinha',id:'teste_madrinha'}];
+  let views;
+  if(perfilReal.role==='admin'){
+    views=[{k:'real',l:'Admin',id:perfilReal.id},
+           {k:'sdr',l:'Visão SDR',id:'teste_sdr'},
+           {k:'madrinha',l:'Visão Madrinha',id:'teste_madrinha'}];
+  } else if(perfilReal.role==='mentor'){
+    views=[{k:'real',l:'Madrinha',id:perfilReal.id},
+           {k:'sdr',l:'Visão SDR',id:'teste_sdr'}];
+  } else { vs.style.display='none'; return; }
   vs.innerHTML=views.map(v=>`<button class="view-btn${currentUser.id===v.id?' active':''}" onclick="switchView('${v.k}')">${v.l}</button>`).join('');
 }
 
 function switchView(mode){
-  if(mode==='gestao') currentUser=realAdmin;
+  if(mode==='real') currentUser=perfilReal;
   else if(mode==='sdr') currentUser=USERS.find(u=>u.id==='teste_sdr');
   else if(mode==='madrinha') currentUser=USERS.find(u=>u.id==='teste_madrinha');
   atualizarHeaderPerfil();
@@ -1480,7 +1488,7 @@ function switchView(mode){
 }
 
 function logout(){
-  currentUser=null; realAdmin=null;
+  currentUser=null; perfilReal=null;
   document.getElementById('view-switch').style.display='none';
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('app').style.display='none';
@@ -1677,8 +1685,8 @@ function buildAdmDuvidas(){
 
 /* ══════ NOVO SDR ══════ */
 function buildNovoPanels(tabs,main){
-  addTab(tabs,main,'cronograma','Cronograma',()=>`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
-  addTab(tabs,main,'modulos','Módulos',()=>buildModHero()+buildModulosHTML());
+  addTab(tabs,main,'cronograma','Início',()=>buildModHero()+`<div class="section-title">Agenda da Integração</div>`+buildDaysHTML());
+  addTab(tabs,main,'modulos','Módulos',()=>buildModulosHTML());
   addTab(tabs,main,'proc','Aval. Processos',buildProcPanel);
   addTab(tabs,main,'progresso','Desempenho',()=>`<div class="section-title">Meu Desempenho</div>`+buildLeaderboardHTML());
   tabs.querySelectorAll('.ntab')[0].click();
