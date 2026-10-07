@@ -652,6 +652,12 @@
   .lib-item .lifer{font-size:.63rem;color:#94a3b8;display:block;}
   .btn-lib-done{background:var(--orange);color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;}
   .btn-lib-done:disabled{background:#2d3748;color:#64748b;cursor:not-allowed;}
+
+  .lib-cover{width:52px;height:38px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:.6rem;font-weight:800;color:#fff;text-align:center;line-height:1.1;padding:2px;}
+  .lib-cover .cv-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);font-size:.85rem;}
+  .lib-item.step-tarefas .lib-cover,.lib-item.step-teste .lib-cover{background:#1e293b;}
+  .lib-item.step-tarefas .lis,.lib-item.step-teste .lis{display:none;}
+  .lib-step-label{font-size:.68rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:10px 12px 4px;}
 </style>
 </head>
 <body>
@@ -666,10 +672,13 @@
       <div class="login-section-label">Acesso ao Sistema</div>
       <input type="text" id="login-email" class="login-input" placeholder="Seu e-mail de acesso" autocomplete="username">
       <input type="password" id="login-password" class="login-input" placeholder="Senha" autocomplete="current-password">
+      <label style="display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--muted);margin:8px 2px 0;cursor:pointer">
+        <input type="checkbox" id="login-remember" style="width:15px;height:15px;cursor:pointer"> Lembrar meu acesso neste dispositivo
+      </label>
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v6.2</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.0</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1318,7 +1327,22 @@ function doLogin(){
   if(pwds[key]!==pw){err.textContent='Senha incorreta.';return;}
   const full=USERS.find(u=>u.id===au.userId);
   if(!full){err.textContent='Erro ao carregar usuário.';return;}
+  const lembrar=document.getElementById('login-remember');
+  if(lembrar&&lembrar.checked){
+    try{localStorage.setItem('sdrRemember',JSON.stringify({email,pw}));}catch(e){}
+  } else {
+    try{localStorage.removeItem('sdrRemember');}catch(e){}
+  }
   currentUser=full;loginSuccess();
+}
+function carregarAcessoLembrado(){
+  try{
+    const r=JSON.parse(localStorage.getItem('sdrRemember')||'null');
+    if(r&&r.email){
+      const e=document.getElementById('login-email'), p=document.getElementById('login-password'), c=document.getElementById('login-remember');
+      if(e)e.value=r.email; if(p)p.value=r.pw; if(c)c.checked=true;
+    }
+  }catch(e){}
 }
 
 function doCreatePw(){
@@ -1392,11 +1416,13 @@ function logout(){
   document.getElementById('login-email').value='';
   document.getElementById('login-password').value='';
   document.getElementById('login-error').textContent='';
+  carregarAcessoLembrado();
 }
 
 // Enter key no login
 // Inicializar auth e eventos imediatamente (script está no final do body)
 initAuth();
+carregarAcessoLembrado();
 document.getElementById('login-password')?.addEventListener('keypress',function(e){if(e.key==='Enter')doLogin();});
 document.getElementById('login-email')?.addEventListener('keypress',function(e){if(e.key==='Enter')document.getElementById('login-password')?.focus();});
 
@@ -1830,7 +1856,7 @@ function toggleBloco(bid,mid){
 
 function toggleCx(id){document.getElementById(id)?.classList.toggle('open');}
 function bindModEvents(root){
-  root.querySelectorAll('.day-header').forEach(h=>{const c=h.closest('.day-card');if(!c.classList.contains('mod-locked'))h.onclick=()=>c.classList.toggle('open');});
+  // módulos agora abrem a biblioteca direto via onclick no próprio card — nada a vincular aqui
 }
 function restoreModStates(){}
 
@@ -1944,18 +1970,15 @@ function buildModulosHTML(){
       const chip={done:'<span class="mod-chip chip-done">Concluído</span>',
                   doing:'<span class="mod-chip chip-doing">Em andamento</span>',
                   todo:'<span class="mod-chip chip-todo">A iniciar</span>'}[p.status];
-      html+=`<div class="day-card" id="mod-${m.id}">
+      html+=`<div class="day-card" id="mod-${m.id}" style="cursor:pointer" onclick="abrirBibliotecaModulo('${m.id}')">
         <div class="day-header"><div class="dh-left">
           <div class="module-num ${p.status==='done'?'done':p.status==='doing'?'doing':''}">${p.status==='done'?'✓':m.num}</div>
           <div style="flex:1">
             <strong>Módulo ${m.num}</strong>${chip}
-            <div class="day-sub" style="margin-top:3px">${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} avaliações</div>
+            <div class="day-sub" style="margin-top:3px">${m.totalAulas} aulas · ${m.blocos.length} ${m.blocos.length>1?'blocos':'bloco'} · ${p.env}/${p.tE} testes</div>
             <div class="mod-progress"><i style="width:${p.pct}%"></i></div>
-          </div></div><span class="day-arrow">▼</span></div>
-        <div class="day-body">
-          ${m.materiais?buildMateriais(m.materiais):''}
-          ${m.blocos.map((b,idx)=>buildBloco(m,b,idx)).join('')}
-        </div></div>`;
+          </div></div><span class="day-arrow">▶</span></div>
+      </div>`;
     });
     html+=`</div>`;
   });
@@ -2056,10 +2079,15 @@ function todasAulasDoModulo(m){
 function abrirBiblioteca(mid,aid){
   const m=MODULOS.find(x=>x.id===mid); if(!m)return;
   if(!moduloLiberado(m)){alert('Este módulo ainda não está liberado.');return;}
-  libState={mid,aid,filtro:''};
+  libState={mid,sel:null};
+  const etapas=todasEtapasDoModulo(m);
+  libState.sel = aid ? etapas.find(e=>e.type==='aula'&&e.aid===aid) : (etapas.find(e=>!etapaConcluida(m,e)) || etapas[0]);
   const el=document.getElementById('video-lib');
   el.classList.add('open');
   renderBiblioteca();
+}
+function abrirBibliotecaModulo(mid){
+  abrirBiblioteca(mid,null);
 }
 function fecharBiblioteca(){
   const el=document.getElementById('video-lib');
@@ -2067,33 +2095,125 @@ function fecharBiblioteca(){
   libState=null;
   refreshTrilha();
 }
-function abrirAulaNaBiblioteca(aid){
-  const m=MODULOS.find(x=>x.id===libState.mid);
-  const todas=todasAulasDoModulo(m);
-  const alvo=todas.find(a=>a.aid===aid);
-  if(!alvo)return;
-  // bloco anterior precisa estar completo e aula anterior assistida
-  const bloco=m.blocos.find(b=>b.id===alvo.bid);
-  if(!aulaDesbloqueadaGlobal(m,alvo)){return;}
-  libState.aid=aid;
+
+const PALETA_TEMAS={
+  'Introdução à Plataforma':'#1e3a5f','Google Agenda':'#0f766e','Slack':'#7c3aed',
+  'Pipedrive':'#c2410c','Chatwoot':'#be123c','VoIP':'#0369a1','Rotinas':'#4d7c0f',
+  'Simulador de Estimativa':'#a16207','Metas':'#9333ea','WhatsApp':'#15803d'
+};
+function corTema(fer){ return PALETA_TEMAS[fer] || '#334155'; }
+function gerarCapa(fer,pequena){
+  const cor=corTema(fer);
+  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)">
+    <span style="position:relative;z-index:1">${fer}</span>
+    <span class="cv-play">▶</span>
+  </div>`;
+}
+
+function todasEtapasDoModulo(m){
+  const lista=[];
+  m.blocos.forEach(b=>{
+    b.aulas.forEach((t,j)=>{ lista.push({type:'aula',bid:b.id,fer:b.fer,idx:j,nome:t,aid:b.id+'_a'+j,num:b.ini+j+1}); });
+    if(b.praticas.length) lista.push({type:'tarefas',bid:b.id,fer:b.fer});
+    lista.push({type:'teste',bid:b.id,fer:b.fer});
+  });
+  return lista;
+}
+function etapaConcluida(m,et){
+  const u=getU(currentUser.id);
+  if(et.type==='aula') return (u.modTopics||[]).includes(et.aid);
+  const b=m.blocos.find(x=>x.id===et.bid);
+  if(et.type==='tarefas') return b.praticas.every((_,j)=>((u.modPrats||{})[b.id+'_p'+j]||{}).done);
+  if(et.type==='teste') return !!((u.modProvas||{})[b.id]||{}).submitted;
+}
+function etapaDesbloqueada(m,et){
+  const b=m.blocos.find(x=>x.id===et.bid);
+  const bi=m.blocos.findIndex(x=>x.id===et.bid);
+  if(bi>0 && !blocoCompleto(m.blocos[bi-1])) return false;
+  if(et.type==='aula') return aulaDesbloqueada(b,et.idx);
+  const dA=blocoProg(b).dA, tA=blocoProg(b).tA;
+  if(et.type==='tarefas') return dA===tA;
+  if(et.type==='teste'){
+    const dP=blocoProg(b).dP, tP=blocoProg(b).tP;
+    return dA===tA && dP===tP;
+  }
+}
+function chaveEtapa(et){ return et.type==='aula'? et.aid : (et.type+'_'+et.bid); }
+
+function selecionarEtapa(m,chave){
+  const etapas=todasEtapasDoModulo(m);
+  const alvo=etapas.find(e=>chaveEtapa(e)===chave);
+  if(!alvo || !etapaDesbloqueada(m,alvo)) return;
+  libState.sel=alvo;
   renderBiblioteca();
 }
-function aulaDesbloqueadaGlobal(m,alvo){
-  // dentro do mesmo bloco: sequencial. bloco só acessível se bloco anterior completo.
-  const bi=m.blocos.findIndex(b=>b.id===alvo.bid);
-  if(bi>0){ const ant=m.blocos[bi-1]; if(!blocoCompleto(ant))return false; }
-  return aulaDesbloqueada(m.blocos[bi],alvo.idx);
-}
+
 function renderBiblioteca(){
   const m=MODULOS.find(x=>x.id===libState.mid);
   const u=getU(currentUser.id);
-  const todas=todasAulasDoModulo(m);
-  const alvo=todas.find(a=>a.aid===libState.aid)||todas[0];
-  const src=AULA_VIDEOS[alvo.aid]||'';
-  const vmeta=(u.aulaVideo||{})[alvo.aid];
-  const watched=!!vmeta||!src;
+  const etapas=todasEtapasDoModulo(m);
+  const alvo=libState.sel || etapas[0];
   const filtro=(libState.filtro||'').toLowerCase();
-  const visiveis=todas.filter(a=>!filtro||a.nome.toLowerCase().includes(filtro)||a.fer.toLowerCase().includes(filtro));
+
+  // ═══ Painel principal (depende do tipo de etapa) ═══
+  let mainHtml='';
+  if(alvo.type==='aula'){
+    const src=AULA_VIDEOS[alvo.aid]||'';
+    const vmeta=(u.aulaVideo||{})[alvo.aid];
+    const watched=!!vmeta||!src;
+    mainHtml=`<div class="lib-video-wrap">
+        ${src?`<video id="libvideo" controls playsinline preload="metadata"
+              onplay="videoPlay('${alvo.aid}')"
+              onseeking="videoSeeking('${alvo.aid}',this)"
+              onratechange="this.playbackRate=1"
+              onended="videoFimLib('${alvo.aid}')"
+              ontimeupdate="videoProg('${alvo.aid}',this)"><source src="${src}" type="video/mp4"></video>`
+            :`<div style="padding:60px 20px;text-align:center;color:#94a3b8;font-size:.85rem">Vídeo em produção — será disponibilizado em breve.</div>`}
+      </div>
+      <div class="lib-info">
+        <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
+        ${watched
+          ? `<div class="lib-watched">Você já assistiu este vídeo. Pode navegar livremente e ajustar a velocidade.</div>`
+          : `<div class="lib-warn">Primeira vez assistindo: só é possível voltar o vídeo, nunca adiantar ou acelerar.</div>`}
+        <button class="btn-lib-done" id="libdonebtn" ${watched?'':'disabled'} onclick="concluirAulaLib('${alvo.aid}')">
+          ${(u.modTopics||[]).includes(alvo.aid)?'✓ Aula concluída':'Marcar aula como concluída'}
+        </button>
+      </div>`;
+  } else if(alvo.type==='tarefas'){
+    const b=m.blocos.find(x=>x.id===alvo.bid);
+    mainHtml=`<div class="lib-info" style="margin:0 auto;max-width:700px">
+      <h4>Tarefas de ${b.fer}</h4>
+      <p style="color:#94a3b8;font-size:.78rem;margin-bottom:14px">Faça cada tarefa no sistema. Ao concluir, marque e avalie o nível de dificuldade.</p>
+      <div id="lib-tarefas-box">${b.praticas.map((t,j)=>buildPraticaLib(b,t,j)).join('')}</div>
+    </div>`;
+  } else if(alvo.type==='teste'){
+    const b=m.blocos.find(x=>x.id===alvo.bid);
+    mainHtml=`<div class="lib-info" style="margin:0 auto;max-width:700px">
+      <h4>Teste de ${b.fer}</h4>
+      <div id="lib-teste-box">${buildProva(b)}</div>
+    </div>`;
+  }
+
+  // ═══ Lista lateral ═══
+  let sideHtml='';
+  let temaAtual=null;
+  etapas.forEach(et=>{
+    if(et.fer!==temaAtual){ temaAtual=et.fer; sideHtml+=`<div class="lib-step-label">${et.fer}</div>`; }
+    const chave=chaveEtapa(et);
+    const done=etapaConcluida(m,et);
+    const unlocked=etapaDesbloqueada(m,et);
+    const ativo=chave===chaveEtapa(alvo);
+    const visivelBusca=!filtro || et.fer.toLowerCase().includes(filtro) || (et.nome||'').toLowerCase().includes(filtro) || (et.type!=='aula'&&et.type.includes(filtro));
+    if(!visivelBusca) return;
+    const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
+    const cover = et.type==='aula' ? gerarCapa(et.fer) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
+    sideHtml+=`<div class="lib-item ${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
+      ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
+      ${cover}
+      <span class="lis">${done?'✓':'▶'}</span>
+      <span class="litxt">${label}</span>
+    </div>`;
+  });
 
   const el=document.getElementById('video-lib');
   el.innerHTML=`
@@ -2102,42 +2222,46 @@ function renderBiblioteca(){
       <span class="lib-title">Módulo ${m.num} — ${alvo.fer}</span>
     </div>
     <div class="lib-body">
-      <div class="lib-main">
-        <div class="lib-video-wrap">
-          ${src?`<video id="libvideo" controls playsinline preload="metadata"
-                onplay="videoPlay('${alvo.aid}')"
-                onseeking="videoSeeking('${alvo.aid}',this)"
-                onratechange="this.playbackRate=1"
-                onended="videoFimLib('${alvo.aid}')"
-                ontimeupdate="videoProg('${alvo.aid}',this)"><source src="${src}" type="video/mp4"></video>`
-              :`<div style="padding:60px 20px;text-align:center;color:#94a3b8;font-size:.85rem">Vídeo em produção — será disponibilizado em breve.</div>`}
-        </div>
-        <div class="lib-info">
-          <h4>Aula ${alvo.num} — ${alvo.nome}</h4>
-          ${watched
-            ? `<div class="lib-watched">Você já assistiu este vídeo. Pode navegar livremente e ajustar a velocidade.</div>`
-            : `<div class="lib-warn">Primeira vez assistindo: só é possível voltar o vídeo, nunca adiantar ou acelerar.</div>`}
-          <button class="btn-lib-done" id="libdonebtn" ${watched?'':'disabled'} onclick="concluirAulaLib('${alvo.aid}')">
-            ${(u.modTopics||[]).includes(alvo.aid)?'✓ Aula concluída':'Marcar aula como concluída · +0 pts (libera avanço)'}
-          </button>
-        </div>
-      </div>
+      <div class="lib-main">${mainHtml}</div>
       <div class="lib-side">
         <div class="lib-search"><input type="text" placeholder="Pesquisar aula..." value="${libState.filtro||''}" oninput="libState.filtro=this.value;renderBiblioteca();"></div>
-        <div class="lib-list">
-          ${visiveis.map(a=>{
-            const done=(u.modTopics||[]).includes(a.aid);
-            const unlocked=aulaDesbloqueadaGlobal(m,a);
-            return `<div class="lib-item ${a.aid===alvo.aid?'active':''} ${done?'done':''} ${!unlocked?'locked':''}"
-              ${unlocked?`onclick="abrirAulaNaBiblioteca('${a.aid}')"`:''}>
-              <span class="lis">${done?'✓':(unlocked?'▶':'🔒')}</span>
-              <span class="litxt">Aula ${a.num} — ${a.nome}<span class="lifer">${a.fer}</span></span>
-            </div>`;
-          }).join('')}
-        </div>
+        <div class="lib-list">${sideHtml}</div>
       </div>
     </div>`;
 }
+
+function buildPraticaLib(b,txt,j){
+  const pid=b.id+'_p'+j;
+  const st=(getU(currentUser.id).modPrats||{})[pid]||{};
+  if(st.done){
+    return `<div class="prat-row2 done" style="background:#1a2332;border-color:#2f6b45">
+      <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
+      <div class="dif-row" style="display:flex;padding-left:0">
+        <span class="dlbl" style="color:#94a3b8">Dificuldade:</span>
+        ${DIFICULDADES.map(d=>`<button class="dif-btn${st.dif===d?' sel':''}" onclick="setDificuldadeLib('${pid}','${d}')">${d}</button>`).join('')}
+      </div>
+      <button class="btn-task done" disabled>✓ Concluída</button>
+    </div>`;
+  }
+  return `<div class="prat-row2" id="prow-${pid}" style="background:#1a2332;border-color:#2d3748">
+    <div class="ptxt" style="color:#e2e8f0"><b style="color:var(--orange);font-size:.66rem">TAREFA ${j+1}</b> · ${txt}</div>
+    <button class="btn-task" onclick="confirmarTarefaLib('${pid}','${txt.replace(/'/g,"\\\\'")}')">Marcar como concluída</button>
+  </div>`;
+}
+function confirmarTarefaLib(pid,txt){
+  if(!confirm('Confirmar conclusão da tarefa?\\n\\n"'+txt+'"\\n\\nDepois de confirmada não será possível desmarcar.'))return;
+  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
+  pr[pid]={done:true,em:new Date().toISOString()};
+  setU(uid,{modPrats:pr});
+  renderBiblioteca();
+}
+function setDificuldadeLib(pid,d){
+  const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
+  if(!pr[pid])pr[pid]={done:true};
+  pr[pid].dif=d; setU(uid,{modPrats:pr});
+  renderBiblioteca();
+}
+
 function videoFimLib(aid){
   videoFim(aid);
   renderBiblioteca();
@@ -2288,7 +2412,7 @@ function finalizarQuiz(){
     enviadoEm:agora,duracaoSegundos:Math.round((Date.now()-inicioGeral)/1000),corrigidoPor:'Automático'};
   setU(uid,{modProvas:mp});
   activeQuiz=null;
-  refreshTrilha();
+  if(typeof libState!=='undefined' && libState){ renderBiblioteca(); } else { refreshTrilha(); }
 }
 
 
@@ -2395,8 +2519,7 @@ function buildModHero(){
   return out;
 }
 function abrirMod(id){
-  const c=document.getElementById('mod-'+id);
-  if(c){c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
+  abrirBibliotecaModulo(id);
 }
 
 function buildDaysHTML(){
