@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.4</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.5</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1899,15 +1899,13 @@ function buildProgressBanner(){
     ? `<div class="ch-avatar"><img src="${currentUser.photo}"></div>`
     : `<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
 
-  const hora=new Date().getHours();
-  const saud=hora<12?'Bom dia':hora<18?'Boa tarde':'Boa noite';
 
   let html=`<div class="course-hero">
     <div class="ch-top">
       ${av}
       <div class="ch-greet">
         <div class="eyebrow">Trilha de Integração</div>
-        <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
+        <h2>Olá, SDR!</h2>
         <p>Plataforma de Treinamento Pré-Vendas · Decorafit</p>
       </div>
       ${ring}
@@ -2814,11 +2812,10 @@ function buildModHero(){
   const done=MODULOS.filter(m=>modProgress(m).status==='done').length;
   const av=currentUser.photo?`<div class="ch-avatar"><img src="${currentUser.photo}"></div>`
     :`<div class="ch-avatar" style="background:${currentUser.color}">${currentUser.name[0]}</div>`;
-  const h=new Date().getHours(), saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
   const totalAulas=MODULOS.reduce((a,m)=>a+m.totalAulas,0);
   let out=`<div class="course-hero"><div class="ch-top">${av}
       <div class="ch-greet"><div class="eyebrow">Formação Pré-Vendas</div>
-      <h2>${saud}, ${currentUser.name.split(' ')[0]}!</h2>
+      <h2>Olá, SDR!</h2>
       <p>${done} de ${MODULOS.length} módulos concluídos</p></div>
     </div>
     <div class="ch-stats">
