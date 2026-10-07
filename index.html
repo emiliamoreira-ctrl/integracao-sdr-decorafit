@@ -637,7 +637,7 @@
   .lib-info h4{font-size:.95rem;font-weight:700;margin-bottom:8px;}
   .lib-warn{font-size:.76rem;color:#fbbf24;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
   .lib-watched{font-size:.76rem;color:#4ade80;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
-  .lib-side{width:340px;background:#111826;border-right:1px solid #232c3d;display:flex;flex-direction:column;flex-shrink:0;order:-1;}
+  .lib-side{width:390px;background:#111826;border-right:1px solid #232c3d;display:flex;flex-direction:column;flex-shrink:0;order:-1;}
   .lib-search{padding:14px;border-bottom:1px solid #232c3d;}
   .lib-search input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #2d3748;background:#1a2332;color:#fff;font-family:'Montserrat',sans-serif;font-size:.78rem;}
   .lib-search input::placeholder{color:#64748b;}
@@ -653,12 +653,21 @@
   .btn-lib-done{background:var(--orange);color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;}
   .btn-lib-done:disabled{background:#2d3748;color:#64748b;cursor:not-allowed;}
 
-  .lib-cover{width:92px;height:62px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:.68rem;font-weight:800;color:#fff;text-align:center;line-height:1.2;padding:4px;}
+  .lib-cover{width:124px;height:72px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:.68rem;font-weight:800;color:#fff;text-align:center;line-height:1.2;padding:4px;}
   .lib-cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
   .lib-cover .cv-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);font-size:.85rem;}
   .lib-item.step-tarefas .lib-cover,.lib-item.step-teste .lib-cover{background:#1e293b;}
   .lib-item.step-tarefas .lis,.lib-item.step-teste .lis{display:none;}
   .lib-step-label{font-size:.68rem;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:10px 12px 4px;}
+
+  .lib-cover video.cv-prev{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s;z-index:2;}
+  .lib-item:hover .lib-cover video.cv-prev{opacity:1;}
+  .lib-item:hover .lib-cover .cv-play{opacity:0;}
+  .lib-cover .cv-play{transition:opacity .2s;}
+  .lib-item{align-items:flex-start;gap:12px;padding:11px 12px;}
+  .lib-item .litxt{font-size:.8rem;padding-top:5px;}
+  .lib-item .lifer{font-size:.68rem;margin-top:3px;}
+  .lib-item .lis{margin-top:7px;}
 </style>
 </head>
 <body>
@@ -1147,6 +1156,13 @@ const AULA_VIDEOS={
   'm1_b0_a1':'aula-de-onde-vem-o-lead.mp4',
   'm1_b1_a0':'pipedrive-intro.mp4',
   'm1_b1_a1':'aula-etapas-do-funil.mp4'
+};
+/* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
+const AULA_PREVIEWS={
+  'm1_b0_a0':'prev-m1b0a0.mp4',
+  'm1_b0_a1':'prev-m1b0a1.mp4',
+  'm1_b1_a0':'prev-m1b1a0.mp4',
+  'm1_b1_a1':'prev-m1b1a1.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
@@ -2104,26 +2120,18 @@ const PALETA_TEMAS={
   'Simulador de Estimativa':'#a16207','Metas':'#9333ea','WhatsApp':'#15803d'
 };
 function corTema(fer){ return PALETA_TEMAS[fer] || '#334155'; }
-function gerarCapa(fer,src){
+function gerarCapa(fer,aid){
   const cor=corTema(fer);
-  const onEnter = src ? `onmouseenter="iniciarPreview(this,'${src}')"` : '';
-  const onLeave = src ? `onmouseleave="pararPreview(this)"` : '';
-  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)" ${onEnter} ${onLeave}>
+  const prev=aid?AULA_PREVIEWS[aid]:null;
+  return `<div class="lib-cover" style="background:linear-gradient(135deg,${cor},${cor}cc)"
+      ${prev?`onmouseenter="const v=this.querySelector('video.cv-prev');if(v){v.currentTime=0;const p=v.play();if(p)p.catch(function(){});}" onmouseleave="const v=this.querySelector('video.cv-prev');if(v){v.pause();v.currentTime=0;}"`:''}>
     <span class="cv-label" style="position:relative;z-index:1">${fer}</span>
     <span class="cv-play">▶</span>
+    ${prev?`<video class="cv-prev" muted loop playsinline preload="none"><source src="${prev}" type="video/mp4"></video>`:''}
   </div>`;
 }
-function iniciarPreview(el,src){
-  if(el.querySelector('video'))return;
-  const v=document.createElement('video');
-  v.src=src; v.muted=true; v.autoplay=true; v.loop=true; v.playsInline=true;
-  el.insertBefore(v, el.firstChild);
-  v.play().catch(()=>{});
-}
-function pararPreview(el){
-  const v=el.querySelector('video');
-  if(v){v.pause();v.remove();}
-}
+
+
 
 function todasEtapasDoModulo(m){
   const lista=[];
@@ -2221,7 +2229,7 @@ function renderBiblioteca(){
     const visivelBusca=!filtro || et.fer.toLowerCase().includes(filtro) || (et.nome||'').toLowerCase().includes(filtro) || (et.type!=='aula'&&et.type.includes(filtro));
     if(!visivelBusca) return;
     const label = et.type==='aula' ? `Aula ${et.num} — ${et.nome}` : (et.type==='tarefas'?'Tarefas':'Teste');
-    const cover = et.type==='aula' ? gerarCapa(et.fer, AULA_VIDEOS[et.aid]||'') : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
+    const cover = et.type==='aula' ? gerarCapa(et.fer, et.aid) : `<div class="lib-cover" style="background:${corTema(et.fer)}"><span style="font-size:1.1rem">${et.type==='tarefas'?'📋':'📝'}</span></div>`;
     sideHtml+=`<div class="lib-item ${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
       ${cover}
