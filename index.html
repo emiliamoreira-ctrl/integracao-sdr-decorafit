@@ -1219,6 +1219,9 @@ function initAuth(){
     const ADM_EMAIL='Decorafit';
     // Garantir que a gestora sempre tem acesso, mesmo com dados antigos salvos
     if(!pwds[ADM_EMAIL.toLowerCase()])pwds[ADM_EMAIL.toLowerCase()]='2218';
+    // Login principal da Emília (e-mail + senha próprios)
+    const EMILIA_EMAIL='emilia.moreira@decorafit.com.br';
+    pwds[EMILIA_EMAIL]='Emi@221807';
     localStorage.setItem('sdrPwd_v1',JSON.stringify(pwds));
     let em=users.find(u=>u.userId==='emilia');
     if(!em){em={userId:'emilia',name:'Emília',role:'admin',email:ADM_EMAIL,approved:true};users.push(em);}
