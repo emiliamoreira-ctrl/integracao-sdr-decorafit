@@ -719,6 +719,10 @@
   }
   .hlogo .ltxt b{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.3px;}
   .hlogo .ltxt small{font-size:.6rem;letter-spacing:1.1px;font-weight:700;color:rgba(255,255,255,.55);}
+
+  video.sem-seek::-webkit-media-controls-timeline{display:none!important;}
+  video.sem-seek::-webkit-media-controls-seek-back-button,
+  video.sem-seek::-webkit-media-controls-seek-forward-button{display:none!important;}
 </style>
 </head>
 <body>
@@ -739,7 +743,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.6</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.7</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1286,7 +1290,7 @@ function setU(uid,data){state[uid]={...getU(uid),...data};saveState();}
 /* Reset de progresso — roda uma vez por navegador ao subir esta versão */
 (function resetProgressoV73(){
   try{
-    const MARCA='sdrResetV73';
+    const MARCA='sdrResetV77';
     if(localStorage.getItem(MARCA)) return;
     const raw=localStorage.getItem('sdrInt26');
     if(raw){
@@ -1294,7 +1298,7 @@ function setU(uid,data){state[uid]={...getU(uid),...data};saveState();}
       Object.keys(dados).forEach(uid=>{
         const d=dados[uid]||{};
         delete d.modTopics; delete d.modPrats; delete d.modProvas;
-        delete d.aulaVideo; delete d.tarefaInicio; delete d.procAval;
+        delete d.aulaVideo; delete d.videoMax; delete d.tarefaInicio; delete d.procAval;
         delete d.pts; delete d.evals;
         dados[uid]=d;
       });
@@ -1925,15 +1929,8 @@ function toggleAulaOpen(aid){
   el.parentNode?.querySelectorAll('.aula.open').forEach(a=>{if(a!==el)a.classList.remove('open');});
   el.classList.toggle('open',abrindo);
 }
-function videoProg(aid,v){ if(v.duration&&v.currentTime/v.duration>=0.95) videoFim(aid); }
-function videoFim(aid){
-  const u=getU(currentUser.id), av=u.aulaVideo||{};
-  if(av[aid])return;
-  av[aid]=true; setU(currentUser.id,{aulaVideo:av});
-  const b=document.getElementById('btn-'+aid); if(b)b.disabled=false;
-  const h=document.getElementById('hint-'+aid);
-  if(h){h.textContent='Vídeo assistido';h.classList.add('ok');}
-}
+
+
 function togglePratica(pid){
   const uid=currentUser.id,u=getU(uid),pr=u.modPrats||{};
   if(!pr[pid])pr[pid]={};
@@ -2281,10 +2278,12 @@ function renderBiblioteca(){
     const vmeta=(u.aulaVideo||{})[alvo.aid];
     const watched=!!vmeta||!src;
     mainHtml=`<div class="lib-video-wrap">
-        ${src?`<video id="libvideo" controls playsinline preload="metadata"
+        ${src?`<video id="libvideo" ${watched?'controls':'controls controlsList="nodownload noplaybackrate" disablePictureInPicture'} playsinline preload="metadata"
+              class="${watched?'':'sem-seek'}"
               onplay="videoPlay('${alvo.aid}')"
               onseeking="videoSeeking('${alvo.aid}',this)"
-              onratechange="this.playbackRate=1"
+              onseeked="videoSeeking('${alvo.aid}',this)"
+              onratechange="if(this.playbackRate>1)this.playbackRate=1"
               onended="videoFimLib('${alvo.aid}')"
               ontimeupdate="videoProg('${alvo.aid}',this)"><source src="${src}" type="video/mp4"></video>`
             :`<div style="padding:60px 20px;text-align:center;color:#94a3b8;font-size:.85rem">Vídeo em produção — será disponibilizado em breve.</div>`}
@@ -2432,7 +2431,8 @@ function concluirTarefaLib(pid){
 
 
 function videoFimLib(aid){
-  videoFim(aid);
+  const el=document.getElementById('libvideo');
+  videoFim(aid, el?el.duration:null);
   renderBiblioteca();
 }
 function concluirAulaLib(aid){
@@ -2444,30 +2444,51 @@ function concluirAulaLib(aid){
 
 
 const videoMaxTime={}, videoStart={};
-function videoPlay(aid){ if(!videoStart[aid]) videoStart[aid]=Date.now(); }
+function videoPlay(aid){
+  if(!videoStart[aid]) videoStart[aid]=Date.now();
+}
+/* progresso máximo assistido, persistido para não burlar recarregando */
+function getMaxTime(aid){
+  const u=getU(currentUser.id);
+  const mt=(u.videoMax||{})[aid];
+  return typeof mt==='number'?mt:0;
+}
+function setMaxTime(aid,t){
+  const uid=currentUser.id,u=getU(uid),mx=u.videoMax||{};
+  if(t>(mx[aid]||0)){ mx[aid]=t; setU(uid,{videoMax:mx}); }
+}
 function videoSeeking(aid,v){
   const u=getU(currentUser.id);
-  if((u.aulaVideo||{})[aid]) return; // já assistido: libera seek livre
-  if(videoMaxTime[aid]===undefined) videoMaxTime[aid]=0;
-  if(v.currentTime>videoMaxTime[aid]+0.75){ v.currentTime=videoMaxTime[aid]; }
+  if((u.aulaVideo||{})[aid]) return; // já concluído: navegação livre
+  const limite=getMaxTime(aid);
+  if(v.currentTime > limite+0.5){ v.currentTime=limite; }
 }
 function videoProg(aid,v){
   const u=getU(currentUser.id);
-  if(!(u.aulaVideo||{})[aid]){
-    if(v.currentTime>(videoMaxTime[aid]||0)) videoMaxTime[aid]=v.currentTime;
-  }
-  if(v.duration&&v.currentTime/v.duration>=0.97) videoFim(aid);
+  if(v.playbackRate && v.playbackRate>1) v.playbackRate=1;
+  if((u.aulaVideo||{})[aid]) return;
+  if(v.seeking) return;
+  const limite=getMaxTime(aid);
+  const salto=v.currentTime-limite;
+  if(salto>3){ v.currentTime=limite; return; }   // pulo grande: volta
+  if(v.currentTime>limite) setMaxTime(aid, v.currentTime);
+  if(v.duration && v.currentTime >= v.duration-1.0) videoFim(aid, v.duration);
 }
-function videoFim(aid){
+function videoFim(aid, duracao){
   const u=getU(currentUser.id), av=u.aulaVideo||{};
   if(av[aid])return;
-  const dur=videoStart[aid]?Math.round((Date.now()-videoStart[aid])/1000):null;
-  av[aid]={em:new Date().toISOString(),duracaoSegundos:dur};
+  let dur=duracao;
+  if(dur==null){ const el=document.getElementById('libvideo'); dur=el?el.duration:null; }
+  // só conclui se tiver realmente percorrido o vídeo inteiro
+  if(dur && getMaxTime(aid) < dur-2) return;
+  if(!dur) return; // sem duração conhecida, não conclui
+  const tempo=videoStart[aid]?Math.round((Date.now()-videoStart[aid])/1000):null;
+  av[aid]={em:new Date().toISOString(),duracaoSegundos:tempo};
   setU(currentUser.id,{aulaVideo:av});
-  const b=document.getElementById('btn-'+aid); if(b)b.disabled=false;
-  const h=document.getElementById('hint-'+aid);
-  if(h){h.textContent='Vídeo assistido';h.classList.add('ok');}
 }
+
+
+
 
 
 function buildPratica(b,txt,j){
