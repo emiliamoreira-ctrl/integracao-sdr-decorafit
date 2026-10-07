@@ -701,6 +701,24 @@
   .lib-item.compact:hover .lib-cover{transform:none;box-shadow:none;}
   .lib-item.compact .litxt{padding-top:0;font-size:.79rem;}
   .lib-item.compact .lis{margin-top:0;}
+
+  /* ═══ BARRA SUPERIOR TRAVADA (header + abas) ═══ */
+  header{position:sticky;top:0;z-index:200;}
+  .nav-tabs{position:sticky;top:60px;z-index:190;background:#fff;}
+  [data-theme="dark"] .nav-tabs{background:#1b2130;border-bottom-color:var(--line);}
+  [data-theme="dark"] .ntab{color:#aab4c8;}
+  [data-theme="dark"] .ntab.active{background:#2a1f14;color:var(--orange);}
+  /* ═══ LOGO ═══ */
+  .hlogo .lmark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(135deg,#fb923c,#f97316);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;
+    color:#fff;letter-spacing:-.5px;line-height:1;
+    box-shadow:0 2px 8px rgba(249,115,22,.35);
+  }
+  .hlogo .ltxt b{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.3px;}
+  .hlogo .ltxt small{font-size:.6rem;letter-spacing:1.1px;font-weight:700;color:rgba(255,255,255,.55);}
 </style>
 </head>
 <body>
@@ -721,7 +739,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.5</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v7.6</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
