@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.8</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v8.9</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1053,10 +1053,10 @@ const MODULOS=[
    {id:'p2a5',txt:'Como priorizar quando há atividades atrasadas?',
     opcoes:['Ignorar e seguir só com as do dia','Resolver primeiro as mais antigas ou mais urgentes para o cliente','Deixar para o fim do mês','Apagar as atividades atrasadas'],correta:1}]}},
  {fer:'Chatwoot',
-  aulas:['Proprietário','Cliente bot','Cliente WhatsApp','Status da conversa','Mensagens prontas','Envio de template após a janela de 24 horas'],
-  praticas:['Identifique o proprietário de três conversas','Localize uma conversa do bot e outra do WhatsApp','Altere o status de uma conversa de teste','Use uma mensagem pronta numa conversa de teste','Localize os templates e simule o envio após 24h'],
+  aulas:['Agente atribuído','Lead bot e WhatsApp','Status: aberto, pendente e resolvida','Respostas rápidas','Envio de mensagem após 24h'],
+  praticas:['Identifique o agente atribuído de três conversas','Localize uma conversa do bot e outra do WhatsApp','Altere o status de uma conversa de teste','Use uma resposta rápida numa conversa de teste','Localize os templates e simule o envio após 24h'],
   prova:{pts:29,perguntas:[
-   {id:'p2b1',txt:'O que acontece quando uma conversa não tem um proprietário definido?',
+   {id:'p2b1',txt:'O que acontece quando uma conversa não tem um agente atribuído?',
     opcoes:['Ela é fechada automaticamente','Ela fica sem responsável claro, podendo atrasar a resposta','O sistema atribui a todos os SDRs ao mesmo tempo','Ela é apagada em 24h'],correta:1},
    {id:'p2b2',txt:'Qual a principal diferença entre cliente bot e cliente WhatsApp?',
     opcoes:['Não existe diferença real','O bot é um atendimento automático inicial; o WhatsApp é o canal de conversa com a pessoa','Cliente bot é sempre um erro do sistema','Cliente WhatsApp não aparece no Chatwoot'],correta:1},
@@ -1064,7 +1064,7 @@ const MODULOS=[
     opcoes:['Apenas para fins estéticos','Indicam se a conversa está aberta, pendente ou resolvida','Mostram o valor do contrato','Indicam o plano de internet do cliente'],correta:1},
    {id:'p2b4',txt:'O que muda no WhatsApp depois que a janela de 24 horas se fecha?',
     opcoes:['Nada muda','Só é possível reiniciar a conversa usando um template aprovado','A conversa é apagada','O cliente é bloqueado automaticamente'],correta:1},
-   {id:'p2b5',txt:'Quando faz mais sentido usar uma mensagem pronta?',
+   {id:'p2b5',txt:'Quando faz mais sentido usar uma resposta rápida?',
     opcoes:['Em qualquer situação, mesmo complexa','Em respostas padrão e recorrentes, adaptando ao contexto quando necessário','Nunca, deve-se sempre escrever do zero','Somente quando o cliente pede'],correta:1}]}},
  {fer:'Google Agenda',
   aulas:['Criar invite','Disponibilidade de agenda','Adicionar tarefas e pausas','Boas práticas meet'],
@@ -1257,7 +1257,12 @@ const AULA_VIDEOS={
   'm2_b0_a0':'pd-duplicidade.mp4',
   'm2_b0_a1':'pd-anotacoes.mp4',
   'm2_b0_a2':'pd-etapa.mp4',
-  'm2_b0_a3':'pd-atividades.mp4'
+  'm2_b0_a3':'pd-atividades.mp4',
+  'm2_b1_a0':'cw2-agente.mp4',
+  'm2_b1_a1':'cw2-botwpp.mp4',
+  'm2_b1_a2':'cw2-status.mp4',
+  'm2_b1_a3':'cw2-respostas.mp4',
+  'm2_b1_a4':'cw2-24h.mp4'
 };
 /* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
 const AULA_PREVIEWS={
@@ -1272,7 +1277,12 @@ const AULA_PREVIEWS={
   'm2_b0_a0':'prev-pd-duplicidade.mp4',
   'm2_b0_a1':'prev-pd-anotacoes.mp4',
   'm2_b0_a2':'prev-pd-etapa.mp4',
-  'm2_b0_a3':'prev-pd-atividades.mp4'
+  'm2_b0_a3':'prev-pd-atividades.mp4',
+  'm2_b1_a0':'prev-cw2-agente.mp4',
+  'm2_b1_a1':'prev-cw2-botwpp.mp4',
+  'm2_b1_a2':'prev-cw2-status.mp4',
+  'm2_b1_a3':'prev-cw2-respostas.mp4',
+  'm2_b1_a4':'prev-cw2-24h.mp4'
 };
 const SEMANAS=[
  {n:1,label:'Semana 1 · Online · 06 a 09/10'},
