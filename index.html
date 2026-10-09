@@ -761,6 +761,17 @@
   .ed-bloco.aberto .ed-bloco-corpo{display:block;}
   .ed-bloco.aberto{border-color:var(--orange);background:var(--card);}
   .ed-flag{font-size:.64rem;font-weight:700;background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:20px;}
+
+  .mod-locked{opacity:1;}
+  .mod-locked .module-num{background:var(--bg);border-color:var(--line);}
+  .mod-locked .day-header{cursor:pointer;}
+  .mod-locked .day-body{display:none;}
+  .mod-locked.open .day-body{display:block;}
+  .preview-lock{font-size:.68rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .prev-tema{margin-bottom:13px;}
+  .prev-tema-h{font-size:.73rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;}
+  .prev-aula{display:flex;gap:9px;align-items:center;font-size:.77rem;color:var(--muted);padding:5px 10px;background:var(--bg);border-radius:7px;margin-bottom:4px;}
+  .lib-item.locked{opacity:.45;}
 </style>
 </head>
 <body>
@@ -781,7 +792,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.7</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.8</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -1128,7 +1139,7 @@ const MODULOS=[
 
 {num:4,data:'09/10',libera:'09/10',dia:'Quinta-feira',modo:'online',sem:1,blocos:[
  {fer:'Rotinas',
-  aulas:['Início do expediente: 09h ou 12h conforme o turno','Avisar imediatamente qualquer impedimento','Pedir cobertura dos leads quando não puder trabalhar'],
+  aulas:['Boas práticas do dia a dia'],
   praticas:[],
   prova:{pts:27,perguntas:[
    {id:'p4a1',txt:'Por que a pontualidade no início do turno é importante para o resultado do time?',
@@ -1165,7 +1176,7 @@ const MODULOS=[
 
 {num:5,data:'14/10',dia:'Quarta-feira',modo:'presencial',sem:2,libera:null,blocos:[
  {fer:'Metas',
-  aulas:['29 agendamentos','Até 5% de desalinhados','Até 10% de queda em R0','SLA de 1 hora','500 ligações por mês'],
+  aulas:['Entregáveis','Metas e simulador de agendamentos'],
   praticas:['Calcule quantas ligações precisa por dia útil','Calcule quantos agendamentos precisa por semana','Monte sua rotina diária alinhada às metas e valide com a madrinha'],
   prova:{pts:100,perguntas:[
    {id:'p5a1',txt:'Liste todas as metas do SDR com seus respectivos números.'},
@@ -1208,7 +1219,7 @@ const MODULOS=[
 
 {num:8,data:'21/10',dia:'Quarta-feira',modo:'online',sem:3,libera:null,blocos:[
  {fer:'Pipedrive',
-  aulas:['Número de leads SDR','Conversão','Nº de MQL','Lead por arquiteta','Queda em R0','Desalinhados'],
+  aulas:['Indicadores'],
   praticas:['Abra o painel de indicadores e anote seus números da semana','Calcule sua taxa de conversão do período','Identifique quantos MQL viraram agendamento','Compare seus indicadores com as metas do time'],
   prova:{pts:56,perguntas:[
    {id:'p8a1',txt:'O que é MQL e como se diferencia de um lead comum?'},
@@ -2272,11 +2283,23 @@ function buildModulosHTML(){
       const liberado=moduloLiberado(m);
       if(!liberado){
         html+=`<div class="day-card mod-locked" id="mod-${m.id}">
-          <div class="day-header"><div class="dh-left">
+          <div class="day-header" onclick="document.getElementById('mod-${m.id}').classList.toggle('open')">
+            <div class="dh-left">
             <div class="module-num">🔒</div>
             <div style="flex:1"><strong>Módulo ${m.num}</strong>
               <div class="day-sub" style="margin-top:3px">${motivoBloqueio(m)}</div>
-            </div></div></div>
+              <div class="day-sub" style="margin-top:2px;color:var(--orange);font-weight:600">${m.totalAulas} aulas · ver o que vem por aí</div>
+            </div></div><span class="day-arrow">▼</span></div>
+          <div class="day-body">
+            <div class="preview-lock">Conteúdo deste módulo (ainda bloqueado)</div>
+            ${m.blocos.map(b=>`
+              <div class="prev-tema">
+                <div class="prev-tema-h">${b.fer}</div>
+                ${b.aulas.map((a,j)=>`<div class="prev-aula"><span>🔒</span><span>Aula ${b.ini+j+1} — ${a}</span></div>`).join('')}
+                ${b.praticas.length?`<div class="prev-aula"><span>📋</span><span>${b.praticas.length} tarefas</span></div>`:''}
+                <div class="prev-aula"><span>📝</span><span>Teste · ${b.prova.perguntas.length} questões</span></div>
+              </div>`).join('')}
+          </div>
         </div>`;
         return;
       }
@@ -2567,7 +2590,7 @@ function renderBiblioteca(){
     sideHtml+=`<div class="lib-item ${et.type!=='aula'?'compact ':''}${ativo?'active':''} ${done?'done':''} ${!unlocked?'locked step-'+et.type:'step-'+et.type}"
       ${unlocked?`onclick="selecionarEtapa(MODULOS.find(x=>x.id==='${m.id}'),'${chave}')"`:''}>
       ${cover}
-      <span class="lis">${done?'✓':'▶'}</span>
+      <span class="lis">${done?'✓':(unlocked?'▶':'🔒')}</span>
       <span class="litxt">${label}</span>
     </div>`;
   });
