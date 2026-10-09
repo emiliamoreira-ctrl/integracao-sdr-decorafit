@@ -792,7 +792,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.8</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.9</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -938,16 +938,15 @@ const DAYS=[
     id:'d4',date:'09/10 (Sex)',label:'Sexta-feira',sub:'09/10 · Online',color:'#22c55e',pts:60,
     blocks:[
       {time:'09h–10h',     title:'Rotina da manhã com a madrinha',type:'live',conduct:'Gaby',turno:'manha',note:'Larissa e Leandro',meet:''},
-      {auto:'m1',from:'10h',to:'12h',turno:'manha',apenas:['Google Agenda','Slack']},
+      {time:'10h–12h',     title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'manha'},
       {time:'12h–13h',     title:'Almoço',type:'async',conduct:'—',turno:'manha'},
       {time:'12h–13h',     title:'Rotina da tarde com a madrinha',type:'live',conduct:'Grazi',turno:'allice',note:'Allice',meet:''},
       {time:'13h–15h30',   title:'Treinamento de Integração — todos juntos',type:'live',conduct:'Emília',joint:true,meet:''},
       {time:'15h30–16h',   title:'30 min de dúvidas com a madrinha',type:'live',conduct:'Madrinha',joint:true},
-      {time:'16h–16h30',   title:'Call conjunta — fechamento da 1ª semana',type:'live',conduct:'Emília',joint:true,note:'Todos juntos',meet:''},
-      {time:'16h30–17h',   title:'Checkout Pré-Sales',type:'meet',conduct:'Equipe SDR',joint:true,meet:''},
+      {time:'16h–17h',     title:'Call conjunta — fechamento da 1ª semana',type:'live',conduct:'Emília',joint:true,note:'Todos juntos',meet:''},
       {time:'17h–18h',     title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'manha'},
       {time:'18h–19h',     title:'Almoço',type:'async',conduct:'—',turno:'allice'},
-      {auto:'m1',from:'19h',to:'21h',turno:'allice',apenas:['Google Agenda','Slack']},
+      {time:'19h–21h',     title:'Prática livre nos sistemas',type:'practice',conduct:'Auto',turno:'allice'},
     ],
     tasks:[]},
   {
@@ -1013,15 +1012,21 @@ const DAYS=[
 const MODULOS=[
 {num:1,data:'06/10',libera:'06/10',dia:'Terça-feira',modo:'online',sem:1,blocos:[
  {fer:'Introdução à Plataforma',
-  aulas:['Introdução à Plataforma','De onde vem o lead?'],
-  praticas:['Navegue pela plataforma e identifique as principais áreas','Acesse o site da Decorafit e localize as informações institucionais'],
-  prova:{pts:27,perguntas:[
+  aulas:['Introdução à Plataforma'],
+  praticas:['Navegue pela plataforma e identifique as principais áreas'],
+  prova:{pts:14,perguntas:[
    {id:'p1a1',txt:'Qual é a principal finalidade da plataforma de treinamento para o novo SDR?',
     opcoes:['Servir de rede social interna da equipe','Organizar o aprendizado em módulos, aulas e avaliações','Substituir o Pipedrive no dia a dia','Ser usada apenas pela gestão para relatórios'],correta:1},
-   {id:'p1a2',txt:'O que o site institucional da Decorafit normalmente ajuda o SDR a fazer?',
-    opcoes:['Processar pagamentos de clientes','Mostrar ao cliente o portfólio e a proposta de valor da empresa','Substituir o CRM da empresa','Agendar férias da equipe'],correta:1},
-   {id:'p1a3',txt:'Por que conhecer bem a plataforma e o site institucional é importante no atendimento?',
+   {id:'p1a2',txt:'Por que conhecer bem a plataforma é importante no atendimento?',
     opcoes:['Porque é exigido apenas no primeiro dia de trabalho','Porque ajuda a passar segurança e informação correta ao cliente','Porque evita o uso do Chatwoot','Porque substitui a necessidade de treinamento de produto'],correta:1}]}},
+ {fer:'Processos',
+  aulas:['Processos Decorafit','De onde vem o lead?'],
+  praticas:['Acesse o site da Decorafit e localize as informações institucionais','Liste de quais canais chegaram os leads que você viu hoje'],
+  prova:{pts:13,perguntas:[
+   {id:'p1f1',txt:'O que o site institucional da Decorafit normalmente ajuda o SDR a fazer?',
+    opcoes:['Processar pagamentos de clientes','Mostrar ao cliente o portfólio e a proposta de valor da empresa','Substituir o CRM da empresa','Agendar férias da equipe'],correta:1},
+   {id:'p1f2',txt:'Por que saber de onde veio o lead muda a forma de abordar?',
+    opcoes:['Não muda nada, a abordagem é sempre a mesma','Porque o canal indica o nível de interesse e o contexto do contato','Porque define o valor do projeto','Porque determina quem será o arquiteto responsável'],correta:1}]}},
  {fer:'Pipedrive',
   aulas:['Introdução ao Pipedrive','Etapas do Funil','Abrindo um card'],
   praticas:['Criar o card teste','Favoritar seu usuário','Localizar a aba Pré-Venda dentro do card e o preenchimento do cliente'],
@@ -1051,7 +1056,7 @@ const MODULOS=[
 {num:2,data:'07/10',libera:'07/10',dia:'Quarta-feira',modo:'online',sem:1, blocos:[
  {fer:'Pipedrive',
   aulas:['Pesquisar duplicidade','Fazendo anotações no card','Mudando o card de etapa','Atividades do dia e atrasadas'],
-  praticas:['Pesquise duplicidade antes de criar um card de teste','Faça uma anotação registrando o contato','Movimente o card entre duas etapas do funil','Abra as atividades do dia e liste as pendentes','Conclua uma atividade e crie a próxima na sequência'],
+  praticas:['Concluir o Treinamento de Integração|semtempo','Pesquise duplicidade antes de criar um card de teste','Faça uma anotação registrando o contato','Movimente o card entre duas etapas do funil','Abra as atividades do dia e liste as pendentes','Conclua uma atividade e crie a próxima na sequência'],
   prova:{pts:29,perguntas:[
    {id:'p2a1',txt:'Ao encontrar um lead duplicado, qual é a conduta correta?',
     opcoes:['Criar um novo card mesmo assim','Unificar as informações no card já existente','Apagar os dois cards','Ignorar e seguir com os dois cards separados'],correta:1},
@@ -1107,6 +1112,9 @@ const MODULOS=[
   obs:['Como o consultor abriu a reunião','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado ao cliente','Qual próximo passo ficou combinado']},
  blocos:[
  {fer:'VoIP',
+  materiais:{titulo:'Ouvir ligações',desc:'Ouça as gravações e registre suas observações no Cronograma.',
+   links:[{nome:'Gravação 1',url:''},{nome:'Gravação 2',url:''},{nome:'Gravação 3',url:''}],
+   obs:['Como o SDR abriu a ligação','Quais perguntas de qualificação foram usadas','Como o valor foi apresentado','Qual próximo passo ficou combinado']},
   aulas:['Boas práticas do VoIP','Configurar o VoIP','Relatório de ligações / pesquisar ligação'],
   materiais:{titulo:'Ouvir ligações',desc:'Ouça os áudios e registre suas observações.',
    links:[{nome:'Ligação 1',url:''},{nome:'Ligação 2',url:''},{nome:'Ligação 3',url:''}],
@@ -1123,7 +1131,7 @@ const MODULOS=[
     opcoes:['Não é relevante para o processo','Evita mal-entendidos que atrapalham o fechamento','Serve só para estatística interna','É exigido apenas em ligações longas'],correta:1}]}},
  {fer:'Chatwoot',
   aulas:['Etiquetas: para que servem','Como aplicar etiquetas corretamente','Preenchimento lateral','Salvar dados','Salvar mensagem no Pipedrive'],
-  praticas:['Aplique três etiquetas diferentes em conversas de teste','Preencha todos os campos da barra lateral','Salve os dados e confirme o registro','Salve uma mensagem direto no card do Pipedrive','Filtre a caixa por uma etiqueta'],
+  praticas:['Ler 3 conversas e registrar o que entendeu no Cronograma|semtempo','Aplique três etiquetas diferentes em conversas de teste','Preencha todos os campos da barra lateral','Salve os dados e confirme o registro','Salve uma mensagem direto no card do Pipedrive','Filtre a caixa por uma etiqueta'],
   prova:{pts:56,perguntas:[
    {id:'p3b1',txt:'O que acontece se uma conversa não for etiquetada corretamente?',
     opcoes:['Nada muda no processo','Fica mais difícil organizar e localizar aquela conversa depois','A conversa é apagada','O cliente recebe uma mensagem automática de erro'],correta:1},
@@ -1137,7 +1145,7 @@ const MODULOS=[
     opcoes:['Porque o Chatwoot é mais confiável que o Pipedrive','Porque o Pipedrive centraliza o funil e o acompanhamento comercial do lead','Porque o Chatwoot apaga mensagens automaticamente','Não há diferença real entre os dois'],correta:1}]}},
 ]},
 
-{num:4,data:'09/10',libera:'09/10',dia:'Quinta-feira',modo:'online',sem:1,blocos:[
+{num:4,data:'13/10',libera:'13/10',dia:'Terça-feira',modo:'presencial',sem:2,blocos:[
  {fer:'Rotinas',
   aulas:['Boas práticas do dia a dia'],
   praticas:[],
@@ -1258,13 +1266,13 @@ const DIFICULDADES=['Fácil','Médio','Difícil'];
 /* Vídeo por aula. Chave = <idBloco>_a<indice>. */
 const AULA_VIDEOS={
   'm1_b0_a0':'aula1-introducao-plataforma.mp4',
-  'm1_b0_a1':'aula-de-onde-vem-o-lead.mp4',
-  'm1_b1_a0':'pipedrive-intro.mp4',
-  'm1_b1_a1':'aula-etapas-do-funil.mp4',
-  'm1_b1_a2':'aula-abrindo-um-card.mp4',
-  'm1_b2_a0':'chatwoot-intro.mp4',
-  'm1_b2_a1':'chatwoot-conversas.mp4',
-  'm1_b2_a2':'chatwoot-pesquisar.mp4',
+  'm1_b1_a1':'aula-de-onde-vem-o-lead.mp4',
+  'm1_b2_a0':'pipedrive-intro.mp4',
+  'm1_b2_a1':'aula-etapas-do-funil.mp4',
+  'm1_b2_a2':'aula-abrindo-um-card.mp4',
+  'm1_b3_a0':'chatwoot-intro.mp4',
+  'm1_b3_a1':'chatwoot-conversas.mp4',
+  'm1_b3_a2':'chatwoot-pesquisar.mp4',
   'm2_b0_a0':'pd-duplicidade.mp4',
   'm2_b0_a1':'pd-anotacoes.mp4',
   'm2_b0_a2':'pd-etapa.mp4',
@@ -1284,13 +1292,13 @@ const AULA_VIDEOS={
 /* Prévias curtas sem áudio, exibidas ao passar o mouse na miniatura */
 const AULA_PREVIEWS={
   'm1_b0_a0':'prev-m1b0a0.mp4',
-  'm1_b0_a1':'prev-m1b0a1.mp4',
-  'm1_b1_a0':'prev-m1b1a0.mp4',
-  'm1_b1_a1':'prev-m1b1a1.mp4',
-  'm1_b1_a2':'prev-m1b1a2.mp4',
-  'm1_b2_a0':'prev-chatwoot-intro.mp4',
-  'm1_b2_a1':'prev-chatwoot-conversas.mp4',
-  'm1_b2_a2':'prev-chatwoot-pesquisar.mp4',
+  'm1_b1_a1':'prev-m1b0a1.mp4',
+  'm1_b2_a0':'prev-m1b1a0.mp4',
+  'm1_b2_a1':'prev-m1b1a1.mp4',
+  'm1_b2_a2':'prev-m1b1a2.mp4',
+  'm1_b3_a0':'prev-chatwoot-intro.mp4',
+  'm1_b3_a1':'prev-chatwoot-conversas.mp4',
+  'm1_b3_a2':'prev-chatwoot-pesquisar.mp4',
   'm2_b0_a0':'prev-pd-duplicidade.mp4',
   'm2_b0_a1':'prev-pd-anotacoes.mp4',
   'm2_b0_a2':'prev-pd-etapa.mp4',
@@ -2323,8 +2331,18 @@ function buildModulosHTML(){
 }
 
 function blocoCompleto(b){
+  const u=getU(currentUser.id);
+  // aulas que já têm vídeo precisam estar assistidas
+  for(let j=0;j<b.aulas.length;j++){
+    const aid=b.id+'_a'+j;
+    if(!AULA_VIDEOS[aid]) continue;              // aula em produção: não trava
+    if(!(u.modTopics||[]).includes(aid)) return false;
+  }
+  // tarefas e teste só são exigidos quando o tema está 100% gravado
+  const todasComVideo=b.aulas.every((_,j)=>!!AULA_VIDEOS[b.id+'_a'+j]);
+  if(!todasComVideo) return true;
   const p=blocoProg(b);
-  return p.dA===p.tA && p.dP===p.tP && p.env===1;
+  return p.dP===p.tP && p.env===1;
 }
 function aulaDesbloqueada(b,j){
   if(j===0)return true;
@@ -2627,29 +2645,32 @@ function marcarInicioTarefa(pid){
   const uid=currentUser.id,u=getU(uid),ti=u.tarefaInicio||{};
   if(!ti[pid]){ ti[pid]=new Date().toISOString(); setU(uid,{tarefaInicio:ti}); }
 }
+function tarefaSemTempo(txt){ return typeof txt==='string' && txt.indexOf('|semtempo')!==-1; }
+function tarefaTexto(txt){ return String(txt).replace('|semtempo',''); }
 function buildPraticaLib(b,txt,j){
   const pid=b.id+'_p'+j;
   const u=getU(currentUser.id);
   const st=(u.modPrats||{})[pid]||{};
-  // trava sequencial: só libera a tarefa seguinte depois de concluir a anterior
+  const semTempo=tarefaSemTempo(txt);
+  const texto=tarefaTexto(txt);
   const anteriorOk = j===0 || ((u.modPrats||{})[b.id+'_p'+(j-1)]||{}).done;
   if(st.done){
     return `<div class="tk tk-done">
       <span class="tk-ic">✓</span>
-      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div></div>
+      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${texto}</div></div>
     </div>`;
   }
   if(!anteriorOk){
     return `<div class="tk tk-lock">
       <span class="tk-ic">🔒</span>
-      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div>
+      <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${texto}</div>
       <div class="tk-hint">Conclua a tarefa ${j} para liberar</div></div>
     </div>`;
   }
-  const rest=tempoRestanteTarefa(pid);
+  const rest = semTempo ? 0 : tempoRestanteTarefa(pid);
   return `<div class="tk tk-open" id="prow-${pid}">
     <span class="tk-ic">○</span>
-    <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${txt}</div>
+    <div class="tk-body"><span class="tk-n">TAREFA ${j+1}</span><div class="tk-t">${texto}</div>
       <div id="tarea-acao-${pid}">
         ${rest<=0
           ? `<button class="btn-check" onclick="concluirTarefaLib('${pid}')">✓ Marcar como concluída</button>`
@@ -2667,8 +2688,9 @@ function iniciarContadoresTarefa(b){
     const pid=b.id+'_p'+j;
     const st=(u.modPrats||{})[pid]||{};
     if(st.done) return;
+    if(tarefaSemTempo(b.praticas[j])) return; // tarefa sem temporizador
     const anteriorOk = j===0 || ((u.modPrats||{})[b.id+'_p'+(j-1)]||{}).done;
-    if(!anteriorOk) return; // tarefa travada não conta tempo ainda
+    if(!anteriorOk) return;
     marcarInicioTarefa(pid);
     const t=setInterval(()=>{
       const rest=tempoRestanteTarefa(pid);
@@ -3208,7 +3230,7 @@ function buildSdrProvaCard(u,corrigir){
           <div class="day-sub">${dA}/${b.aulas.length} aulas${b.praticas.length?` · ${dP}/${b.praticas.length} tarefas`:''}</div>
           <div class="day-sub">${stat}</div></div></div><span class="day-arrow">▼</span></div>
         <div class="day-body">`;
-      const difs=b.praticas.map((t,j)=>({t,d:(prats[b.id+'_p'+j]||{}).dif})).filter(x=>x.d);
+      const difs=b.praticas.map((t,j)=>({t:tarefaTexto(t),d:(prats[b.id+'_p'+j]||{}).dif})).filter(x=>x.d);
       if(difs.length){
         html+=`<div style="margin-bottom:11px"><div style="font-size:.73rem;font-weight:700;color:var(--navy);margin-bottom:5px">Dificuldade relatada</div>`;
         difs.forEach(x=>{
@@ -3470,6 +3492,12 @@ function buildEditor(){
           </div>`).join('')}
         <button class="ed-add" onclick="edAddTarefa(${mi},${bi})">+ tarefa</button>
 
+        ${b.materiais?`<div class="ed-sec">MATERIAIS — ${b.materiais.titulo}</div>
+          ${b.materiais.links.map((l,li)=>`<div class="ed-row">
+            <span class="ed-qn" style="width:auto;white-space:nowrap">${l.nome}</span>
+            <input class="ed-inp" style="flex:1" placeholder="cole aqui o link da gravação" value="${(l.url||'').replace(/"/g,'&quot;')}" onchange="edSetLink(${mi},${bi},${li},this.value)">
+          </div>`).join('')}`:''}
+
         <div class="ed-sec">QUESTÕES DO TESTE</div>
         ${b.prova.perguntas.map((q,qi)=>`<div class="ed-q">
             <div class="ed-row">
@@ -3517,6 +3545,7 @@ function edMoverAula(mi,bi,ai,destino){
   edRecalc(); edRefresh();
 }
 function edSetTarefa(mi,bi,pi,v){ MODULOS[mi].blocos[bi].praticas[pi]=v; }
+function edSetLink(mi,bi,li,v){ MODULOS[mi].blocos[bi].materiais.links[li].url=v.trim(); }
 function edAddTarefa(mi,bi){ MODULOS[mi].blocos[bi].praticas.push('Nova tarefa'); edRefresh(); }
 function edRemoverTarefa(mi,bi,pi){
   if(!confirm('Remover esta tarefa?'))return;
