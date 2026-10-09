@@ -781,7 +781,7 @@
       <div id="login-error" class="login-error"></div>
       <button class="btn-enter" onclick="doLogin()">Entrar →</button>
       <div style="text-align:center;margin-top:10px"><a href="#" onclick="resetLocalData();return false;" style="font-size:.7rem;color:var(--muted);text-decoration:underline">Problemas para entrar? Limpar dados e recarregar</a></div>
-      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.6</div>
+      <div id="app-version" style="text-align:center;font-size:.68rem;color:var(--muted);margin-top:14px">Plataforma de Treinamento Pré-Vendas · v9.7</div>
     </div>
     <div id="create-pw-area" style="display:none">
       <div class="login-section-label">Criar senha de acesso</div>
@@ -2025,11 +2025,55 @@ function blocoProg(b){
 }
 
 const TEMPO_POR_PERGUNTA=300; // 5 minutos
+/* Um módulo "tem conteúdo" quando pelo menos uma aula já tem vídeo publicado */
+function moduloTemConteudo(m){
+  return m.blocos.some(b=>b.aulas.some((_,j)=>!!AULA_VIDEOS[b.id+'_a'+j]));
+}
+/* Concluído = todo o conteúdo JÁ PUBLICADO foi percorrido (aulas com vídeo, tarefas e testes) */
+function moduloConcluido(m){
+  if(!moduloTemConteudo(m)) return true; // sem vídeo ainda: não trava a trilha
+  const u=getU(currentUser.id);
+  for(const b of m.blocos){
+    const temVid = b.aulas.some((_,j)=>!!AULA_VIDEOS[b.id+'_a'+j]);
+    if(!temVid) continue;                 // tema ainda sem vídeo: ignorado
+    for(let j=0;j<b.aulas.length;j++){
+      const aid=b.id+'_a'+j;
+      if(!AULA_VIDEOS[aid]) continue;     // aula sem vídeo: ignorada
+      if(!(u.modTopics||[]).includes(aid)) return false;
+    }
+    const todasAulasComVideo = b.aulas.every((_,j)=>!!AULA_VIDEOS[b.id+'_a'+j]);
+    if(todasAulasComVideo){
+      for(let j=0;j<b.praticas.length;j++){
+        if(!((u.modPrats||{})[b.id+'_p'+j]||{}).done) return false;
+      }
+      if(!((u.modProvas||{})[b.id]||{}).submitted) return false;
+    }
+  }
+  return true;
+}
+/* Motivo do bloqueio, para exibir no card */
+function motivoBloqueio(m){
+  const idx=MODULOS.findIndex(x=>x.id===m.id);
+  const anterior = idx>0 ? MODULOS[idx-1] : null;
+  const faltaAnterior = anterior && !moduloConcluido(anterior);
+  let dataOk=false;
+  if(m.libera){
+    const [d,mo]=m.libera.split('/').map(Number);
+    dataOk = new Date() >= new Date(2026,mo-1,d,0,0,0);
+  }
+  if(!m.libera && !faltaAnterior) return 'Em breve — data a definir';
+  if(faltaAnterior && !dataOk) return `Conclua o Módulo ${anterior.num} · disponível a partir de ${m.libera}`;
+  if(faltaAnterior) return `Conclua o Módulo ${anterior.num} para liberar`;
+  if(!dataOk) return `Disponível a partir de ${m.libera}`;
+  return '';
+}
 function moduloLiberado(m){
   if(!m.libera) return false;
   const [d,mo]=m.libera.split('/').map(Number);
-  const dataLib=new Date(2026,mo-1,d,0,0,0);
-  return new Date()>=dataLib;
+  if(new Date() < new Date(2026,mo-1,d,0,0,0)) return false;
+  const idx=MODULOS.findIndex(x=>x.id===m.id);
+  if(idx>0 && !moduloConcluido(MODULOS[idx-1])) return false;
+  return true;
 }
 function procLiberado(){
   const dataLib=new Date(2026,9,16,0,0,0); // 16/10/2026
@@ -2231,7 +2275,7 @@ function buildModulosHTML(){
           <div class="day-header"><div class="dh-left">
             <div class="module-num">🔒</div>
             <div style="flex:1"><strong>Módulo ${m.num}</strong>
-              <div class="day-sub" style="margin-top:3px">${m.libera?`Disponível a partir de ${m.libera}`:'Em breve — data a definir'}</div>
+              <div class="day-sub" style="margin-top:3px">${motivoBloqueio(m)}</div>
             </div></div></div>
         </div>`;
         return;
